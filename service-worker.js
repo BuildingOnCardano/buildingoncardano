@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "https://BuildingOnCardano.github.io/buildingoncardano/precache-manifest.3226ad740d74b026c0bbf885ea733773.js"
+  "https://buildingoncardano.github.io/buildingoncardano/precache-manifest.b174276c25b705e72ea78ef7b5de6842.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -33,7 +33,7 @@ workbox.core.clientsClaim();
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("https://BuildingOnCardano.github.io/buildingoncardano/index.html"), {
+workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("https://buildingoncardano.github.io/buildingoncardano/index.html"), {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });

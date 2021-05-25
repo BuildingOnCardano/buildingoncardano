@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "https://BuildingOnCardano.github.io/buildingoncardano/static/css/main.b06e38fa.chunk.css",
-    "main.js": "https://BuildingOnCardano.github.io/buildingoncardano/static/js/main.a6c316a6.chunk.js",
-    "main.js.map": "https://BuildingOnCardano.github.io/buildingoncardano/static/js/main.a6c316a6.chunk.js.map",
-    "runtime~main.js": "https://BuildingOnCardano.github.io/buildingoncardano/static/js/runtime~main.3200014f.js",
-    "runtime~main.js.map": "https://BuildingOnCardano.github.io/buildingoncardano/static/js/runtime~main.3200014f.js.map",
-    "static/js/2.3081d2df.chunk.js": "https://BuildingOnCardano.github.io/buildingoncardano/static/js/2.3081d2df.chunk.js",
-    "static/js/2.3081d2df.chunk.js.map": "https://BuildingOnCardano.github.io/buildingoncardano/static/js/2.3081d2df.chunk.js.map",
-    "index.html": "https://BuildingOnCardano.github.io/buildingoncardano/index.html",
-    "precache-manifest.3226ad740d74b026c0bbf885ea733773.js": "https://BuildingOnCardano.github.io/buildingoncardano/precache-manifest.3226ad740d74b026c0bbf885ea733773.js",
-    "service-worker.js": "https://BuildingOnCardano.github.io/buildingoncardano/service-worker.js",
-    "static/css/main.b06e38fa.chunk.css.map": "https://BuildingOnCardano.github.io/buildingoncardano/static/css/main.b06e38fa.chunk.css.map",
-    "static/media/100_4.jpg": "https://BuildingOnCardano.github.io/buildingoncardano/static/media/100_4.978e51b5.jpg",
-    "static/media/logo_200.png": "https://BuildingOnCardano.github.io/buildingoncardano/static/media/logo_200.b7018540.png",
-    "static/media/rsz_1sidebar-4.jpg": "https://BuildingOnCardano.github.io/buildingoncardano/static/media/rsz_1sidebar-4.f7f5fc61.jpg"
+    "main.css": "https://buildingoncardano.github.io/buildingoncardano/static/css/main.b06e38fa.chunk.css",
+    "main.js": "https://buildingoncardano.github.io/buildingoncardano/static/js/main.b4d5c78f.chunk.js",
+    "main.js.map": "https://buildingoncardano.github.io/buildingoncardano/static/js/main.b4d5c78f.chunk.js.map",
+    "runtime~main.js": "https://buildingoncardano.github.io/buildingoncardano/static/js/runtime~main.2c6293f6.js",
+    "runtime~main.js.map": "https://buildingoncardano.github.io/buildingoncardano/static/js/runtime~main.2c6293f6.js.map",
+    "static/js/2.3081d2df.chunk.js": "https://buildingoncardano.github.io/buildingoncardano/static/js/2.3081d2df.chunk.js",
+    "static/js/2.3081d2df.chunk.js.map": "https://buildingoncardano.github.io/buildingoncardano/static/js/2.3081d2df.chunk.js.map",
+    "index.html": "https://buildingoncardano.github.io/buildingoncardano/index.html",
+    "precache-manifest.b174276c25b705e72ea78ef7b5de6842.js": "https://buildingoncardano.github.io/buildingoncardano/precache-manifest.b174276c25b705e72ea78ef7b5de6842.js",
+    "service-worker.js": "https://buildingoncardano.github.io/buildingoncardano/service-worker.js",
+    "static/css/main.b06e38fa.chunk.css.map": "https://buildingoncardano.github.io/buildingoncardano/static/css/main.b06e38fa.chunk.css.map",
+    "static/media/100_4.jpg": "https://buildingoncardano.github.io/buildingoncardano/static/media/100_4.978e51b5.jpg",
+    "static/media/logo_200.png": "https://buildingoncardano.github.io/buildingoncardano/static/media/logo_200.b7018540.png",
+    "static/media/rsz_1sidebar-4.jpg": "https://buildingoncardano.github.io/buildingoncardano/static/media/rsz_1sidebar-4.f7f5fc61.jpg"
   }
 }
