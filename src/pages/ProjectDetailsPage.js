@@ -97,6 +97,16 @@ class ProjectDetailsPage extends React.Component {
                       <br></br>
                       <h3>Token:</h3>
                       <h4>{this.props.location.state.projectDetails.tokenType}</h4>
+                      <h3>Total Supply:</h3>
+                      <h4>{this.props.location.state.projectDetails.totalSupply}</h4>
+                      <h3>Circulating Supply:</h3>
+                      <h4>{this.props.location.state.projectDetails.circulatingSupply}</h4>
+                      <h3>Token Info:</h3>
+                      <a href={this.props.location.state.projectDetails.tokenDistributionLink} target="_blank" rel="noreferrer">
+                      <h4>{this.props.location.state.projectDetails.tokenDistributionLink}</h4></a>
+                      <h3>Sales Info:</h3>
+                      <a href={this.props.location.state.projectDetails.saleDetailsLink} target="_blank" rel="noreferrer">
+                      <h4>{this.props.location.state.projectDetails.saleDetailsLink}</h4></a>
                     </Col>
                   </Row>
                 </CardBody>
