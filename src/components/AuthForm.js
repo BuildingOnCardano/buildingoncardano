@@ -54,7 +54,7 @@ class AuthForm extends React.Component {
   }
   renderRedirectToLogin = () => {
     if (this.state.redirect) {
-      return <Redirect to={{ pathname: '/login', state: { username: this.state.email } }} />
+      return <Redirect to={{ pathname: '/login' }} />
     }
   }
 
