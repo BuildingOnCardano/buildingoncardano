@@ -1,0 +1,25 @@
+tr {
+    height: 40px !important;
+    vertical-align: bottom;
+    border: none !important;
+
+}
+
+th {
+    max-width: 125px;
+    min-width: 125px;
+    padding: 0 !important;
+    overflow-x: auto;
+    white-space: nowrap;
+    text-align: center !important;
+    vertical-align: middle;
+    border: none !important;
+}
+
+td {
+    height: 100px !important;
+    padding: 5px !important;
+    text-align: center !important;
+    vertical-align: middle !important;;
+    border: none !important;
+}
