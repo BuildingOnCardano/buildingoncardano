@@ -1,42 +1,16 @@
 import Page from 'components/Page';
-import { IconWidget, NumberWidget } from 'components/Widget';
 import ProjectCard from 'components/ProjectCard';
 import React from 'react';
 import {
-  Badge,
-  Button,
-  Card,
-  CardBody,
-  CardText,
-  CardDeck,
-  CardGroup,
-  CardHeader,
-  CardTitle,
   Col,
-  ListGroup,
-  ListGroupItem,
   Row,
-  Table
+  Button
 } from 'reactstrap';
-import { getColor } from 'utils/colors';
 import BeatLoader
   from "react-spinners/BeatLoader";
 import { css } from "@emotion/core";
 import { baseUrl, getProjectByOwner } from '../assets/services';
-import SocialMedia from '../components/SocialMedia';
-import CardanoImage from 'assets/img/cardanoIcon.png';
-import { Link } from 'react-router-dom';
-import ReactImageFallback from "react-image-fallback";
-import { getUser, getPassword  } from 'utils/Common.js';
-
-const socialMediaProps = {
-  twitter_handle: '@PoolShamrock',
-  telegram_handle: 'change',
-  youtube_handle: 'change',
-  facebook_handle: 'change',
-  discord_handle: 'change'
-};
-
+import { getUser, getPassword } from 'utils/Common.js';
 
 const override = css`
   display: block;
@@ -57,14 +31,14 @@ class MyProjectsPage extends React.Component {
 
   async getProjectsByType() {
     try {
-      var response = await fetch(baseUrl + getProjectByOwner  + getUser(),{
+      var response = await fetch(baseUrl + getProjectByOwner + getUser(), {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'same-origin', // include, *same-origin, omit
         headers: {
           'Content-Type': 'application/json',
-          'password': getPassword() 
+          'password': getPassword()
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         redirect: 'follow', // manual, *follow, error
@@ -92,12 +66,13 @@ class MyProjectsPage extends React.Component {
           {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
             :
             this.state.projects.map(function (item, index) {
-              return (  
+              return (
                 <Col lg={4} md={4} sm={4} xs={12} className="mb-3">
                   <div className='ProjectCards'>
                     <ProjectCard
                       img={item.imageUrl}
-                      projectDetails= {item} />
+                      projectDetails={item}
+                      myprojectspage={true} />                    
                   </div>
                 </Col>
               )

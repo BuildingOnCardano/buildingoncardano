@@ -16,6 +16,7 @@ import ProjectsPage from 'pages/ProjectsPage';
 import ProjectDetailsPage from 'pages/ProjectDetailsPage';
 import ProjectAddPage from 'pages/ProjectAddPage';
 import MyProjectsPage from 'pages/MyProjectsPage';
+import MyProjectEditPage from 'pages/MyProjectEditPage';
 
 import { getUser  } from 'utils/Common.js';
 const getBasename = () => {
@@ -81,6 +82,7 @@ class App extends React.Component {
 
                 <Route exact path="/projectdetails" render={(props) => <ProjectDetailsPage {...props} />} />
                 <Route exact path="/myprojects" render={(props) => <MyProjectsPage {...props} />} />
+                <Route exact path="/editmyproject" render={(props) => <MyProjectEditPage {...props} />} />
 
                 <Route exact path="/login-modal" component={AuthModalPage} />
                 <Route

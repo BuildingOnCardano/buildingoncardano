@@ -124,8 +124,8 @@ class DashboardPage extends React.Component {
                             <TableRow component={Link} to={{ pathname: '/projectdetails', state: { projectDetails: item } }}>
 
                               {/* <td scope="row">{item.id}</td> */}
-                              <TableCell ><h4>{item.name}</h4></TableCell>
-                              <TableCell ><h4>{item.type}</h4></TableCell>
+                              <TableCell ><h3>{item.name}</h3></TableCell>
+                              <TableCell ><h3>{item.type}</h3></TableCell>
 
                             </TableRow >
                           )
@@ -141,11 +141,11 @@ class DashboardPage extends React.Component {
                                 className="rounded"
                                 style={{ width: 100, height: 100 }}
                               />)} </h4></TableCell>
-                              <TableCell><h4>{item.name}</h4></TableCell>
-                              <TableCell><h4>{item.type}</h4></TableCell>
-                              <TableCell><h4>{item.tokenType}</h4></TableCell>
-                              <TableCell><h4>{item.ticker}</h4></TableCell>
-                              <TableCell><h4>{item.stage}</h4></TableCell>
+                              <TableCell><h3>{item.name}</h3></TableCell>
+                              <TableCell><h3>{item.type}</h3></TableCell>
+                              <TableCell><h3>{item.tokenType}</h3></TableCell>
+                              <TableCell><h3>{item.ticker}</h3></TableCell>
+                              <TableCell><h3>{item.stage}</h3></TableCell>
                             </TableRow >
                           )
                         })}
