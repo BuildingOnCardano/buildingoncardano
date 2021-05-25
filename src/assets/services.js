@@ -7,6 +7,7 @@ export const login = "/login/user";
 
 //projects
 export const createProject = "/projects/create";
+export const updateProject = "/projects/create";
 export const getAllProjects = "/projects/all";
 export const getProjectDetailsById = "/projects/details/";//{projectId}
 export const getProjectsByType = "/projects/type/";////{projectType}
