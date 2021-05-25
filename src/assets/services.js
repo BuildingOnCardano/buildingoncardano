@@ -1,6 +1,8 @@
 
 //export const baseUrl = "http://localhost:8080";
-export const baseUrl = "https://173.212.232.170:8080";
+//export const baseUrl = "https://173.212.232.170:8080";
+export const baseUrl = "https://smashpeek.com/bocservices";
+
 //login and reg
 export const registration = "/registration/user";
 export const login = "/login/user";
