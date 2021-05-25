@@ -2,7 +2,7 @@
   "name": "buildingoncardano",
   "version": "1.1.0",
   "private": false,
-  "homepage": "https://pblake81239.github.io/buildingoncardano",
+  "homepage": "https://BuildingOnCardano.github.io/buildingoncardano",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
