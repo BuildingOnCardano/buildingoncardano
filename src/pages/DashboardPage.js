@@ -90,7 +90,7 @@ class DashboardPage extends React.Component {
         {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
           :
           <Row>
-            <Col lg={3} md={2} sm={2} xs={12} className="mb-3">
+            <Col lg={3} md={3} sm={3} xs={3} className="mb-3">
               <NumberWidget
                 title="Total Projects"
                 number={this.state.totalProjects}
@@ -100,7 +100,7 @@ class DashboardPage extends React.Component {
 
             {this.state.projectTypesAndCount.map(function (item, index) {
               return (
-                <Col lg={3} md={2} sm={2} xs={12} className="mb-3">
+                <Col lg={3} md={3} sm={3} xs={3} className="mb-3">
                   <Link to={{ pathname: '/' + item.projectType }}>
                     <NumberWidget
                       title={item.projectType}
@@ -111,15 +111,14 @@ class DashboardPage extends React.Component {
                 </Col>
               )
             })}
-
           </Row>
         }
 
         <Row style={{
-          justifyContent: 'left',
+          justifyContent: 'center',
           alignItems: 'center',
         }}>
-          <Col lg={9} sm={4} sm={3} xs={12}>
+          <Col lg={10} sm={12} sm={12} xs={12}>
             <Card >
               <CardHeader><h2>Latest Projects</h2></CardHeader>
                 {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>

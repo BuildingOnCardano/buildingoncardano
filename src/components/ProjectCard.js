@@ -40,10 +40,12 @@ export default class ProjectCard extends React.Component {
 
     render() {
         return (
-            <div className="ProjectCard" style={{ minHeight: '22rem', minWidth: '25rem' }}>
+            <div className="ProjectCard" style={{
+                minHeight: '25rem'
+            }}>
                 <br></br>
                 {this.props.myprojectspage && (<Link to={{ pathname: '/editmyproject', state: { projectDetails: this.props.projectDetails } }}>Edit Project</Link>)}
-                
+
                 <Link to={{ pathname: '/projectdetails', state: { projectDetails: this.props.projectDetails } }}>
                     <div style={{ paddingTop: 15, alignSelf: 'flex-start' }}>
                         <ReactImageFallback

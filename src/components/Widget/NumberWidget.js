@@ -14,7 +14,7 @@ const NumberWidget = ({
 }) => {
   return (
     <Card body {...restProps}>
-      <div className="d-flex justify-content-between">
+      <div  class="inner" className="d-flex justify-content-between">
         <CardText tag="div">
           <Typography className="mb-0">
             <strong>{title}</strong>
