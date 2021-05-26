@@ -66,6 +66,11 @@ class ProjectAddPage extends React.Component {
     modal_nested: false
   };
 
+  constructor(props) {
+    super(props);
+  }
+
+
   toggle = modalType => () => {
     if (!modalType) {
       return this.setState({
