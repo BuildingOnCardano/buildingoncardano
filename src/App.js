@@ -77,7 +77,7 @@ class App extends React.Component {
               <Route exact path="/addproject" render={(props) => <ProjectAddPage {...props} />} />
 
               <Route exact path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
-              <Route exact path="/application" render={(props) => <ProjectsPage {...props} projectType="application" />} />
+              <Route exact path={process.env.PUBLIC_URL + "/application"} render={(props) => <ProjectsPage {...props} projectType="application" />} />
               <Route exact path="/tooling" render={(props) => <ProjectsPage {...props} projectType="tooling" />} />
               <Route exact path="/wallet" render={(props) => <ProjectsPage {...props} projectType="wallet" />} />
               <Route exact path="/data" render={(props) => <ProjectsPage {...props} projectType="data" />} />
