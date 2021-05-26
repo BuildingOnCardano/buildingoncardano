@@ -80,8 +80,8 @@ class DashboardPage extends React.Component {
     return (
       <Page
         className="DashboardPage"
-        title=""
-        breadcrumbs={[{ name: '/', active: true }]}
+        title="Welcome to Building On Cardano"
+        // breadcrumbs={[{ name: '/', active: true }]}
       >
         {/* <Row style={{
           justifyContent: 'center',
