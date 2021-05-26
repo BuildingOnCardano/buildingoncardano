@@ -76,7 +76,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    // "build": "react-scripts build",
     "build": "react-scripts build && cp build/index.html build/404.html",
     "serve": "serve -s build",
     "predeploy": "npm run build",
