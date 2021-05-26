@@ -49,7 +49,6 @@ class ProjectsPage extends React.Component {
     try {
       var response = await fetch(baseUrl + getProjectsByType + this.props.projectType);
       const data = await response.json();
-      console.log(data);
 
       this.setState({ projects: data, loading: false })
     } catch (error) {
