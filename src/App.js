@@ -5,7 +5,7 @@ import PageSpinner from 'components/PageSpinner';
 import AuthPage from 'pages/AuthPage';
 import React from 'react';
 import componentQueries from 'react-component-queries';
-import { Router, BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { Router, BrowserRouter, HashRouter , Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
 
 
@@ -50,8 +50,9 @@ var hist = createBrowserHistory();
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter basename={getBasename()}>
-        <Router history={hist}>
+      // <BrowserRouter basename={getBasename()}>
+      <HashRouter basename={getBasename()}>
+
           {/* <GAListener> */}
           <Switch>
             <LayoutRoute
@@ -74,10 +75,11 @@ class App extends React.Component {
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/" render={(props) => <DashboardPage {...props} />} />
+
                 <Route path="/addproject" render={(props) => <ProjectAddPage {...props} />} />
 
                 <Route path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
-                <Route path="/application" > <ProjectsPage projectType="application" /></Route> 
+                <Route path="/application" component={() =>  <ProjectsPage projectType="application" />}></Route> 
                 <Route path="/tooling" render={(props) => <ProjectsPage {...props} projectType="tooling" />} />
                 <Route path="/wallet" render={(props) => <ProjectsPage {...props} projectType="wallet" />} />
                 <Route path="/data" render={(props) => <ProjectsPage {...props} projectType="data" />} />
@@ -93,18 +95,17 @@ class App extends React.Component {
                   exact
                   path="/button-groups"
                   component={ButtonGroupPage}
-                />
-
-                <Redirect to='/' />
+                />       
 
               </React.Suspense>
             </MainLayout>
-
+            <Redirect to='/' />
           </Switch>
           {/* </GAListener> */}
 
-        </Router>
-      </BrowserRouter>
+
+      {/* </BrowserRouter> */}
+      </HashRouter>
     );
   }
 }
