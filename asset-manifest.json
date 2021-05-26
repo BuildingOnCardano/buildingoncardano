@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "https://buildingoncardano.com/static/css/main.8fa3de25.chunk.css",
-    "main.js": "https://buildingoncardano.com/static/js/main.4cd24b48.chunk.js",
-    "main.js.map": "https://buildingoncardano.com/static/js/main.4cd24b48.chunk.js.map",
+    "main.js": "https://buildingoncardano.com/static/js/main.a746456b.chunk.js",
+    "main.js.map": "https://buildingoncardano.com/static/js/main.a746456b.chunk.js.map",
     "runtime~main.js": "https://buildingoncardano.com/static/js/runtime~main.f8d49d98.js",
     "runtime~main.js.map": "https://buildingoncardano.com/static/js/runtime~main.f8d49d98.js.map",
     "static/js/2.6d97b08d.chunk.js": "https://buildingoncardano.com/static/js/2.6d97b08d.chunk.js",
     "static/js/2.6d97b08d.chunk.js.map": "https://buildingoncardano.com/static/js/2.6d97b08d.chunk.js.map",
     "index.html": "https://buildingoncardano.com/index.html",
-    "precache-manifest.01183d4682525112eb728fec9d57a27c.js": "https://buildingoncardano.com/precache-manifest.01183d4682525112eb728fec9d57a27c.js",
+    "precache-manifest.c738fcae0c1cfeea026293d3133379ac.js": "https://buildingoncardano.com/precache-manifest.c738fcae0c1cfeea026293d3133379ac.js",
     "service-worker.js": "https://buildingoncardano.com/service-worker.js",
     "static/css/main.8fa3de25.chunk.css.map": "https://buildingoncardano.com/static/css/main.8fa3de25.chunk.css.map",
     "static/media/100_4.jpg": "https://buildingoncardano.com/static/media/100_4.978e51b5.jpg",
