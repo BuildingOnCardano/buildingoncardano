@@ -94,9 +94,12 @@ class App extends React.Component {
                 path="/button-groups"
                 component={ButtonGroupPage}
               />
+
+<Redirect to='/' />
+
             </React.Suspense>
           </MainLayout>
-          <Redirect to="/" />
+          
         </Switch>
         {/* </GAListener> */}
       {/* </BrowserRouter> */}
