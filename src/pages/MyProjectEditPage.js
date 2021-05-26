@@ -118,7 +118,7 @@ class MyProjectEditPage extends React.Component {
 
       var selectedValue = [];
       pieces.forEach(typeInDb => {
-        if(!isEmpty(typeInDb)){
+        if (!isEmpty(typeInDb)) {
           var typeFound = tagOptions.filter(item => item.name.includes(typeInDb));
           selectedValue.push(typeFound[0]);
         }
@@ -170,13 +170,13 @@ class MyProjectEditPage extends React.Component {
         circulatingSupply: this.state.circulatingSupply,
         tokenDistributionLink: this.state.tokenDistributionLink,
 
-         
+
 
         saleDetailsLink: this.state.saleDetailsLink,
 
         createdDate: this.props.location.state.projectDetails.createdDate,
         verified: this.props.location.state.projectDetails.verified,
-        
+
         ownerEmail: getUser()
       })
     };
@@ -202,38 +202,18 @@ class MyProjectEditPage extends React.Component {
     selectedListTags = selectedList;
   }
 
-
-
   render() {
     return (
       <Page
         className="ProjectAddPage"
-        title="Project Edit"
-        breadcrumbs={[{ name: 'Project Edit', active: true }]}
+        title=""
+        breadcrumbs={[{ name: 'Project Edit', active: false }]}
       >
-
-        {/* https://reactstrap.github.io/components/form/?email=&password=&select=1&text=&file= */}
-
-        {/* {
-        "id": 1,
-        "name": "Poolpeek",
-        "type": "Application",
-        "tokenType": "DUNNO",
-        "ticker": "12345",
-        "stage": "ISO",
-        "description": null,
-        "homepage": null,
-        "twitterHandle": null,
-        "telegramHandle": null,
-        "youtubeHandle": null,
-        "facebookHandle": null,
-        "discordHandle": null
-    }, */}
 
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle()}
-        // className={this.props.className}
+          className={this.props.className}
         >
           <ModalHeader toggle={this.toggle()}></ModalHeader>
           <ModalBody>
@@ -254,7 +234,6 @@ class MyProjectEditPage extends React.Component {
 
         <Row
           style={{
-            height: '100vh',
             justifyContent: 'center',
             alignItems: 'center',
           }}>
@@ -324,7 +303,7 @@ class MyProjectEditPage extends React.Component {
                 <FormGroup row>
                   <Label for="name" sm={inputnamewidth}>Stage / Status</Label>
                   <Col sm={inputfieldwidth}>
-                  <Input type="select" name="select" onChange={e => this.setState({ stage: e.target.value })} value={this.state.stage}> 
+                    <Input type="select" name="select" onChange={e => this.setState({ stage: e.target.value })} value={this.state.stage}>
                       <option></option>
                       <option>Pre Funding</option>
                       <option>Catalyst</option>
@@ -357,7 +336,7 @@ class MyProjectEditPage extends React.Component {
                 <FormGroup row>
                   <Label for="name" sm={inputnamewidth}>Token Type</Label>
                   <Col sm={inputfieldwidth}>
-                  <Input type="select" name="select" onChange={e => this.setState({ tokenType: e.target.value })} value={this.state.tokenType}>
+                    <Input type="select" name="select" onChange={e => this.setState({ tokenType: e.target.value })} value={this.state.tokenType}>
                       <option>No Token</option>
                       <option>Native Asset</option>
                       <option>ERC20</option>
@@ -365,26 +344,26 @@ class MyProjectEditPage extends React.Component {
                     </Input></Col>
                 </FormGroup>
                 {!isEmpty(this.state.tokenType) && this.state.tokenType != 'No Token' && (<div>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Total Supply</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="" value={this.state.totalSupply}
-                      onChange={e => this.setState({ totalSupply: e.target.value })} /></Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Circulating Supply</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="" value={this.state.circulatingSupply}
-                      onChange={e => this.setState({ circulatingSupply: e.target.value })} /></Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Token Distribution Link</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="" value={this.state.tokenDistributionLink}
-                      onChange={e => this.setState({ tokenDistributionLink: e.target.value })} /></Col>
-                </FormGroup>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Total Supply</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder="" value={this.state.totalSupply}
+                        onChange={e => this.setState({ totalSupply: e.target.value })} /></Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Circulating Supply</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder="" value={this.state.circulatingSupply}
+                        onChange={e => this.setState({ circulatingSupply: e.target.value })} /></Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Token Distribution Link</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder="" value={this.state.tokenDistributionLink}
+                        onChange={e => this.setState({ tokenDistributionLink: e.target.value })} /></Col>
+                  </FormGroup>
                 </div>)}
-                
+
                 <br></br>
                 <h4>Sale Details</h4>
                 <FormGroup row>

@@ -80,8 +80,7 @@ class MainLayout extends React.Component {
         <Sidebar />
         <Content fluid onClick={this.handleContentClick}>
           <Header />
-          {children}
-          <br></br>
+          {children}          
           <Footer />
         </Content>
 
