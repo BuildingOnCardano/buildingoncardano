@@ -74,21 +74,21 @@ class App extends React.Component {
           <MainLayout breakpoint={this.props.breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
               <Route exact path="/" render={(props) => <DashboardPage {...props} />} />
-              <Route  path="/addproject" render={(props) => <ProjectAddPage {...props} />} />
+              <Route path="/addproject" render={(props) => <ProjectAddPage {...props} />} />
 
-              <Route  path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
-              <Route  path={process.env.PUBLIC_URL + "/application"} render={(props) => <ProjectsPage {...props} projectType="application" />} />
-              <Route  path="/tooling" render={(props) => <ProjectsPage {...props} projectType="tooling" />} />
-              <Route  path="/wallet" render={(props) => <ProjectsPage {...props} projectType="wallet" />} />
-              <Route  path="/data" render={(props) => <ProjectsPage {...props} projectType="data" />} />
-              <Route  path="/nft" render={(props) => <ProjectsPage {...props} projectType="nft" />} />
-              <Route  path="/dex" render={(props) => <ProjectsPage {...props} projectType="dex" />} />
+              <Route path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
+              <Route path="/application" render={(props) => <ProjectsPage {...props} projectType="application" />} />
+              <Route path="/tooling" render={(props) => <ProjectsPage {...props} projectType="tooling" />} />
+              <Route path="/wallet" render={(props) => <ProjectsPage {...props} projectType="wallet" />} />
+              <Route path="/data" render={(props) => <ProjectsPage {...props} projectType="data" />} />
+              <Route path="/nft" render={(props) => <ProjectsPage {...props} projectType="nft" />} />
+              <Route path="/dex" render={(props) => <ProjectsPage {...props} projectType="dex" />} />
 
-              <Route  path="/projectdetails" render={(props) => <ProjectDetailsPage {...props} />} />
-              <Route  path="/myprojects" render={(props) => <MyProjectsPage {...props} />} />
-              <Route  path="/editmyproject" render={(props) => <MyProjectEditPage {...props} />} />
+              <Route path="/projectdetails" render={(props) => <ProjectDetailsPage {...props} />} />
+              <Route path="/myprojects" render={(props) => <MyProjectsPage {...props} />} />
+              <Route path="/editmyproject" render={(props) => <MyProjectEditPage {...props} />} />
 
-              <Route  path="/login-modal" component={AuthModalPage} />
+              <Route path="/login-modal" component={AuthModalPage} />
               <Route
                 exact
                 path="/button-groups"
