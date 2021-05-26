@@ -28,7 +28,7 @@ class MyProjectsPage extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     if(!isEmpty(getUser())){
-      this.getProjectsByType();
+      await this.getProjectsByType();
     }
   }
 
