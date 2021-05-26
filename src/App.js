@@ -18,7 +18,6 @@ import ProjectAddPage from 'pages/ProjectAddPage';
 import MyProjectsPage from 'pages/MyProjectsPage';
 import MyProjectEditPage from 'pages/MyProjectEditPage';
 
-import { getUser } from 'utils/Common.js';
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
 };
