@@ -2,7 +2,7 @@
   "name": "buildingoncardano",
   "version": "1.1.0",
   "private": false,
-  "homepage": "/",
+  "homepage": "https://buildingoncardano.com/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
@@ -76,7 +76,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && cp build/index.html build/404.html",
+    "build": "react-scripts build",
     "serve": "serve -s build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
