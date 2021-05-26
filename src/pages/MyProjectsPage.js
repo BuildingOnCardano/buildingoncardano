@@ -24,11 +24,16 @@ class MyProjectsPage extends React.Component {
     projects: [],
     loading: true
   };
+  
+  constructor(props) {
+    super(props);
+  }
+
 
   componentDidMount() {
     window.scrollTo(0, 0);
     if(!isEmpty(getUser())){
-      await this.getProjectsByType();
+      this.getProjectsByType();
     }
   }
 
