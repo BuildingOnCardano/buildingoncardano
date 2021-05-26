@@ -60,7 +60,7 @@ class ProjectDetailsPage extends React.Component {
     return (
       <Page
         className="ProjectDetailsPage"
-        title="Project Details"
+        title=""
         breadcrumbs={[{ name: 'Project Details / ' + this.props.location.state.projectDetails.type + ' / ' + this.props.location.state.projectDetails.name, active: true }]}
       >
         <Row
@@ -68,7 +68,7 @@ class ProjectDetailsPage extends React.Component {
             height: '100vh',
             justifyContent: 'center',
           }}>
-          <Col md={2} sm={6} xs={12} className="mb-3">
+          <Col md={2} sm={6} lg={3} xs={12} className="mb-3">
             <Row style={{
               justifyContent: 'center',
               alignItems: 'center',

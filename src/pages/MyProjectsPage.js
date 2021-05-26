@@ -59,8 +59,8 @@ class MyProjectsPage extends React.Component {
     return (
       <Page
         className="MyProjectsPage"
-        title="My Projects"
-        breadcrumbs={[{ name: 'My Projects/' + this.props.projectType, active: true }]}
+        title=""
+        breadcrumbs={[{ name: 'My Projects /', active: true }]}
       >
         <Row>
           {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>

@@ -257,7 +257,7 @@ class ProjectAddPage extends React.Component {
                 <FormGroup row>
                   <Label for="name" sm={inputnamewidth}>Ticker</Label>
                   <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder=""
+                    <Input type="text" name="name" id="name" placeholder="E.G ADA"
                       onChange={e => this.setState({ ticker: e.target.value })} /></Col>
                 </FormGroup>
 

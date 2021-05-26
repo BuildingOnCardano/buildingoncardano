@@ -40,7 +40,7 @@ export default class ProjectCard extends React.Component {
 
     render() {
         return (
-            <div className="ProjectCard" style={{ minHeight: '22rem', width: '25rem' }}>
+            <div className="ProjectCard" style={{ minHeight: '22rem', minWidth: '25rem' }}>
                 <br></br>
                 {this.props.myprojectspage && (<Link to={{ pathname: '/editmyproject', state: { projectDetails: this.props.projectDetails } }}>Edit Project</Link>)}
                 

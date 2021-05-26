@@ -79,7 +79,7 @@ class DashboardPage extends React.Component {
     return (
       <Page
         className="DashboardPage"
-        title="Dashboard"
+        title=""
         breadcrumbs={[{ name: '/', active: true }]}
       >
         {/* <Row style={{
@@ -116,16 +116,21 @@ class DashboardPage extends React.Component {
         }
 
         <Row style={{
-          justifyContent: 'center',
+          justifyContent: 'left',
           alignItems: 'center',
         }}>
-          <Col lg="9" sm={6} sm={6}>
+          <Col lg={9} sm={4} sm={3} xs={12}>
             <Card >
               <CardHeader><h2>Latest Projects</h2></CardHeader>
-              <CardBody>
                 {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
                   :
-                  <Table>
+                  <Table  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    overflow:'wrap',
+                    whiteSpace: 'unset',
+                    minWidth: "10vh", minHeight: "10vh"
+                  }}>
                     <TableHead>
                       {this.state.smallScreen ?
                         <TableRow >
@@ -145,7 +150,7 @@ class DashboardPage extends React.Component {
                         </TableRow >}
 
                     </TableHead>
-                    <TableBody >
+                    <TableBody>
 
                       {this.state.smallScreen ?
                         this.state.projects.map(function (item, index) {
@@ -174,7 +179,7 @@ class DashboardPage extends React.Component {
                               <TableCell><h4>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
                                 src={item.imageUrl}
                                 className="rounded"
-                                style={{ width: 100, height: 100 }}
+                                style={{ width: "10vh", height: "10vh" }}
                               />)} </h4></TableCell>
                               <TableCell><h3>{item.name}</h3></TableCell>
                               <TableCell><h3>{item.type}</h3></TableCell>
@@ -187,8 +192,6 @@ class DashboardPage extends React.Component {
                     </TableBody >
                   </Table>
                 }
-              </CardBody>
-
             </Card>
           </Col>
         </Row>
