@@ -81,6 +81,7 @@ class MainLayout extends React.Component {
         <Content fluid onClick={this.handleContentClick}>
           <Header />
           {children}
+          <br></br>
           <Footer />
         </Content>
 

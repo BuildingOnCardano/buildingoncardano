@@ -28,12 +28,6 @@ const tagOptions = [
 ]
 
 var selectedValue = [];
-{/* <option>Defi</option>
-<option>Application</option>
-<option>Tooling</option>
-<option>Wallet</option>
-<option>Data</option>
-<option>Nft</option> */}
 
 class ProjectAddPage extends React.Component {
   state = {
@@ -157,245 +151,225 @@ class ProjectAddPage extends React.Component {
     return (
       <Page
         className="ProjectAddPage"
-        title="Project Add"
+        title=""
         breadcrumbs={[{ name: 'Project Add', active: true }]}
       >
+        <div>
 
-        {/* https://reactstrap.github.io/components/form/?email=&password=&select=1&text=&file= */}
+          <Modal
+            isOpen={this.state.modal}
+            toggle={this.toggle()}
+            // className={this.props.className}
+          >
+            <ModalHeader toggle={this.toggle()}></ModalHeader>
+            <ModalBody>
+              <Row>
+                <p>Project Submitted successfully.</p>
+                <p>We will be reviewing this project for credability and will hope to approve ASAP.</p>
+              </Row>
 
-        {/* {
-        "id": 1,
-        "name": "Poolpeek",
-        "type": "Application",
-        "tokenType": "DUNNO",
-        "ticker": "12345",
-        "stage": "ISO",
-        "description": null,
-        "homepage": null,
-        "twitterHandle": null,
-        "telegramHandle": null,
-        "youtubeHandle": null,
-        "facebookHandle": null,
-        "discordHandle": null
-    }, */}
-
-        <Modal
-          isOpen={this.state.modal}
-          toggle={this.toggle()}
-        // className={this.props.className}
-        >
-          <ModalHeader toggle={this.toggle()}></ModalHeader>
-          <ModalBody>
-            <Row>
-              <p>Project Submitted successfully.</p>
-              <p>We will be reviewing this project for credability and will hope to approve ASAP.</p>
-            </Row>
-
-          </ModalBody>
-          <ModalFooter>
-            {' '}
-            <Link to={{ pathname: '/' }}>
-              <Button color="secondary" onClick={this.toggle()}>
-                Close
+            </ModalBody>
+            <ModalFooter>
+              {' '}
+              <Link to={{ pathname: '/' }}>
+                <Button color="secondary" onClick={this.toggle()}>
+                  Close
             </Button>
-            </Link>
-          </ModalFooter>
-        </Modal>
+              </Link>
+            </ModalFooter>
+          </Modal>
 
-        <Row
-          style={{
-            height: '100vh',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Col md={6} lg={8}>
-            <Card body>
-              <h3>Submit Project</h3>
-              <Form>
-                <br></br>
-                <h4>Info</h4>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Name</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder=""
-                      onChange={e => this.setState({ name: e.target.value })} /></Col>
-                </FormGroup>
-                {/* onChange={e => this.s etState({ type: e.target.value })} */}
-                <FormGroup row>
-                  <Label for="exampleSelect" sm={inputnamewidth}>Tags</Label>
-                  <Col sm={inputfieldwidth}>
-                    {/* <Select name="select" id="exampleSelect"
+          <Row
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Col md={6} lg={9}>
+              <Card body>
+                <h3>Submit Project</h3>
+                <Form>
+                  <br></br>
+                  <h4>Info</h4>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Name</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder=""
+                        onChange={e => this.setState({ name: e.target.value })} /></Col>
+                  </FormGroup>
+                  {/* onChange={e => this.s etState({ type: e.target.value })} */}
+                  <FormGroup row>
+                    <Label for="exampleSelect" sm={inputnamewidth}>Tags</Label>
+                    <Col sm={inputfieldwidth}>
+                      {/* <Select name="select" id="exampleSelect"
                       placeholder="nft, dex, protocol, cross chain, Wallet, Oracle, Tooling, Infrastructure"
                       onChange={this.handleChange} value={this.state.value} multiple={true} options={tagOptions}> */}
 
-                    <Multiselect
-                      options={tagOptions} // Options to display in the dropdown
-                      //selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
-                      onSelect={this.onSelect} // Function will trigger on select event
-                      onRemove={this.onRemove} // Function will trigger on remove event
-                      displayValue="name" // Property name to display in the dropdown options
-                    />
+                      <Multiselect
+                        options={tagOptions} // Options to display in the dropdown
+                        //selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
+                        onSelect={this.onSelect} // Function will trigger on select event
+                        onRemove={this.onRemove} // Function will trigger on remove event
+                        displayValue="name" // Property name to display in the dropdown options
+                      />
 
-                  </Col>
-                </FormGroup>
+                    </Col>
+                  </FormGroup>
 
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Website</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="Website Url"
-                      onChange={e => this.setState({ homepage: e.target.value })} /></Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Whitepaper</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="Whitepaper Url"
-                      onChange={e => this.setState({ whitepaperUrl: e.target.value })} /></Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Project Logo Url</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="Add link/Url to project logo"
-                      onChange={e => this.setState({ imageUrl: e.target.value })} /></Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Youtube presentation</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="ID to video presenation on YouTube E.G KPTA9J6S-pY"
-                      onChange={e => this.setState({ youTubeEmbedId: e.target.value })} /></Col>
-                </FormGroup>
-
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Ticker</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="E.G ADA"
-                      onChange={e => this.setState({ ticker: e.target.value })} /></Col>
-                </FormGroup>
-
-                <FormGroup row>
-                  <Label for="exampleSelect" sm={inputnamewidth}>Stage / Status</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="select" name="select" onChange={e => this.setState({ stage: e.target.value })}>
-                      <option></option>
-                      <option>Pre Funding</option>
-                      <option>Catalyst</option>
-                      <option>Private Sale</option>
-                      <option>Presale</option>
-                      <option>IEO</option>
-                      <option>IDO</option>
-                      <option>ISO</option>
-                      <option>Live on Exchange</option>
-                    </Input>
-                  </Col>
-                </FormGroup>
-
-                <FormGroup row>
-                  <Label for="description" sm={inputnamewidth}>Short Description</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="description" id="description"
-                      onChange={e => this.setState({ shortDescription: e.target.value })} /></Col>
-                </FormGroup>
-
-
-                <FormGroup row>
-                  <Label for="description" sm={inputnamewidth}>Long Description</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="textarea" name="description" id="description"
-                      onChange={e => this.setState({ description: e.target.value })} /></Col>
-                </FormGroup>
-
-                <br></br>
-                <h4>Tokenomics</h4>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Token Type</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="select" name="select" onChange={e => this.setState({ tokenType: e.target.value })} >
-                      <option>No Token</option>
-                      <option>Native Asset</option>
-                      <option>ERC20</option>
-                      <option>BSC</option>
-                    </Input>
-                  </Col>
-                </FormGroup>
-
-                {!isEmpty(this.state.tokenType) && this.state.tokenType != 'No Token' && (<div>
                   <FormGroup row>
-                    <Label for="name" sm={inputnamewidth}>Total Supply</Label>
+                    <Label for="name" sm={inputnamewidth}>Website</Label>
                     <Col sm={inputfieldwidth}>
-                      <Input type="text" name="name" id="name" placeholder=""
-                        onChange={e => this.setState({ totalSupply: e.target.value })} /></Col>
+                      <Input type="text" name="name" id="name" placeholder="Website Url"
+                        onChange={e => this.setState({ homepage: e.target.value })} /></Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="name" sm={inputnamewidth}>Circulating Supply</Label>
+                    <Label for="name" sm={inputnamewidth}>Whitepaper</Label>
                     <Col sm={inputfieldwidth}>
-                      <Input type="text" name="name" id="name" placeholder=""
-                        onChange={e => this.setState({ circulatingSupply: e.target.value })} /></Col>
+                      <Input type="text" name="name" id="name" placeholder="Whitepaper Url"
+                        onChange={e => this.setState({ whitepaperUrl: e.target.value })} /></Col>
                   </FormGroup>
                   <FormGroup row>
-                    <Label for="name" sm={inputnamewidth}>Token Distribution Link</Label>
+                    <Label for="name" sm={inputnamewidth}>Project Logo Url</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder="Add link/Url to project logo"
+                        onChange={e => this.setState({ imageUrl: e.target.value })} /></Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Youtube presentation</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder="ID to video presenation on YouTube E.G KPTA9J6S-pY"
+                        onChange={e => this.setState({ youTubeEmbedId: e.target.value })} /></Col>
+                  </FormGroup>
+
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Ticker</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder="E.G ADA"
+                        onChange={e => this.setState({ ticker: e.target.value })} /></Col>
+                  </FormGroup>
+
+                  <FormGroup row>
+                    <Label for="exampleSelect" sm={inputnamewidth}>Stage / Status</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="select" name="select" onChange={e => this.setState({ stage: e.target.value })}>
+                        <option></option>
+                        <option>Pre Funding</option>
+                        <option>Catalyst</option>
+                        <option>Private Sale</option>
+                        <option>Presale</option>
+                        <option>IEO</option>
+                        <option>IDO</option>
+                        <option>ISO</option>
+                        <option>Live on Exchange</option>
+                      </Input>
+                    </Col>
+                  </FormGroup>
+
+                  <FormGroup row>
+                    <Label for="description" sm={inputnamewidth}>Short Description</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="description" id="description"
+                        onChange={e => this.setState({ shortDescription: e.target.value })} /></Col>
+                  </FormGroup>
+
+
+                  <FormGroup row>
+                    <Label for="description" sm={inputnamewidth}>Long Description</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="textarea" name="description" id="description"
+                        onChange={e => this.setState({ description: e.target.value })} /></Col>
+                  </FormGroup>
+
+                  <br></br>
+                  <h4>Tokenomics</h4>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Token Type</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="select" name="select" onChange={e => this.setState({ tokenType: e.target.value })} >
+                        <option>No Token</option>
+                        <option>Native Asset</option>
+                        <option>ERC20</option>
+                        <option>BSC</option>
+                      </Input>
+                    </Col>
+                  </FormGroup>
+
+                  {!isEmpty(this.state.tokenType) && this.state.tokenType != 'No Token' && (<div>
+                    <FormGroup row>
+                      <Label for="name" sm={inputnamewidth}>Total Supply</Label>
+                      <Col sm={inputfieldwidth}>
+                        <Input type="text" name="name" id="name" placeholder=""
+                          onChange={e => this.setState({ totalSupply: e.target.value })} /></Col>
+                    </FormGroup>
+                    <FormGroup row>
+                      <Label for="name" sm={inputnamewidth}>Circulating Supply</Label>
+                      <Col sm={inputfieldwidth}>
+                        <Input type="text" name="name" id="name" placeholder=""
+                          onChange={e => this.setState({ circulatingSupply: e.target.value })} /></Col>
+                    </FormGroup>
+                    <FormGroup row>
+                      <Label for="name" sm={inputnamewidth}>Token Distribution Link</Label>
+                      <Col sm={inputfieldwidth}>
+                        <Input type="text" name="name" id="name" placeholder=""
+                          onChange={e => this.setState({ tokenDistributionLink: e.target.value })} /></Col>
+                    </FormGroup>
+                  </div>)}
+
+
+                  <br></br>
+                  <h4>Sale Details</h4>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Sales Details Link</Label>
                     <Col sm={inputfieldwidth}>
                       <Input type="text" name="name" id="name" placeholder=""
-                        onChange={e => this.setState({ tokenDistributionLink: e.target.value })} /></Col>
+                        onChange={e => this.setState({ saleDetailsLink: e.target.value })} /></Col>
                   </FormGroup>
-                </div>)}
 
+                  <br></br>
+                  <h4>Social Media</h4>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Twitter Handle</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder="@BuildingOnCardano"
+                        onChange={e => this.setState({ twitterHandle: e.target.value })} /></Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Telegram Handle</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder="name of chat"
+                        onChange={e => this.setState({ telegramHandle: e.target.value })} /></Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Youtube Handle</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder="channel id"
+                        onChange={e => this.setState({ youtubeHandle: e.target.value })} /></Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Facebook Handle</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder="facebook id"
+                        onChange={e => this.setState({ facebookHandle: e.target.value })} /></Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Discord</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder="discord id"
+                        onChange={e => this.setState({ discordHandle: e.target.value })} /></Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Github Link</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder="https://github.com"
+                        onChange={e => this.setState({ githubLink: e.target.value })} /></Col>
+                  </FormGroup>
+                  <br></br>
 
-                <br></br>
-                <h4>Sale Details</h4>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Sales Details Link</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder=""
-                      onChange={e => this.setState({ saleDetailsLink: e.target.value })} /></Col>
-                </FormGroup>
-
-                <br></br>
-                <h4>Social Media</h4>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Twitter Handle</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="@BuildingOnCardano"
-                      onChange={e => this.setState({ twitterHandle: e.target.value })} /></Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Telegram Handle</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="name of chat"
-                      onChange={e => this.setState({ telegramHandle: e.target.value })} /></Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Youtube Handle</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="channel id"
-                      onChange={e => this.setState({ youtubeHandle: e.target.value })} /></Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Facebook Handle</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="facebook id"
-                      onChange={e => this.setState({ facebookHandle: e.target.value })} /></Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Discord</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="discord id"
-                      onChange={e => this.setState({ discordHandle: e.target.value })} /></Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Github Link</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="https://github.com"
-                      onChange={e => this.setState({ githubLink: e.target.value })} /></Col>
-                </FormGroup>
-                <br></br>
-
-
-
-
-                <Button onClick={this.handleSubmit}>Submit</Button>
-              </Form>
-            </Card>
-          </Col>
-        </Row>
+                  <Button onClick={this.handleSubmit}>Submit</Button>
+                </Form>
+              </Card>
+            </Col>
+          </Row>
+        </div>
       </Page >
     );
   }
