@@ -27,14 +27,6 @@ import CardanoImage from 'assets/img/cardanoIcon.png';
 import YoutubeEmbed from '../components/YoutubeEmbed';
 import { isEmpty } from 'utils/stringutil.js';
 
-const socialMediaProps = {
-  twitter_handle: '@PoolShamrock',
-  telegram_handle: 'change',
-  youtube_handle: 'change',
-  facebook_handle: 'change',
-  discord_handle: 'change'
-};
-
 
 const override = css`
   display: block;
@@ -151,7 +143,8 @@ class ProjectDetailsPage extends React.Component {
                       telegram_handle: this.props.location.state.projectDetails.telegramHandle,
                       youtube_handle: this.props.location.state.projectDetails.youtubeHandle,
                       facebook_handle: this.props.location.state.projectDetails.facebookHandle,
-                      discord_handle: this.props.location.state.projectDetails.discordHandle
+                      githubLink: this.props.location.state.projectDetails.githubLink,
+
                     }} />
                   </CardBody>
                 </Card>

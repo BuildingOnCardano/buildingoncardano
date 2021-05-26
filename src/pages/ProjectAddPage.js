@@ -11,8 +11,8 @@ import { Card, Col, Row } from 'reactstrap';
 import { baseUrl, createProject } from '../assets/services';
 import { Link } from 'react-router-dom';
 import { Multiselect } from 'multiselect-react-dropdown';
-import { getUser, getPassword  } from 'utils/Common.js';
-
+import { getUser, getPassword } from 'utils/Common.js';
+import { isEmpty } from 'utils/stringutil.js';
 
 const inputnamewidth = 2;
 const inputfieldwidth = 8;
@@ -24,6 +24,7 @@ const tagOptions = [
   { name: 'Wallet', id: 4 },
   { name: 'Data', id: 5 },
   { name: 'Nft', id: 6 },
+  { name: 'Dex', id: 6 },
 ]
 
 var selectedValue = [];
@@ -52,15 +53,18 @@ class ProjectAddPage extends React.Component {
     facebookHandle: null,
     discordHandle: null,
     youTubeEmbedId: null,
+    githubLink: null,
 
     imageUrl: null,
-    
+
     tokenType: null,
     totalSupply: null,
     circulatingSupply: null,
     tokenDistributionLink: null,
-    
+
     saleDetailsLink: null,
+
+    verified: null,
 
     modal: false,
     modal_backdrop: false,
@@ -97,7 +101,7 @@ class ProjectAddPage extends React.Component {
 
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'password': getPassword()},
+      headers: { 'Content-Type': 'application/json', 'password': getPassword() },
       body: JSON.stringify({
         name: this.state.name,
         type: tags,
@@ -115,14 +119,15 @@ class ProjectAddPage extends React.Component {
         youtubeHandle: this.state.youtubeHandle,
         facebookHandle: this.state.facebookHandle,
         discordHandle: this.state.discordHandle,
-        
+        githubLink: this.state.githubLink,
+
         youTubeEmbedId: this.state.youTubeEmbedId,
 
         tokenType: this.state.tokenType,
         totalSupply: this.state.totalSupply,
         circulatingSupply: this.state.circulatingSupply,
         tokenDistributionLink: this.state.tokenDistributionLink,
-        
+
         saleDetailsLink: this.state.saleDetailsLink,
 
         ownerEmail: getUser()
@@ -136,12 +141,17 @@ class ProjectAddPage extends React.Component {
   };
 
   onSelect(selectedList, selectedItem) {
-    selectedValue= selectedList;
+    selectedValue = selectedList;
   }
 
   onRemove(selectedList, removedItem) {
-    selectedValue= selectedList;
+    selectedValue = selectedList;
   }
+
+  onSelect(selectedList, selectedItem) {
+    selectedValue = selectedList;
+  }
+
 
   render() {
     return (
@@ -262,10 +272,20 @@ class ProjectAddPage extends React.Component {
                 </FormGroup>
 
                 <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Stage / Status</Label>
+                  <Label for="exampleSelect" sm={inputnamewidth}>Stage / Status</Label>
                   <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="E.G Pre Funding, Catalyst, Private Sale, Presale, IEO, IDO, ISO, Live on Exchange"
-                      onChange={e => this.setState({ stage: e.target.value })} /></Col>
+                    <Input type="select" name="select" onChange={e => this.setState({ stage: e.target.value })}>
+                      <option></option>
+                      <option>Pre Funding</option>
+                      <option>Catalyst</option>
+                      <option>Private Sale</option>
+                      <option>Presale</option>
+                      <option>IEO</option>
+                      <option>IDO</option>
+                      <option>ISO</option>
+                      <option>Live on Exchange</option>
+                    </Input>
+                  </Col>
                 </FormGroup>
 
                 <FormGroup row>
@@ -288,27 +308,36 @@ class ProjectAddPage extends React.Component {
                 <FormGroup row>
                   <Label for="name" sm={inputnamewidth}>Token Type</Label>
                   <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="Native Asset, ERC20, BSC, No Token"
-                      onChange={e => this.setState({ tokenType: e.target.value })} /></Col>
+                    <Input type="select" name="select" onChange={e => this.setState({ tokenType: e.target.value })} >
+                      <option>No Token</option>
+                      <option>Native Asset</option>
+                      <option>ERC20</option>
+                      <option>BSC</option>
+                    </Input>
+                  </Col>
                 </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Total Supply</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder=""
-                      onChange={e => this.setState({ totalSupply: e.target.value })} /></Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Circulating Supply</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder=""
-                      onChange={e => this.setState({ circulatingSupply: e.target.value })} /></Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="name" sm={inputnamewidth}>Token Distribution Link</Label>
-                  <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder=""
-                      onChange={e => this.setState({ tokenDistributionLink: e.target.value })} /></Col>
-                </FormGroup>
+
+                {!isEmpty(this.state.tokenType) && this.state.tokenType != 'No Token' && (<div>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Total Supply</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder=""
+                        onChange={e => this.setState({ totalSupply: e.target.value })} /></Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Circulating Supply</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder=""
+                        onChange={e => this.setState({ circulatingSupply: e.target.value })} /></Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="name" sm={inputnamewidth}>Token Distribution Link</Label>
+                    <Col sm={inputfieldwidth}>
+                      <Input type="text" name="name" id="name" placeholder=""
+                        onChange={e => this.setState({ tokenDistributionLink: e.target.value })} /></Col>
+                  </FormGroup>
+                </div>)}
+
 
                 <br></br>
                 <h4>Sale Details</h4>
@@ -350,6 +379,12 @@ class ProjectAddPage extends React.Component {
                   <Col sm={inputfieldwidth}>
                     <Input type="text" name="name" id="name" placeholder="discord id"
                       onChange={e => this.setState({ discordHandle: e.target.value })} /></Col>
+                </FormGroup>
+                <FormGroup row>
+                  <Label for="name" sm={inputnamewidth}>Github Link</Label>
+                  <Col sm={inputfieldwidth}>
+                    <Input type="text" name="name" id="name" placeholder="https://github.com"
+                      onChange={e => this.setState({ githubLink: e.target.value })} /></Col>
                 </FormGroup>
                 <br></br>
 

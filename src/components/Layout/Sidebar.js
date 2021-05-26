@@ -44,6 +44,7 @@ const pageContents = [
   { to: '/wallet', name: 'Wallet', exact: true, Icon: MdKeyboardArrowRight },
   { to: '/data', name: 'Data', exact: true, Icon: MdKeyboardArrowRight },
   { to: '/nft', name: 'Nft', exact: true, Icon: MdKeyboardArrowRight },
+  { to: '/dex', name: 'Dex', exact: true, Icon: MdKeyboardArrowRight },
 ];
 
 var navItemsTop = [

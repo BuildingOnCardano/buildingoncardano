@@ -28,14 +28,6 @@ import CardanoImage from 'assets/img/cardanoIcon.png';
 import { Link } from 'react-router-dom';
 import ReactImageFallback from "react-image-fallback";
 
-const socialMediaProps = {
-  twitter_handle: '@PoolShamrock',
-  telegram_handle: 'change',
-  youtube_handle: 'change',
-  facebook_handle: 'change',
-  discord_handle: 'change'
-};
-
 
 const override = css`
   display: block;

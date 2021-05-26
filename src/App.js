@@ -80,6 +80,7 @@ class App extends React.Component {
                 <Route exact path="/wallet" render={(props) => <ProjectsPage {...props}   projectType="wallet"/>} />
                 <Route exact path="/data" render={(props) => <ProjectsPage {...props}   projectType="data"/>} />
                 <Route exact path="/nft" render={(props) => <ProjectsPage {...props}   projectType="nft"/>} />
+                <Route exact path="/dex" render={(props) => <ProjectsPage {...props}   projectType="dex"/>} />
 
                 <Route exact path="/projectdetails" render={(props) => <ProjectDetailsPage {...props} />} />
                 <Route exact path="/myprojects" render={(props) => <MyProjectsPage {...props} />} />

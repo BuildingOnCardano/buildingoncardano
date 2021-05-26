@@ -25,6 +25,7 @@ const tagOptions = [
   { name: 'Wallet', id: 4 },
   { name: 'Data', id: 5 },
   { name: 'Nft', id: 6 },
+  { name: 'Dex', id: 6 },
 ]
 
 var selectedListTags = [];
@@ -49,6 +50,7 @@ class MyProjectEditPage extends React.Component {
     facebookHandle: null,
     discordHandle: null,
     youTubeEmbedId: null,
+    githubLink: null,
 
     imageUrl: null,
 
@@ -106,6 +108,7 @@ class MyProjectEditPage extends React.Component {
     this.setState({ circulatingSupply: this.props.location.state.projectDetails.circulatingSupply });
     this.setState({ tokenDistributionLink: this.props.location.state.projectDetails.tokenDistributionLink });
     this.setState({ saleDetailsLink: this.props.location.state.projectDetails.saleDetailsLink });
+    this.setState({ githubLink: this.props.location.state.projectDetails.githubLink });
 
     var types = this.props.location.state.projectDetails.type;
 
@@ -158,6 +161,7 @@ class MyProjectEditPage extends React.Component {
         youtubeHandle: this.state.youtubeHandle,
         facebookHandle: this.state.facebookHandle,
         discordHandle: this.state.discordHandle,
+        githubLink: this.state.githubLink,
 
         youTubeEmbedId: this.state.youTubeEmbedId,
 
@@ -166,8 +170,13 @@ class MyProjectEditPage extends React.Component {
         circulatingSupply: this.state.circulatingSupply,
         tokenDistributionLink: this.state.tokenDistributionLink,
 
+         
+
         saleDetailsLink: this.state.saleDetailsLink,
 
+        createdDate: this.props.location.state.projectDetails.createdDate,
+        verified: this.props.location.state.projectDetails.verified,
+        
         ownerEmail: getUser()
       })
     };
@@ -315,8 +324,17 @@ class MyProjectEditPage extends React.Component {
                 <FormGroup row>
                   <Label for="name" sm={inputnamewidth}>Stage / Status</Label>
                   <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="E.G Pre Funding, Catalyst, Private Sale, Presale, IEO, IDO, ISO, Live on Exchange" value={this.state.stage}
-                      onChange={e => this.setState({ stage: e.target.value })} /></Col>
+                  <Input type="select" name="select" onChange={e => this.setState({ stage: e.target.value })} value={this.state.stage}> 
+                      <option></option>
+                      <option>Pre Funding</option>
+                      <option>Catalyst</option>
+                      <option>Private Sale</option>
+                      <option>Presale</option>
+                      <option>IEO</option>
+                      <option>IDO</option>
+                      <option>ISO</option>
+                      <option>Live on Exchange</option>
+                    </Input></Col>
                 </FormGroup>
 
                 <FormGroup row>
@@ -339,9 +357,14 @@ class MyProjectEditPage extends React.Component {
                 <FormGroup row>
                   <Label for="name" sm={inputnamewidth}>Token Type</Label>
                   <Col sm={inputfieldwidth}>
-                    <Input type="text" name="name" id="name" placeholder="Native Asset, ERC20, BSC, No Token" value={this.state.tokenType}
-                      onChange={e => this.setState({ tokenType: e.target.value })} /></Col>
+                  <Input type="select" name="select" onChange={e => this.setState({ tokenType: e.target.value })} value={this.state.tokenType}>
+                      <option>No Token</option>
+                      <option>Native Asset</option>
+                      <option>ERC20</option>
+                      <option>BSC</option>
+                    </Input></Col>
                 </FormGroup>
+                {!isEmpty(this.state.tokenType) && this.state.tokenType != 'No Token' && (<div>
                 <FormGroup row>
                   <Label for="name" sm={inputnamewidth}>Total Supply</Label>
                   <Col sm={inputfieldwidth}>
@@ -360,7 +383,8 @@ class MyProjectEditPage extends React.Component {
                     <Input type="text" name="name" id="name" placeholder="" value={this.state.tokenDistributionLink}
                       onChange={e => this.setState({ tokenDistributionLink: e.target.value })} /></Col>
                 </FormGroup>
-
+                </div>)}
+                
                 <br></br>
                 <h4>Sale Details</h4>
                 <FormGroup row>
@@ -401,6 +425,12 @@ class MyProjectEditPage extends React.Component {
                   <Col sm={inputfieldwidth}>
                     <Input type="text" name="name" id="name" placeholder="discord id" value={this.state.discordHandle}
                       onChange={e => this.setState({ discordHandle: e.target.value })} /></Col>
+                </FormGroup>
+                <FormGroup row>
+                  <Label for="name" sm={inputnamewidth}>Github Link</Label>
+                  <Col sm={inputfieldwidth}>
+                    <Input type="text" name="name" id="name" placeholder="" value={this.state.githubLink}
+                      onChange={e => this.setState({ githubLink: e.target.value })} /></Col>
                 </FormGroup>
                 <br></br>
 

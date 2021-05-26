@@ -1,13 +1,10 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTwitter, faTelegram, faYoutube, faFacebook, faDiscord } from "@fortawesome/free-brands-svg-icons";
+import { faTwitter, faTelegram, faYoutube, faFacebook, faDiscord, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { isEmpty } from 'utils/stringutil.js';
 import Tooltip from "@material-ui/core/Tooltip";
-import {
-    Row,
-    Col
-} from 'reactstrap';
+
 export default class SocialMedia extends React.Component {
 
     constructor(props) {
@@ -18,7 +15,8 @@ export default class SocialMedia extends React.Component {
             telegramHandle: "",
             youtubeHandle: "",
             facebookHandle: "",
-            discordHandle: ""
+            discordHandle: "",
+            githubLink: ""
         }
     }
     async componentDidMount() {
@@ -57,6 +55,12 @@ export default class SocialMedia extends React.Component {
         if (!isEmpty(this.props.extendedmeta.discord_handle)) {
             this.state.discordHandle = this.props.extendedmeta.discord_handle;
             this.setState({ discordHandle: this.props.extendedmeta.discord_handle });
+        }
+
+        //github
+        if (!isEmpty(this.props.extendedmeta.githubLink)) {
+            this.state.githubLink = this.props.extendedmeta.githubLink;
+            this.setState({ githubLink: this.props.extendedmeta.githubLink });
         }
     }
 
@@ -143,6 +147,19 @@ export default class SocialMedia extends React.Component {
                                 className="pr-2"
                                 alt=""
                             /> <FontAwesomeIcon size="2x" icon={faDiscord} /> Discord</a></Tooltip>}
+
+                {this.state.githubLink != "" &&
+                    <Tooltip
+                        title="Github"
+                        placement="left"
+                    >
+                        <a href={this.state.githubLink} target="_blank" rel="noreferrer">
+                            <br></br>
+                            <br></br>
+                            <img
+                                className="pr-2"
+                                alt=""
+                            /> <FontAwesomeIcon size="2x" icon={faGithub} /> Github</a></Tooltip>}
 
             </div>
         )
