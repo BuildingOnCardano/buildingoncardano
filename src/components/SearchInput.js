@@ -1,21 +1,36 @@
 import React from 'react';
 import { MdSearch } from 'react-icons/md';
 import { Form, Input } from 'reactstrap';
+import Select from 'react-select';
 
-const SearchInput = () => {
-  return (
-    <Form inline className="cr-search-form" onSubmit={e => e.preventDefault()}>
-      <MdSearch
-        size="20"
-        className="cr-search-form__icon-search text-secondary"
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+];
+
+class SearchInput extends React.Component {
+  state = {
+    selectedOption: null,
+  };
+  handleChange = selectedOption => {
+    this.setState({ selectedOption });
+    console.log(`Option selected:`, selectedOption);
+  };
+  render() {
+    const { selectedOption } = this.state;
+
+    return (
+      <div style={{ width: 250, cursor: 'pointer' }}>
+      <Select 
+        value={selectedOption}
+        onChange={this.handleChange}
+        options={options}
+        
       />
-      <Input
-        type="search"
-        className="cr-search-form__input"
-        placeholder="Search..."
-      />
-    </Form>
-  );
-};
+      </div>
+    );
+  }
+}
 
 export default SearchInput;

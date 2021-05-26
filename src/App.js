@@ -70,10 +70,11 @@ class App extends React.Component {
 
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
-                <Route exact path="/" component={DashboardPage} />
+                {/* <Route exact path="/" component={DashboardPage} /> */}
+                <Route exact path="/" render={(props) => <DashboardPage {...props} />} />
                 <Route exact path="/addproject" render={(props) => <ProjectAddPage {...props} />} />
 
-                <Route exact path="/projects/defi" render={(props) => <ProjectsPage {...props}   projectType="defi"/>} />
+                <Route exact path="/defi" render={(props) => <ProjectsPage {...props}   projectType="defi"/>} />
                 <Route exact path="/application" render={(props) => <ProjectsPage {...props}   projectType="application"/>} />
                 <Route exact path="/tooling" render={(props) => <ProjectsPage {...props}   projectType="tooling"/>} />
                 <Route exact path="/wallet" render={(props) => <ProjectsPage {...props}   projectType="wallet"/>} />

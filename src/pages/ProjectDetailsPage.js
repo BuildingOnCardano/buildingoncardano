@@ -68,6 +68,29 @@ class ProjectDetailsPage extends React.Component {
             height: '100vh',
             justifyContent: 'center',
           }}>
+          <Col md={2} sm={6} xs={12} className="mb-3">
+            <Row style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+              <Col>
+                <Card body style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                  <ReactImageFallback
+                    src={this.props.location.state.projectDetails.imageUrl}
+                    width="140"
+                    height="140"
+                    fallbackImage={CardanoImage} />
+                  <br></br>
+                  <h2>{this.props.location.state.projectDetails.name}</h2>
+                  <h4>{this.props.location.state.projectDetails.shortDescription}</h4>
+                  <h5>{this.props.location.state.projectDetails.type}</h5>
+                </Card>
+              </Col>
+            </Row>
+          </Col>
           <Col xl={6} lg={12} md={12} sm={6}>
             <Card>
               <CardBody>
@@ -103,10 +126,10 @@ class ProjectDetailsPage extends React.Component {
                       <h4>{this.props.location.state.projectDetails.circulatingSupply}</h4>
                       <h3>Token Info:</h3>
                       <a href={this.props.location.state.projectDetails.tokenDistributionLink} target="_blank" rel="noreferrer">
-                      <h4>{this.props.location.state.projectDetails.tokenDistributionLink}</h4></a>
+                        <h4>{this.props.location.state.projectDetails.tokenDistributionLink}</h4></a>
                       <h3>Sales Info:</h3>
                       <a href={this.props.location.state.projectDetails.saleDetailsLink} target="_blank" rel="noreferrer">
-                      <h4>{this.props.location.state.projectDetails.saleDetailsLink}</h4></a>
+                        <h4>{this.props.location.state.projectDetails.saleDetailsLink}</h4></a>
                     </Col>
                   </Row>
                 </CardBody>
@@ -118,20 +141,6 @@ class ProjectDetailsPage extends React.Component {
               alignItems: 'center',
             }}>
               <Col>
-                <Card body style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                  <ReactImageFallback
-                    src={this.props.location.state.projectDetails.imageUrl}
-                    width="140"
-                    height="140"
-                    fallbackImage={CardanoImage} />
-                  <br></br>
-                  <h2>{this.props.location.state.projectDetails.name}</h2>
-                  <h4>{this.props.location.state.projectDetails.shortDescription}</h4>
-                  <h5>{this.props.location.state.projectDetails.type}</h5>
-                </Card>
                 <Card style={{
                   alignItems: 'center'
                 }}>
@@ -145,6 +154,15 @@ class ProjectDetailsPage extends React.Component {
                       discord_handle: this.props.location.state.projectDetails.discordHandle
                     }} />
                   </CardBody>
+                </Card>
+                <Card body style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                  <h4>Date Created:</h4>                  
+                  <h5>{this.props.location.state.projectDetails.createdDate.split('T')[0]}</h5>
+                  <h4>Date Updated:</h4>
+                  <h5>{this.props.location.state.projectDetails.updatedDate.split('T')[0]}</h5>
                 </Card>
               </Col>
             </Row>

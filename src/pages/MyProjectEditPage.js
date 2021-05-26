@@ -177,7 +177,7 @@ class MyProjectEditPage extends React.Component {
     var data = await response.json();
 
     console.log(data.response);
-    if (data.response == "created") {
+    if (data.response == "updated") {
       this.setState({ modal: true });
       selectedListTags = []
     }

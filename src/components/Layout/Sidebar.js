@@ -37,30 +37,8 @@ const sidebarBackground = {
   backgroundRepeat: 'no-repeat',
 };
 
-const navComponents = [
-  { to: '/buttons', name: 'buttons', exact: false, Icon: MdRadioButtonChecked },
-  {
-    to: '/button-groups',
-    name: 'button groups',
-    exact: false,
-    Icon: MdGroupWork,
-  },
-  { to: '/forms', name: 'forms', exact: false, Icon: MdChromeReaderMode },
-  { to: '/input-groups', name: 'input groups', exact: false, Icon: MdViewList },
-  {
-    to: '/dropdowns',
-    name: 'dropdowns',
-    exact: false,
-    Icon: MdArrowDropDownCircle,
-  },
-  { to: '/badges', name: 'badges', exact: false, Icon: MdStar },
-  { to: '/alerts', name: 'alerts', exact: false, Icon: MdNotificationsActive },
-  { to: '/progress', name: 'progress', exact: false, Icon: MdBrush },
-  { to: '/modals', name: 'modals', exact: false, Icon: MdViewDay },
-];
-
 const pageContents = [
-  { to: '/projects/defi', name: 'Defi', exact: true, Icon: MdKeyboardArrowRight },
+  { to: '/defi', name: 'Defi', exact: true, Icon: MdKeyboardArrowRight },
   { to: '/application', name: 'Application', exact: true, Icon: MdKeyboardArrowRight },
   { to: '/tooling', name: 'tooling', exact: true, Icon: MdKeyboardArrowRight },
   { to: '/wallet', name: 'Wallet', exact: true, Icon: MdKeyboardArrowRight },

@@ -3,6 +3,7 @@ import { IconWidget, NumberWidget } from 'components/Widget';
 import React from 'react';
 import {
   Card,
+  CardHeader,
   CardBody,
   Col,
   Row,
@@ -13,8 +14,9 @@ import BeatLoader
 import { css } from "@emotion/core";
 import { baseUrl, getAllProjects, getProjectsStats } from '../assets/services';
 import { Link } from 'react-router-dom';
-import { TableRow, TableCell, TableHead, TableBody   } from '@material-ui/core';
+import { TableRow, TableCell, TableHead, TableBody } from '@material-ui/core';
 import "../styles/styles.css";
+import SearchInput from 'components/SearchInput';
 
 const override = css`
   display: block;
@@ -62,8 +64,10 @@ class DashboardPage extends React.Component {
       var response = await fetch(baseUrl + getProjectsStats);
       const data = await response.json();
       console.log(data);
-      var projectTypesAndCount = data.projectTypesAndCount;
-      this.setState({ totalProjects: data.totalProjects, projectTypesAndCount: projectTypesAndCount })
+
+      this.setState({ totalProjects: data.totalProjects, projectTypesAndCount: data.projectTypesAndCount });
+      this.state.projectTypesAndCount = data.projectTypesAndCount;
+      console.log(this.state.projectTypesAndCount);
     } catch (error) {
       console.log(error)
     }
@@ -78,22 +82,46 @@ class DashboardPage extends React.Component {
         title="Dashboard"
         breadcrumbs={[{ name: '/', active: true }]}
       >
-        <Row>
-          <Col lg={3} md={6} sm={6} xs={12}>
-            <NumberWidget
-              title="Total Projects"
-              number={this.state.totalProjects}
-              color="secondary"
-            />
-          </Col>
-        </Row>
-        <Row style={{          
+        {/* <Row style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>         {width > 700 && <SearchInput />}</Row> */}
+
+        {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
+          :
+          <Row>
+            <Col lg={3} md={2} sm={2} xs={12} className="mb-3">
+              <NumberWidget
+                title="Total Projects"
+                number={this.state.totalProjects}
+                color="secondary"
+              />
+            </Col>
+
+            {this.state.projectTypesAndCount.map(function (item, index) {
+              return (
+                <Col lg={3} md={2} sm={2} xs={12} className="mb-3">
+                  <Link to={{ pathname: '/' + item.projectType }}>
+                    <NumberWidget
+                      title={item.projectType}
+                      number={item.projectCount}
+                      color="secondary"
+                    />
+                  </Link>
+                </Col>
+              )
+            })}
+
+          </Row>
+        }
+
+        <Row style={{
           justifyContent: 'center',
           alignItems: 'center',
         }}>
           <Col lg="9" sm={6} sm={6}>
             <Card >
-              {/* <CardHeader>Projects</CardHeader> */}
+              <CardHeader><h2>Latest Projects</h2></CardHeader>
               <CardBody>
                 {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
                   :
@@ -102,6 +130,7 @@ class DashboardPage extends React.Component {
                       {this.state.smallScreen ?
                         <TableRow >
                           {/* <th>#</th> */}
+                          {/* <TableCell></TableCell> */}
                           <TableCell><h2>Project</h2></TableCell>
                           <TableCell><h2>Type</h2></TableCell>
                         </TableRow >
@@ -124,6 +153,11 @@ class DashboardPage extends React.Component {
                             <TableRow component={Link} to={{ pathname: '/projectdetails', state: { projectDetails: item } }}>
 
                               {/* <td scope="row">{item.id}</td> */}
+                              {/* <TableCell><h6>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
+                                src={item.imageUrl}
+                                className="rounded"
+                                style={{ width: 25, height: 25 }}
+                              />)} </h6></TableCell> */}
                               <TableCell ><h3>{item.name}</h3></TableCell>
                               <TableCell ><h3>{item.type}</h3></TableCell>
 
@@ -133,9 +167,10 @@ class DashboardPage extends React.Component {
 
                         :
                         this.state.projects.map(function (item, index) {
+                          if(index< 10){
                           return (
                             <TableRow component={Link} to={{ pathname: '/projectdetails', state: { projectDetails: item } }} >
-                              {/* <td scope="row">{item.id}</td> */}                              
+                              {/* <td scope="row">{item.id}</td> */}
                               <TableCell><h4>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
                                 src={item.imageUrl}
                                 className="rounded"
@@ -147,7 +182,7 @@ class DashboardPage extends React.Component {
                               <TableCell><h3>{item.ticker}</h3></TableCell>
                               <TableCell><h3>{item.stage}</h3></TableCell>
                             </TableRow >
-                          )
+                          )}
                         })}
                     </TableBody >
                   </Table>

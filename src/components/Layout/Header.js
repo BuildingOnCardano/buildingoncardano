@@ -31,6 +31,7 @@ import bn from 'utils/bemnames';
 import { getUser  } from 'utils/Common.js';
 
 const bem = bn.create('header');
+const width = window.innerWidth;
 
 const MdNotificationsActiveWithBadge = withBadge({
   size: 'md',
@@ -93,7 +94,7 @@ class Header extends React.Component {
           </Button>
         </Nav>
         <Nav navbar>
-          {/* <SearchInput /> */}
+
         </Nav>
 
         <Nav navbar className={bem.e('nav-right')}>
