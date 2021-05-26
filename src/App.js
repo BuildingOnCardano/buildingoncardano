@@ -19,7 +19,7 @@ import MyProjectsPage from 'pages/MyProjectsPage';
 import MyProjectEditPage from 'pages/MyProjectEditPage';
 
 const getBasename = () => {
-  return `/${process.env.PUBLIC_URL.split('/').pop()}`;
+  return `/${process.env.PUBLIC_URL}`;
 };
 
 
