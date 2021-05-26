@@ -50,60 +50,61 @@ var hist = createBrowserHistory();
 class App extends React.Component {
   render() {
     return (
-      // <BrowserRouter basename={getBasename()}>
-      <Router history={hist}>
-        {/* <GAListener> */}
-        <Switch>
-          <LayoutRoute
-            exact
-            path="/login"
-            layout={EmptyLayout}
-            component={props => (
-              <AuthPage {...props} authState={STATE_LOGIN} />
-            )}
-          />
-          <LayoutRoute
-            exact
-            path="/signup"
-            layout={EmptyLayout}
-            component={props => (
-              <AuthPage {...props} authState={STATE_SIGNUP} />
-            )}
-          />
+      <BrowserRouter basename={getBasename()}>
+        <Router history={hist}>
+          {/* <GAListener> */}
+          <Switch>
+            <LayoutRoute
+              exact
+              path="/login"
+              layout={EmptyLayout}
+              component={props => (
+                <AuthPage {...props} authState={STATE_LOGIN} />
+              )}
+            />
+            <LayoutRoute
+              exact
+              path="/signup"
+              layout={EmptyLayout}
+              component={props => (
+                <AuthPage {...props} authState={STATE_SIGNUP} />
+              )}
+            />
 
-          <MainLayout breakpoint={this.props.breakpoint}>
-            <React.Suspense fallback={<PageSpinner />}>
-              <Route exact path="/" render={(props) => <DashboardPage {...props} />} />
-              <Route path="/addproject" render={(props) => <ProjectAddPage {...props} />} />
+            <MainLayout breakpoint={this.props.breakpoint}>
+              <React.Suspense fallback={<PageSpinner />}>
+                <Route exact path="/" render={(props) => <DashboardPage {...props} />} />
+                <Route path="/addproject" render={(props) => <ProjectAddPage {...props} />} />
 
-              <Route path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
-              <Route path="/application" render={(props) => <ProjectsPage {...props} projectType="application" />} />
-              <Route path="/tooling" render={(props) => <ProjectsPage {...props} projectType="tooling" />} />
-              <Route path="/wallet" render={(props) => <ProjectsPage {...props} projectType="wallet" />} />
-              <Route path="/data" render={(props) => <ProjectsPage {...props} projectType="data" />} />
-              <Route path="/nft" render={(props) => <ProjectsPage {...props} projectType="nft" />} />
-              <Route path="/dex" render={(props) => <ProjectsPage {...props} projectType="dex" />} />
+                <Route path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
+                <Route path="/application" render={(props) => <ProjectsPage {...props} projectType="application" />} />
+                <Route path="/tooling" render={(props) => <ProjectsPage {...props} projectType="tooling" />} />
+                <Route path="/wallet" render={(props) => <ProjectsPage {...props} projectType="wallet" />} />
+                <Route path="/data" render={(props) => <ProjectsPage {...props} projectType="data" />} />
+                <Route path="/nft" render={(props) => <ProjectsPage {...props} projectType="nft" />} />
+                <Route path="/dex" render={(props) => <ProjectsPage {...props} projectType="dex" />} />
 
-              <Route path="/projectdetails" render={(props) => <ProjectDetailsPage {...props} />} />
-              <Route path="/myprojects" render={(props) => <MyProjectsPage {...props} />} />
-              <Route path="/editmyproject" render={(props) => <MyProjectEditPage {...props} />} />
+                <Route path="/projectdetails" render={(props) => <ProjectDetailsPage {...props} />} />
+                <Route path="/myprojects" render={(props) => <MyProjectsPage {...props} />} />
+                <Route path="/editmyproject" render={(props) => <MyProjectEditPage {...props} />} />
 
-              <Route path="/login-modal" component={AuthModalPage} />
-              <Route
-                exact
-                path="/button-groups"
-                component={ButtonGroupPage}
-              />
+                <Route path="/login-modal" component={AuthModalPage} />
+                <Route
+                  exact
+                  path="/button-groups"
+                  component={ButtonGroupPage}
+                />
 
-              <Redirect to='/' />
+                <Redirect to='/' />
 
-            </React.Suspense>
-          </MainLayout>
+              </React.Suspense>
+            </MainLayout>
 
-        </Switch>
-        {/* </GAListener> */}
-        {/* </BrowserRouter> */}
-      </Router>
+          </Switch>
+          {/* </GAListener> */}
+
+        </Router>
+      </BrowserRouter>
     );
   }
 }
