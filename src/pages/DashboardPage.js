@@ -134,7 +134,7 @@ class DashboardPage extends React.Component {
                       </TableRow >
                       :
                       <TableRow >
-                        <TableCell></TableCell>
+                        {/* <TableCell></TableCell> */}
                         <TableCell><h2>Project</h2></TableCell>
                         <TableCell><h2>Type</h2></TableCell>
                         <TableCell><h2>Token Type</h2></TableCell>
@@ -153,7 +153,7 @@ class DashboardPage extends React.Component {
                               src={item.imageUrl}
                               className="rounded"
                               style={{ width: 30, height: 30 }}
-                            />)} {item.name}</h3></TableCell>
+                            />)}  {item.name}</h3></TableCell>
                             <TableCell><h3>{item.type}</h3></TableCell>
 
                           </TableRow >
@@ -166,12 +166,16 @@ class DashboardPage extends React.Component {
                           return (
                             <TableRow component={Link} to={{ pathname: '/projectdetails', state: { projectDetails: item } }} >
                               {/* <td scope="row">{item.id}</td> */}
-                              <TableCell width="10%"><h4>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
+                              {/* <TableCell width="10%"><h4>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
                                 src={item.imageUrl}
                                 className="rounded"
                                 style={{ width: "10vh", height: "10vh" }}
-                              />)} </h4></TableCell>
-                              <TableCell><h3>{item.name}</h3></TableCell>
+                              />)} </h4></TableCell> */}
+                              <TableCell><h3>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
+                                src={item.imageUrl}
+                                className="rounded"
+                                style={{ width: "10vh", height: "10vh" }}
+                              />)}{item.name}</h3></TableCell>
                               <TableCell><h3>{item.type}</h3></TableCell>
                               <TableCell><h3>{item.tokenType}</h3></TableCell>
                               <TableCell><h3>{item.ticker}</h3></TableCell>
