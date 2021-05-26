@@ -11,6 +11,7 @@ import BeatLoader
 import { css } from "@emotion/core";
 import { baseUrl, getProjectByOwner } from '../assets/services';
 import { getUser, getPassword } from 'utils/Common.js';
+import { isEmpty } from 'utils/stringutil.js';
 
 const override = css`
   display: block;
@@ -26,7 +27,9 @@ class MyProjectsPage extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    this.getProjectsByType();
+    if(!isEmpty(getUser())){
+      this.getProjectsByType();
+    }
   }
 
   async getProjectsByType() {
