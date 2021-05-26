@@ -5,7 +5,7 @@ import PageSpinner from 'components/PageSpinner';
 import AuthPage from 'pages/AuthPage';
 import React from 'react';
 import componentQueries from 'react-component-queries';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { Router,BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
 
 
@@ -17,6 +17,7 @@ import ProjectDetailsPage from 'pages/ProjectDetailsPage';
 import ProjectAddPage from 'pages/ProjectAddPage';
 import MyProjectsPage from 'pages/MyProjectsPage';
 import MyProjectEditPage from 'pages/MyProjectEditPage';
+import { createBrowserHistory } from "history";
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL}`;
@@ -44,10 +45,13 @@ const reducer = (state, action) => {
   }
 };
 
+var hist = createBrowserHistory();
+
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter basename={getBasename()}>
+      // <BrowserRouter basename={getBasename()}>
+      <Router history={hist}>
         {/* <GAListener> */}
         <Switch>
           <LayoutRoute
@@ -95,7 +99,8 @@ class App extends React.Component {
           <Redirect to="/" />
         </Switch>
         {/* </GAListener> */}
-      </BrowserRouter>
+      {/* </BrowserRouter> */}
+      </Router>
     );
   }
 }
