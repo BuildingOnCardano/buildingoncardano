@@ -103,29 +103,31 @@ class ProjectDetailsPage extends React.Component {
                 </Row>
               </CardBody>
             </Card>
-            {!isEmpty(this.props.location.state.projectDetails.tokenType) && (
-              <Card>
-                <CardBody>
-                  <Row>
-                    <Col>
-                      <h3>Tokenomics:</h3>
-                      <br></br>
-                      <h3>Token:</h3>
-                      <h4>{this.props.location.state.projectDetails.tokenType}</h4>
-                      <h3>Total Supply:</h3>
-                      <h4>{this.props.location.state.projectDetails.totalSupply}</h4>
-                      <h3>Circulating Supply:</h3>
-                      <h4>{this.props.location.state.projectDetails.circulatingSupply}</h4>
-                      <h3>Token Info:</h3>
-                      <a href={this.props.location.state.projectDetails.tokenDistributionLink} target="_blank" rel="noreferrer">
-                        <h4>{this.props.location.state.projectDetails.tokenDistributionLink}</h4></a>
-                      <h3>Sales Info:</h3>
-                      <a href={this.props.location.state.projectDetails.saleDetailsLink} target="_blank" rel="noreferrer">
-                        <h4>{this.props.location.state.projectDetails.saleDetailsLink}</h4></a>
-                    </Col>
-                  </Row>
-                </CardBody>
-              </Card>)}
+
+            {!isEmpty(this.props.location.state.projectDetails.tokenType) &&
+              this.props.location.state.projectDetails.tokenType != 'No Token' && (
+                <Card>
+                  <CardBody>
+                    <Row>
+                      <Col>
+                        <h3>Tokenomics:</h3>
+                        <br></br>
+                        <h3>Token:</h3>
+                        <h4>{this.props.location.state.projectDetails.tokenType}</h4>
+                        <h3>Total Supply:</h3>
+                        <h4>{this.props.location.state.projectDetails.totalSupply}</h4>
+                        <h3>Circulating Supply:</h3>
+                        <h4>{this.props.location.state.projectDetails.circulatingSupply}</h4>
+                        <h3>Token Info:</h3>
+                        <a href={this.props.location.state.projectDetails.tokenDistributionLink} target="_blank" rel="noreferrer">
+                          <h4>{this.props.location.state.projectDetails.tokenDistributionLink}</h4></a>
+                        <h3>Sales Info:</h3>
+                        <a href={this.props.location.state.projectDetails.saleDetailsLink} target="_blank" rel="noreferrer">
+                          <h4>{this.props.location.state.projectDetails.saleDetailsLink}</h4></a>
+                      </Col>
+                    </Row>
+                  </CardBody>
+                </Card>)}
           </Col>
           <Col md={2} sm={6} xs={12} className="mb-3">
             <Row style={{
@@ -152,7 +154,7 @@ class ProjectDetailsPage extends React.Component {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                  <h4>Date Created:</h4>                  
+                  <h4>Date Created:</h4>
                   <h5>{this.props.location.state.projectDetails.createdDate.split('T')[0]}</h5>
                   <h4>Date Updated:</h4>
                   <h5>{this.props.location.state.projectDetails.updatedDate.split('T')[0]}</h5>
