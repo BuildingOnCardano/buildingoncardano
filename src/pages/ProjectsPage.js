@@ -71,7 +71,7 @@ class ProjectsPage extends React.Component {
               :
               this.state.projects.map(function (item, index) {
                 return (
-                  <Col lg={3} md={4} sm={6} xs={6} className="mb-3">
+                  <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
                   <div className='ProjectCards'>
                     <ProjectCard
                       img={item.imageUrl}
