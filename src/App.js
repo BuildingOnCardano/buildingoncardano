@@ -5,7 +5,7 @@ import PageSpinner from 'components/PageSpinner';
 import AuthPage from 'pages/AuthPage';
 import React from 'react';
 import componentQueries from 'react-component-queries';
-import { Router,BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { Router, BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
 
 
@@ -74,35 +74,35 @@ class App extends React.Component {
           <MainLayout breakpoint={this.props.breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
               <Route exact path="/" render={(props) => <DashboardPage {...props} />} />
-              <Route exact path="/addproject" render={(props) => <ProjectAddPage {...props} />} />
+              <Route  path="/addproject" render={(props) => <ProjectAddPage {...props} />} />
 
-              <Route exact path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
-              <Route exact path={process.env.PUBLIC_URL + "/application"} render={(props) => <ProjectsPage {...props} projectType="application" />} />
-              <Route exact path="/tooling" render={(props) => <ProjectsPage {...props} projectType="tooling" />} />
-              <Route exact path="/wallet" render={(props) => <ProjectsPage {...props} projectType="wallet" />} />
-              <Route exact path="/data" render={(props) => <ProjectsPage {...props} projectType="data" />} />
-              <Route exact path="/nft" render={(props) => <ProjectsPage {...props} projectType="nft" />} />
-              <Route exact path="/dex" render={(props) => <ProjectsPage {...props} projectType="dex" />} />
+              <Route  path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
+              <Route  path={process.env.PUBLIC_URL + "/application"} render={(props) => <ProjectsPage {...props} projectType="application" />} />
+              <Route  path="/tooling" render={(props) => <ProjectsPage {...props} projectType="tooling" />} />
+              <Route  path="/wallet" render={(props) => <ProjectsPage {...props} projectType="wallet" />} />
+              <Route  path="/data" render={(props) => <ProjectsPage {...props} projectType="data" />} />
+              <Route  path="/nft" render={(props) => <ProjectsPage {...props} projectType="nft" />} />
+              <Route  path="/dex" render={(props) => <ProjectsPage {...props} projectType="dex" />} />
 
-              <Route exact path="/projectdetails" render={(props) => <ProjectDetailsPage {...props} />} />
-              <Route exact path="/myprojects" render={(props) => <MyProjectsPage {...props} />} />
-              <Route exact path="/editmyproject" render={(props) => <MyProjectEditPage {...props} />} />
+              <Route  path="/projectdetails" render={(props) => <ProjectDetailsPage {...props} />} />
+              <Route  path="/myprojects" render={(props) => <MyProjectsPage {...props} />} />
+              <Route  path="/editmyproject" render={(props) => <MyProjectEditPage {...props} />} />
 
-              <Route exact path="/login-modal" component={AuthModalPage} />
+              <Route  path="/login-modal" component={AuthModalPage} />
               <Route
                 exact
                 path="/button-groups"
                 component={ButtonGroupPage}
               />
 
-<Redirect to='/' />
+              <Redirect to='/' />
 
             </React.Suspense>
           </MainLayout>
-          
+
         </Switch>
         {/* </GAListener> */}
-      {/* </BrowserRouter> */}
+        {/* </BrowserRouter> */}
       </Router>
     );
   }
