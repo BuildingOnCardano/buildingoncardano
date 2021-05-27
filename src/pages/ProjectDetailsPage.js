@@ -57,7 +57,6 @@ class ProjectDetailsPage extends React.Component {
       >
         <Row
           style={{
-            height: '100vh',
             justifyContent: 'center',
           }}>
           <Col md={2} sm={6} lg={3} xs={12} className="mb-3">
