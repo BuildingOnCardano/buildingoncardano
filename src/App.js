@@ -91,7 +91,7 @@ class App extends React.Component {
 
            
                 <Route path="/myprojects" render={(props) => <MyProjectsPage {...props} />} />
-                <Route path="/editmyproject" render={(props) => <MyProjectEditPage {...props} />} />
+                <Route path="/editmyproject/:projectname" render={(props) => <MyProjectEditPage {...props} />} />
 
                 <Route path="/login-modal" component={AuthModalPage} />
                 <Route
