@@ -17,12 +17,29 @@ import { isEmpty } from 'lodash';
 import BeatLoader
   from "react-spinners/BeatLoader";
 import { css } from "@emotion/core";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
 
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
+}));
+
 
 const inputnamewidth = 2;
 const inputfieldwidth = 8;
@@ -110,6 +127,11 @@ class MyProjectsAddEditPage extends React.Component {
     });
 
     this.setState({ project: { ...this.state.project, type: tags } });
+
+    // if(isEmpty(this.state.project.saleStartDate)){
+    //   this.setState({ project: { ...this.state.project, saleStartDate: new Date() } });
+    // }
+
     this.setState({ loading: false });
   }
 
@@ -175,6 +197,7 @@ class MyProjectsAddEditPage extends React.Component {
   }
 
   render() {
+
     return (
       <div>
         {
@@ -385,6 +408,26 @@ class MyProjectsAddEditPage extends React.Component {
                           <Input type="text" name="name" id="name" placeholder="Github url" value={this.state.project.githubLink}
                             onChange={e => this.setState({ project: { ...this.state.project, githubLink: e.target.value } })} /></Col>
                       </FormGroup>
+
+
+
+
+                      <FormGroup row>
+                        <Label for="name" sm={inputnamewidth}>Sale Start Date</Label>
+                        <Col sm={inputfieldwidth}>
+                          <TextField
+                            id="date"                            
+                            type="date"
+                            defaultValue={this.state.project.saleStartDate}
+                            // className={useStyles().textField}
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                          />
+                        </Col>
+                      </FormGroup>
+
+
                       <br></br>
 
 
