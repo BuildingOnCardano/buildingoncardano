@@ -167,6 +167,7 @@ class MyProjectsAddEditPage extends React.Component {
     }
 
     this.setState({ project: { ...this.state.project, ownerEmail: getUser() } });
+    this.state.project.ownerEmail = getUser();
     this.setState({ project: { ...this.state.project, type: tags } });
     this.state.project.type = tags;
 
