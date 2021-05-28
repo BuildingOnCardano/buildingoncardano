@@ -22,6 +22,7 @@ import BeatLoader
 import { css } from "@emotion/core";
 import ReactImageFallback from "react-image-fallback";
 import SocialMedia from '../components/SocialMedia';
+import ShareProject from '../components/ShareProject';
 import CardanoImage from 'assets/img/cardanoIcon.png';
 import YoutubeEmbed from '../components/YoutubeEmbed';
 import { isEmpty } from 'utils/stringutil.js';
@@ -189,6 +190,14 @@ class ProjectDetailsPage extends React.Component {
                         <h4>Date Updated:</h4>
                         <h5>{this.state.project.updatedDate.split('T')[0]}</h5>
                       </Card>
+                      <Card body style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                        <h4>Share Project</h4>
+                        <ShareProject name={this.state.project.name} />
+                      </Card>
+
                     </Col>
                   </Row>
                 </Col>
