@@ -68,26 +68,21 @@ class MyProjectsAddEditPage extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-
     //if edit get existing project
     if (this.props.action == 'edit') {
       this.getProjectDetails();
     }
     else {
-      this.setState({project: project});
+      this.setState({ project: project });
       this.setState({ loading: false });
     }
-
   }
 
   async getProjectDetails() {
     try {
       var response = await fetch(baseUrl + getProjectByName + this.props.match.params.projectname);
       const data = await response.json();
-      console.log(data);
-      // this.setState({ project: data })
       this.setState({ project: data });
-      console.log(this.state.project)
       this.setIncomingStateValues();
     } catch (error) {
       console.log(error)
@@ -96,11 +91,9 @@ class MyProjectsAddEditPage extends React.Component {
 
   setIncomingStateValues() {
     var types = this.state.project.type;
-
     if (!isEmpty(types)) {
       selectedListTags = null;
       var pieces = types.split(" ");
-
       var selectedValue = [];
       pieces.forEach(typeInDb => {
         if (!isEmpty(typeInDb)) {
@@ -108,12 +101,9 @@ class MyProjectsAddEditPage extends React.Component {
           selectedValue.push(typeFound[0]);
         }
       });
-
       selectedListTags = selectedValue;
     }
-
     var tags = "";
-    //get tags
     selectedListTags.forEach(element => {
       console.log(element.name);
       tags += element.name + " ";
@@ -129,10 +119,8 @@ class MyProjectsAddEditPage extends React.Component {
       headers: { 'Content-Type': 'application/json', 'password': getPassword() },
       body: JSON.stringify(this.state.project)
     };
-
     var response = await fetch(baseUrl + updateProject, requestOptions);
     var data = await response.json();
-
     if (data.response == "updated") {
       this.setState({ modal: true });
     }
@@ -159,10 +147,9 @@ class MyProjectsAddEditPage extends React.Component {
 
     var tags = "";
     for (const key in selectedListTags) {
-      if(key>0){
-        tags+= " ";
+      if (key > 0) {
+        tags += " ";
       }
-
       tags += selectedListTags[key].name;
     }
 
@@ -216,7 +203,7 @@ class MyProjectsAddEditPage extends React.Component {
                   <Link to={{ pathname: '/myprojects' }}>
                     <Button color="secondary" onClick={this.toggle()}>
                       Close
-            </Button>
+                    </Button>
                   </Link>
                 </ModalFooter>
               </Modal>
@@ -238,14 +225,10 @@ class MyProjectsAddEditPage extends React.Component {
                           <Input type="text" name="name" id="name" placeholder="" value={this.state.project.name}
                             onChange={e => this.setState({ project: { ...this.state.project, name: e.target.value } })} /></Col>
                       </FormGroup>
-                      {/* onChange={e => this.s etState({ type: e.target.value })} */}
+
                       <FormGroup row>
                         <Label for="exampleSelect" sm={inputnamewidth}>Tags</Label>
                         <Col sm={inputfieldwidth}>
-                          {/* <Select name="select" id="exampleSelect"
-                      placeholder="nft, dex, protocol, cross chain, Wallet, Oracle, Tooling, Infrastructure"
-                      onChange={this.handleChange} value={this.state.value} multiple={true} options={tagOptions}> */}
-
                           <Multiselect
                             options={tagOptions} // Options to display in the dropdown                     
                             onSelect={this.onSelect} // Function will trigger on select event
@@ -253,7 +236,6 @@ class MyProjectsAddEditPage extends React.Component {
                             displayValue="name" // Property name to display in the dropdown options
                             selectedValues={selectedListTags}
                           />
-
                         </Col>
                       </FormGroup>
 
