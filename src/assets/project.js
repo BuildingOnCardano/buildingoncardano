@@ -24,7 +24,7 @@ export var project = {
     saleDetailsLink: null,
     createdDate: null,
     updatedDate: null,
-    verified: null,
+    verified: false,
     upcomingSale: null,
     saleStartDate: null,
     saleEndDate: null,
