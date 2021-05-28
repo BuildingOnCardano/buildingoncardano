@@ -14,9 +14,8 @@ import ButtonGroupPage from 'pages/ButtonGroupPage';
 import DashboardPage from 'pages/DashboardPage';
 import ProjectsPage from 'pages/ProjectsPage';
 import ProjectDetailsPage from 'pages/ProjectDetailsPage';
-import ProjectAddPage from 'pages/ProjectAddPage';
 import MyProjectsPage from 'pages/MyProjectsPage';
-import MyProjectEditPage from 'pages/MyProjectEditPage';
+import MyProjectsAddEditPage from 'pages/MyProjectsAddEditPage';
 import { createBrowserHistory } from "history";
 
 const getBasename = () => {
@@ -76,7 +75,7 @@ class App extends React.Component {
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/" render={(props) => <DashboardPage {...props} />} />
 
-                <Route path="/addproject" render={(props) => <ProjectAddPage {...props} />} />
+
 
                 <Route path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
                 <Route path="/application" component={() =>  <ProjectsPage projectType="application" />}></Route> 
@@ -91,7 +90,8 @@ class App extends React.Component {
 
            
                 <Route path="/myprojects" render={(props) => <MyProjectsPage {...props} />} />
-                <Route path="/editmyproject/:projectname" render={(props) => <MyProjectEditPage {...props} />} />
+                <Route path="/addproject" render={(props) => <MyProjectsAddEditPage {...props} action="add"/>} />
+                <Route path="/editproject/:projectname" render={(props) => <MyProjectsAddEditPage {...props} action="edit"/>} />
 
                 <Route path="/login-modal" component={AuthModalPage} />
                 <Route

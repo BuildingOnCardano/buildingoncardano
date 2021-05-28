@@ -1,4 +1,4 @@
-export const project = {
+export var project = {
     id: null,
     name: null,
     type: null,
