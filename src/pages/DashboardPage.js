@@ -148,7 +148,7 @@ class DashboardPage extends React.Component {
                     {this.state.smallScreen ?
                       this.state.projects.map(function (item, index) {
                         return (
-                          <TableRow component={Link} to={{ pathname: '/projectdetails', state: { projectDetails: item } }}>
+                          <TableRow component={Link} to={{ pathname: '/projectdetails/'+item.name, state: { projectDetails: item } }}>
                             <TableCell><h3>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
                               src={item.imageUrl}
                               className="rounded"
@@ -164,7 +164,7 @@ class DashboardPage extends React.Component {
                       this.state.projects.map(function (item, index) {
                         if (index < 10) {
                           return (
-                            <TableRow component={Link} to={{ pathname: '/projectdetails', state: { projectDetails: item } }} >
+                            <TableRow component={Link} to={{ pathname: '/projectdetails/'+item.name, state: { projectDetails: item } }} >
                               {/* <td scope="row">{item.id}</td> */}
                               {/* <TableCell width="10%"><h4>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
                                 src={item.imageUrl}
