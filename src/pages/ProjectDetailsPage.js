@@ -204,7 +204,7 @@ class ProjectDetailsPage extends React.Component {
                         <h4>Share Project</h4>
                         <ShareProject name={this.state.project.name} />
                       </Card>
-                      {this.state.project.salesDetails != null &&
+                      {this.state.project.salesDetails != null && this.state.project.salesDetails[0] != undefined &&
                         <Card body style={{
                           justifyContent: 'center',
                           alignItems: 'center',

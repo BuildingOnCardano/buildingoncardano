@@ -22,22 +22,6 @@ export default class ProjectCard extends React.Component {
 
     };
 
-    //   {
-    //     "id": 1,
-    //     "name": "Poolpeek",
-    //     "type": "Application",
-    //     "tokenType": "DUNNO",
-    //     "ticker": "12345",
-    //     "stage": "ISO",
-    //     "description": null,
-    //     "homepage": null,
-    //     "twitterHandle": null,
-    //     "telegramHandle": null,
-    //     "youtubeHandle": null,
-    //     "facebookHandle": null,
-    //     "discordHandle": null
-    // },
-
     render() {
         return (
             <div className="ProjectCard" style={{
