@@ -58,6 +58,8 @@ class ProjectDetailsPage extends React.Component {
     if (isEmpty(this.state.project)) {
       this.getProjectDetails();
     }
+
+
   }
 
   async getProjectDetails() {
@@ -204,23 +206,8 @@ class ProjectDetailsPage extends React.Component {
                         <h4>Share Project</h4>
                         <ShareProject name={this.state.project.name} />
                       </Card>
-                      {this.state.project.salesDetails != null && this.state.project.salesDetails[0] != undefined &&
-                        <Card body style={{
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                        }}>
-                          <h3>Next Token Sale</h3>
-                          <h4>Sale Link</h4>
-                          <a href={this.state.project.salesDetails[0].saleDetailLink} target="_blank" rel="noreferrer">
-                            <h5>{this.state.project.salesDetails[0].saleDetailLink}</h5></a>
-                          <h4>Sale Start Date</h4>
-                          <h5>{this.state.project.salesDetails[0].saleStartDate}</h5>
-                          <h4>Sale End Date</h4>
-                          <h5>{this.state.project.salesDetails[0].saleEndDate}</h5>
-                        </Card>}
 
-
-                      <Card body style={{
+                      < Card body style={{
                         justifyContent: 'center',
                         alignItems: 'center',
                       }}>
@@ -234,6 +221,56 @@ class ProjectDetailsPage extends React.Component {
                   </Row>
                 </Col>
               </Row>
+
+              <Row
+                style={{
+                  justifyContent: 'center',
+                }}>
+                <Col md={6} sm={6} lg={6} xs={12} className="mb-3">
+                  {this.state.project.salesDetails != null && this.state.project.salesDetails.length > 0 && this.state.project.salesDetails != undefined &&
+                    <div>
+                      {this.state.project.salesDetails.map(function (item, index) {
+                        return (
+                          <Card body style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}>
+                            <h3>Next Token Sale</h3>
+                            <h4>Sale Link</h4>
+                            <a href={item.saleDetailLink} target="_blank" rel="noreferrer">
+                              <h5>{item.saleDetailLink}</h5></a>
+                            <h4>Sale Start Date</h4>
+                            <h5>{item.saleStartDate}</h5>
+                            <h4>Sale End Date</h4>
+                            <h5>{item.saleEndDate}</h5>
+                          </Card>
+                        )
+                      })
+                      }</div>}
+
+                </Col>
+                <Col md={6} sm={6} lg={6} xs={12} className="mb-3">
+                  {this.state.project.projectTeam != null && this.state.project.projectTeam.length > 0 && this.state.project.projectTeam != undefined &&
+                    <div>
+                      {this.state.project.projectTeam.map(function (item, index) {
+                        return (
+                          <Card body style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}>
+                            <h5>{item.memberName}</h5>
+                            <h5>{item.position}</h5>
+                            <h5>{item.twitter}</h5>
+                            <h5>{item.linkin}</h5>
+                            <h5>{item.github}</h5>
+                            <h5>{item.img}</h5>
+                          </Card>
+                        )
+                      })
+                      }</div>}
+                </Col>
+              </Row>
+
             </Page>
         }
       </div >
