@@ -65,7 +65,7 @@ class MyProjectsAddEditPage extends React.Component {
 
     project: null,
     salesDetails: null,
-    salesOne: null,
+    salesOne: {},
 
     modal: false,
     modal_backdrop: false,
@@ -93,6 +93,7 @@ class MyProjectsAddEditPage extends React.Component {
     }
     else {
       this.setState({ project: project });
+
       this.setState({ loading: false });
     }
   }
@@ -129,7 +130,7 @@ class MyProjectsAddEditPage extends React.Component {
 
     this.setState({ project: { ...this.state.project, type: tags } });
     this.setState({ salesDetails: this.state.project.salesDetails });
-    if (this.state.project.salesDetails != null) {
+    if (this.state.project.salesDetails != null && this.state.project.salesDetails.size == 0) {
       this.setState({ salesOne: this.state.project.salesDetails[0] });
     }
     this.setState({ loading: false });
@@ -242,9 +243,11 @@ class MyProjectsAddEditPage extends React.Component {
                   alignItems: 'center',
                 }}>
                 <Col md={6} lg={8}>
-                  <Card body>
-                    <h2>Edit Project</h2>
-                    <Form>
+
+                  <h2>Edit Project</h2>
+                  <Form>
+                    <Card body>
+
                       <h3>Project Info</h3>
                       <br></br>
                       <FormGroup row>
@@ -348,9 +351,9 @@ class MyProjectsAddEditPage extends React.Component {
                           />
                         </Col>
                       </FormGroup>
+                    </Card>
 
-
-                      <br></br>
+                    <Card body>
                       <h3>Tokenomics</h3>
                       <br></br>
                       <FormGroup row>
@@ -384,7 +387,9 @@ class MyProjectsAddEditPage extends React.Component {
                               onChange={e => this.setState({ project: { ...this.state.project, tokenDistributionLink: e.target.value } })} /></Col>
                         </FormGroup>
                       </div>)}
+                    </Card>
 
+                    <Card body>
                       <br></br>
                       <h3>Social Media</h3>
                       <br></br>
@@ -424,17 +429,16 @@ class MyProjectsAddEditPage extends React.Component {
                           <Input type="text" name="name" id="name" placeholder="Github url" value={this.state.project.githubLink}
                             onChange={e => this.setState({ project: { ...this.state.project, githubLink: e.target.value } })} /></Col>
                       </FormGroup>
+                    </Card>
 
-                      <br></br>
+                    <Card body>
                       <h3>Sale Details</h3>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Sales Details Link</Label>
+                        <Label for="salelink" sm={inputnamewidth}>Sales Details Link</Label>
                         <Col sm={inputfieldwidth}>
-
-                          <Input type="text" name="name" id="name" placeholder="" value={this.state.salesOne.saleDetailLink}
+                          <Input type="text" name="name" id="name" placeholder="" value={this.state.salesOne.saleDetailLink || ''}
                             onChange={e => this.setState({ salesOne: { ...this.state.salesOne, saleDetailLink: e.target.value } })} /></Col>
                       </FormGroup>
-
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Sale Start Date</Label>
                         <Col sm={inputfieldwidth}>
@@ -450,7 +454,6 @@ class MyProjectsAddEditPage extends React.Component {
                           />
                         </Col>
                       </FormGroup>
-
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Sale End Date</Label>
                         <Col sm={inputfieldwidth}>
@@ -466,11 +469,14 @@ class MyProjectsAddEditPage extends React.Component {
                           />
                         </Col>
                       </FormGroup>
-
-
-                      <Button onClick={this.handleSubmit}>Submit</Button>
-                    </Form>
-                  </Card>
+                    </Card>
+                    <Card body style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                    <Button onClick={this.handleSubmit}>Submit</Button>
+                    </Card>
+                  </Form>
                 </Col>
               </Row>
             </Page >}
