@@ -68,33 +68,28 @@ class MyProjectsPage extends React.Component {
         title=""
         breadcrumbs={[{ name: 'My Projects /', active: true }]}
       >
-        <Row>
-          {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
-            :
-            <div>
-              {this.state.projects != null ?
-                <div>
-                  {this.state.projects.map(function (item, index) {
-                    return (
-                      <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
-                        <ProjectCard
-                          img={item.imageUrl}
-                          projectDetails={item}
-                          myprojectspage={true} />
 
-                      </Col>
-                    )
-                  })}
-                </div>
-                :
-                <p>You currently have no projects added.</p>
-              }
-            </div>
-          }
+        <BeatLoader loading={this.state.loading} css={override} size={180} />
+        {this.state.projects != null ?
+          <Row>
+            {
+              this.state.projects.map(function (item, index) {
+                return (
+                  <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
+                    <ProjectCard
+                      img={item.imageUrl}
+                      projectDetails={item}
+                      myprojectspage={true} />
+                  </Col>
+                )
+              })
+            }
+          </Row>
+          :
+          <p>You currently have no projects added.</p>
+        }
 
 
-
-        </Row>
 
       </Page >
     );

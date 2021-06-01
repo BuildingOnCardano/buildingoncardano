@@ -1,4 +1,7 @@
 import Page from 'components/Page';
+import MultiAddTeamMembers from 'components/MultiAddTeamMembers';
+import MultiAddSales from 'components/MultiAddSales';
+
 import React from 'react';
 import {
   Button, Form, FormGroup, Input, Label,
@@ -17,7 +20,6 @@ import { isEmpty } from 'lodash';
 import BeatLoader
   from "react-spinners/BeatLoader";
 import { css } from "@emotion/core";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
@@ -57,21 +59,27 @@ const tagOptions = [
 var selectedListTags = [];
 
 class MyProjectsAddEditPage extends React.Component {
-  state = {
-    loading: true,
+  constructor(props) {
+    super(props)
 
-    selectedValue: [],
-    hasToken: false,
+    this.handler = this.handler.bind(this);
+    this.salesDataHandler = this.salesDataHandler.bind(this);
 
-    project: null,
-    salesDetails: null,
-    salesOne: {},
+    this.state = {
+      loading: true,
 
-    modal: false,
-    modal_backdrop: false,
-    modal_nested_parent: false,
-    modal_nested: false
-  };
+      selectedValue: [],
+      hasToken: false,
+
+      project: null,
+
+      modal: false,
+      modal_backdrop: false,
+      modal_nested_parent: false,
+      modal_nested: false
+    };
+  }
+
 
   toggle = modalType => () => {
     if (!modalType) {
@@ -129,10 +137,6 @@ class MyProjectsAddEditPage extends React.Component {
     });
 
     this.setState({ project: { ...this.state.project, type: tags } });
-    this.setState({ salesDetails: this.state.project.salesDetails });
-    if (this.state.project.salesDetails != null && this.state.project.salesDetails.size == 0) {
-      this.setState({ salesOne: this.state.project.salesDetails[0] });
-    }
     this.setState({ loading: false });
   }
 
@@ -181,11 +185,6 @@ class MyProjectsAddEditPage extends React.Component {
     this.setState({ project: { ...this.state.project, type: tags } });
     this.state.project.type = tags;
 
-
-    if (this.state.project.salesDetails != null) {
-      this.state.project.salesDetails[0] = this.state.salesOne;
-    }
-
     if (this.props.action == 'edit') {
       this.updateProject();
     }
@@ -200,6 +199,21 @@ class MyProjectsAddEditPage extends React.Component {
 
   onRemove(selectedList, removedItem) {
     selectedListTags = selectedList;
+  }
+
+
+  // getData(data) {
+  //   console.log(this.state.project);
+  //   this.state.project.projectTeam = data;
+  //   //this.setState({ project: { ...this.state.project, projectTeam: data } });
+  // }
+
+  handler(data) {
+    this.setState({ project: { ...this.state.project, projectTeam: data } });
+  }
+
+  salesDataHandler(data) {
+    console.log(data);
   }
 
   render() {
@@ -273,19 +287,19 @@ class MyProjectsAddEditPage extends React.Component {
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Website</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="Website Url" value={this.state.project.homepage}
+                          <Input type="url" name="name" id="name" placeholder="Website Url" value={this.state.project.homepage}
                             onChange={e => this.setState({ project: { ...this.state.project, homepage: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Whitepaper</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="Whitepaper Url" value={this.state.project.whitepaperUrl}
+                          <Input type="url" name="name" id="name" placeholder="Whitepaper Url" value={this.state.project.whitepaperUrl}
                             onChange={e => this.setState({ project: { ...this.state.project, whitepaperUrl: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Project Logo Url</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="Add link/Url to project logo" value={this.state.project.imageUrl}
+                          <Input type="url" name="name" id="name" placeholder="Add link/Url to project logo" value={this.state.project.imageUrl}
                             onChange={e => this.setState({ project: { ...this.state.project, imageUrl: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
@@ -433,48 +447,20 @@ class MyProjectsAddEditPage extends React.Component {
 
                     <Card body>
                       <h3>Sale Details</h3>
-                      <FormGroup row>
-                        <Label for="salelink" sm={inputnamewidth}>Sales Details Link</Label>
-                        <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="" value={this.state.salesOne.saleDetailLink || ''}
-                            onChange={e => this.setState({ salesOne: { ...this.state.salesOne, saleDetailLink: e.target.value } })} /></Col>
-                      </FormGroup>
-                      <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Sale Start Date</Label>
-                        <Col sm={inputfieldwidth}>
-                          <TextField
-                            id="date"
-                            type="date"
-                            defaultValue={this.state.salesOne.saleStartDate}
-                            // className={useStyles().textField}
-                            InputLabelProps={{
-                              shrink: true,
-                            }}
-                            onChange={e => this.setState({ salesOne: { ...this.state.salesOne, saleStartDate: e.target.value } })}
-                          />
-                        </Col>
-                      </FormGroup>
-                      <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Sale End Date</Label>
-                        <Col sm={inputfieldwidth}>
-                          <TextField
-                            id="date"
-                            type="date"
-                            defaultValue={this.state.salesOne.saleEndDate}
-                            // className={useStyles().textField}
-                            InputLabelProps={{
-                              shrink: true,
-                            }}
-                            onChange={e => this.setState({ salesOne: { ...this.state.salesOne, saleEndDate: e.target.value } })}
-                          />
-                        </Col>
-                      </FormGroup>
+                      <MultiAddSales sendData={this.salesDataHandler} existingSalesDetails={this.state.project.salesDetails} />
                     </Card>
+
+                    <Card body>
+                      <h3>Team Details</h3>
+                      <MultiAddTeamMembers sendData={this.handler} existingTeam={this.state.project.projectTeam} />
+                    </Card>
+
+
                     <Card body style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
-                    <Button onClick={this.handleSubmit}>Submit</Button>
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                      <Button onClick={this.handleSubmit}>Submit</Button>
                     </Card>
                   </Form>
                 </Col>
