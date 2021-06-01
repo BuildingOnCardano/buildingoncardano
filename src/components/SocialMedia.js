@@ -67,19 +67,18 @@ export default class SocialMedia extends React.Component {
     render() {
         return (
             <div>
+                {!isEmpty(this.state.homepage) &&
                 <Tooltip
                     title="Website"
                     placement="left"
                 >
-
                     <a href={this.state.homepage} target="_blank" rel="noreferrer">
                         <img
                             className="pr-2"
                             alt=""
                         />
                         <FontAwesomeIcon size="2x" icon={faGlobe} /> Website</a></Tooltip>
-
-
+                }
                 {this.state.twitterHandle !== "" &&
 
                     <Tooltip

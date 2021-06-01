@@ -79,7 +79,6 @@ class Header extends React.Component {
 
   componentDidMount() {
     var user = getUser();
-    console.log(user);
     this.setState({user : user });
   }
 

@@ -64,11 +64,8 @@ class DashboardPage extends React.Component {
     try {
       var response = await fetch(baseUrl + getProjectsStats);
       const data = await response.json();
-      console.log(data);
-
       this.setState({ totalProjects: data.totalProjects, projectTypesAndCount: data.projectTypesAndCount });
       this.state.projectTypesAndCount = data.projectTypesAndCount;
-      console.log(this.state.projectTypesAndCount);
     } catch (error) {
       console.log(error)
     }

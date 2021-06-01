@@ -87,20 +87,17 @@ class AuthForm extends React.Component {
       var confirmPassword = this.state.confirmPassword;
       if (password == confirmPassword) {
         var status = await this.register();
-        console.log(status.response);
 
         if (status.response == 'user_exists') {
-          console.log('user already exists!')
           this.setState({
             modal_text: "User already exists.", modal: true
           });
         }
         else {
-          console.log('success!')
           this.setRedirect();
         }
       } else {
-        console.log('Passwords dont match');
+
         this.setState({
           modal_text: "Passwords dont match.", modal: true
         });
@@ -108,14 +105,12 @@ class AuthForm extends React.Component {
     } else {
       //login
       var status = await this.login();
-      console.log(status.response);
 
       if (status.response == 'valid_user') {
         setUserSession(this.state.email,this.state.password);
         this.setRedirectDashboard();
       }
       else {
-        console.log('invalid user!');
         this.setState({
           modal_text: "User doesnt exist.", modal: true
         });

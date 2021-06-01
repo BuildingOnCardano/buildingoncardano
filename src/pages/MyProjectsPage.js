@@ -24,7 +24,7 @@ class MyProjectsPage extends React.Component {
     projects: [],
     loading: true
   };
-  
+
   constructor(props) {
     super(props);
   }
@@ -32,7 +32,7 @@ class MyProjectsPage extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    if(!isEmpty(getUser())){
+    if (!isEmpty(getUser())) {
       this.getProjectsByType();
     }
   }
@@ -53,8 +53,6 @@ class MyProjectsPage extends React.Component {
         referrerPolicy: 'no-referrer' // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       });
       const data = await response.json();
-      console.log(data);
-
       this.setState({ projects: data, loading: false })
     } catch (error) {
       console.log(error)
@@ -73,19 +71,27 @@ class MyProjectsPage extends React.Component {
         <Row>
           {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
             :
-            this.state.projects.map(function (item, index) {
-              return (
-                <Col lg={3} md={4} sm={6} xs={6} className="mb-3">
-                  <ProjectCard
-                    img={item.imageUrl}
-                    projectDetails={item}
-                    myprojectspage={true} />
+            <div>
+              {this.state.projects != null ?
+                <div>
+                  {this.state.projects.map(function (item, index) {
+                    return (
+                      <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
+                        <ProjectCard
+                          img={item.imageUrl}
+                          projectDetails={item}
+                          myprojectspage={true} />
 
-                </Col>
-              )
-
-            })
+                      </Col>
+                    )
+                  })}
+                </div>
+                :
+                <p>You currently have no projects added.</p>
+              }
+            </div>
           }
+
 
 
         </Row>

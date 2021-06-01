@@ -64,6 +64,8 @@ class MyProjectsAddEditPage extends React.Component {
     hasToken: false,
 
     project: null,
+    salesDetails: null,
+    salesOne: null,
 
     modal: false,
     modal_backdrop: false,
@@ -122,16 +124,14 @@ class MyProjectsAddEditPage extends React.Component {
     }
     var tags = "";
     selectedListTags.forEach(element => {
-      console.log(element.name);
       tags += element.name + " ";
     });
 
     this.setState({ project: { ...this.state.project, type: tags } });
-
-    // if(isEmpty(this.state.project.saleStartDate)){
-    //   this.setState({ project: { ...this.state.project, saleStartDate: new Date() } });
-    // }
-
+    this.setState({ salesDetails: this.state.project.salesDetails });
+    if (this.state.project.salesDetails != null) {
+      this.setState({ salesOne: this.state.project.salesDetails[0] });
+    }
     this.setState({ loading: false });
   }
 
@@ -179,6 +179,11 @@ class MyProjectsAddEditPage extends React.Component {
     this.state.project.ownerEmail = getUser();
     this.setState({ project: { ...this.state.project, type: tags } });
     this.state.project.type = tags;
+
+
+    if (this.state.project.salesDetails != null) {
+      this.state.project.salesDetails[0] = this.state.salesOne;
+    }
 
     if (this.props.action == 'edit') {
       this.updateProject();
@@ -238,10 +243,10 @@ class MyProjectsAddEditPage extends React.Component {
                 }}>
                 <Col md={6} lg={8}>
                   <Card body>
-                    <h3>Edit Project</h3>
+                    <h2>Edit Project</h2>
                     <Form>
+                      <h3>Project Info</h3>
                       <br></br>
-                      <h4>Info</h4>
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Name</Label>
                         <Col sm={inputfieldwidth}>
@@ -327,8 +332,27 @@ class MyProjectsAddEditPage extends React.Component {
                             onChange={e => this.setState({ project: { ...this.state.project, description: e.target.value } })} /></Col>
                       </FormGroup>
 
+
+                      <FormGroup row>
+                        <Label for="name" sm={inputnamewidth}>Release Date</Label>
+                        <Col sm={inputfieldwidth}>
+                          <TextField
+                            id="date"
+                            type="date"
+                            defaultValue={this.state.project.releaseDate}
+                            // className={useStyles().textField}
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            onChange={e => this.setState({ project: { ...this.state.project, releaseDate: e.target.value } })}
+                          />
+                        </Col>
+                      </FormGroup>
+
+
                       <br></br>
-                      <h4>Tokenomics</h4>
+                      <h3>Tokenomics</h3>
+                      <br></br>
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Token Type</Label>
                         <Col sm={inputfieldwidth}>
@@ -362,16 +386,8 @@ class MyProjectsAddEditPage extends React.Component {
                       </div>)}
 
                       <br></br>
-                      <h4>Sale Details</h4>
-                      <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Sales Details Link</Label>
-                        <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="" value={this.state.project.saleDetailsLink}
-                            onChange={e => this.setState({ project: { ...this.state.project, saleDetailsLink: e.target.value } })} /></Col>
-                      </FormGroup>
-
+                      <h3>Social Media</h3>
                       <br></br>
-                      <h4>Social Media</h4>
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Twitter Handle</Label>
                         <Col sm={inputfieldwidth}>
@@ -409,28 +425,47 @@ class MyProjectsAddEditPage extends React.Component {
                             onChange={e => this.setState({ project: { ...this.state.project, githubLink: e.target.value } })} /></Col>
                       </FormGroup>
 
+                      <br></br>
+                      <h3>Sale Details</h3>
+                      <FormGroup row>
+                        <Label for="name" sm={inputnamewidth}>Sales Details Link</Label>
+                        <Col sm={inputfieldwidth}>
 
-
+                          <Input type="text" name="name" id="name" placeholder="" value={this.state.salesOne.saleDetailLink}
+                            onChange={e => this.setState({ salesOne: { ...this.state.salesOne, saleDetailLink: e.target.value } })} /></Col>
+                      </FormGroup>
 
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Sale Start Date</Label>
                         <Col sm={inputfieldwidth}>
                           <TextField
-                            id="date"                            
+                            id="date"
                             type="date"
-                            defaultValue={this.state.project.saleStartDate}
+                            defaultValue={this.state.salesOne.saleStartDate}
                             // className={useStyles().textField}
                             InputLabelProps={{
                               shrink: true,
                             }}
+                            onChange={e => this.setState({ salesOne: { ...this.state.salesOne, saleStartDate: e.target.value } })}
                           />
                         </Col>
                       </FormGroup>
 
-
-                      <br></br>
-
-
+                      <FormGroup row>
+                        <Label for="name" sm={inputnamewidth}>Sale End Date</Label>
+                        <Col sm={inputfieldwidth}>
+                          <TextField
+                            id="date"
+                            type="date"
+                            defaultValue={this.state.salesOne.saleEndDate}
+                            // className={useStyles().textField}
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            onChange={e => this.setState({ salesOne: { ...this.state.salesOne, saleEndDate: e.target.value } })}
+                          />
+                        </Col>
+                      </FormGroup>
 
 
                       <Button onClick={this.handleSubmit}>Submit</Button>

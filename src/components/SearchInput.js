@@ -36,7 +36,6 @@ class SearchInput extends React.Component {
   };
   handleChange = selectedOption => {
     this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
   };
   render() {
     const { selectedOption } = this.state;

@@ -1,5 +1,4 @@
 import Page from 'components/Page';
-import { IconWidget, NumberWidget } from 'components/Widget';
 import React from 'react';
 import {
   Badge,
@@ -27,6 +26,9 @@ import CardanoImage from 'assets/img/cardanoIcon.png';
 import YoutubeEmbed from '../components/YoutubeEmbed';
 import { isEmpty } from 'utils/stringutil.js';
 import { baseUrl, getProjectByName } from '../assets/services';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPage4 } from "@fortawesome/free-brands-svg-icons";
+import { faNewspaper } from "@fortawesome/free-solid-svg-icons";
 
 
 const override = css`
@@ -45,7 +47,6 @@ class ProjectDetailsPage extends React.Component {
   };
 
   componentDidMount() {
-
     try {
       this.setState({ project: this.props.location.state.projectDetails });
       this.state.project = this.props.location.state.projectDetails;
@@ -57,14 +58,12 @@ class ProjectDetailsPage extends React.Component {
     if (isEmpty(this.state.project)) {
       this.getProjectDetails();
     }
-
   }
 
   async getProjectDetails() {
     try {
       var response = await fetch(baseUrl + getProjectByName + this.props.match.params.projectname);
       const data = await response.json();
-      console.log(data);
       this.setState({ project: data })
       this.setState({ loading: false });
     } catch (error) {
@@ -109,7 +108,39 @@ class ProjectDetailsPage extends React.Component {
                         <br></br>
                         <h2>{this.state.project.name}</h2>
                         <h4>{this.state.project.shortDescription}</h4>
+                        <br></br>
+                        {!isEmpty(this.state.project.whitepaper) &&
+                          (<div style={{ display: 'inline-block' }}>
+                            <a href={this.state.project.whitepaper} target="_blank" rel="noreferrer">
+                              <FontAwesomeIcon size="2x" icon={faNewspaper} /> White Paper</a><br></br>
+                          </div>)}
+
+                        {!isEmpty(this.state.project.releaseDate) &&
+
+                          <h5>Release Date: {this.state.project.releaseDate}</h5>
+                        }
+
+                        <br></br>
                         <h5>{this.state.project.type}</h5>
+
+
+
+                      </Card>
+
+                      <Card style={{
+                        alignItems: 'center'
+                      }}>
+                        <CardBody>
+                          <SocialMedia extendedmeta={{
+                            homepage: this.state.project.homepage,
+                            twitter_handle: this.state.project.twitterHandle,
+                            telegram_handle: this.state.project.telegramHandle,
+                            youtube_handle: this.state.project.youtubeHandle,
+                            facebook_handle: this.state.project.facebookHandle,
+                            githubLink: this.state.project.githubLink,
+
+                          }} />
+                        </CardBody>
                       </Card>
                     </Col>
                   </Row>
@@ -166,21 +197,29 @@ class ProjectDetailsPage extends React.Component {
                     alignItems: 'center',
                   }}>
                     <Col>
-                      <Card style={{
-                        alignItems: 'center'
+                      <Card body style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
                       }}>
-                        <CardBody>
-                          <SocialMedia extendedmeta={{
-                            homepage: this.state.project.homepage,
-                            twitter_handle: this.state.project.twitterHandle,
-                            telegram_handle: this.state.project.telegramHandle,
-                            youtube_handle: this.state.project.youtubeHandle,
-                            facebook_handle: this.state.project.facebookHandle,
-                            githubLink: this.state.project.githubLink,
-
-                          }} />
-                        </CardBody>
+                        <h4>Share Project</h4>
+                        <ShareProject name={this.state.project.name} />
                       </Card>
+                      {this.state.project.salesDetails != null &&
+                        <Card body style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}>
+                          <h3>Next Token Sale</h3>
+                          <h4>Sale Link</h4>
+                          <a href={this.state.project.salesDetails[0].saleDetailLink} target="_blank" rel="noreferrer">
+                            <h5>{this.state.project.salesDetails[0].saleDetailLink}</h5></a>
+                          <h4>Sale Start Date</h4>
+                          <h5>{this.state.project.salesDetails[0].saleStartDate}</h5>
+                          <h4>Sale End Date</h4>
+                          <h5>{this.state.project.salesDetails[0].saleEndDate}</h5>
+                        </Card>}
+
+
                       <Card body style={{
                         justifyContent: 'center',
                         alignItems: 'center',
@@ -189,13 +228,6 @@ class ProjectDetailsPage extends React.Component {
                         <h5>{this.state.project.createdDate.split('T')[0]}</h5>
                         <h4>Date Updated:</h4>
                         <h5>{this.state.project.updatedDate.split('T')[0]}</h5>
-                      </Card>
-                      <Card body style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
-                        <h4>Share Project</h4>
-                        <ShareProject name={this.state.project.name} />
                       </Card>
 
                     </Col>

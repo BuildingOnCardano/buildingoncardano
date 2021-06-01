@@ -1,3 +1,4 @@
+@import '../../node_modules/bootstrap/scss/functions';
 @import "variables";
 
 // libraries
@@ -22,5 +23,3 @@
 // themes
 @import "themes/colors";
 
-// demos (only for demo pages)
-@import "demos/demos";
