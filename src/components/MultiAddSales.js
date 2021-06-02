@@ -29,12 +29,15 @@ export default class MultiAddSales extends React.Component {
     }
 
     getInitialList() {
-        if (this.props.existingSalesDetails != null || this.props.existingSalesDetails != undefined && this.props.existingSalesDetails.length > 0) {
-            return this.props.existingSalesDetails;
+
+        try {
+            if (this.props.existingSalesDetails != null || this.props.existingSalesDetails != undefined && this.props.existingSalesDetails.length > 0) {
+                return this.props.existingSalesDetails;
+            }
+        } catch (error) {
+            
         }
-        else {
-            return [saleObject];
-        }
+        return [saleObject];
     }
 
     // handle input change
