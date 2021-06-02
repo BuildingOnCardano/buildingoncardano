@@ -190,6 +190,8 @@ class ProjectDetailsPage extends React.Component {
                                     <h5>{item.saleStartDate}</h5>
                                     <h4>Sale End Date</h4>
                                     <h5>{item.saleEndDate}</h5>
+                                    <h4>Sale Token Price</h4>
+                                    <h5>{item.saleTokenPrice}</h5>
                                   </div>
                                 )
                               })
