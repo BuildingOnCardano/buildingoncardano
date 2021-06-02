@@ -47,7 +47,16 @@ export default class MultiAddSales extends React.Component {
     // handle click event of the Add button
     handleAddClick = () => {
         const list = this.state.inputList;
-        list.push(saleObject);
+        list.push({
+            projectName: "",
+            upcomingSale: "",
+            saleStartDate: "",
+            saleEndDate: "",
+            saleDetailLink: "",
+            saleTokenPrice: "",
+            tokenDistributionDetail: "",
+            acceptedFunding: "",
+        });
         this.setState({ inputList: list });
     }
 

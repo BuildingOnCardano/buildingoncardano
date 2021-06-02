@@ -44,7 +44,7 @@ export default class MultiAddTeamMembers extends React.Component {
     // handle click event of the Add button
     handleAddClick = () => {
         const list = this.state.inputList;
-        list.push(teamMemberObject);
+        list.push({ memberName: "", position: "", twitter: "", linkedin: "", img: "" });
         this.setState({ inputList: list });
     }
 
