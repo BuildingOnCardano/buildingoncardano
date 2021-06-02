@@ -21,7 +21,8 @@ import {
 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import {
-  // UncontrolledTooltip,
+  Row,
+  Col,
   Collapse,
   Nav,
   Navbar,
@@ -29,7 +30,8 @@ import {
   NavLink as BSNavLink,
 } from 'reactstrap';
 import bn from 'utils/bemnames';
-import { getUser  } from 'utils/Common.js';
+import { getUser } from 'utils/Common.js';
+import logo200Image from 'assets/img/logo/logo_200.png';
 
 const sidebarBackground = {
   backgroundImage: `url("${sidebarBgImage}")`,
@@ -45,11 +47,6 @@ const pageContents = [
   { to: '/data', name: 'Data', exact: true, Icon: MdKeyboardArrowRight },
   { to: '/nft', name: 'Nft', exact: true, Icon: MdKeyboardArrowRight },
   { to: '/dex', name: 'Dex', exact: true, Icon: MdKeyboardArrowRight },
-];
-
-var navItemsTop = [
-  // { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
-  // { to: '/addproject', name: 'add project', exact: true, Icon: MdAddToQueue },
 ];
 
 const navItemsBottom = [
@@ -70,18 +67,22 @@ class Sidebar extends React.Component {
     var user = getUser();
     console.log(user);
 
-    if(user != null){
-      this.setState({navItemsTop : [
-        { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
-        { to: '/myprojects', name: 'my projects', exact: true, Icon: MdVerifiedUser },
-        { to: '/addproject', name: 'add project', exact: true, Icon: MdAddToQueue },
+    if (user != null) {
+      this.setState({
+        navItemsTop: [
+          { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
+          { to: '/myprojects', name: 'my projects', exact: true, Icon: MdVerifiedUser },
+          { to: '/addproject', name: 'add project', exact: true, Icon: MdAddToQueue },
 
-      ] })
-      
-    }else{
-      this.setState({navItemsTop : [
-        { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard }
-      ] })
+        ]
+      })
+
+    } else {
+      this.setState({
+        navItemsTop: [
+          { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard }
+        ]
+      })
     }
   }
 
@@ -102,7 +103,19 @@ class Sidebar extends React.Component {
       <aside className={bem.b()} data-image={sidebarBgImage}>
         <div className={bem.e('background')} style={sidebarBackground} />
         <div className={bem.e('content')}>
+
           <Navbar>
+            <Row className="justify-content-md-center">
+              <Col xs={12} sm={4} md={4}>
+                <img
+                  src={logo200Image}
+                  className="rounded"
+                  style={{ width: 120, height: 120, cursor: 'pointer', alignSelf: 'center' }}
+                  alt="logo"
+                />
+              </Col>
+            </Row>
+
             <h5 className="text-white">Building On Cardano</h5>
           </Navbar>
           <Nav vertical>
