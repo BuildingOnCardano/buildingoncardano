@@ -76,10 +76,10 @@ export default class MultiAddSales extends React.Component {
                     return (
                         <div>
                             <FormGroup row>
-                                <Label for="name" sm={inputnamewidth}>Sale End Date</Label>
+                                <Label for="name" sm={inputnamewidth}>Sale Type</Label>
                                 <Col sm={inputfieldwidth}>
                                     <Input type="select" name="upcomingSale"
-                                        value={this.state.inputList[i].upcomingSale}
+                                        value={x.upcomingSale}
                                         onChange={e => this.handleInputChange(e, i)}
                                     >
                                         <option>Private Sale</option>
