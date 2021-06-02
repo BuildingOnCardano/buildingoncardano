@@ -213,7 +213,7 @@ class MyProjectsAddEditPage extends React.Component {
   }
 
   salesDataHandler(data) {
-    console.log(data);
+    this.setState({ project: { ...this.state.project, salesDetails: data } });
   }
 
   render() {
