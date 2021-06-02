@@ -28,13 +28,13 @@ export default class MultiAddSales extends React.Component {
         };
     }
 
-    getInitialList(){
-        if(this.props.existingSalesDetails.length > 0){
+    getInitialList() {
+        if (this.props.existingSalesDetails.length > 0) {
             return this.props.existingSalesDetails;
         }
-        else{
+        else {
             return [saleObject];
-        } 
+        }
     }
 
     // handle input change
@@ -75,18 +75,20 @@ export default class MultiAddSales extends React.Component {
                 {this.state.inputList.map((x, i) => {
                     return (
                         <div>
-                            {/* <FormGroup row>
+                            <FormGroup row>
                                 <Label for="name" sm={inputnamewidth}>Sale End Date</Label>
                                 <Col sm={inputfieldwidth}>
-
-                                    <Input
-                                        name="upcomingSale"
-                                        placeholder="Upcoming Sale"
+                                    <Input type="select" name="upcomingSale"
                                         value={this.state.inputList[i].upcomingSale}
                                         onChange={e => this.handleInputChange(e, i)}
-                                    />
+                                    >
+                                        <option>General</option>
+                                        <option>Native Asset</option>
+                                        <option>ERC20</option>
+                                        <option>BSC</option>
+                                    </Input>
                                 </Col>
-                            </FormGroup> */}
+                            </FormGroup>
 
                             <FormGroup row>
                                 <Label for="name" sm={inputnamewidth}>Sale Start Date</Label>
