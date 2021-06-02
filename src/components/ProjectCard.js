@@ -25,7 +25,7 @@ export default class ProjectCard extends React.Component {
     render() {
         return (
             <div className="ProjectCard" style={{
-                minHeight: '21rem'
+                minHeight: '19rem'
             }}>
                 <br></br>
                 {this.props.myprojectspage && (<Link to={{ pathname: '/editproject/'+this.props.projectDetails.name}}>Edit Project</Link>)}
@@ -39,7 +39,6 @@ export default class ProjectCard extends React.Component {
                             fallbackImage={CardanoImage} />
 
                         <div className="ProjectCard-body">
-
                             <h2>{this.props.projectDetails.name}</h2>
                             <h4>{this.props.projectDetails.shortDescription}</h4>
                             <h5>{this.props.projectDetails.type}</h5>
