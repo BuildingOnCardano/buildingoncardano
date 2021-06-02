@@ -22,10 +22,19 @@ export default class MultiAddSales extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            inputList: this.props.existingSalesDetails || [saleObject],
+            inputList: this.getInitialList(),
             setInputList: null,
             loading: true,
         };
+    }
+
+    getInitialList(){
+        if(this.props.existingSalesDetails.length > 0){
+            return this.props.existingSalesDetails;
+        }
+        else{
+            return [saleObject];
+        } 
     }
 
     // handle input change
