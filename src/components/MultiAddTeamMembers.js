@@ -93,9 +93,21 @@ export default class MultiAddTeamMembers extends React.Component {
                                 <Col sm={inputfieldwidth}>
                                     <Input
                                         className="ml10"
-                                        name="linkedin"
+                                        name="linkin"
                                         placeholder="Linkedin Url"
-                                        value={x.linkedin}
+                                        value={x.linkin}
+                                        onChange={e => this.handleInputChange(e, i)}
+                                    />
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="name" sm={inputnamewidth}>Github Url</Label>
+                                <Col sm={inputfieldwidth}>
+                                    <Input
+                                        className="ml10"
+                                        name="github"
+                                        placeholder="Url"
+                                        value={x.github}
                                         onChange={e => this.handleInputChange(e, i)}
                                     />
                                 </Col>

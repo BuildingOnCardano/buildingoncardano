@@ -15,7 +15,9 @@ import {
   ListGroupItem,
   Row,
   Table
+
 } from 'reactstrap';
+import { faTwitter, faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import BeatLoader
   from "react-spinners/BeatLoader";
 import { css } from "@emotion/core";
@@ -23,6 +25,7 @@ import ReactImageFallback from "react-image-fallback";
 import SocialMedia from '../components/SocialMedia';
 import ShareProject from '../components/ShareProject';
 import CardanoImage from 'assets/img/cardanoIcon.png';
+import Person from 'assets/img/person.png';
 import YoutubeEmbed from '../components/YoutubeEmbed';
 import { isEmpty } from 'utils/stringutil.js';
 import { baseUrl, getProjectByName } from '../assets/services';
@@ -144,6 +147,15 @@ class ProjectDetailsPage extends React.Component {
                           }} />
                         </CardBody>
                       </Card>
+                      < Card body style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                        <h4>Date Created:</h4>
+                        <h5>{this.state.project.createdDate.split('T')[0]}</h5>
+                        <h4>Date Updated:</h4>
+                        <h5>{this.state.project.updatedDate.split('T')[0]}</h5>
+                      </Card>
                     </Col>
                   </Row>
                 </Col>
@@ -162,10 +174,33 @@ class ProjectDetailsPage extends React.Component {
                           <h4>{this.state.project.stage}</h4>
                           <br></br>
 
+                          {this.state.project.salesDetails != null && this.state.project.salesDetails.length > 0 && this.state.project.salesDetails != undefined &&
+                            <div>
+                              <h3>Next Token Sale</h3>
+                              {this.state.project.salesDetails.map(function (item, index) {
+                                return (
+                                  <div>
+
+                                    <div style={{ display: 'inline-block' }}>
+                                      <h4>Sale Link</h4>
+                                      <a href={item.saleDetailLink} target="_blank" rel="noreferrer">
+                                        <h5>{item.saleDetailLink}</h5></a></div>
+
+                                    <h4>Sale Start Date</h4>
+                                    <h5>{item.saleStartDate}</h5>
+                                    <h4>Sale End Date</h4>
+                                    <h5>{item.saleEndDate}</h5>
+                                  </div>
+                                )
+                              })
+                              }</div>}
 
                         </Col>
+
                       </Row>
                     </CardBody>
+
+
                   </Card>
 
                   {!isEmpty(this.state.project.tokenType) &&
@@ -203,18 +238,58 @@ class ProjectDetailsPage extends React.Component {
                         justifyContent: 'center',
                         alignItems: 'center',
                       }}>
-                        <h4>Share Project</h4>
-                        <ShareProject name={this.state.project.name} />
+                        <h3>The Team</h3>
+                        <Row>
+                          {this.state.project.projectTeam.map(function (item, index) {
+                            return (
+                              <Card body style={{
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                              }}>
+                                <ReactImageFallback
+                                  src={item.img}
+                                  width="100"
+                                  height="80"
+                                  fallbackImage={Person} />
+                                <h5>{item.memberName}</h5>
+                                <h5>{item.position}</h5>
+
+                                {item.twitter &&
+                                  <a href={item.twitter} target="_blank" rel="noreferrer">
+                                    <img
+                                      className="pr-2"
+                                      alt=""
+                                    /><div style={{ display: 'inline-block' }}>
+                                      <FontAwesomeIcon size="1x" icon={faTwitter} />Twitter</div></a>}
+
+                                {item.linkin &&
+                                  <a href={item.linkin} target="_blank" rel="noreferrer">
+                                    <img
+                                      className="pr-2"
+                                      alt=""
+                                    /><div style={{ display: 'inline-block' }}>
+                                      <FontAwesomeIcon size="1x" icon={faLinkedin} /> Linkedin</div></a>}
+
+                                {item.github &&
+                                  <a href={item.github} target="_blank" rel="noreferrer">
+                                    <img
+                                      className="pr-2"
+                                      alt=""
+                                    /><div style={{ display: 'inline-block' }}>
+                                      <FontAwesomeIcon size="1x" icon={faGithub} /> Linkedin</div></a>}
+                              </Card>
+                            )
+                          })
+                          }
+                        </Row>
                       </Card>
 
-                      < Card body style={{
+                      <Card body style={{
                         justifyContent: 'center',
                         alignItems: 'center',
                       }}>
-                        <h4>Date Created:</h4>
-                        <h5>{this.state.project.createdDate.split('T')[0]}</h5>
-                        <h4>Date Updated:</h4>
-                        <h5>{this.state.project.updatedDate.split('T')[0]}</h5>
+                        <h4>Share Project</h4>
+                        <ShareProject name={this.state.project.name} />
                       </Card>
 
                     </Col>
@@ -222,55 +297,7 @@ class ProjectDetailsPage extends React.Component {
                 </Col>
               </Row>
 
-              <Row
-                style={{
-                  justifyContent: 'center',
-                }}>
-                <Col md={6} sm={6} lg={6} xs={12} className="mb-3">
-                  {this.state.project.salesDetails != null && this.state.project.salesDetails.length > 0 && this.state.project.salesDetails != undefined &&
-                    <div>
-                      {this.state.project.salesDetails.map(function (item, index) {
-                        return (
-                          <Card body style={{
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                          }}>
-                            <h3>Next Token Sale</h3>
-                            <h4>Sale Link</h4>
-                            <a href={item.saleDetailLink} target="_blank" rel="noreferrer">
-                              <h5>{item.saleDetailLink}</h5></a>
-                            <h4>Sale Start Date</h4>
-                            <h5>{item.saleStartDate}</h5>
-                            <h4>Sale End Date</h4>
-                            <h5>{item.saleEndDate}</h5>
-                          </Card>
-                        )
-                      })
-                      }</div>}
-
-                </Col>
-                <Col md={6} sm={6} lg={6} xs={12} className="mb-3">
-                  {this.state.project.projectTeam != null && this.state.project.projectTeam.length > 0 && this.state.project.projectTeam != undefined &&
-                    <div>
-                      {this.state.project.projectTeam.map(function (item, index) {
-                        return (
-                          <Card body style={{
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                          }}>
-                            <h5>{item.memberName}</h5>
-                            <h5>{item.position}</h5>
-                            <h5>{item.twitter}</h5>
-                            <h5>{item.linkin}</h5>
-                            <h5>{item.github}</h5>
-                            <h5>{item.img}</h5>
-                          </Card>
-                        )
-                      })
-                      }</div>}
-                </Col>
-              </Row>
-
+            
             </Page>
         }
       </div >
