@@ -82,10 +82,12 @@ export default class MultiAddSales extends React.Component {
                                         value={this.state.inputList[i].upcomingSale}
                                         onChange={e => this.handleInputChange(e, i)}
                                     >
-                                        <option>General</option>
-                                        <option>Native Asset</option>
-                                        <option>ERC20</option>
-                                        <option>BSC</option>
+                                        <option>Private Sale</option>
+                                        <option>Presale</option>
+                                        <option>IEO</option>
+                                        <option>IDO</option>
+                                        <option>ISO</option>
+                                        <option>ICO</option>
                                     </Input>
                                 </Col>
                             </FormGroup>
