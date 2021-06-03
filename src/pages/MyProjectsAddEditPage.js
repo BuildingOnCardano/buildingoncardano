@@ -112,7 +112,7 @@ class MyProjectsAddEditPage extends React.Component {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'ownerEmail': getUser() },
       };
-      var response = await fetch(baseUrl + getProjectByName + this.props.match.params.projectname);
+      var response = await fetch(baseUrl + getProjectByName + this.props.match.params.projectname, requestOptions);
       const data = await response.json();
       this.setState({ project: data });
       this.setIncomingStateValues();
