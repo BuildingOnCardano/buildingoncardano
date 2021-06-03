@@ -446,7 +446,7 @@ class MyProjectsAddEditPage extends React.Component {
                     </Card>
 
                     <Card body>
-                      <h3>Sale Details</h3>
+                      <h3>Upcoming/Past Sale Details</h3><br/>
                       <MultiAddSales sendData={this.salesDataHandler} existingSalesDetails={this.state.project.salesDetails} />
                     </Card>
 

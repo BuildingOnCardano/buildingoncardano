@@ -5,6 +5,11 @@ import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { isEmpty } from 'utils/stringutil.js';
 import Tooltip from "@material-ui/core/Tooltip";
 
+import {
+  Col,
+  Row,
+  } from 'reactstrap';
+
 export default class SocialMedia extends React.Component {
 
     constructor(props) {
@@ -67,99 +72,72 @@ export default class SocialMedia extends React.Component {
     render() {
         return (
             <div>
-                {!isEmpty(this.state.homepage) &&
+            <Row>
+               {/* <Col>
+            {!isEmpty(this.state.homepage) &&
                 <Tooltip
                     title="Website"
                     placement="left"
                 >
                     <a href={this.state.homepage} target="_blank" rel="noreferrer">
-                        <img
-                            className="pr-2"
-                            alt=""
-                        />
-                        <FontAwesomeIcon size="2x" icon={faGlobe} /> Website</a></Tooltip>
+                        <FontAwesomeIcon size="2x" icon={faGlobe} /></a></Tooltip>
                 }
-                {this.state.twitterHandle !== "" &&
+                </Col>
+                */}
 
+                {this.state.twitterHandle !== "" &&
                     <Tooltip
                         title="Twitter"
                         placement="left"
                     >
-
-                        <a href={"https://twitter.com/@" + this.state.twitterHandle} target="_blank" rel="noreferrer">
-                            <br></br>
-                            <br></br>
-                            <img
-                                className="pr-2"
-                                alt=""
-                            /><div style={{ display: 'inline-block' }}>
-                                <FontAwesomeIcon size="2x" icon={faTwitter} /> Twitter</div></a></Tooltip>}
+                        <Col><a href={"https://twitter.com/@" + this.state.twitterHandle} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon size="2x" icon={faTwitter} /></a></Col></Tooltip>}
 
                 {this.state.telegramHandle != "" &&
                     <Tooltip
                         title="Telegram"
                         placement="left"
                     >
-                        <a href={"https://t.me/" + this.state.telegramHandle} target="_blank" rel="noreferrer">
-                            <br></br>
-                            <br></br>
-                            <img
-                                className="pr-2"
-                                alt=""
-                            /> <FontAwesomeIcon size="2x" icon={faTelegram} /> Telegram</a></Tooltip>}
+                       <Col> <a href={"https://t.me/" + this.state.telegramHandle} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon size="2x" icon={faTelegram} /></a></Col></Tooltip>}
 
+                
                 {this.state.youtubeHandle != "" &&
                     <Tooltip
                         title="Youtube"
                         placement="left"
                     >
-                        <a href={"https://www.youtube.com/channel/" + this.state.youtubeHandle} target="_blank" rel="noreferrer">
-                            <br></br>
-                            <br></br>
-                            <img
-                                className="pr-2"
-                                alt=""
-                            /> <FontAwesomeIcon size="2x" icon={faYoutube} /> Youtube</a></Tooltip>}
+                     <Col>   <a href={"https://www.youtube.com/channel/" + this.state.youtubeHandle} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon size="2x" icon={faYoutube} /></a></Col></Tooltip>}
 
                 {this.state.facebookHandle != "" &&
                     <Tooltip
                         title="Facebook"
                         placement="left"
                     >
-                        <a href={"https://www.facebook.com/" + this.state.facebookHandle} target="_blank" rel="noreferrer">
-                            <br></br>
-                            <br></br>
-                            <img
-                                className="pr-2"
-                                alt=""
-                            /> <FontAwesomeIcon size="2x" icon={faFacebook} /> Facebook</a></Tooltip>}
-
+                        <Col><a href={"https://www.facebook.com/" + this.state.facebookHandle} target="_blank" rel="noreferrer">
+                         <FontAwesomeIcon size="2x" icon={faFacebook} /></a></Col></Tooltip>}
+                
                 {this.state.discordHandle != "" &&
                     <Tooltip
                         title="Discord"
                         placement="left"
                     >
+                    <Col>
                         <a href={"https://discord.com/invite/" + this.state.discordHandle} target="_blank" rel="noreferrer">
-                            <br></br>
-                            <br></br>
-                            <img
-                                className="pr-2"
-                                alt=""
-                            /> <FontAwesomeIcon size="2x" icon={faDiscord} /> Discord</a></Tooltip>}
+                         <FontAwesomeIcon size="2x" icon={faDiscord} /></a></Col></Tooltip>}
+                
 
+                
                 {this.state.githubLink != "" &&
                     <Tooltip
                         title="Github"
                         placement="left"
                     >
-                        <a href={this.state.githubLink} target="_blank" rel="noreferrer">
-                            <br></br>
-                            <br></br>
-                            <img
-                                className="pr-2"
-                                alt=""
-                            /> <FontAwesomeIcon size="2x" icon={faGithub} /> Github</a></Tooltip>}
-
+                       <Col> <a href={this.state.githubLink} target="_blank" rel="noreferrer">
+                         <FontAwesomeIcon size="2x" icon={faGithub} /></a></Col></Tooltip>}
+                    
+                </Row>
             </div>
         )
     };
