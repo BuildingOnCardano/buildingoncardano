@@ -108,6 +108,10 @@ class MyProjectsAddEditPage extends React.Component {
 
   async getProjectDetails() {
     try {
+      const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', 'ownerEmail': getUser() },
+      };
       var response = await fetch(baseUrl + getProjectByName + this.props.match.params.projectname);
       const data = await response.json();
       this.setState({ project: data });
@@ -201,13 +205,6 @@ class MyProjectsAddEditPage extends React.Component {
     selectedListTags = selectedList;
   }
 
-
-  // getData(data) {
-  //   console.log(this.state.project);
-  //   this.state.project.projectTeam = data;
-  //   //this.setState({ project: { ...this.state.project, projectTeam: data } });
-  // }
-
   handler(data) {
     this.setState({ project: { ...this.state.project, projectTeam: data } });
   }
@@ -235,9 +232,17 @@ class MyProjectsAddEditPage extends React.Component {
                 className={this.props.className}
               >
                 <ModalHeader toggle={this.toggle()}></ModalHeader>
+
                 <ModalBody>
+                  <h3>Success.</h3>
                   <Row>
-                    <p>Project updated successfully.</p>
+                    {this.props.action == 'edit' ? <p>Project updated successfully.</p>
+                      : <div>
+                        <p>Thank you for submitting a project to Building On Cardano.</p>
+                        <br></br>
+                        <p>We have a short process of verification before a project is displayed.</p>
+                      </div>}
+
                   </Row>
 
                 </ModalBody>
@@ -446,7 +451,7 @@ class MyProjectsAddEditPage extends React.Component {
                     </Card>
 
                     <Card body>
-                      <h3>Upcoming/Past Sale Details</h3><br/>
+                      <h3>Upcoming/Past Sale Details</h3><br />
                       <MultiAddSales sendData={this.salesDataHandler} existingSalesDetails={this.state.project.salesDetails} />
                     </Card>
 

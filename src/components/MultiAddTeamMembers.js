@@ -16,13 +16,16 @@ export default class MultiAddTeamMembers extends React.Component {
         };
     }
 
-    getInitialList(){
-        if(this.props.existingTeam.length > 0){
-            return this.props.existingTeam;
+    getInitialList() {
+        try {
+            if (this.props.existingTeam.length > 0) {
+                return this.props.existingTeam;
+            }
+        } catch (error) {
+
         }
-        else{
-            return [teamMemberObject];
-        } 
+        return [{ memberName: "", position: "", twitter: "", linkedin: "", img: "" }];
+
     }
 
     // handle input change

@@ -39,8 +39,6 @@ class DashboardPage extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    // console.log(this.props.location.state.loggedIn);
-
     if (width < 600) {
       this.setState({ smallScreen: true });
     }
@@ -53,7 +51,6 @@ class DashboardPage extends React.Component {
     try {
       var response = await fetch(baseUrl + getAllProjects);
       const data = await response.json();
-      console.log(data);
       this.setState({ projects: data, loading: false })
     } catch (error) {
       console.log(error)

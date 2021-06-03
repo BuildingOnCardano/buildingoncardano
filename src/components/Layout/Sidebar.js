@@ -65,8 +65,6 @@ class Sidebar extends React.Component {
 
   componentDidMount() {
     var user = getUser();
-    console.log(user);
-
     if (user != null) {
       this.setState({
         navItemsTop: [
