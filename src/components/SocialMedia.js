@@ -90,7 +90,7 @@ export default class SocialMedia extends React.Component {
                         title="Twitter"
                         placement="left"
                     >
-                        <Col><a href={"https://twitter.com/@" + this.state.twitterHandle} target="_blank" rel="noreferrer">
+                        <Col><a href={this.state.twitterHandle} target="_blank" rel="noreferrer">
                             <FontAwesomeIcon size="2x" icon={faTwitter} /></a></Col></Tooltip>}
 
                 {this.state.telegramHandle != "" &&
@@ -98,7 +98,7 @@ export default class SocialMedia extends React.Component {
                         title="Telegram"
                         placement="left"
                     >
-                       <Col> <a href={"https://t.me/" + this.state.telegramHandle} target="_blank" rel="noreferrer">
+                       <Col> <a href={this.state.telegramHandle} target="_blank" rel="noreferrer">
                             <FontAwesomeIcon size="2x" icon={faTelegram} /></a></Col></Tooltip>}
 
                 
@@ -107,7 +107,7 @@ export default class SocialMedia extends React.Component {
                         title="Youtube"
                         placement="left"
                     >
-                     <Col>   <a href={"https://www.youtube.com/channel/" + this.state.youtubeHandle} target="_blank" rel="noreferrer">
+                     <Col>   <a href={this.state.youtubeHandle} target="_blank" rel="noreferrer">
                             <FontAwesomeIcon size="2x" icon={faYoutube} /></a></Col></Tooltip>}
 
                 {this.state.facebookHandle != "" &&
@@ -115,7 +115,7 @@ export default class SocialMedia extends React.Component {
                         title="Facebook"
                         placement="left"
                     >
-                        <Col><a href={"https://www.facebook.com/" + this.state.facebookHandle} target="_blank" rel="noreferrer">
+                        <Col><a href={this.state.facebookHandle} target="_blank" rel="noreferrer">
                          <FontAwesomeIcon size="2x" icon={faFacebook} /></a></Col></Tooltip>}
                 
                 {this.state.discordHandle != "" &&
@@ -124,11 +124,9 @@ export default class SocialMedia extends React.Component {
                         placement="left"
                     >
                     <Col>
-                        <a href={"https://discord.com/invite/" + this.state.discordHandle} target="_blank" rel="noreferrer">
+                        <a href={this.state.discordHandle} target="_blank" rel="noreferrer">
                          <FontAwesomeIcon size="2x" icon={faDiscord} /></a></Col></Tooltip>}
-                
-
-                
+                                
                 {this.state.githubLink != "" &&
                     <Tooltip
                         title="Github"

@@ -72,6 +72,7 @@ class MyProjectsAddEditPage extends React.Component {
       hasToken: false,
 
       project: null,
+      nameValid: false,
 
       modal: false,
       modal_backdrop: false,
@@ -270,10 +271,28 @@ class MyProjectsAddEditPage extends React.Component {
                       <h3>Project Info</h3>
                       <br></br>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Name</Label>
+                        <Label for="name" sm={inputnamewidth}>Name *</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="" value={this.state.project.name}
-                            onChange={e => this.setState({ project: { ...this.state.project, name: e.target.value } })} /></Col>
+                          <Input valid={this.state.nameValid} type="text" name="name" id="name" placeholder="" value={this.state.project.name}
+                            onChange={e => this.setState({ project: { ...this.state.project, name: e.target.value }, valid: true })} /></Col>
+                      </FormGroup>
+
+                      <FormGroup row>
+                        <Label for="name" sm={inputnamewidth}>Stage / Status *</Label>
+                        <Col sm={inputfieldwidth}>
+                          <Input type="select" name="select" onChange={e => this.setState({ project: { ...this.state.project, stage: e.target.value } })}
+                            value={this.state.project.stage}>
+                            <option></option>
+                            <option>Pre Funding</option>
+                            <option>Catalyst</option>
+                            <option>Private Sale</option>
+                            <option>Presale</option>
+                            <option>IEO</option>
+                            <option>IDO</option>
+                            <option>ISO</option>
+                            <option>Live on Exchange</option>
+                            <option>Other</option>
+                          </Input></Col>
                       </FormGroup>
 
                       <FormGroup row>
@@ -320,23 +339,6 @@ class MyProjectsAddEditPage extends React.Component {
                         <Col sm={inputfieldwidth}>
                           <Input type="text" name="name" id="name" placeholder="" value={this.state.project.ticker}
                             onChange={e => this.setState({ project: { ...this.state.project, ticker: e.target.value } })} /></Col>
-                      </FormGroup>
-
-                      <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Stage / Status</Label>
-                        <Col sm={inputfieldwidth}>
-                          <Input type="select" name="select" onChange={e => this.setState({ project: { ...this.state.project, stage: e.target.value } })}
-                            value={this.state.project.stage}>
-                            <option></option>
-                            <option>Pre Funding</option>
-                            <option>Catalyst</option>
-                            <option>Private Sale</option>
-                            <option>Presale</option>
-                            <option>IEO</option>
-                            <option>IDO</option>
-                            <option>ISO</option>
-                            <option>Live on Exchange</option>
-                          </Input></Col>
                       </FormGroup>
 
                       <FormGroup row>
@@ -413,33 +415,33 @@ class MyProjectsAddEditPage extends React.Component {
                       <h3>Social Media</h3>
                       <br></br>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Twitter Handle</Label>
+                        <Label for="name" sm={inputnamewidth}>Twitter Url</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="@BuildingOnCardano" value={this.state.project.twitterHandle}
+                          <Input type="text" name="name" id="name" placeholder="https://twitter.com/BuildingOnCardano" value={this.state.project.twitterHandle}
                             onChange={e => this.setState({ project: { ...this.state.project, twitterHandle: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Telegram Handle</Label>
+                        <Label for="name" sm={inputnamewidth}>Telegram Chat</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="name of chat" value={this.state.project.telegramHandle}
+                          <Input type="text" name="name" id="name" placeholder="https://t.me/BuildingOnCardano" value={this.state.project.telegramHandle}
                             onChange={e => this.setState({ project: { ...this.state.project, telegramHandle: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Youtube Handle</Label>
+                        <Label for="name" sm={inputnamewidth}>Youtube Channel</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="channel id" value={this.state.project.youtubeHandle}
+                          <Input type="text" name="name" id="name" placeholder="https://www.youtube.com/channel/channelid" value={this.state.project.youtubeHandle}
                             onChange={e => this.setState({ project: { ...this.state.project, youtubeHandle: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Facebook Handle</Label>
+                        <Label for="name" sm={inputnamewidth}>Facebook Url</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="facebook id" value={this.state.project.facebookHandle}
+                          <Input type="text" name="name" id="name" placeholder="https://www.facebook.com/BuildingOnCardano" value={this.state.project.facebookHandle}
                             onChange={e => this.setState({ project: { ...this.state.project, facebookHandle: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Discord</Label>
+                        <Label for="name" sm={inputnamewidth}>Discord Url</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="discord id" value={this.state.project.discordHandle}
+                          <Input type="text" name="name" id="name" placeholder="Disrord Invite Url" value={this.state.project.discordHandle}
                             onChange={e => this.setState({ project: { ...this.state.project, discordHandle: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
