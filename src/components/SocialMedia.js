@@ -88,7 +88,7 @@ export default class SocialMedia extends React.Component {
                         <FontAwesomeIcon size="2x" icon={faGlobe} /></a></Tooltip>
                 }
                 </Col>
-                */}
+                */} 
 
                 {this.state.twitterHandle !== "" &&
                     <Tooltip
