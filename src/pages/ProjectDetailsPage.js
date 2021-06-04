@@ -62,8 +62,6 @@ class ProjectDetailsPage extends React.Component {
     if (isEmpty(this.state.project)) {
       this.getProjectDetails();
     }
-
-
   }
 
   async getProjectDetails() {
@@ -76,8 +74,6 @@ class ProjectDetailsPage extends React.Component {
       console.log(error)
     }
   }
-
-
 
   render() {
 
@@ -159,24 +155,22 @@ class ProjectDetailsPage extends React.Component {
                                   fallbackImage={Person} />
                                 <b>{item.memberName}</b>
                                 <p>{item.position}</p>
-                                <Row>
-                                <Col>
+                                <div style={{
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    textAlign: 'center',
+                                  }}>
                                 {item.twitter &&
                                   <a href={item.twitter} target="_blank" rel="noreferrer">
-                                      <FontAwesomeIcon size="1x" icon={faTwitter} /></a>}
-                                 </Col>
-                                 <Col>
+                                      <FontAwesomeIcon icon={faTwitter} />  </a>}
                                 {item.linkin &&
                                   <a href={item.linkin} target="_blank" rel="noreferrer">
-                                      <FontAwesomeIcon size="1x" icon={faLinkedin} /></a>}
-                                </Col>
-                                <Col>
+                                      <FontAwesomeIcon icon={faLinkedin} />  </a>}
                                 {item.github &&
                                   <a href={item.github} target="_blank" rel="noreferrer">
-                                      <FontAwesomeIcon size="1x" icon={faGithub} /></a>}
-                              </Col>
-                              </Row>
-                              </Card>
+                                      <FontAwesomeIcon icon={faGithub} />  </a>}
+                                </div>
+                            </Card>
                             )
                           })
                           }
@@ -186,11 +180,9 @@ class ProjectDetailsPage extends React.Component {
                     </Col>
                   </Row>
 
-                                  <Card>
+                  <Card>
                     <CardHeader>Token Sales</CardHeader>
                     <CardBody>
-
-
                       <Row>
                         <Col>
 
@@ -211,27 +203,28 @@ class ProjectDetailsPage extends React.Component {
                                             <p><b>Token Price: </b>{item.saleTokenPrice}</p>
                                         </CardText>
                                         <hr/>
-                                          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                          
+                                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                                         <Button variant="outline-light"><a href={item.saleDetailLink} target="_blank" rel="noreferrer">Sale Details</a></Button>
                                       </div>
                                         </CardBody>
                                 </Card>
-
                                 )
-                              
                               })
-                              
                               }
                               </CardColumns>
                               </div>}
-
                         </Col>
-
                       </Row>
                     </CardBody>
                   </Card>
-
-
+                    
+                  <Card body style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                        <p><b>Project Added on </b>{this.state.project.createdDate.split('T')[0]}  |  <b>Last Updated on </b>{this.state.project.updatedDate.split('T')[0]}</p>
+                     </Card>
                 </Col>
 
                 <Col md={2} sm={6} lg={3} xs={12} className="mb-3">
@@ -240,8 +233,6 @@ class ProjectDetailsPage extends React.Component {
                     alignItems: 'center',
                   }}>
                     <Col>
-
-
                       <Card style={{
                         alignItems: 'center'
                       }}>
@@ -257,9 +248,11 @@ class ProjectDetailsPage extends React.Component {
                             <Col>
                             <Button variant="outline-light"><a href={this.state.project.homepage} target="_blank" rel="noreferrer">Website</a></Button>
                             </Col>
+                            
                             <Col>
                             <Button variant="outline-light"><a href={this.state.project.whitepaper} target="_blank" rel="noreferrer">Whitepaper</a></Button>
                             </Col>
+                            
                         </Row>
 
                           <SocialMedia extendedmeta={{
@@ -305,20 +298,12 @@ class ProjectDetailsPage extends React.Component {
                       <CardBody style={{
                         justifyContent: 'center',
                         alignItems: 'center',
+                        textAlign: 'center',
                       }}>
                         <ShareProject name={this.state.project.name} />
                         </CardBody>
                       </Card>
 
-                      <Card body style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
-                        <h4>Date Created:</h4>
-                        <h5>{this.state.project.createdDate.split('T')[0]}</h5>
-                        <h4>Date Updated:</h4>
-                        <h5>{this.state.project.updatedDate.split('T')[0]}</h5>
-                      </Card>
                     </Col>
                   </Row>
                 </Col>

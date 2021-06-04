@@ -31,7 +31,7 @@ import {
 } from 'reactstrap';
 import bn from 'utils/bemnames';
 import { getUser } from 'utils/Common.js';
-import logo200Image from 'assets/img/logo/logo_200.png';
+import logo200Image from 'assets/img/logo/Light-icon200.png';
 
 const sidebarBackground = {
   backgroundImage: `url("${sidebarBgImage}")`,

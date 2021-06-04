@@ -4,6 +4,7 @@ import {
 } from 'reactstrap';
 import TextField from '@material-ui/core/TextField';
 import { DataUsageSharp } from '@material-ui/icons';
+import { isEmpty } from 'lodash';
 
 const inputnamewidth = 2;
 const inputfieldwidth = 8;
@@ -16,6 +17,7 @@ const saleObject = {
     saleTokenPrice: "",
     tokenDistributionDetail: "",
     acceptedFunding: "",
+    saleStatus: "",
 };
 
 export default class MultiAddSales extends React.Component {
@@ -68,6 +70,7 @@ export default class MultiAddSales extends React.Component {
             saleTokenPrice: "",
             tokenDistributionDetail: "",
             acceptedFunding: "",
+            saleStatus: "",
         });
         this.setState({ inputList: list });
     }
@@ -85,6 +88,7 @@ export default class MultiAddSales extends React.Component {
                                         value={x.upcomingSale}
                                         onChange={e => this.handleInputChange(e, i)}
                                     >
+                                        <option>No Token Sales</option>
                                         <option>Private Sale</option>
                                         <option>Presale</option>
                                         <option>IEO</option>
@@ -95,6 +99,21 @@ export default class MultiAddSales extends React.Component {
                                 </Col>
                             </FormGroup>
 
+                            
+                            <FormGroup row>
+                                <Label for="name" sm={inputnamewidth}>Sale Status</Label>
+                                <Col sm={inputfieldwidth}>
+                                    <Input type="select" name="saleStatus"
+                                        value={x.saleStatus}
+                                        onChange={e => this.handleInputChange(e, i)}
+                                    >
+                                        <option>Upcoming</option>
+                                        <option>Completed</option>
+                                        <option>Live</option>
+                                    </Input>
+                                </Col>
+                            </FormGroup>
+                            
                             <FormGroup row>
                                 <Label for="name" sm={inputnamewidth}>Sale Start Date</Label>
                                 <Col sm={inputfieldwidth}>
@@ -127,23 +146,9 @@ export default class MultiAddSales extends React.Component {
                                     />
                                 </Col>
                             </FormGroup>
-
-
-
+                                                        
                             <FormGroup row>
-                                <Label for="name" sm={inputnamewidth}>Sale Detail Link</Label>
-                                <Col sm={inputfieldwidth}>
-                                    <Input
-                                        className="ml10"
-                                        name="saleDetailLink"
-                                        placeholder="Sale Details Link"
-                                        value={x.saleDetailLink}
-                                        onChange={e => this.handleInputChange(e, i)}
-                                    />
-                                </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                                <Label for="name" sm={inputnamewidth}>Sale Token Price</Label>
+                                <Label for="name" sm={inputnamewidth}>Token Price</Label>
                                 <Col sm={inputfieldwidth}>
                                     <Input
                                         className="ml10"
@@ -154,18 +159,7 @@ export default class MultiAddSales extends React.Component {
                                     />
                                 </Col>
                             </FormGroup>
-                            <FormGroup row>
-                                <Label for="name" sm={inputnamewidth}>Token Distribution Detail</Label>
-                                <Col sm={inputfieldwidth}>
-                                    <Input
-                                        className="ml10"
-                                        name="tokenDistributionDetail"
-                                        placeholder="Token Distribution Detail"
-                                        value={x.tokenDistributionDetail}
-                                        onChange={e => this.handleInputChange(e, i)}
-                                    />
-                                </Col>
-                            </FormGroup>
+
                             <FormGroup row>
                                 <Label for="name" sm={inputnamewidth}>Accepted Funding</Label>
                                 <Col sm={inputfieldwidth}>
@@ -178,12 +172,28 @@ export default class MultiAddSales extends React.Component {
                                     />
                                 </Col>
                             </FormGroup>
+
                             <FormGroup row>
+                                <Label for="name" sm={inputnamewidth}>Sale Details</Label>
                                 <Col sm={inputfieldwidth}>
+                                    <Input
+                                        className="ml10"
+                                        name="tokenDistributionDetail"
+                                        placeholder="Link to more info on sale"
+                                        value={x.tokenDistributionDetail}
+                                        onChange={e => this.handleInputChange(e, i)}
+                                    />
+                                </Col>
+                            </FormGroup>
+
+                            
+                            <FormGroup row>
+                            
+                            <Col sm={inputfieldwidth}>
                                     {this.state.inputList.length !== 1 && <Button
                                         className="mr10"
                                         onClick={() => this.handleRemoveClick(i)}>Remove</Button>}
-                                    {this.state.inputList.length - 1 === i && <Button onClick={this.handleAddClick}>Add Another</Button>}
+                                    {this.state.inputList.length - 1 === i && <Button onClick={this.handleAddClick}>Add Another Sale</Button>}
                                 </Col>
                             </FormGroup>
                         </div>

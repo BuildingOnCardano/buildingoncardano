@@ -71,8 +71,13 @@ export default class SocialMedia extends React.Component {
 
     render() {
         return (
-            <div>
-            <Row>
+            <div style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        textAlign: 'center',
+                        fontSize: '18px',
+                      }}>
+            
                {/* <Col>
             {!isEmpty(this.state.homepage) &&
                 <Tooltip
@@ -83,23 +88,22 @@ export default class SocialMedia extends React.Component {
                         <FontAwesomeIcon size="2x" icon={faGlobe} /></a></Tooltip>
                 }
                 </Col>
-                */}
+                */} 
 
                 {this.state.twitterHandle !== "" &&
                     <Tooltip
                         title="Twitter"
                         placement="left"
                     >
-                        <Col><a href={this.state.twitterHandle} target="_blank" rel="noreferrer">
-                            <FontAwesomeIcon size="2x" icon={faTwitter} /></a></Col></Tooltip>}
-
+                        <a href={"https://twitter.com/@" + this.state.twitterHandle} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon size="2x" icon={faTwitter} /> </a></Tooltip>}
                 {this.state.telegramHandle != "" &&
                     <Tooltip
                         title="Telegram"
                         placement="left"
                     >
-                       <Col> <a href={this.state.telegramHandle} target="_blank" rel="noreferrer">
-                            <FontAwesomeIcon size="2x" icon={faTelegram} /></a></Col></Tooltip>}
+                       <a href={"https://t.me/" + this.state.telegramHandle} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon size="2x" icon={faTelegram} /> </a></Tooltip>}
 
                 
                 {this.state.youtubeHandle != "" &&
@@ -107,35 +111,34 @@ export default class SocialMedia extends React.Component {
                         title="Youtube"
                         placement="left"
                     >
-                     <Col>   <a href={this.state.youtubeHandle} target="_blank" rel="noreferrer">
-                            <FontAwesomeIcon size="2x" icon={faYoutube} /></a></Col></Tooltip>}
+                     <a href={"https://www.youtube.com/channel/" + this.state.youtubeHandle} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon size="2x" icon={faYoutube} /> </a></Tooltip>}
 
                 {this.state.facebookHandle != "" &&
                     <Tooltip
                         title="Facebook"
                         placement="left"
                     >
-                        <Col><a href={this.state.facebookHandle} target="_blank" rel="noreferrer">
-                         <FontAwesomeIcon size="2x" icon={faFacebook} /></a></Col></Tooltip>}
+                        <a href={"https://www.facebook.com/" + this.state.facebookHandle} target="_blank" rel="noreferrer">
+                         <FontAwesomeIcon size="2x" icon={faFacebook} /> </a></Tooltip>}
                 
                 {this.state.discordHandle != "" &&
                     <Tooltip
                         title="Discord"
                         placement="left"
                     >
-                    <Col>
-                        <a href={this.state.discordHandle} target="_blank" rel="noreferrer">
-                         <FontAwesomeIcon size="2x" icon={faDiscord} /></a></Col></Tooltip>}
-                                
+                    
+                        <a href={"https://discord.com/invite/" + this.state.discordHandle} target="_blank" rel="noreferrer">
+                         <FontAwesomeIcon size="2x" icon={faDiscord} /> </a></Tooltip>}
                 {this.state.githubLink != "" &&
                     <Tooltip
                         title="Github"
                         placement="left"
                     >
-                       <Col> <a href={this.state.githubLink} target="_blank" rel="noreferrer">
-                         <FontAwesomeIcon size="2x" icon={faGithub} /></a></Col></Tooltip>}
+                       <a href={this.state.githubLink} target="_blank" rel="noreferrer">
+                         <FontAwesomeIcon size="2x" icon={faGithub} /> </a></Tooltip>}
                     
-                </Row>
+               
             </div>
         )
     };

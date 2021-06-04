@@ -59,7 +59,7 @@ export default class ShareProject extends React.Component {
     }
     render() {
         return (
-            <div>
+                <div>
                 <FacebookShareButton url={baseUrl + this.props.name}
                     title={"Checkout " + this.props.name + " on buildingoncardano.com!"}>
                     <FacebookIcon
