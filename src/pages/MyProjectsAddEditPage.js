@@ -11,7 +11,7 @@ import {
   ModalHeader,
 } from 'reactstrap';
 import { Card, Col, Row } from 'reactstrap';
-import { baseUrl, updateProject, getProjectByName, createProject } from '../assets/services';
+import { baseUrl, updateProject, getProjectByNameAndOwner, createProject } from '../assets/services';
 import { project } from '../assets/project';
 import { Link } from 'react-router-dom';
 import { Multiselect } from 'multiselect-react-dropdown';
@@ -113,7 +113,7 @@ class MyProjectsAddEditPage extends React.Component {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'ownerEmail': getUser() },
       };
-      var response = await fetch(baseUrl + getProjectByName + this.props.match.params.projectname, requestOptions);
+      var response = await fetch(baseUrl + getProjectByNameAndOwner + this.props.match.params.projectname, requestOptions);
       const data = await response.json();
       this.setState({ project: data });
       this.setIncomingStateValues();
