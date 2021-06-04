@@ -113,6 +113,11 @@ class ProjectDetailsPage extends React.Component {
                         <p><b>Development Stage: </b>{this.state.project.stage}</p>
                             </div>
                         )}
+                        {!isEmpty(this.state.project.releaseDate) && (
+                            <div>
+                        <p><b>Release Date: </b>{this.state.project.releaseDate}</p>
+                            </div>
+                        )}
                        </Col>
                     </Row>
                     <hr/>
