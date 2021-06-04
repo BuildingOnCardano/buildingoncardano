@@ -250,7 +250,7 @@ class ProjectDetailsPage extends React.Component {
                             </Col>
                             
                             <Col>
-                            <Button variant="outline-light"><a href={this.state.project.whitepaper} target="_blank" rel="noreferrer">Whitepaper</a></Button>
+                            <Button variant="outline-light"><a href={this.state.project.whitepaperUrl} target="_blank" rel="noreferrer">Whitepaper</a></Button>
                             </Col>
                             
                         </Row>

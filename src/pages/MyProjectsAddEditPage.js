@@ -270,14 +270,14 @@ class MyProjectsAddEditPage extends React.Component {
                       <h3>Project Info</h3>
                       <br></br>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Name</Label>
+                        <Label for="name" sm={inputnamewidth}>Name *</Label>
                         <Col sm={inputfieldwidth}>
                           <Input type="text" name="name" id="name" placeholder="" value={this.state.project.name}
                             onChange={e => this.setState({ project: { ...this.state.project, name: e.target.value } })} /></Col>
                       </FormGroup>
 
                       <FormGroup row>
-                        <Label for="exampleSelect" sm={inputnamewidth}>Tags</Label>
+                        <Label for="exampleSelect" sm={inputnamewidth}>Tags *</Label>
                         <Col sm={inputfieldwidth}>
                           <Multiselect
                             options={tagOptions} // Options to display in the dropdown                     
@@ -287,6 +287,24 @@ class MyProjectsAddEditPage extends React.Component {
                             selectedValues={selectedListTags}
                           />
                         </Col>
+                      </FormGroup>
+
+                      <FormGroup row>
+                        <Label for="name" sm={inputnamewidth}>Stage / Status *</Label>
+                        <Col sm={inputfieldwidth}>
+                          <Input type="select" name="select" onChange={e => this.setState({ project: { ...this.state.project, stage: e.target.value } })}
+                            value={this.state.project.stage}>
+                            <option></option>
+                            <option>Pre Funding</option>
+                            <option>Catalyst</option>
+                            <option>Private Sale</option>
+                            <option>Presale</option>
+                            <option>IEO</option>
+                            <option>IDO</option>
+                            <option>ISO</option>
+                            <option>Live on Exchange</option>
+                            <option>Other</option>
+                          </Input></Col>
                       </FormGroup>
 
                       <FormGroup row>
@@ -313,23 +331,6 @@ class MyProjectsAddEditPage extends React.Component {
                           <Input type="text" name="name" id="name" placeholder="ID to video presenation on YouTube E.G KPTA9J6S-pY"
                             value={this.state.project.youTubeEmbedId}
                             onChange={e => this.setState({ project: { ...this.state.project, youTubeEmbedId: e.target.value } })} /></Col>
-                      </FormGroup>
-
-                      <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Stage / Status</Label>
-                        <Col sm={inputfieldwidth}>
-                          <Input type="select" name="select" onChange={e => this.setState({ project: { ...this.state.project, stage: e.target.value } })}
-                            value={this.state.project.stage}>
-                            <option></option>
-                            <option>Pre Funding</option>
-                            <option>Catalyst</option>
-                            <option>Private Sale</option>
-                            <option>Presale</option>
-                            <option>IEO</option>
-                            <option>IDO</option>
-                            <option>ISO</option>
-                            <option>Live on Exchange</option>
-                          </Input></Col>
                       </FormGroup>
 
                       <FormGroup row>
