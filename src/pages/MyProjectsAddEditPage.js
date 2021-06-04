@@ -316,13 +316,6 @@ class MyProjectsAddEditPage extends React.Component {
                       </FormGroup>
 
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Ticker</Label>
-                        <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="" value={this.state.project.ticker}
-                            onChange={e => this.setState({ project: { ...this.state.project, ticker: e.target.value } })} /></Col>
-                      </FormGroup>
-
-                      <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Stage / Status</Label>
                         <Col sm={inputfieldwidth}>
                           <Input type="select" name="select" onChange={e => this.setState({ project: { ...this.state.project, stage: e.target.value } })}
@@ -388,21 +381,30 @@ class MyProjectsAddEditPage extends React.Component {
                       </FormGroup>
                       {!isEmpty(this.state.project.tokenType) && this.state.project.tokenType != 'No Token' && (<div>
                         <FormGroup row>
+                            <Label for="name" sm={inputnamewidth}>Ticker</Label>
+                            <Col sm={inputfieldwidth}>
+                              <Input type="text" name="name" id="name" placeholder="eg ADA" value={this.state.project.ticker}
+                                onChange={e => this.setState({ project: { ...this.state.project, ticker: e.target.value } })} /></Col>
+                        </FormGroup>
+
+                        <FormGroup row>
                           <Label for="name" sm={inputnamewidth}>Total Supply</Label>
                           <Col sm={inputfieldwidth}>
                             <Input type="text" name="name" id="name" placeholder="" value={this.state.project.totalSupply}
                               onChange={e => this.setState({ project: { ...this.state.project, totalSupply: e.target.value } })} /></Col>
                         </FormGroup>
+                        {/*
                         <FormGroup row>
                           <Label for="name" sm={inputnamewidth}>Circulating Supply</Label>
                           <Col sm={inputfieldwidth}>
                             <Input type="text" name="name" id="name" placeholder="" value={this.state.project.circulatingSupply}
                               onChange={e => this.setState({ project: { ...this.state.project, circulatingSupply: e.target.value } })} /></Col>
                         </FormGroup>
+                        */}
                         <FormGroup row>
                           <Label for="name" sm={inputnamewidth}>Token Distribution Link</Label>
                           <Col sm={inputfieldwidth}>
-                            <Input type="text" name="name" id="name" placeholder="" value={this.state.project.tokenDistributionLink}
+                            <Input type="text" name="name" id="name" placeholder="Link to Details on Token Distribution" value={this.state.project.tokenDistributionLink}
                               onChange={e => this.setState({ project: { ...this.state.project, tokenDistributionLink: e.target.value } })} /></Col>
                         </FormGroup>
                       </div>)}

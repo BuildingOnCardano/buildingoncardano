@@ -58,7 +58,7 @@ export default class MultiAddTeamMembers extends React.Component {
                     return (
                         <div>
                             <FormGroup row>
-                                <Label for="name" sm={inputnamewidth}>Team Member Name</Label>
+                                <Label for="name" sm={inputnamewidth}>Name</Label>
                                 <Col sm={inputfieldwidth}>
                                     <Input
                                         name="memberName"
@@ -131,7 +131,7 @@ export default class MultiAddTeamMembers extends React.Component {
                             {this.state.inputList.length !== 1 && <Button
                                 className="mr10"
                                 onClick={() => this.handleRemoveClick(i)}>Remove</Button>}
-                            {this.state.inputList.length - 1 === i && <Button onClick={this.handleAddClick}>Add Another</Button>}
+                            {this.state.inputList.length - 1 === i && <Button onClick={this.handleAddClick}>Add Another Team Member</Button>}
 
                         </div>
                     );
