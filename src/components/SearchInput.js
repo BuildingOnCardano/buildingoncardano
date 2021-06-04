@@ -1,67 +1,72 @@
 import React from 'react';
 import { MdSearch } from 'react-icons/md';
-import { Form, Input } from 'reactstrap';
+import { Form, Input, Col, Card, CardHeader } from 'reactstrap';
 import Select from 'react-select';
-import styled from '@emotion/styled'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-
-const searchList = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
-
-const StyledSearch = styled(Select)`
- width: 300px;
- padding: 20px;
- .select__menu-list::-webkit-scrollbar{
-   width: 4px;
-   height: 0px;
- }
- .select__menu-list::-webkit-scrollbar-track{
-   background: #f1f1f1;
- }
- .select__menu-list::-webkit-scrollbar-thumb{
-   background: #888;
- }
- .select__menu-list::-webkit-scrollbar-thumb:hover{
-   background: #555;
- }
-`
+import { Link, Redirect } from "react-router-dom";
+import ReactImageFallback from "react-image-fallback";
+import CardanoImage from 'assets/img/cardanoIcon.png';
 
 class SearchInput extends React.Component {
-  state = {
-    selectedOption: null,
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedOption: null,
+      options: null,
+      redirect: false,
+      projectName: ""
+    };
+  }
+
+
+  componentDidMount() {
+    var data = this.props.projects;
+    var options = [];
+    data.forEach(item => {
+      var option = { value: item.name, label: <div>                          <ReactImageFallback
+        src={item.imageUrl}
+        width="30px"
+        height="30px"
+        fallbackImage={CardanoImage} />{item.name}</div> };
+      options.push(option);
+    });
+    this.setState({ options: options });
+  }
+
   handleChange = selectedOption => {
-    this.setState({ selectedOption });
+    this.setState({ redirect: true, projectName: selectedOption.value });
   };
+
+  renderRedirectToLogin = () => {
+    if (this.state.redirect) {
+      return <Redirect to={{ pathname: '/projectdetails/'+this.state.projectName }} />
+    }
+  }
+
   render() {
     const { selectedOption } = this.state;
-
+    const { match, location, history } = this.props;
 
 
     return (
-      <div style={{ width: 250, cursor: 'pointer' }}>
+      
+      <Card >
+        {this.renderRedirectToLogin()}
+        {/* <CardHeader><h2>Search Projects</h2></CardHeader> */}
         <Select
           value={selectedOption}
-          options={searchList}
+          options={this.state.options}
           onChange={this.handleChange}
+
           styles={customStyles}
           placeholder="Search..."
-          openMenuOnClick={false}
-
+          openMenuOnClick={true}
           classNamePrefix="select"
           styles={customStyles}
-          width='200px'
-          menuColor='red'
-
-
-
-        // components={ {DropdownIndicator} }
+          // width='200px'
+          menuColor='blue'
+        // components={{ DropdownIndicator }}
         />
-      </div>
+      </Card>
     );
   }
 }
@@ -73,12 +78,12 @@ const customStyles = {
   control: (base, state) => ({
     ...base,
     fontFamily: 'Times New Roman',
-    fontSize: 18,
+    fontSize: 32,
     border: state.isFocused ? 0 : 0,
     boxShadow: state.isFocused ? 0 : 0,
     cursor: 'text',
     borderRadius: 0,
-    borderBottom: 'solid 1px',
+    borderBottom: '1px',
   }),
 
   option: (styles, { isFocused }) => {
@@ -86,7 +91,7 @@ const customStyles = {
       ...styles,
       cursor: 'pointer',
       backgroundColor: isFocused ? 'white' : 'white',
-      color: isFocused ? 'rgba(255, 80, 86)' : 'black',
+      color: isFocused ? 'rgba(0, 0, 0)' : 'black',
       lineHeight: 2,
     }
   },
@@ -106,6 +111,6 @@ const customStyles = {
 
   singleValue: styles => ({
     ...styles,
-    color: 'rgba(255, 80, 86)',
+    color: 'rgba(0, 0, 0)',
   }),
 }

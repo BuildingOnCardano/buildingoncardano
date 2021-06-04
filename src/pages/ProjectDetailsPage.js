@@ -95,32 +95,32 @@ class ProjectDetailsPage extends React.Component {
                 <Col xl={8} lg={12} md={12} sm={6}>
                   <Card>
                     <CardBody>
-                    <Row>
+                      <Row>
                         <Col sm={3}>
                           <ReactImageFallback
-                          src={this.state.project.imageUrl}
-                          width="140"
-                          height="140"
-                          fallbackImage={CardanoImage} />
+                            src={this.state.project.imageUrl}
+                            width="140"
+                            height="140"
+                            fallbackImage={CardanoImage} />
                         </Col>
-                        
+
                         <Col sm={8}>
-                        <h1>{this.state.project.name}</h1>
-                        <p>{this.state.project.shortDescription}</p>
-                        <p><b>Tags: </b>{this.state.project.type}</p>
-                        {!isEmpty(this.state.project.stage) && (
+                          <h1>{this.state.project.name}</h1>
+                          <p>{this.state.project.shortDescription}</p>
+                          <p><b>Tags: </b>{this.state.project.type}</p>
+                          {!isEmpty(this.state.project.stage) && (
                             <div>
-                        <p><b>Development Stage: </b>{this.state.project.stage}</p>
+                              <p><b>Development Stage: </b>{this.state.project.stage}</p>
                             </div>
-                        )}
-                        {!isEmpty(this.state.project.releaseDate) && (
+                          )}
+                          {!isEmpty(this.state.project.releaseDate) && (
                             <div>
-                        <p><b>Release Date: </b>{this.state.project.releaseDate}</p>
+                              <p><b>Release Date: </b>{this.state.project.releaseDate}</p>
                             </div>
-                        )}
-                       </Col>
-                    </Row>
-                    <hr/>
+                          )}
+                        </Col>
+                      </Row>
+                      <hr />
                       <Row>
                         <Col>
                           <h2>Project Description:</h2>
@@ -138,104 +138,116 @@ class ProjectDetailsPage extends React.Component {
                   </Card>
 
 
-                <Row style={{
+                  <Row style={{
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
                     <Col>
-                    <Card>
-                    <CardHeader>Team Details</CardHeader>
-                      <CardBody style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
-                        
-                        <Row>
-                          {this.state.project.projectTeam.map(function (item, index) {
-                            return (
-                              <Card body style={{
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                              }}>
-                                <ReactImageFallback
-                                  src={item.img}
-                                  width="100"
-                                  height="100"
-                                  fallbackImage={Person} />
-                                <b>{item.memberName}</b>
-                                <p>{item.position}</p>
-                                <div style={{
+                      <Card>
+                        <CardHeader style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: '100%',
+                          borderRadius: '1.9em'}}>Team Details</CardHeader>
+                        <CardBody style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}>
+
+                          <Row>
+                            {this.state.project.projectTeam.map(function (item, index) {
+                              return (
+                                <Card body style={{
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                }}>
+                                  <ReactImageFallback
+                                    src={item.img}
+                                    width="100"
+                                    height="100"
+                                    fallbackImage={Person} />
+                                  <b>{item.memberName}</b>
+                                  <p>{item.position}</p>
+                                  <div style={{
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                     textAlign: 'center',
                                   }}>
-                                {item.twitter &&
-                                  <a href={item.twitter} target="_blank" rel="noreferrer">
-                                      <FontAwesomeIcon icon={faTwitter} />  </a>}
-                                {item.linkin &&
-                                  <a href={item.linkin} target="_blank" rel="noreferrer">
-                                      <FontAwesomeIcon icon={faLinkedin} />  </a>}
-                                {item.github &&
-                                  <a href={item.github} target="_blank" rel="noreferrer">
-                                      <FontAwesomeIcon icon={faGithub} />  </a>}
-                                </div>
-                            </Card>
-                            )
-                          })
-                          }
-                        </Row>
+                                    {item.twitter &&
+                                      <a href={item.twitter} target="_blank" rel="noreferrer">
+                                        <FontAwesomeIcon icon={faTwitter} />  </a>}
+                                    {item.linkin &&
+                                      <a href={item.linkin} target="_blank" rel="noreferrer">
+                                        <FontAwesomeIcon icon={faLinkedin} />  </a>}
+                                    {item.github &&
+                                      <a href={item.github} target="_blank" rel="noreferrer">
+                                        <FontAwesomeIcon icon={faGithub} />  </a>}
+                                  </div>
+                                </Card>
+                              )
+                            })
+                            }
+                          </Row>
                         </CardBody>
                       </Card>
                     </Col>
                   </Row>
 
                   <Card>
-                    <CardHeader>Token Sales</CardHeader>
+                    <CardHeader style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: '100%',
+                          borderRadius: '1.9em'}}>Token Sales</CardHeader>
                     <CardBody>
                       <Row>
                         <Col>
 
                           {this.state.project.salesDetails != null && this.state.project.salesDetails.length > 0 && this.state.project.salesDetails != undefined &&
                             <div>
-                              
-                             <CardColumns>
-                              {this.state.project.salesDetails.map(function (item, index) {
-                                return (
-                                
-                                <Card>
-                                      <CardHeader>{item.saleStatus}</CardHeader>
+
+                              <CardColumns>
+                                {this.state.project.salesDetails.map(function (item, index) {
+                                  return (
+
+                                    <Card>
+                                      <CardHeader style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: '100%',
+                          borderRadius: '1.9em'}}>{item.saleStatus}</CardHeader>
                                       <CardBody>
                                         <CardTitle><b>Sale Type: </b>{item.upcomingSale}</CardTitle>
                                         <CardText>
-                                            <p><b>Start Date: </b>{item.saleStartDate}</p>
-                                            <p><b>End Date: </b>{item.saleEndDate}</p>
-                                            <p><b>Token Price: </b>{item.saleTokenPrice}</p>
-                                            <p><b>Accepted Funding: </b>{item.acceptedFunding}</p>
+                                          <p><b>Start Date: </b>{item.saleStartDate}</p>
+                                          <p><b>End Date: </b>{item.saleEndDate}</p>
+                                          <p><b>Token Price: </b>{item.saleTokenPrice}</p>
+                                          <p><b>Accepted Funding: </b>{item.acceptedFunding}</p>
                                         </CardText>
-                                        <hr/>
-                                         {!isEmpty(item.tokenDistributionDetail) && (
-                                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                        <hr />
+                                        {!isEmpty(item.tokenDistributionDetail) && (
+                                          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                                             <Button variant="outline-light"><a href={item.tokenDistributionDetail} target="_blank" rel="noreferrer">Sale Details</a></Button>
-                                        </div>
-                                        )} 
-                                        </CardBody>
-                                </Card>
-                                )
-                              })
-                              }
+                                          </div>
+                                        )}
+                                      </CardBody>
+                                    </Card>
+                                  )
+                                })
+                                }
                               </CardColumns>
-                              </div>}
+                            </div>}
                         </Col>
                       </Row>
                     </CardBody>
                   </Card>
-                    
+
                   <Card body style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
-                        <p><b>Project Added on </b>{this.state.project.createdDate.split('T')[0]}  |  <b>Last Updated on </b>{this.state.project.updatedDate.split('T')[0]}</p>
-                     </Card>
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                    <p><b>Project Added on </b>{this.state.project.createdDate.split('T')[0]}  |  <b>Last Updated on </b>{this.state.project.updatedDate.split('T')[0]}</p>
+                  </Card>
                 </Col>
 
                 <Col md={2} sm={6} lg={3} xs={12} className="mb-3">
@@ -248,25 +260,26 @@ class ProjectDetailsPage extends React.Component {
                         alignItems: 'center'
                       }}>
 
-                    < CardHeader style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: '100%',
-                      }}>Project Links</CardHeader>
+                        < CardHeader style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: '100%',
+                          borderRadius: '1.9em'
+                        }}>Project Links</CardHeader>
 
                         <CardBody>
-                            {!isEmpty(this.state.project.homepage) && (
-                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                    <Button variant="outline-light"><a href={this.state.project.homepage} target="_blank" rel="noreferrer">Website</a></Button>
-                                <br/><br/>
-                                </div>
-                            )}
-                            {!isEmpty(this.state.project.whitepaperUrl) && (
-                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                    <Button variant="outline-light"><a href={this.state.project.whitepaperUrl} target="_blank" rel="noreferrer">Whitepaper</a></Button>
-                                    <br/><br/>
-                                </div>
-                            )}
+                          {!isEmpty(this.state.project.homepage) && (
+                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                              <Button variant="outline-light"><a href={this.state.project.homepage} target="_blank" rel="noreferrer">Website</a></Button>
+                              <br /><br />
+                            </div>
+                          )}
+                          {!isEmpty(this.state.project.whitepaperUrl) && (
+                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                              <Button variant="outline-light"><a href={this.state.project.whitepaperUrl} target="_blank" rel="noreferrer">Whitepaper</a></Button>
+                              <br /><br />
+                            </div>
+                          )}
 
                           <SocialMedia extendedmeta={{
                             homepage: this.state.project.homepage,
@@ -280,49 +293,51 @@ class ProjectDetailsPage extends React.Component {
                         </CardBody>
                       </Card>
 
-                     {!isEmpty(this.state.project.tokenType) &&
-                    this.state.project.tokenType != 'No Token' && (
+                      {!isEmpty(this.state.project.tokenType) &&
+                        this.state.project.tokenType != 'No Token' && (
+                          <Card>
+                            <CardHeader style={{
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              width: '100%',
+                              borderRadius: '1.9em'
+                            }}>
+                              Tokenomics</CardHeader>
+                            <CardBody>
+                              <Row>
+                                <Col>
+                                  <p><b>Token Type: </b>{this.state.project.tokenType}</p>
+
+                                  {!isEmpty(this.state.project.totalSupply) && (
+                                    <div>
+                                      <p><b>Total Supply: </b>{this.state.project.totalSupply}</p>
+                                    </div>
+                                  )}
+
+                                  {!isEmpty(this.state.project.tokenDistributionLink) && (
+                                    <div>
+                                      <p><b>Token Distribution Info: </b><a href={this.state.project.tokenDistributionLink} target="_blank" rel="noreferrer">Click Here</a></p>
+                                    </div>
+                                  )}
+                                </Col>
+                              </Row>
+                            </CardBody>
+                          </Card>)}
+
                       <Card>
-                      <CardHeader style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: '100%',
-                      }}>
-                      Tokenomics</CardHeader>
-                        <CardBody>
-                          <Row>
-                            <Col>
-                              <p><b>Token Type: </b>{this.state.project.tokenType}</p>
-                              
-                            {!isEmpty(this.state.project.totalSupply) && (
-                                <div>
-                              <p><b>Total Supply: </b>{this.state.project.totalSupply}</p>
-                                </div>
-                              )}
-
-                              {!isEmpty(this.state.project.tokenDistributionLink) && (
-                                <div>
-                              <p><b>Token Distribution Info: </b><a href={this.state.project.tokenDistributionLink} target="_blank" rel="noreferrer">Click Here</a></p>
-                                </div>
-                              )}
-                            </Col>
-                          </Row>
-                        </CardBody>
-                      </Card>)}
-
-                    <Card>
-                      <CardHeader style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: '100%',
-                      }}>
-                      Share Project</CardHeader>
-                      <CardBody style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        textAlign: 'center',
-                      }}>
-                        <ShareProject name={this.state.project.name} />
+                        <CardHeader style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: '100%',
+                          borderRadius: '1.9em'
+                        }}>
+                          Share Project</CardHeader>
+                        <CardBody style={{
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          textAlign: 'center',
+                        }}>
+                          <ShareProject name={this.state.project.name} />
                         </CardBody>
                       </Card>
 
@@ -332,7 +347,7 @@ class ProjectDetailsPage extends React.Component {
 
               </Row>
 
-            
+
             </Page>
         }
       </div >
