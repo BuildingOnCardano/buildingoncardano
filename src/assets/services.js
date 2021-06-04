@@ -16,3 +16,4 @@ export const getProjectsByType = "/projects/type/";////{projectType}
 export const getProjectsStats = "/projects/stats";
 export const getProjectByOwner = "/projects/owner/";////{owneremail}
 export const getProjectByName = "/projects/details/name/";//{projectId}
+export const getProjectByNameAndOwner = "/projects/details/nameandowner/";//{projectId}

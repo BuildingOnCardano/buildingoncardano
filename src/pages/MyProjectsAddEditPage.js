@@ -451,7 +451,7 @@ class MyProjectsAddEditPage extends React.Component {
                             onChange={e => this.setState({ project: { ...this.state.project, githubLink: e.target.value } })} /></Col>
                       </FormGroup>
                     </Card>
-
+                    
                     <Card body>
                       <h3>Upcoming/Past Sale Details</h3><br />
                       <MultiAddSales sendData={this.salesDataHandler} existingSalesDetails={this.state.project.salesDetails} />
