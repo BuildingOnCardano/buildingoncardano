@@ -415,33 +415,33 @@ class MyProjectsAddEditPage extends React.Component {
                       <h3>Social Media</h3>
                       <br></br>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Twitter Handle</Label>
+                        <Label for="name" sm={inputnamewidth}>Twitter Url</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="@BuildingOnCardano" value={this.state.project.twitterHandle}
+                          <Input type="text" name="name" id="name" placeholder="https://twitter.com/BuildingOnCardano" value={this.state.project.twitterHandle}
                             onChange={e => this.setState({ project: { ...this.state.project, twitterHandle: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Telegram Handle</Label>
+                        <Label for="name" sm={inputnamewidth}>Telegram Chat</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="name of chat" value={this.state.project.telegramHandle}
+                          <Input type="text" name="name" id="name" placeholder="https://t.me/BuildingOnCardano" value={this.state.project.telegramHandle}
                             onChange={e => this.setState({ project: { ...this.state.project, telegramHandle: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Youtube Handle</Label>
+                        <Label for="name" sm={inputnamewidth}>Youtube Channel</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="channel id" value={this.state.project.youtubeHandle}
+                          <Input type="text" name="name" id="name" placeholder="https://www.youtube.com/channel/channelid" value={this.state.project.youtubeHandle}
                             onChange={e => this.setState({ project: { ...this.state.project, youtubeHandle: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Facebook Handle</Label>
+                        <Label for="name" sm={inputnamewidth}>Facebook Url</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="facebook id" value={this.state.project.facebookHandle}
+                          <Input type="text" name="name" id="name" placeholder="https://www.facebook.com/BuildingOnCardano" value={this.state.project.facebookHandle}
                             onChange={e => this.setState({ project: { ...this.state.project, facebookHandle: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
-                        <Label for="name" sm={inputnamewidth}>Discord</Label>
+                        <Label for="name" sm={inputnamewidth}>Discord Url</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="discord id" value={this.state.project.discordHandle}
+                          <Input type="text" name="name" id="name" placeholder="Disrord Invite Url" value={this.state.project.discordHandle}
                             onChange={e => this.setState({ project: { ...this.state.project, discordHandle: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
@@ -451,7 +451,7 @@ class MyProjectsAddEditPage extends React.Component {
                             onChange={e => this.setState({ project: { ...this.state.project, githubLink: e.target.value } })} /></Col>
                       </FormGroup>
                     </Card>
-                    
+
                     <Card body>
                       <h3>Upcoming/Past Sale Details</h3><br />
                       <MultiAddSales sendData={this.salesDataHandler} existingSalesDetails={this.state.project.salesDetails} />
