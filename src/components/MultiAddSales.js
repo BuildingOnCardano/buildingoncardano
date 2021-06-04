@@ -99,7 +99,8 @@ export default class MultiAddSales extends React.Component {
                                 </Col>
                             </FormGroup>
 
-                            
+                            {x.upcomingSale != 'No Token Sales' && !isEmpty(x.upcomingSale) &&
+                            <div>
                             <FormGroup row>
                                 <Label for="name" sm={inputnamewidth}>Sale Status</Label>
                                 <Col sm={inputfieldwidth}>
@@ -185,7 +186,8 @@ export default class MultiAddSales extends React.Component {
                                     />
                                 </Col>
                             </FormGroup>
-
+                            </div>
+                }
                             
                             <FormGroup row>
                             
