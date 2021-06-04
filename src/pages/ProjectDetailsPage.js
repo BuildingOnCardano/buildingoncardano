@@ -108,7 +108,11 @@ class ProjectDetailsPage extends React.Component {
                         <h1>{this.state.project.name}</h1>
                         <p>{this.state.project.shortDescription}</p>
                         <p><b>Tags: </b>{this.state.project.type}</p>
+                        {!isEmpty(this.state.project.stage) && (
+                            <div>
                         <p><b>Development Stage: </b>{this.state.project.stage}</p>
+                            </div>
+                        )}
                        </Col>
                     </Row>
                     <hr/>
@@ -201,12 +205,14 @@ class ProjectDetailsPage extends React.Component {
                                             <p><b>Start Date: </b>{item.saleStartDate}</p>
                                             <p><b>End Date: </b>{item.saleEndDate}</p>
                                             <p><b>Token Price: </b>{item.saleTokenPrice}</p>
+                                            <p><b>Accepted Funding: </b>{item.acceptedFunding}</p>
                                         </CardText>
                                         <hr/>
-                                          
+                                         {!isEmpty(item.tokenDistributionDetail) && (
                                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                        <Button variant="outline-light"><a href={item.saleDetailLink} target="_blank" rel="noreferrer">Sale Details</a></Button>
-                                      </div>
+                                            <Button variant="outline-light"><a href={item.tokenDistributionDetail} target="_blank" rel="noreferrer">Sale Details</a></Button>
+                                        </div>
+                                        )} 
                                         </CardBody>
                                 </Card>
                                 )
@@ -244,16 +250,18 @@ class ProjectDetailsPage extends React.Component {
                       }}>Project Links</CardHeader>
 
                         <CardBody>
-                        <Row>
-                            <Col>
-                            <Button variant="outline-light"><a href={this.state.project.homepage} target="_blank" rel="noreferrer">Website</a></Button>
-                            </Col>
-                            
-                            <Col>
-                            <Button variant="outline-light"><a href={this.state.project.whitepaperUrl} target="_blank" rel="noreferrer">Whitepaper</a></Button>
-                            </Col>
-                            
-                        </Row>
+                            {!isEmpty(this.state.project.homepage) && (
+                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                    <Button variant="outline-light"><a href={this.state.project.homepage} target="_blank" rel="noreferrer">Website</a></Button>
+                                <br/><br/>
+                                </div>
+                            )}
+                            {!isEmpty(this.state.project.whitepaperUrl) && (
+                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                    <Button variant="outline-light"><a href={this.state.project.whitepaperUrl} target="_blank" rel="noreferrer">Whitepaper</a></Button>
+                                    <br/><br/>
+                                </div>
+                            )}
 
                           <SocialMedia extendedmeta={{
                             homepage: this.state.project.homepage,
@@ -280,9 +288,18 @@ class ProjectDetailsPage extends React.Component {
                           <Row>
                             <Col>
                               <p><b>Token Type: </b>{this.state.project.tokenType}</p>
+                              
+                            {!isEmpty(this.state.project.totalSupply) && (
+                                <div>
                               <p><b>Total Supply: </b>{this.state.project.totalSupply}</p>
-                              <p><b>Circulating Supply: </b>{this.state.project.totalSupply}</p>
+                                </div>
+                              )}
+
+                              {!isEmpty(this.state.project.tokenDistributionLink) && (
+                                <div>
                               <p><b>Token Distribution Info: </b><a href={this.state.project.tokenDistributionLink} target="_blank" rel="noreferrer">Click Here</a></p>
+                                </div>
+                              )}
                             </Col>
                           </Row>
                         </CardBody>

@@ -28,8 +28,11 @@ export default class ProjectCard extends React.Component {
                 minHeight: '19rem'
             }}>
                 <br></br>
+                <div style={{ display: "flex", justifyContent: "left", alignItems: "left",paddingLeft:"10px", }}>
+                {this.props.myprojectspage && (<p><b>Approved: </b>{this.props.projectDetails.verified}</p>)}</div>
+                <div style={{ display: "flex", justifyContent: "left", alignItems: "left",paddingLeft:"10px", }}>
                 {this.props.myprojectspage && (<Link to={{ pathname: '/editproject/'+this.props.projectDetails.name}}>Edit Project</Link>)}
-                {this.props.myprojectspage && (<p>Verified: {this.props.projectDetails.verified}</p>)}
+                </div>
                 <Link to={{ pathname: '/projectdetails/'+this.props.projectDetails.name, state: { projectDetails: this.props.projectDetails } }}>
                     <div style={{ paddingTop: 10, alignSelf: 'flex-start' }}>
                         <ReactImageFallback
@@ -40,7 +43,7 @@ export default class ProjectCard extends React.Component {
 
                         <div className="ProjectCard-body">
                             <h2>{this.props.projectDetails.name}</h2>
-                            <h4>{this.props.projectDetails.shortDescription}</h4>
+                            <p>{this.props.projectDetails.shortDescription}</p>
                             <h5>{this.props.projectDetails.type}</h5>
                         </div>
                     </div>
