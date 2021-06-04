@@ -77,118 +77,124 @@ class DashboardPage extends React.Component {
         title="Welcome to Building On Cardano"
       // breadcrumbs={[{ name: '/', active: true }]}
       >
-                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
-                  :
-        <Col lg={12} sm={12} sm={12} xs={12}>
+        {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
+          :
+          <Col lg={12} sm={12} sm={12} xs={12}>
 
-          <Row style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+            <Row style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
 
-            <Col lg={9} sm={12} sm={12} xs={12}>
-              <SearchInput projects={this.state.projects} />
+              <Col lg={9} sm={12} sm={12} xs={12}>
+                <SearchInput projects={this.state.projects} />
 
-              <Card style={{ margin: '1rem' }}>
-                <CardHeader><h2>Latest Projects</h2></CardHeader>
-                  <TableContainer component={Paper}>
-                    <Table >
-                      <TableHead>
-                        {this.state.smallScreen ?
-                          <TableRow>
-                            <TableCell ><h2>Project</h2></TableCell>
-                            <TableCell ><h2>Type</h2></TableCell>
-                          </TableRow >
-                          :
-                          <TableRow >
-                            {/* <TableCell></TableCell> */}
-                            <TableCell><h2>Project</h2></TableCell>
-                            <TableCell><h2>Type</h2></TableCell>
-                            <TableCell><h2>Token Type</h2></TableCell>
-                            <TableCell><h2>Ticker</h2></TableCell>
-                            <TableCell><h2>Stage</h2></TableCell>
-                          </TableRow >}
+                <Card style={{ margin: '1rem' }}>
+                  <CardHeader style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: '100%',
+                    borderRadius: '1.9em'
+                  }}><h2>Latest Projects</h2></CardHeader>
+                  <CardBody>
+                    <TableContainer component={Paper}>
+                      <Table >
+                        <TableHead>
+                          {this.state.smallScreen ?
+                            <TableRow>
+                              <TableCell ><h2>Project</h2></TableCell>
+                              <TableCell ><h2>Type</h2></TableCell>
+                            </TableRow >
+                            :
+                            <TableRow >
+                              {/* <TableCell></TableCell> */}
+                              <TableCell><h2>Project</h2></TableCell>
+                              <TableCell><h2>Type</h2></TableCell>
+                              <TableCell><h2>Token Type</h2></TableCell>
+                              <TableCell><h2>Ticker</h2></TableCell>
+                              <TableCell><h2>Stage</h2></TableCell>
+                            </TableRow >}
 
-                      </TableHead>
-                      <TableBody>
+                        </TableHead>
+                        <TableBody>
 
-                        {this.state.smallScreen ?
-                          this.state.projects.map(function (item, index) {
-                            return (
-                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                <TableCell><h3>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
-                                  src={item.imageUrl}
-                                  className="rounded"
-                                  style={{ width: 30, height: 30 }}
-                                />)}  {item.name}</h3></TableCell>
-                                <TableCell><h3>{item.type}</h3></TableCell>
-
-                              </TableRow >
-                            )
-                          })
-
-                          :
-                          this.state.projects.map(function (item, index) {
-                            if (index < 10) {
+                          {this.state.smallScreen ?
+                            this.state.projects.map(function (item, index) {
                               return (
-                                <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                  {/* <td scope="row">{item.id}</td> */}
-                                  {/* <TableCell width="10%"><h4>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
+                                <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
+                                  <TableCell><h3>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
+                                    src={item.imageUrl}
+                                    className="rounded"
+                                    style={{ width: 30, height: 30 }}
+                                  />)}  {item.name}</h3></TableCell>
+                                  <TableCell><h3>{item.type}</h3></TableCell>
+
+                                </TableRow >
+                              )
+                            })
+
+                            :
+                            this.state.projects.map(function (item, index) {
+                              if (index < 10) {
+                                return (
+                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
+                                    {/* <td scope="row">{item.id}</td> */}
+                                    {/* <TableCell width="10%"><h4>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
                                 src={item.imageUrl}
                                 className="rounded"
                                 style={{ width: "10vh", height: "10vh" }}
                               />)} </h4></TableCell> */}
-                                  <TableCell><h3>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
-                                    src={item.imageUrl}
-                                    className="rounded"
-                                    style={{ width: "10vh", height: "10vh" }}
-                                  />)}{item.name}</h3></TableCell>
-                                  <TableCell><h3>{item.type}</h3></TableCell>
-                                  <TableCell><h3>{item.tokenType}</h3></TableCell>
-                                  <TableCell><h3>{item.ticker}</h3></TableCell>
-                                  <TableCell><h3>{item.stage}</h3></TableCell>
-                                </TableRow >
-                              )
-                            }
-                          })}
-                      </TableBody >
-                    </Table>
-                  </TableContainer>
-                
-              </Card>
-            </Col>
+                                    <TableCell><h3>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
+                                      src={item.imageUrl}
+                                      className="rounded"
+                                      style={{ width: "10vh", height: "10vh" }}
+                                    />)}{item.name}</h3></TableCell>
+                                    <TableCell><h3>{item.type}</h3></TableCell>
+                                    <TableCell><h3>{item.tokenType}</h3></TableCell>
+                                    <TableCell><h3>{item.ticker}</h3></TableCell>
+                                    <TableCell><h3>{item.stage}</h3></TableCell>
+                                  </TableRow >
+                                )
+                              }
+                            })}
+                        </TableBody >
+                      </Table>
+                    </TableContainer>
+                  </CardBody>
+                </Card>
+              </Col>
 
-            <Col lg={3} sm={12} sm={12} xs={12}>
-              {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
-                :
-                <Row>
-                  <Col lg={6} sm={12} sm={12} xs={12}>
-                    <NumberWidget
-                      title="Total Projects"
-                      number={this.state.totalProjects}
-                      color="secondary"
-                    />
-                  </Col>
-                  
-                  {this.state.projectTypesAndCount.map(function (item, index) {
-                    return (
-                      <Col lg={6} sm={12} sm={12} xs={12}>
-                        <Link to={{ pathname: '/' + item.projectType }}>
-                          <NumberWidget
-                            title={item.projectType}
-                            number={item.projectCount}
-                            color="secondary"
-                          />
-                        </Link>
-                      </Col>
-                    )
-                  })}
-                </Row>
-              }
+              <Col lg={3} sm={12} sm={12} xs={12}>
+                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
+                  :
+                  <Row>
+                    <Col lg={6} sm={12} sm={12} xs={12}>
+                      <NumberWidget
+                        title="Total Projects"
+                        number={this.state.totalProjects}
+                        color="secondary"
+                      />
+                    </Col>
+
+                    {this.state.projectTypesAndCount.map(function (item, index) {
+                      return (
+                        <Col lg={6} sm={12} sm={12} xs={12}>
+                          <Link to={{ pathname: '/' + item.projectType }}>
+                            <NumberWidget
+                              title={item.projectType}
+                              number={item.projectCount}
+                              color="secondary"
+                            />
+                          </Link>
+                        </Col>
+                      )
+                    })}
+                  </Row>
+                }
 
 
-            </Col>
-          </Row>
+              </Col>
+            </Row>
           </Col>}
       </Page>
     );

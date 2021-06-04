@@ -49,7 +49,7 @@ class SearchInput extends React.Component {
 
     return (
       
-      <Card >
+      <Card body>
         {this.renderRedirectToLogin()}
         {/* <CardHeader><h2>Search Projects</h2></CardHeader> */}
         <Select
