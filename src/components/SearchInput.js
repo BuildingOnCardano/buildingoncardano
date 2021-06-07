@@ -22,7 +22,8 @@ class SearchInput extends React.Component {
     var data = this.props.projects;
     var options = [];
     data.forEach(item => {
-      var option = { value: item.name, label: <div>                          <ReactImageFallback
+      var option = { value: item.name, label: <div>                          
+      <ReactImageFallback
         src={item.imageUrl}
         width="30px"
         height="30px"
@@ -49,7 +50,7 @@ class SearchInput extends React.Component {
 
     return (
       
-      <Card body>
+      <div className="serach-tab">
         {this.renderRedirectToLogin()}
         {/* <CardHeader><h2>Search Projects</h2></CardHeader> */}
         <Select
@@ -66,7 +67,7 @@ class SearchInput extends React.Component {
           menuColor='blue'
         // components={{ DropdownIndicator }}
         />
-      </Card>
+      </div>
     );
   }
 }

@@ -160,6 +160,10 @@ class ProjectDetailsPage extends React.Component {
                                 <Card body style={{
                                   justifyContent: 'center',
                                   alignItems: 'center',
+                                  maxWidth: '12rem',
+                                  boxShadow: 'none',
+                                  margin: '14px',
+                                  backgroundColor: '#f8f9fa',
                                 }}>
                                   <ReactImageFallback
                                     src={item.img}
@@ -197,8 +201,7 @@ class ProjectDetailsPage extends React.Component {
                     <CardHeader style={{
                           justifyContent: 'center',
                           alignItems: 'center',
-                          width: '100%',
-                          borderRadius: '1.9em'}}>Token Sales</CardHeader>
+                          width: '100%',}}>Token Sales</CardHeader>
                     <CardBody>
                       <Row>
                         <Col>
@@ -210,12 +213,19 @@ class ProjectDetailsPage extends React.Component {
                                 {this.state.project.salesDetails.map(function (item, index) {
                                   return (
 
-                                    <Card>
+                                    <Card body style={{
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        boxShadow: 'none',
+                                        backgroundColor: '#f8f9fa',
+                                    }}>
                                       <CardHeader style={{
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          width: '100%',
-                          borderRadius: '1.9em'}}>{item.saleStatus}</CardHeader>
+                                      justifyContent: 'center',
+                                      alignItems: 'center',
+                                      width: '100%',
+                                      borderRadius: '0em',
+
+                                  }}>{item.saleStatus}</CardHeader>
                                       <CardBody>
                                         <CardTitle><b>Sale Type: </b>{item.upcomingSale}</CardTitle>
                                         <CardText>
@@ -245,6 +255,7 @@ class ProjectDetailsPage extends React.Component {
                   <Card body style={{
                     justifyContent: 'center',
                     alignItems: 'center',
+                    border: 'none',
                   }}>
                     <p><b>Project Added on </b>{this.state.project.createdDate.split('T')[0]}  |  <b>Last Updated on </b>{this.state.project.updatedDate.split('T')[0]}</p>
                   </Card>
@@ -329,7 +340,7 @@ class ProjectDetailsPage extends React.Component {
                           justifyContent: 'center',
                           alignItems: 'center',
                           width: '100%',
-                          borderRadius: '1.9em'
+                          borderRadius: 'none',
                         }}>
                           Share Project</CardHeader>
                         <CardBody style={{

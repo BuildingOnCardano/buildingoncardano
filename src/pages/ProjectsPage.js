@@ -35,10 +35,15 @@ const override = css`
   border-color: red;
 `;
 
+
 class ProjectsPage extends React.Component {
   state = {
-    projects: [],
-    loading: true
+    projects: null,
+    loading: true,
+    totalProjects: '',
+    projectTypesAndCount: [],
+    smallScreen: false
+
   };
 
   componentDidMount() {
@@ -66,10 +71,31 @@ class ProjectsPage extends React.Component {
         title=""
         breadcrumbs={[{ name: 'Projects /' + this.props.projectType, active: true }]}
       >
+              <div>
+              <p><b>Filter By Tags: </b></p>
+                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
+                  :
+                  <Row>
+                    <Col>
+                    {this.state.projectTypesAndCount.map(function (item, index) {
+                      return (
+                        <Button className ="btn-tag">  
+                            <Link to={{ pathname: '/' + item.projectType }}>
+                            {item.projectType} ({item.projectCount})
+                                </Link>
+                          </Button>
+                      )
+                    })}
+                    </Col>
+                  </Row>
+                }
+              </div>
+
         <Row>
 
             {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
               :
+
               this.state.projects.map(function (item, index) {
                 return (
                   <Col lg={3} md={10} sm={10} xs={12} className="mb-3">

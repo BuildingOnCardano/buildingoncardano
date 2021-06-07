@@ -7,7 +7,8 @@ import {
   CardBody,
   Col,
   Row,
-  Table
+  Table,
+  Button
 } from 'reactstrap';
 import BeatLoader
   from "react-spinners/BeatLoader";
@@ -77,26 +78,50 @@ class DashboardPage extends React.Component {
         title="Welcome to Building On Cardano"
       // breadcrumbs={[{ name: '/', active: true }]}
       >
+
+              {/* <div><p><b>Total Projects: </b>{this.state.totalProjects}</p></div>*/}
+                            <div>
+                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
+                  :
+                  <Row>
+                    <Col lg={9} sm={12} sm={12} xs={12}>
+                    <SearchInput projects={this.state.projects} />
+                    </Col>
+                  </Row>
+                }
+              </div>
+              
+              <div>
+              <p><b>Filter By Tags: </b></p>
+                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
+                  :
+                  <Row>
+                    <Col>
+                    {this.state.projectTypesAndCount.map(function (item, index) {
+                      return (
+                        <Button className ="btn-tag">  
+                            <Link to={{ pathname: '/' + item.projectType }}>
+                            {item.projectType} ({item.projectCount})
+                                </Link>
+                          </Button>
+                      )
+                    })}
+                    </Col>
+                  </Row>
+                }
+              </div>
+
+
         {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
           :
-          <Col lg={12} sm={12} sm={12} xs={12}>
-
-            <Row style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+          <Col>
 
               <Col lg={9} sm={12} sm={12} xs={12}>
-                <SearchInput projects={this.state.projects} />
-
-                <Card style={{ margin: '1rem' }}>
-                  <CardHeader style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '100%',
-                    borderRadius: '1.9em'
-                  }}><h2>Latest Projects</h2></CardHeader>
-                  <CardBody>
+              <hr/><br/>
+              <h2>Latest Projects Added</h2>
+              <br/>
+                <Card>
+                 
                     <TableContainer component={Paper}>
                       <Table >
                         <TableHead>
@@ -122,12 +147,12 @@ class DashboardPage extends React.Component {
                             this.state.projects.map(function (item, index) {
                               return (
                                 <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                  <TableCell><h3>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
+                                  <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
                                     src={item.imageUrl}
                                     className="rounded"
                                     style={{ width: 30, height: 30 }}
-                                  />)}  {item.name}</h3></TableCell>
-                                  <TableCell><h3>{item.type}</h3></TableCell>
+                                  />)}    {item.name}</p></TableCell>
+                                  <TableCell><p>{item.type}</p></TableCell>
 
                                 </TableRow >
                               )
@@ -144,15 +169,15 @@ class DashboardPage extends React.Component {
                                 className="rounded"
                                 style={{ width: "10vh", height: "10vh" }}
                               />)} </h4></TableCell> */}
-                                    <TableCell><h3>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
+                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
                                       src={item.imageUrl}
                                       className="rounded"
-                                      style={{ width: "10vh", height: "10vh" }}
-                                    />)}{item.name}</h3></TableCell>
-                                    <TableCell><h3>{item.type}</h3></TableCell>
-                                    <TableCell><h3>{item.tokenType}</h3></TableCell>
-                                    <TableCell><h3>{item.ticker}</h3></TableCell>
-                                    <TableCell><h3>{item.stage}</h3></TableCell>
+                                      style={{ width: "5vh", height: "5vh" ,marginRight: "10px"}}
+                                    />)}{item.name}</p></TableCell>
+                                    <TableCell><p>{item.type}</p></TableCell>
+                                    <TableCell><p>{item.tokenType}</p></TableCell>
+                                    <TableCell><p>{item.ticker}</p></TableCell>
+                                    <TableCell><p>{item.stage}</p></TableCell>
                                   </TableRow >
                                 )
                               }
@@ -160,41 +185,11 @@ class DashboardPage extends React.Component {
                         </TableBody >
                       </Table>
                     </TableContainer>
-                  </CardBody>
+                  
                 </Card>
               </Col>
 
-              <Col lg={3} sm={12} sm={12} xs={12}>
-                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
-                  :
-                  <Row>
-                    <Col lg={6} sm={12} sm={12} xs={12}>
-                      <NumberWidget
-                        title="Total Projects"
-                        number={this.state.totalProjects}
-                        color="secondary"
-                      />
-                    </Col>
 
-                    {this.state.projectTypesAndCount.map(function (item, index) {
-                      return (
-                        <Col lg={6} sm={12} sm={12} xs={12}>
-                          <Link to={{ pathname: '/' + item.projectType }}>
-                            <NumberWidget
-                              title={item.projectType}
-                              number={item.projectCount}
-                              color="secondary"
-                            />
-                          </Link>
-                        </Col>
-                      )
-                    })}
-                  </Row>
-                }
-
-
-              </Col>
-            </Row>
           </Col>}
       </Page>
     );
