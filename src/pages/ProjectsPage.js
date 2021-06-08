@@ -71,25 +71,7 @@ class ProjectsPage extends React.Component {
         title=""
         breadcrumbs={[{ name: 'Projects /' + this.props.projectType, active: true }]}
       >
-              <div>
-              <p><b>Filter By Tags: </b></p>
-                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
-                  :
-                  <Row>
-                    <Col>
-                    {this.state.projectTypesAndCount.map(function (item, index) {
-                      return (
-                        <Button className ="btn-tag">  
-                            <Link to={{ pathname: '/' + item.projectType }}>
-                            {item.projectType} ({item.projectCount})
-                                </Link>
-                          </Button>
-                      )
-                    })}
-                    </Col>
-                  </Row>
-                }
-              </div>
+
 
         <Row>
 

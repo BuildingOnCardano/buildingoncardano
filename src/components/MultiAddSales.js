@@ -108,6 +108,7 @@ export default class MultiAddSales extends React.Component {
                                         value={x.saleStatus}
                                         onChange={e => this.handleInputChange(e, i)}
                                     >
+                                        <option>Please Select</option>    
                                         <option>Upcoming</option>
                                         <option>Completed</option>
                                         <option>Live</option>
