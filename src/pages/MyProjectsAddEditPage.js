@@ -54,6 +54,11 @@ const tagOptions = [
   { name: 'Data', id: 5 },
   { name: 'Nft', id: 6 },
   { name: 'Dex', id: 6 },
+  { name: 'Cross-Chain', id: 7 },
+  { name: 'Gaming', id: 8 },
+  { name: 'Oracle', id: 9 },
+  { name: 'Stablecoin', id: 10 },
+  { name: 'Infrastructure', id: 11 },
 ]
 
 var selectedListTags = [];

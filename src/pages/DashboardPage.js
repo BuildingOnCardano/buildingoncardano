@@ -1,6 +1,8 @@
 import Page from 'components/Page';
 import { IconWidget, NumberWidget } from 'components/Widget';
 import React from 'react';
+import ReactGA from 'react-ga';
+
 import {
   Card,
   CardHeader,
@@ -26,6 +28,9 @@ const override = css`
   margin: 0 auto;
   border-color: red;
 `;
+
+ReactGA.initialize('G-GHF73S719G');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 const width = window.innerWidth;
 
@@ -92,7 +97,7 @@ class DashboardPage extends React.Component {
               </div>
               
               <div>
-              <p><b>Filter By Tags: </b></p>
+              <p><b>Search By Tags: </b></p>
                 {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
                   :
                   <Row>
