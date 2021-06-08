@@ -33,7 +33,10 @@ import { baseUrl, getProjectByName } from '../assets/services';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPage4 } from "@fortawesome/free-brands-svg-icons";
 import { faNewspaper } from "@fortawesome/free-solid-svg-icons";
-
+import {
+  TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton,
+  TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton
+} from 'react-twitter-embed';
 
 const override = css`
   display: block;
@@ -73,6 +76,11 @@ class ProjectDetailsPage extends React.Component {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  getTwitterName() {
+    var name = this.state.project.twitterHandle.replace('https://twitter.com/', '');
+    return name;
   }
 
   render() {
@@ -148,7 +156,8 @@ class ProjectDetailsPage extends React.Component {
                           justifyContent: 'center',
                           alignItems: 'center',
                           width: '100%',
-                          borderRadius: '1.9em'}}>Team Details</CardHeader>
+                          borderRadius: '1.9em'
+                        }}>Team Details</CardHeader>
                         <CardBody style={{
                           justifyContent: 'center',
                           alignItems: 'center',
@@ -199,9 +208,10 @@ class ProjectDetailsPage extends React.Component {
 
                   <Card>
                     <CardHeader style={{
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          width: '100%',}}>Token Sales</CardHeader>
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: '100%',
+                    }}>Token Sales</CardHeader>
                     <CardBody>
                       <Row>
                         <Col>
@@ -214,18 +224,18 @@ class ProjectDetailsPage extends React.Component {
                                   return (
 
                                     <Card body style={{
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        boxShadow: 'none',
-                                        backgroundColor: '#f8f9fa',
-                                    }}>
-                                      <CardHeader style={{
                                       justifyContent: 'center',
                                       alignItems: 'center',
-                                      width: '100%',
-                                      borderRadius: '0em',
+                                      boxShadow: 'none',
+                                      backgroundColor: '#f8f9fa',
+                                    }}>
+                                      <CardHeader style={{
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        width: '100%',
+                                        borderRadius: '0em',
 
-                                  }}>{item.saleStatus}</CardHeader>
+                                      }}>{item.saleStatus}</CardHeader>
                                       <CardBody>
                                         <CardTitle><b>Sale Type: </b>{item.upcomingSale}</CardTitle>
                                         <CardText>
@@ -351,6 +361,29 @@ class ProjectDetailsPage extends React.Component {
                           <ShareProject name={this.state.project.name} />
                         </CardBody>
                       </Card>
+
+                      {!isEmpty(this.state.project.twitterHandle) &&
+                        <Card>
+                          <CardHeader style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            width: '100%',
+                            borderRadius: 'none',
+                          }}>
+                            Twitter Feed</CardHeader>
+                          <CardBody style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                          }}>
+                            <TwitterTimelineEmbed
+                              sourceType="profile"
+                              screenName={this.getTwitterName()}
+                              options={{ height: 400 }}
+                            />
+                          </CardBody>
+                        </Card>}
+
 
                     </Col>
                   </Row>

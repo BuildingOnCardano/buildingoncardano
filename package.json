@@ -54,6 +54,7 @@
     "react-super-responsive-table": "^5.2.0",
     "react-tabs": "^3.2.2",
     "react-tooltip": "^4.2.15",
+    "react-twitter-embed": "^3.0.3",
     "reactjs-popup": "^2.0.4",
     "reactstrap": "^8.9.0",
     "sass-loader": "^11.0.1",
