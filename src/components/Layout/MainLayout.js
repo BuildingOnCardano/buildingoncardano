@@ -82,6 +82,7 @@ class MainLayout extends React.Component {
           <Header />
           {children}          
           <Footer />
+          <br></br>
         </Content>
 
         <NotificationSystem

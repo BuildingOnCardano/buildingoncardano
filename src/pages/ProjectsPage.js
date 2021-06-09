@@ -75,7 +75,7 @@ class ProjectsPage extends React.Component {
 
         <Row>
 
-            {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
+            {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={100} /></div>
               :
 
               this.state.projects.map(function (item, index) {

@@ -19,14 +19,14 @@ const Footer = () => {
               <img
                 src={shamrock}
                 className="rounded"
-                style={{ width: 100, height: 100, cursor: 'pointer' }}
+                style={{ width: "7vh", height: "7vh", cursor: 'pointer' }}
               />
-            </a>
+            </a>  
             <a href="https://www.cardanowithpaul.com/" target="_blank">
               <img
                 src={paul}
                 className="rounded"
-                style={{ width: 100, height: 100, cursor: 'pointer' }}
+                style={{ width: "7vh", height: "7vh", cursor: 'pointer' }}
               />
             </a>
           </Row>

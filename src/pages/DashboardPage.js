@@ -86,7 +86,7 @@ class DashboardPage extends React.Component {
 
               {/* <div><p><b>Total Projects: </b>{this.state.totalProjects}</p></div>*/}
                             <div>
-                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
+                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={100} /></div>
                   :
                   <Row>
                     <Col lg={9} sm={12} sm={12} xs={12}>
@@ -98,7 +98,7 @@ class DashboardPage extends React.Component {
               
               <div>
               <p><b>Search By Tags: </b></p>
-                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
+                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={100} /></div>
                   :
                   <Row>
                     <Col>
@@ -117,7 +117,7 @@ class DashboardPage extends React.Component {
               </div>
 
 
-        {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
+        {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={100} /></div>
           :
           <Col>
 

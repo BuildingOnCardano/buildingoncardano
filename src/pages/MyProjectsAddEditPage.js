@@ -223,7 +223,7 @@ class MyProjectsAddEditPage extends React.Component {
     return (
       <div>
         {
-          this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
+          this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={100} /></div>
             :
             <Page
               className="MyProjectsAddEditPage"

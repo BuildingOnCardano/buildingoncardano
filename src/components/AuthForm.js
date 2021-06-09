@@ -110,9 +110,14 @@ class AuthForm extends React.Component {
         setUserSession(this.state.email,this.state.password);
         this.setRedirectDashboard();
       }
-      else {
+      else  if (status.response == 'user doesnt exist') {
         this.setState({
           modal_text: "User doesnt exist.", modal: true
+        });
+      }
+      else{
+        this.setState({
+          modal_text: "Incorrect password.", modal: true
         });
       }
     }

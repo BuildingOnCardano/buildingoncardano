@@ -69,7 +69,7 @@ class MyProjectsPage extends React.Component {
         breadcrumbs={[{ name: 'My Projects /', active: true }]}
       >
 
-        <BeatLoader loading={this.state.loading} css={override} size={180} />
+        <BeatLoader loading={this.state.loading} css={override} size={100} />
         {this.state.projects != null ?
           <Row>
             {
