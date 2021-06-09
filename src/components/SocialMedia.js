@@ -95,14 +95,14 @@ export default class SocialMedia extends React.Component {
                         title="Twitter"
                         placement="left"
                     >
-                        <a href={"https://twitter.com/@" + this.state.twitterHandle} target="_blank" rel="noreferrer">
+                        <a href={this.state.twitterHandle} target="_blank" rel="noreferrer">
                             <FontAwesomeIcon size="2x" icon={faTwitter} /> </a></Tooltip>}
                 {this.state.telegramHandle != "" &&
                     <Tooltip
                         title="Telegram"
                         placement="left"
                     >
-                       <a href={"https://t.me/" + this.state.telegramHandle} target="_blank" rel="noreferrer">
+                       <a href={this.state.telegramHandle} target="_blank" rel="noreferrer">
                             <FontAwesomeIcon size="2x" icon={faTelegram} /> </a></Tooltip>}
 
                 
@@ -111,7 +111,7 @@ export default class SocialMedia extends React.Component {
                         title="Youtube"
                         placement="left"
                     >
-                     <a href={"https://www.youtube.com/channel/" + this.state.youtubeHandle} target="_blank" rel="noreferrer">
+                     <a href={this.state.youtubeHandle} target="_blank" rel="noreferrer">
                             <FontAwesomeIcon size="2x" icon={faYoutube} /> </a></Tooltip>}
 
                 {this.state.facebookHandle != "" &&
@@ -119,17 +119,17 @@ export default class SocialMedia extends React.Component {
                         title="Facebook"
                         placement="left"
                     >
-                        <a href={"https://www.facebook.com/" + this.state.facebookHandle} target="_blank" rel="noreferrer">
+                        <a href={this.state.facebookHandle} target="_blank" rel="noreferrer">
                          <FontAwesomeIcon size="2x" icon={faFacebook} /> </a></Tooltip>}
                 
                 {this.state.discordHandle != "" &&
                     <Tooltip
                         title="Discord"
                         placement="left"
-                    >
-                    
-                        <a href={"https://discord.com/invite/" + this.state.discordHandle} target="_blank" rel="noreferrer">
+                    >                   
+                        <a href={this.state.discordHandle} target="_blank" rel="noreferrer">
                          <FontAwesomeIcon size="2x" icon={faDiscord} /> </a></Tooltip>}
+
                 {this.state.githubLink != "" &&
                     <Tooltip
                         title="Github"
