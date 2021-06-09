@@ -59,7 +59,7 @@ class SearchInput extends React.Component {
           onChange={this.handleChange}
 
           styles={customStyles}
-          placeholder="Search..."
+          placeholder="Enter Project Name..."
           openMenuOnClick={true}
           classNamePrefix="select"
           styles={customStyles}
@@ -79,7 +79,7 @@ const customStyles = {
   control: (base, state) => ({
     ...base,
     fontFamily: 'Times New Roman',
-    fontSize: 32,
+    fontSize: 22,
     border: state.isFocused ? 0 : 0,
     boxShadow: state.isFocused ? 0 : 0,
     cursor: 'text',

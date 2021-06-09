@@ -80,16 +80,17 @@ class DashboardPage extends React.Component {
     return (
       <Page
         className="DashboardPage"
-        title="Welcome to Building On Cardano"
+       
       // breadcrumbs={[{ name: '/', active: true }]}
       >
 
               {/* <div><p><b>Total Projects: </b>{this.state.totalProjects}</p></div>*/}
-                            <div>
+              <div>
+                    <p><b>Search By Project Name: </b></p>
                 {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={100} /></div>
                   :
                   <Row>
-                    <Col lg={9} sm={12} sm={12} xs={12}>
+                    <Col lg={4} sm={12} sm={12} xs={12}>
                     <SearchInput projects={this.state.projects} />
                     </Col>
                   </Row>
@@ -97,11 +98,12 @@ class DashboardPage extends React.Component {
               </div>
               
               <div>
+              
               <p><b>Search By Tags: </b></p>
                 {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={100} /></div>
                   :
                   <Row>
-                    <Col>
+                    <Col>                 
                     {this.state.projectTypesAndCount.map(function (item, index) {
                       return (
                         <Button className ="btn-tag">  

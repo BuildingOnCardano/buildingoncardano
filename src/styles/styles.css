@@ -1,5 +1,5 @@
 tr {
-    height: 40px !important;
+    height: 60px !important;
     vertical-align: bottom;
     border: none !important;
 
@@ -16,8 +16,16 @@ tr {
     border: none !important;
 } */
 
+th {
+    height: 60px !important;    
+    text-align: left !important;
+    vertical-align: middle !important;;
+    border: none !important;
+    background:#f8f9fa;
+} 
+
 td {
-    height: 100px !important;    
+    height: 60px !important;    
     text-align: left !important;
     vertical-align: middle !important;;
     border: none !important;
