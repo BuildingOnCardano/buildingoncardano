@@ -99,7 +99,7 @@ class DashboardPage extends React.Component {
               
               <div>
               
-              <p><b>Search By Tags: </b></p>
+              <p><b>Search By Category / Tags: </b></p>
                 {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={100} /></div>
                   :
                   <Row>

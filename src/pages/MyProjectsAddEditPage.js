@@ -381,6 +381,7 @@ class MyProjectsAddEditPage extends React.Component {
                             value={this.state.project.tokenType}>
                             <option>No Token</option>
                             <option>Native Asset</option>
+                            <option>NFT</option>
                             <option>ERC20</option>
                             <option>BSC</option>
                           </Input></Col>
@@ -392,6 +393,15 @@ class MyProjectsAddEditPage extends React.Component {
                               <Input type="text" name="name" id="name" placeholder="eg ADA" value={this.state.project.ticker}
                                 onChange={e => this.setState({ project: { ...this.state.project, ticker: e.target.value } })} /></Col>
                         </FormGroup>
+
+                        {!isEmpty(this.state.project.tokenType) && this.state.project.tokenType != 'ERC20' && this.state.project.tokenType != 'BSC' && (<div>
+                        <FormGroup row>
+                            <Label for="name" sm={inputnamewidth}>Policy ID</Label>
+                            <Col sm={inputfieldwidth}>
+                              <Input type="text" name="name" id="name" placeholder="eg d5e6bf0500378d4f0da4e8dde6becec7621cd8cbf5cbb9b87013d4cc" value={this.state.project.policyID}
+                                onChange={e => this.setState({ project: { ...this.state.project, policyID: e.target.value } })} /></Col>
+                        </FormGroup>
+                        </div>)}
 
                         <FormGroup row>
                           <Label for="name" sm={inputnamewidth}>Total Supply</Label>
