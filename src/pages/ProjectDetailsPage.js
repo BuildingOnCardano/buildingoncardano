@@ -328,7 +328,11 @@ class ProjectDetailsPage extends React.Component {
                               <Row>
                                 <Col>
                                   <p><b>Token Type: </b>{this.state.project.tokenType}</p>
-
+                                  {!isEmpty(this.state.project.totalSupply) && (
+                                    <div>
+                                      <p><b>Policy ID: </b>{this.state.project.policyID}</p>
+                                    </div>
+                                  )}
                                   {!isEmpty(this.state.project.totalSupply) && (
                                     <div>
                                       <p><b>Total Supply: </b>{this.state.project.totalSupply}</p>
