@@ -475,7 +475,7 @@ class MyProjectsAddEditPage extends React.Component {
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Discord Url</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="Disrord Invite Url" value={this.state.project.discordHandle}
+                          <Input type="text" name="name" id="name" placeholder="Discord Invite Url" value={this.state.project.discordHandle}
                             onChange={e => this.setState({ project: { ...this.state.project, discordHandle: e.target.value } })} /></Col>
                       </FormGroup>
                     </Card>
