@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 import { baseUrl, registration, login } from '../assets/services';
 import { Link, Redirect } from "react-router-dom";
-import { setUserSession } from 'utils/Common.js';
+import { setUserSession, removeUserSession } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
 import CircleLoader from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
@@ -20,6 +20,7 @@ const override = css`
   margin: 0 auto;
   border-color: red;
 `;
+
 
 class AuthForm extends React.Component {
   constructor(props) {
@@ -37,6 +38,10 @@ class AuthForm extends React.Component {
       modal_text: "",
       loading: false,
     };
+  }
+
+  componentDidMount() {
+    removeUserSession();
   }
 
   toggle = modalType => () => {
@@ -300,9 +305,9 @@ class AuthForm extends React.Component {
           </h6>
 
         </div>
-        <Link to={{ pathname: '/' }}>
+        <a href="/">
           Exit
-        </Link>
+        </a>
 
         {children}
       </Form>

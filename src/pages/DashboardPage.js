@@ -45,8 +45,9 @@ class DashboardPage extends React.Component {
     window.scrollTo(0, 0);
 
     //handle signout
-    if (!isEmpty(this.props.signout=='true')) {
+    if (!isEmpty(this.props.signout) && this.props.signout=='true') {
       removeUserSession();
+      this.props.signout=false;
     }
 
     if (width < 600) {
