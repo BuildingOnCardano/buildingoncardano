@@ -273,6 +273,8 @@ class ProjectDetailsPage extends React.Component {
                         width: '100%',
                         borderRadius: '1.9em'
                       }}>Similar Projects</CardHeader>
+                      <Row>
+                       
                       {
                         this.state.project.relatedProjects.map(function (relatedProject, index) {
                           return (
@@ -284,7 +286,8 @@ class ProjectDetailsPage extends React.Component {
                             </Col>
                           )
                         })
-                      }
+                        
+                      }</Row>
                     </Card>}
 
 
