@@ -79,7 +79,7 @@ class App extends React.Component {
           />
 
           <Route path="/verify/:verifycode" component={props => (
-            <VerifyEmail />
+            <VerifyEmail {...props}/>
           )} />
 
 

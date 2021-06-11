@@ -5,11 +5,20 @@ import { isEmpty } from 'utils/stringutil.js';
 import {
   Row,
 } from 'reactstrap';
+import CircleLoader
+  from "react-spinners/CircleLoader";
+import { css } from "@emotion/core";
 
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 class VerifyEmail extends React.Component {
   state = {
-    verifysuccess: false
+    verifysuccess: false,
+    loading: true
   };
 
   componentDidMount() {
@@ -35,9 +44,9 @@ class VerifyEmail extends React.Component {
     var data = await response.json();
 
     if (data.response == "user_verified") {
-      this.setState({ verifysuccess: true });
+      this.setState({ verifysuccess: true, loading: false });
     } else {
-      this.setState({ verifysuccess: false });
+      this.setState({ verifysuccess: false, loading: false });
     }
   }
 
@@ -53,13 +62,15 @@ class VerifyEmail extends React.Component {
       >
 
         <Row>
-          {this.state.verifysuccess ? <div> <h3>Email address verified!</h3>
-            <a href="/">
-              Homepage
-        </a></div>
-            : <div>
-              <p>There was an issue with your email verification can you contact buildingoncardano@gmail.com</p>
-            </div>}
+          {this.state.loading ? <div><CircleLoader loading={this.state.loading} css={override} size={100} /></div>
+            :
+            this.state.verifysuccess ? <div> <h3>Email address verified!</h3>
+              <a href="/">
+                Homepage
+              </a></div>
+              : <div>
+                <p>There was an issue with your email verification can you contact buildingoncardano@gmail.com</p>
+              </div>}
         </Row>
       </Page >
     );
