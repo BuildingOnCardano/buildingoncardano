@@ -19,8 +19,6 @@ class AuthPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
- 
-      verifysuccess: false,
       modal: false,
       modal_backdrop: false,
       modal_nested_parent: false,
@@ -40,32 +38,10 @@ class AuthPage extends React.Component {
 
 
   componentDidMount() {
-    try {
-      if (!isEmpty(this.props.match.params.verifycode)) {
-        this.handleCodeVerify(this.props.match.params.verifycode);
-      }
-    } catch (error) {
 
-    }
   }
 
-  async handleCodeVerify(code) {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        verificationCode: code
-      })
-    };
-    var response = await fetch(baseUrl + verifyuser, requestOptions);
-    var data = await response.json();
 
-    if (data.response == "user_verified") {
-      this.setState({ modal: true, verifysuccess: true });
-    }else{
-      this.setState({ modal: true, verifysuccess: false });
-    }
-  }
 
   toggle = modalType => () => {
     if (!modalType) {
