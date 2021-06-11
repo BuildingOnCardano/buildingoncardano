@@ -12,6 +12,7 @@ import ProjectsPage from 'pages/ProjectsPage';
 import ProjectDetailsPage from 'pages/ProjectDetailsPage';
 import MyProjectsPage from 'pages/MyProjectsPage';
 import MyProjectsAddEditPage from 'pages/MyProjectsAddEditPage';
+import VerifyEmail from 'pages/VerifyEmail';
 import { createBrowserHistory } from "history";
 
 const getBasename = () => {
@@ -77,6 +78,10 @@ class App extends React.Component {
             )}
           />
 
+          <Route path="/verify/:verifycode" component={props => (
+            <VerifyEmail />
+          )} />
+
 
           <MainLayout breakpoint={this.props.breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
@@ -105,9 +110,7 @@ class App extends React.Component {
 
 
 
-              <Route path="/verify/:verifycode" component={props => (
-                <AuthPage {...props} authState={STATE_LOGIN} />
-              )} />
+
 
 
             </React.Suspense>
