@@ -1,6 +1,10 @@
 import Page from 'components/Page';
 import React from 'react';
-
+import { baseUrl, verifyuser } from '../assets/services';
+import { isEmpty } from 'utils/stringutil.js';
+import {
+  Row,
+} from 'reactstrap';
 
 
 class VerifyEmail extends React.Component {
@@ -31,9 +35,9 @@ class VerifyEmail extends React.Component {
     var data = await response.json();
 
     if (data.response == "user_verified") {
-      this.setState({verifysuccess: true });
+      this.setState({ verifysuccess: true });
     } else {
-      this.setState({verifysuccess: false });
+      this.setState({ verifysuccess: false });
     }
   }
 
