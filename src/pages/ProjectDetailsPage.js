@@ -206,18 +206,20 @@ class ProjectDetailsPage extends React.Component {
                     </Col>
                   </Row>
 
-                  <Card>
-                    <CardHeader style={{
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      width: '100%',
-                    }}>Token Sales</CardHeader>
-                    <CardBody>
-                      <Row>
-                        <Col>
+                  
 
                           {this.state.project.salesDetails != null && this.state.project.salesDetails.length > 0 && this.state.project.salesDetails != undefined &&
-                            <div>
+                          <Card>
+                            <CardHeader style={{
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              width: '100%',
+                            }}>Token Sales</CardHeader>
+                            <CardBody>
+                              <Row>
+                        <Col>  
+                          
+                          <div>
 
                               <CardColumns>
                                 {this.state.project.salesDetails.map(function (item, index) {
@@ -256,11 +258,11 @@ class ProjectDetailsPage extends React.Component {
                                 })
                                 }
                               </CardColumns>
-                            </div>}
+                            </div>
                         </Col>
                       </Row>
                     </CardBody>
-                  </Card>
+                  </Card>}
 
                   <Card body style={{
                     justifyContent: 'center',
