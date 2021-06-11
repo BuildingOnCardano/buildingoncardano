@@ -8,8 +8,8 @@ import {
   Table,
   Button
 } from 'reactstrap';
-import BeatLoader
-  from "react-spinners/BeatLoader";
+import CircleLoader
+  from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
 import { baseUrl, getAllProjects, getProjectsStats } from '../assets/services';
 import { Link } from 'react-router-dom';
@@ -91,7 +91,7 @@ class DashboardPage extends React.Component {
               {/* <div><p><b>Total Projects: </b>{this.state.totalProjects}</p></div>*/}
               <div>
                     <p><b>Search By Project Name: </b></p>
-                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={100} /></div>
+                {this.state.loading ? <div>Loading projects...<CircleLoader loading={this.state.loading} css={override} size={100} /></div>
                   :
                   <Row>
                     <Col lg={4} sm={12} sm={12} xs={12}>
@@ -104,7 +104,7 @@ class DashboardPage extends React.Component {
               <div>
               
               <p><b>Search By Category / Tags: </b></p>
-                {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={100} /></div>
+                {this.state.loading ? <div>Loading projects...<CircleLoader loading={this.state.loading} css={override} size={100} /></div>
                   :
                   <Row>
                     <Col>                 
@@ -123,7 +123,7 @@ class DashboardPage extends React.Component {
               </div>
 
 
-        {this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={100} /></div>
+        {this.state.loading ? <div>Loading projects...<CircleLoader loading={this.state.loading} css={override} size={100} /></div>
           :
           <Col>
 
