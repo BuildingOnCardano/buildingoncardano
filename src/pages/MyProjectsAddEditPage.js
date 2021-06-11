@@ -59,6 +59,7 @@ const tagOptions = [
   { name: 'Oracle', id: 9 },
   { name: 'Stablecoin', id: 10 },
   { name: 'Infrastructure', id: 11 },
+  { name: 'Catalyst', id: 12 },
 ]
 
 var selectedListTags = [];
