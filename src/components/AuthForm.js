@@ -12,7 +12,14 @@ import { baseUrl, registration, login } from '../assets/services';
 import { Link, Redirect } from "react-router-dom";
 import { setUserSession } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
+import CircleLoader from "react-spinners/CircleLoader";
+import { css } from "@emotion/core";
 
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 class AuthForm extends React.Component {
   constructor(props) {
@@ -27,7 +34,8 @@ class AuthForm extends React.Component {
       modal_backdrop: false,
       modal_nested_parent: false,
       modal_nested: false,
-      modal_text: ""
+      modal_text: "",
+      loading: false,
     };
   }
 
@@ -87,6 +95,9 @@ class AuthForm extends React.Component {
         modal_text: "Enter your email address!", modal: true
       });
     } else {
+      this.setState({
+        loading: true
+      });
       event.preventDefault();
       var authState = this.props.authState;
       var password = this.state.password;
@@ -102,9 +113,9 @@ class AuthForm extends React.Component {
           }
           else {
             this.setState({
-              modal_text: "Registration submitted please check you email inbox for verification.", modal: true
+              modal_text: "Registration submitted please check your email inbox for verification.", modal: true
             });
-          //  this.setRedirect();
+            //  this.setRedirect();
 
           }
         } else {
@@ -137,6 +148,9 @@ class AuthForm extends React.Component {
           });
         }
       }
+      this.setState({
+        loading: false
+      });
     }
   };
 
@@ -260,17 +274,20 @@ class AuthForm extends React.Component {
           </Label>
         </FormGroup>
         <hr />
-        <Button
-          size="lg"
-          className="bg-gradient-theme-left border-0"
-          block
-          onClick={this.handleSubmit}>
-          {this.renderButtonText()}
-        </Button>
+        {this.state.loading ? <CircleLoader loading={this.state.loading} css={override} size={100} />
+          :
+          <Button
+            size="lg"
+            className="bg-gradient-theme-left border-0"
+            block
+            onClick={this.handleSubmit}>
+            {this.renderButtonText()}
+          </Button>}
 
         <div className="text-center pt-1">
           <h6>or</h6>
           <h6>
+
             {this.isSignup ? (
               <a href="#login" onClick={this.changeAuthState(STATE_LOGIN)}>
                 Login
