@@ -59,7 +59,7 @@ class SearchInput extends React.Component {
           onChange={this.handleChange}
 
           styles={customStyles}
-          placeholder="Enter Project Name..."
+          placeholder="Search by Project Name..."
           openMenuOnClick={true}
           classNamePrefix="select"
           styles={customStyles}

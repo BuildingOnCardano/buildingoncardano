@@ -313,6 +313,7 @@ class MyProjectsAddEditPage extends React.Component {
                             <option>Private Sale</option>
                             <option>Presale</option>
                             <option>IEO</option>
+                            <option>IFO</option>
                             <option>IDO</option>
                             <option>ISO</option>
                             <option>Live on Exchange</option>
@@ -504,7 +505,16 @@ class MyProjectsAddEditPage extends React.Component {
                     </Card>
 
                     <Card body>
-                      <h3>Team Details</h3>
+                        <h3>Team Details</h3>
+                        <FormGroup row>
+                                            <Label for="teamDescription" sm={inputnamewidth}>Team Description</Label>
+                            <Col sm={inputfieldwidth}>
+                                <Input type="textarea" name="teamDescription" id="teamDescription" value={this.state.project.teamDescription}
+                                                    onChange={e => this.setState({ project: { ...this.state.project, teamDescription: e.target.value } })} />
+                                                <small>Characters left {5000 - getLength(this.state.project.teamDescription)}</small></Col>
+
+                        </FormGroup>
+                        <h3>Team Details</h3>
                       <MultiAddTeamMembers sendData={this.handler} existingTeam={this.state.project.projectTeam} />
                     </Card>
 

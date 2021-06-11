@@ -6,7 +6,9 @@ import {
   Col,
   Row,
   Table,
-  Button
+  Button,
+  Nav,
+  Navbar
 } from 'reactstrap';
 import CircleLoader
   from "react-spinners/CircleLoader";
@@ -91,24 +93,25 @@ class DashboardPage extends React.Component {
 
               {/* <div><p><b>Total Projects: </b>{this.state.totalProjects}</p></div>*/}
               <div>
-                    <p><b>Search By Project Name: </b></p>
+                    
                 {this.state.loading ? <div>Loading projects...<CircleLoader loading={this.state.loading} css={override} size={100} /></div>
                   :
-                  <Row>
-                    <Col lg={4} sm={12} sm={12} xs={12}>
+
+
+                    <Row className="justify-content-md-center">
+                    <Col lg={5} >
                     <SearchInput projects={this.state.projects} />
                     </Col>
-                  </Row>
+                    </Row>
                 }
-              </div>
-              
-              <div>
-              
-              <p><b>Search By Category / Tags: </b></p>
+            </div>
+
+            <div className="my-auto"><hr />
+                           
                 {this.state.loading ? <div>Loading projects...<CircleLoader loading={this.state.loading} css={override} size={100} /></div>
                   :
-                  <Row>
-                    <Col>                 
+                    
+                    <Col> {/*<p><b>Search By Category / Tags: </b></p>*/}
                     {this.state.projectTypesAndCount.map(function (item, index) {
                       return (
                         <Button className ="btn-tag">  
@@ -118,18 +121,15 @@ class DashboardPage extends React.Component {
                           </Button>
                       )
                     })}
-                    </Col>
-                  </Row>
+                    </Col>  
                 }
-              </div>
-
+                <hr />
+            </div>
 
         {this.state.loading ? <div>Loading projects...<CircleLoader loading={this.state.loading} css={override} size={100} /></div>
-          :
-          <Col>
-
-              <Col lg={9} sm={12} sm={12} xs={12}>
-              <hr/><br/>
+                :          
+                <Col>              
+              <br/>
               <h2>Latest Projects Added</h2>
               <br/>
                 <Card>
@@ -199,7 +199,7 @@ class DashboardPage extends React.Component {
                     </TableContainer>
                   
                 </Card>
-              </Col>
+              
 
 
           </Col>}

@@ -32,5 +32,6 @@ export var project = {
     saleTokenPrice: null,
     tokenDistributionDetail: null,
     acceptedFunding: null,
+    teamDescription: null,
     projectTeam: []
   }
