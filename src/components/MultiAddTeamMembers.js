@@ -65,6 +65,7 @@ export default class MultiAddTeamMembers extends React.Component {
                                         placeholder="Enter Team Member Name"
                                         value={this.state.inputList[i].memberName}
                                         onChange={e => this.handleInputChange(e, i)}
+                                        id="name"
                                     />
                                 </Col>
                             </FormGroup>
@@ -77,6 +78,7 @@ export default class MultiAddTeamMembers extends React.Component {
                                         placeholder="Position/Role"
                                         value={x.position}
                                         onChange={e => this.handleInputChange(e, i)}
+                                        id="name"
                                     />
                                 </Col>
                             </FormGroup>
@@ -88,6 +90,7 @@ export default class MultiAddTeamMembers extends React.Component {
                                         placeholder="Twitter Url"
                                         value={x.twitter}
                                         onChange={e => this.handleInputChange(e, i)}
+                                        id="name"
                                     />
                                 </Col>
                             </FormGroup>
@@ -100,6 +103,7 @@ export default class MultiAddTeamMembers extends React.Component {
                                         placeholder="Linkedin Url"
                                         value={x.linkin}
                                         onChange={e => this.handleInputChange(e, i)}
+                                        id="name"
                                     />
                                 </Col>
                             </FormGroup>
@@ -112,6 +116,7 @@ export default class MultiAddTeamMembers extends React.Component {
                                         placeholder="Url"
                                         value={x.github}
                                         onChange={e => this.handleInputChange(e, i)}
+                                        id="name"
                                     />
                                 </Col>
                             </FormGroup>
@@ -124,6 +129,7 @@ export default class MultiAddTeamMembers extends React.Component {
                                         placeholder="Img Url"
                                         value={x.img}
                                         onChange={e => this.handleInputChange(e, i)}
+                                        id="name"
                                     />
                                 </Col>
                             </FormGroup>

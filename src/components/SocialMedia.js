@@ -1,14 +1,14 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTwitter, faTelegram, faYoutube, faFacebook, faDiscord, faGithub, faReddit } from "@fortawesome/free-brands-svg-icons";
+import { faTwitter, faTelegram, faYoutube, faFacebook, faDiscord, faGithub, faReddit, faGitlab } from "@fortawesome/free-brands-svg-icons";
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { isEmpty } from 'utils/stringutil.js';
 import Tooltip from "@material-ui/core/Tooltip";
 
 import {
-  Col,
-  Row,
-  } from 'reactstrap';
+    Col,
+    Row,
+} from 'reactstrap';
 
 export default class SocialMedia extends React.Component {
 
@@ -23,6 +23,7 @@ export default class SocialMedia extends React.Component {
             discordHandle: "",
             redditHandle: "",
             githubLink: "",
+            gitLabLink: ""
         }
     }
     async componentDidMount() {
@@ -52,9 +53,9 @@ export default class SocialMedia extends React.Component {
         }
 
         //reddit
-        if (!isEmpty(this.props.extendedmeta.reddit_handle)) {
-            this.state.redditHandle = this.props.extendedmeta.reddit_handle;
-            this.setState({ redditHandle: this.props.extendedmeta.reddit_handle });
+        if (!isEmpty(this.props.extendedmeta.redditHandle)) {
+            this.state.redditHandle = this.props.extendedmeta.redditHandle;
+            this.setState({ redditHandle: this.props.extendedmeta.redditHandle });
         }
 
         //facebook
@@ -74,18 +75,24 @@ export default class SocialMedia extends React.Component {
             this.state.githubLink = this.props.extendedmeta.githubLink;
             this.setState({ githubLink: this.props.extendedmeta.githubLink });
         }
+
+        //gitlab
+        if (!isEmpty(this.props.extendedmeta.gitLabLink)) {
+            this.state.githubLink = this.props.extendedmeta.gitLabLink;
+            this.setState({ githubLink: this.props.extendedmeta.gitLabLink });
+        }
     }
 
     render() {
         return (
             <div style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        textAlign: 'center',
-                        fontSize: '18px',
-                      }}>
-            
-               {/* <Col>
+                justifyContent: 'center',
+                alignItems: 'center',
+                textAlign: 'center',
+                fontSize: '18px',
+            }}>
+
+                {/* <Col>
             {!isEmpty(this.state.homepage) &&
                 <Tooltip
                     title="Website"
@@ -95,7 +102,7 @@ export default class SocialMedia extends React.Component {
                         <FontAwesomeIcon size="2x" icon={faGlobe} /></a></Tooltip>
                 }
                 </Col>
-                */} 
+                */}
 
                 {this.state.twitterHandle !== "" &&
                     <Tooltip
@@ -109,16 +116,16 @@ export default class SocialMedia extends React.Component {
                         title="Telegram"
                         placement="left"
                     >
-                       <a href={this.state.telegramHandle} target="_blank" rel="noreferrer">
+                        <a href={this.state.telegramHandle} target="_blank" rel="noreferrer">
                             <FontAwesomeIcon size="2x" icon={faTelegram} /> </a></Tooltip>}
 
-                
+
                 {this.state.youtubeHandle != "" &&
                     <Tooltip
                         title="Youtube"
                         placement="left"
                     >
-                     <a href={this.state.youtubeHandle} target="_blank" rel="noreferrer">
+                        <a href={this.state.youtubeHandle} target="_blank" rel="noreferrer">
                             <FontAwesomeIcon size="2x" icon={faYoutube} /> </a></Tooltip>}
 
                 {this.state.redditHandle != "" &&
@@ -126,7 +133,7 @@ export default class SocialMedia extends React.Component {
                         title="Reddit"
                         placement="left"
                     >
-                     <a href={this.state.redditHandle} target="_blank" rel="noreferrer">
+                        <a href={this.state.redditHandle} target="_blank" rel="noreferrer">
                             <FontAwesomeIcon size="2x" icon={faReddit} /> </a></Tooltip>}
 
                 {this.state.facebookHandle != "" &&
@@ -135,25 +142,34 @@ export default class SocialMedia extends React.Component {
                         placement="left"
                     >
                         <a href={this.state.facebookHandle} target="_blank" rel="noreferrer">
-                         <FontAwesomeIcon size="2x" icon={faFacebook} /> </a></Tooltip>}
-                
+                            <FontAwesomeIcon size="2x" icon={faFacebook} /> </a></Tooltip>}
+
                 {this.state.discordHandle != "" &&
                     <Tooltip
                         title="Discord"
                         placement="left"
-                    >                   
+                    >
                         <a href={this.state.discordHandle} target="_blank" rel="noreferrer">
-                         <FontAwesomeIcon size="2x" icon={faDiscord} /> </a></Tooltip>}
+                            <FontAwesomeIcon size="2x" icon={faDiscord} /> </a></Tooltip>}
 
                 {this.state.githubLink != "" &&
                     <Tooltip
                         title="Github"
                         placement="left"
                     >
-                       <a href={this.state.githubLink} target="_blank" rel="noreferrer">
-                         <FontAwesomeIcon size="2x" icon={faGithub} /> </a></Tooltip>}
-                    
-               
+                        <a href={this.state.githubLink} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon size="2x" icon={faGithub} /> </a></Tooltip>}
+
+
+                {this.state.gitLabLink != "" &&
+                    <Tooltip
+                        title="Gitlab"
+                        placement="left"
+                    >
+                        <a href={this.state.gitLabLink} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon size="2x" icon={faGitlab} /> </a></Tooltip>}
+
+
             </div>
         )
     };

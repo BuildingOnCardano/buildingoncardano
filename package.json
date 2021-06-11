@@ -18,6 +18,7 @@
     "classnames": "^2.2.6",
     "css-loader": "^5.1.1",
     "d3-geo": "^1.11.3",
+    "draft-js": "^0.11.7",
     "faker": "^4.1.0",
     "linkifyjs": "^2.1.9",
     "lodash": "^4.17.20",

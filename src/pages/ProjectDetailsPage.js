@@ -33,6 +33,7 @@ import { baseUrl, getProjectByName } from '../assets/services';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPage4 } from "@fortawesome/free-brands-svg-icons";
 import { faNewspaper } from "@fortawesome/free-solid-svg-icons";
+import ProjectCard from 'components/ProjectCard';
 import {
   TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton,
   TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton
@@ -54,17 +55,17 @@ class ProjectDetailsPage extends React.Component {
   };
 
   componentDidMount() {
-    try {
-      this.setState({ project: this.props.location.state.projectDetails });
-      this.state.project = this.props.location.state.projectDetails;
-      this.setState({ loading: false });
+    // try {
+    //   this.setState({ project: this.props.location.state.projectDetails });
+    //   this.state.project = this.props.location.state.projectDetails;
+    //   this.setState({ loading: false });
 
-    } catch (error) {
+    // } catch (error) {
 
-    }
-    if (isEmpty(this.state.project)) {
+    // }
+    //if (isEmpty(this.state.project)) {
       this.getProjectDetails();
-    }
+    //}
   }
 
   async getProjectDetails() {
@@ -206,20 +207,20 @@ class ProjectDetailsPage extends React.Component {
                     </Col>
                   </Row>
 
-                  
 
-                          {this.state.project.salesDetails != null && this.state.project.salesDetails.length > 0 && this.state.project.salesDetails != undefined &&
-                          <Card>
-                            <CardHeader style={{
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              width: '100%',
-                            }}>Token Sales</CardHeader>
-                            <CardBody>
-                              <Row>
-                        <Col>  
-                          
-                          <div>
+
+                  {this.state.project.salesDetails != null && this.state.project.salesDetails.length > 0 && this.state.project.salesDetails != undefined &&
+                    <Card>
+                      <CardHeader style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '100%',
+                      }}>Token Sales</CardHeader>
+                      <CardBody>
+                        <Row>
+                          <Col>
+
+                            <div>
 
                               <CardColumns>
                                 {this.state.project.salesDetails.map(function (item, index) {
@@ -259,10 +260,33 @@ class ProjectDetailsPage extends React.Component {
                                 }
                               </CardColumns>
                             </div>
-                        </Col>
-                      </Row>
-                    </CardBody>
-                  </Card>}
+                          </Col>
+                        </Row>
+                      </CardBody>
+                    </Card>}
+
+                  {this.state.project.relatedProjects != null && this.state.project.relatedProjects.length > 0 && 
+                    <Card>
+                      <CardHeader style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '100%',
+                        borderRadius: '1.9em'
+                      }}>Similar Projects</CardHeader>
+                      {
+                        this.state.project.relatedProjects.map(function (relatedProject, index) {
+                          return (
+                            <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
+                              <ProjectCard
+                                img={relatedProject.imageUrl}
+                                projectDetails={relatedProject}
+                                myprojectspage={false} />
+                            </Col>
+                          )
+                        })
+                      }
+                    </Card>}
+
 
                   <Card body style={{
                     justifyContent: 'center',
@@ -311,6 +335,9 @@ class ProjectDetailsPage extends React.Component {
                             youtube_handle: this.state.project.youtubeHandle,
                             facebook_handle: this.state.project.facebookHandle,
                             githubLink: this.state.project.githubLink,
+                            redditHandle: this.state.project.redditHandle,
+                            gitLabLink: this.state.project.gitLabLink,
+
 
                           }} />
                         </CardBody>

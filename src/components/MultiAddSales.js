@@ -87,6 +87,7 @@ export default class MultiAddSales extends React.Component {
                                     <Input type="select" name="upcomingSale"
                                         value={x.upcomingSale}
                                         onChange={e => this.handleInputChange(e, i)}
+                                        id="name"
                                     >
                                         <option>No Token Sales</option>
                                         <option>Private Sale</option>
@@ -107,6 +108,7 @@ export default class MultiAddSales extends React.Component {
                                     <Input type="select" name="saleStatus"
                                         value={x.saleStatus}
                                         onChange={e => this.handleInputChange(e, i)}
+                                        id="name"
                                     >
                                         <option>Please Select</option>    
                                         <option>Upcoming</option>
@@ -158,6 +160,7 @@ export default class MultiAddSales extends React.Component {
                                         placeholder="Sale Token Price"
                                         value={x.saleTokenPrice}
                                         onChange={e => this.handleInputChange(e, i)}
+                                        id="name"
                                     />
                                 </Col>
                             </FormGroup>
@@ -171,6 +174,7 @@ export default class MultiAddSales extends React.Component {
                                         placeholder="Accepted Funding"
                                         value={x.acceptedFunding}
                                         onChange={e => this.handleInputChange(e, i)}
+                                        id="name"
                                     />
                                 </Col>
                             </FormGroup>
@@ -184,6 +188,7 @@ export default class MultiAddSales extends React.Component {
                                         placeholder="Link to more info on sale"
                                         value={x.tokenDistributionDetail}
                                         onChange={e => this.handleInputChange(e, i)}
+                                        id="name"
                                     />
                                 </Col>
                             </FormGroup>

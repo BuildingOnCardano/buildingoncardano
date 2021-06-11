@@ -208,3 +208,12 @@ strong {
 .ProjectCard-body {
   padding: 1.5em;
 }
+
+#name::placeholder {
+  color: #225cb6;
+  opacity: 1;
+}
+#name::defaultValue {
+  color: #225cb6;
+  opacity: 1;
+}

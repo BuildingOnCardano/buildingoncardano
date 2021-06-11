@@ -173,7 +173,7 @@ class Sidebar extends React.Component {
               ))}
             </Collapse>
 
-            {navItemsBottom.map(({ to, name, exact, Icon }, index) => (
+            {getUser() == null && navItemsBottom.map(({ to, name, exact, Icon }, index) => (
               <NavItem key={index} className={bem.e('nav-item')}>
                 <BSNavLink
                   id={`navItem-${name}-${index}`}

@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import { Multiselect } from 'multiselect-react-dropdown';
 import { getUser, getPassword } from 'utils/Common.js';
 import { isEmpty } from 'lodash';
+import { getLength } from 'utils/stringutil.js';
 import BeatLoader
   from "react-spinners/BeatLoader";
 import { css } from "@emotion/core";
@@ -219,6 +220,7 @@ class MyProjectsAddEditPage extends React.Component {
     this.setState({ project: { ...this.state.project, salesDetails: data } });
   }
 
+
   render() {
 
     return (
@@ -291,6 +293,7 @@ class MyProjectsAddEditPage extends React.Component {
                             onRemove={this.onRemove} // Function will trigger on remove event
                             displayValue="name" // Property name to display in the dropdown options
                             selectedValues={selectedListTags}
+                            id="name"
                           />
                         </Col>
                       </FormGroup>
@@ -298,7 +301,7 @@ class MyProjectsAddEditPage extends React.Component {
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Stage / Status *</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="select" name="select" onChange={e => this.setState({ project: { ...this.state.project, stage: e.target.value } })}
+                          <Input type="select" name="select" id="name" onChange={e => this.setState({ project: { ...this.state.project, stage: e.target.value } })}
                             value={this.state.project.stage}>
                             <option></option>
                             <option>Pre Funding</option>
@@ -329,7 +332,8 @@ class MyProjectsAddEditPage extends React.Component {
                         <Label for="name" sm={inputnamewidth}>Project Logo Url</Label>
                         <Col sm={inputfieldwidth}>
                           <Input type="url" name="name" id="name" placeholder="Add link/Url to project logo" value={this.state.project.imageUrl}
-                            onChange={e => this.setState({ project: { ...this.state.project, imageUrl: e.target.value } })} /></Col>
+                            onChange={e => this.setState({ project: { ...this.state.project, imageUrl: e.target.value } })} />
+                            <small>Dimensions 250x250px</small></Col>
                       </FormGroup>
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Youtube presentation</Label>
@@ -342,8 +346,10 @@ class MyProjectsAddEditPage extends React.Component {
                       <FormGroup row>
                         <Label for="description" sm={inputnamewidth}>Short Description</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="description" id="description" value={this.state.project.shortDescription}
-                            onChange={e => this.setState({ project: { ...this.state.project, shortDescription: e.target.value } })} /></Col>
+                          <Input type="textarea" name="description" id="description" value={this.state.project.shortDescription}
+                            onChange={e => this.setState({ project: { ...this.state.project, shortDescription: e.target.value } })} />
+                            <small>Characters left {5000 - getLength(this.state.project.shortDescription)}</small></Col>
+                        
                       </FormGroup>
 
 
@@ -351,7 +357,8 @@ class MyProjectsAddEditPage extends React.Component {
                         <Label for="description" sm={inputnamewidth}>Long Description</Label>
                         <Col sm={inputfieldwidth}>
                           <Input type="textarea" name="description" id="description" value={this.state.project.description}
-                            onChange={e => this.setState({ project: { ...this.state.project, description: e.target.value } })} /></Col>
+                            onChange={e => this.setState({ project: { ...this.state.project, description: e.target.value } })} />
+                            <small>Characters left {10000 - getLength(this.state.project.description)}</small></Col>
                       </FormGroup>
 
 
@@ -367,6 +374,7 @@ class MyProjectsAddEditPage extends React.Component {
                               shrink: true,
                             }}
                             onChange={e => this.setState({ project: { ...this.state.project, releaseDate: e.target.value } })}
+                            id="name"
                           />
                         </Col>
                       </FormGroup>
@@ -389,19 +397,19 @@ class MyProjectsAddEditPage extends React.Component {
                       </FormGroup>
                       {!isEmpty(this.state.project.tokenType) && this.state.project.tokenType != 'No Token' && (<div>
                         <FormGroup row>
-                            <Label for="name" sm={inputnamewidth}>Ticker</Label>
-                            <Col sm={inputfieldwidth}>
-                              <Input type="text" name="name" id="name" placeholder="eg ADA" value={this.state.project.ticker}
-                                onChange={e => this.setState({ project: { ...this.state.project, ticker: e.target.value } })} /></Col>
+                          <Label for="name" sm={inputnamewidth}>Ticker</Label>
+                          <Col sm={inputfieldwidth}>
+                            <Input type="text" name="name" id="name" placeholder="eg ADA" value={this.state.project.ticker}
+                              onChange={e => this.setState({ project: { ...this.state.project, ticker: e.target.value } })} /></Col>
                         </FormGroup>
 
                         {!isEmpty(this.state.project.tokenType) && this.state.project.tokenType != 'ERC20' && this.state.project.tokenType != 'BSC' && (<div>
-                        <FormGroup row>
+                          <FormGroup row>
                             <Label for="name" sm={inputnamewidth}>Policy ID</Label>
                             <Col sm={inputfieldwidth}>
                               <Input type="text" name="name" id="name" placeholder="eg d5e6bf0500378d4f0da4e8dde6becec7621cd8cbf5cbb9b87013d4cc" value={this.state.project.policyID}
                                 onChange={e => this.setState({ project: { ...this.state.project, policyID: e.target.value } })} /></Col>
-                        </FormGroup>
+                          </FormGroup>
                         </div>)}
 
                         <FormGroup row>
@@ -428,7 +436,6 @@ class MyProjectsAddEditPage extends React.Component {
                     </Card>
 
                     <Card body>
-                      <br></br>
                       <h3>Social Media</h3>
                       <br></br>
                       <FormGroup row>
@@ -467,13 +474,25 @@ class MyProjectsAddEditPage extends React.Component {
                           <Input type="text" name="name" id="name" placeholder="Disrord Invite Url" value={this.state.project.discordHandle}
                             onChange={e => this.setState({ project: { ...this.state.project, discordHandle: e.target.value } })} /></Col>
                       </FormGroup>
+                    </Card>
+
+                    <Card body>
+                      <h3>Source Code</h3>
+                      <br></br>
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Github Link</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="text" name="name" id="name" placeholder="Github url" value={this.state.project.githubLink}
+                          <Input type="text" name="name" id="name" placeholder="" value={this.state.project.githubLink}
                             onChange={e => this.setState({ project: { ...this.state.project, githubLink: e.target.value } })} /></Col>
                       </FormGroup>
+                      <FormGroup row>
+                        <Label for="name" sm={inputnamewidth}>GitLab Link</Label>
+                        <Col sm={inputfieldwidth}>
+                          <Input type="text" name="name" id="name" placeholder="" value={this.state.project.gitLabLink}
+                            onChange={e => this.setState({ project: { ...this.state.project, gitLabLink: e.target.value } })} /></Col>
+                      </FormGroup>
                     </Card>
+
 
                     <Card body>
                       <h3>Upcoming/Past Sale Details</h3><br />
