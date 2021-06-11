@@ -28,12 +28,12 @@ export default class ProjectCard extends React.Component {
                 minHeight: '19rem'
             }}>
                 <br></br>
-                <div style={{ display: "flex", justifyContent: "left", alignItems: "left",paddingLeft:"10px", }}>
-                {this.props.myprojectspage && (<p><b>Approved: </b>{this.props.projectDetails.verified}</p>)}</div>
-                <div style={{ display: "flex", justifyContent: "left", alignItems: "left",paddingLeft:"10px", }}>
-                {this.props.myprojectspage && (<Link to={{ pathname: '/editproject/'+this.props.projectDetails.name}}>Edit Project</Link>)}
+                <div style={{ display: "flex", justifyContent: "left", alignItems: "left", paddingLeft: "10px", }}>
+                    {this.props.myprojectspage && (<p><b>Approved: </b>{this.props.projectDetails.verified}</p>)}</div>
+                <div style={{ display: "flex", justifyContent: "left", alignItems: "left", paddingLeft: "10px", }}>
+                    {this.props.myprojectspage && (<Link to={{ pathname: '/editproject/' + this.props.projectDetails.name }}>Edit Project</Link>)}
                 </div>
-                <Link to={{ pathname: '/projectdetails/'+this.props.projectDetails.name, state: { projectDetails: this.props.projectDetails } }}>
+                <Link to={{ pathname: '/projectdetails/' + this.props.projectDetails.name, state: { projectDetails: this.props.projectDetails } }}>
                     <div style={{ paddingTop: 10, alignSelf: 'flex-start' }}>
                         <ReactImageFallback
                             src={this.props.img}

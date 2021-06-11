@@ -51,29 +51,35 @@ class ProjectDetailsPage extends React.Component {
     type: "",
     name: "",
 
-    project: null
+    project: null,
+    projectname: ""
   };
 
   componentDidMount() {
-    // try {
-    //   this.setState({ project: this.props.location.state.projectDetails });
-    //   this.state.project = this.props.location.state.projectDetails;
-    //   this.setState({ loading: false });
+    window.scrollTo(0, 0);
+    this.setState({ projectname: this.props.match.params.projectname });
+    this.state.projectname = this.props.match.params.projectname;
+    this.getProjectDetails();
+  }
 
-    // } catch (error) {
-
-    // }
-    //if (isEmpty(this.state.project)) {
+  componentDidUpdate(prevProps) {
+    window.scrollTo(0, 0);
+    if (this.props.match.params.projectname !== prevProps.match.params.projectname) {
+      this.setState({ projectname: this.props.match.params.projectname });
+      this.state.projectname = this.props.match.params.projectname;
       this.getProjectDetails();
-    //}
+    };
   }
 
   async getProjectDetails() {
     try {
-      var response = await fetch(baseUrl + getProjectByName + this.props.match.params.projectname);
-      const data = await response.json();
-      this.setState({ project: data })
-      this.setState({ loading: false });
+      if (!isEmpty(this.state.projectname)) {
+        this.setState({ projectname: this.props.match.params.projectname });
+        var response = await fetch(baseUrl + getProjectByName + this.state.projectname);
+        const data = await response.json();
+        this.setState({ project: data })
+        this.setState({ loading: false });
+      }
     } catch (error) {
       console.log(error)
     }
@@ -265,7 +271,7 @@ class ProjectDetailsPage extends React.Component {
                       </CardBody>
                     </Card>}
 
-                  {this.state.project.relatedProjects != null && this.state.project.relatedProjects.length > 0 && 
+                  {this.state.project.relatedProjects != null && this.state.project.relatedProjects.length > 0 &&
                     <Card>
                       <CardHeader style={{
                         justifyContent: 'center',
@@ -274,20 +280,20 @@ class ProjectDetailsPage extends React.Component {
                         borderRadius: '1.9em'
                       }}>Similar Projects</CardHeader>
                       <Row>
-                       
-                      {
-                        this.state.project.relatedProjects.map(function (relatedProject, index) {
-                          return (
-                            <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
-                              <ProjectCard
-                                img={relatedProject.imageUrl}
-                                projectDetails={relatedProject}
-                                myprojectspage={false} />
-                            </Col>
-                          )
-                        })
-                        
-                      }</Row>
+
+                        {
+                          this.state.project.relatedProjects.map(function (relatedProject, index) {
+                            return (
+                              <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
+                                <ProjectCard
+                                  img={relatedProject.imageUrl}
+                                  projectDetails={relatedProject}
+                                  myprojectspage={false} />
+                              </Col>
+                            )
+                          })
+
+                        }</Row>
                     </Card>}
 
 
