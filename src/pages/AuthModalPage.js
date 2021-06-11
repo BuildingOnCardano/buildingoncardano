@@ -18,6 +18,8 @@ class AuthModalPage extends React.Component {
     authState: STATE_LOGIN,
   };
 
+
+  
   toggle = () => {
     this.setState({
       show: !this.state.show,

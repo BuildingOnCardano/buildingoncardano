@@ -53,6 +53,12 @@ const navItemsBottom = [
   { to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle },
 ];
 
+
+const navItemsBottom2 = [
+  { to: '/signout', name: 'signout', exact: false, Icon: MdAccountCircle },
+];
+
+
 const bem = bn.create('sidebar');
 
 class Sidebar extends React.Component {
@@ -60,7 +66,9 @@ class Sidebar extends React.Component {
     isOpenComponents: true,
     isOpenContents: true,
     isOpenPages: true,
-    navItemsTop: []
+    navItemsTop: [],
+    loggedin: false,
+    navItemsBottom: []
   };
 
   componentDidMount() {
@@ -72,14 +80,17 @@ class Sidebar extends React.Component {
           { to: '/myprojects', name: 'my projects', exact: true, Icon: MdVerifiedUser },
           { to: '/addproject', name: 'add project', exact: true, Icon: MdAddToQueue },
 
-        ]
+        ],
+        loggedin: true,
+        navItemsBottom: [{ to: '/signout', name: 'signout', exact: false, Icon: MdAccountCircle }]
       })
 
     } else {
       this.setState({
         navItemsTop: [
           { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard }
-        ]
+        ],
+        navItemsBottom: [{ to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle }]
       })
     }
   }
@@ -173,7 +184,7 @@ class Sidebar extends React.Component {
               ))}
             </Collapse>
 
-            {getUser() == null && navItemsBottom.map(({ to, name, exact, Icon }, index) => (
+            {this.state.navItemsBottom.map(({ to, name, exact, Icon }, index) => (
               <NavItem key={index} className={bem.e('nav-item')}>
                 <BSNavLink
                   id={`navItem-${name}-${index}`}
@@ -188,6 +199,8 @@ class Sidebar extends React.Component {
                 </BSNavLink>
               </NavItem>
             ))}
+
+
 
           </Nav>
         </div>

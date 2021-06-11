@@ -10,7 +10,8 @@ import {
 } from 'reactstrap';
 import { baseUrl, registration, login } from '../assets/services';
 import { Link, Redirect } from "react-router-dom";
-import { setUserSession  } from 'utils/Common.js';
+import { setUserSession } from 'utils/Common.js';
+import { isEmpty } from 'utils/stringutil.js';
 
 
 class AuthForm extends React.Component {
@@ -61,7 +62,7 @@ class AuthForm extends React.Component {
   renderRedirectToDashboard = () => {
     if (this.state.redirectDashoard) {
       localStorage.setItem('user', this.state.email);
-      return <Redirect to={{ pathname: '/', state: { loggedIn: 'loggedIn' } }}/>;
+      return <Redirect to={{ pathname: '/', state: { loggedIn: 'loggedIn' } }} />;
     }
   }
 
@@ -80,48 +81,63 @@ class AuthForm extends React.Component {
   };
 
   handleSubmit = async event => {
-    event.preventDefault();
-    var authState = this.props.authState;
-    var password = this.state.password;
-    if (authState == 'SIGNUP') {
-      var confirmPassword = this.state.confirmPassword;
-      if (password == confirmPassword) {
-        var status = await this.register();
 
-        if (status.response == 'user_exists') {
+    if (isEmpty(this.state.email)) {
+      this.setState({
+        modal_text: "Enter your email address!", modal: true
+      });
+    } else {
+      event.preventDefault();
+      var authState = this.props.authState;
+      var password = this.state.password;
+      if (authState == 'SIGNUP') {
+        var confirmPassword = this.state.confirmPassword;
+        if (password == confirmPassword) {
+          var status = await this.register();
+
+          if (status.response == 'user_exists') {
+            this.setState({
+              modal_text: "User already exists.", modal: true
+            });
+          }
+          else {
+            this.setState({
+              modal_text: "Registration submitted please check you email inbox for verification.", modal: true
+            });
+          //  this.setRedirect();
+
+          }
+        } else {
+
           this.setState({
-            modal_text: "User already exists.", modal: true
+            modal_text: "Passwords dont match.", modal: true
+          });
+        }
+      } else {
+        //login
+        var status = await this.login();
+
+        if (status.response == 'valid_user') {
+          setUserSession(this.state.email, this.state.password);
+          this.setRedirectDashboard();
+        }
+        else if (status.response == 'user doesnt exist') {
+          this.setState({
+            modal_text: "User doesnt exist.", modal: true
+          });
+        }
+        else if (status.response == 'email_not_verified') {
+          this.setState({
+            modal_text: "Email address not verified check your email inbox.", modal: true
           });
         }
         else {
-          this.setRedirect();
+          this.setState({
+            modal_text: "Incorrect password.", modal: true
+          });
         }
-      } else {
-
-        this.setState({
-          modal_text: "Passwords dont match.", modal: true
-        });
-      }
-    } else {
-      //login
-      var status = await this.login();
-
-      if (status.response == 'valid_user') {
-        setUserSession(this.state.email,this.state.password);
-        this.setRedirectDashboard();
-      }
-      else  if (status.response == 'user doesnt exist') {
-        this.setState({
-          modal_text: "User doesnt exist.", modal: true
-        });
-      }
-      else{
-        this.setState({
-          modal_text: "Incorrect password.", modal: true
-        });
       }
     }
-
   };
 
   async register() {

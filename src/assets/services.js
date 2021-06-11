@@ -6,6 +6,7 @@ export const baseUrl = "http://localhost:8080";
 //login and reg
 export const registration = "/registration/user";
 export const login = "/login/user";
+export const verifyuser = "/registration/verifyuser";
 
 //projects
 export const createProject = "/projects/create";
@@ -17,3 +18,5 @@ export const getProjectsStats = "/projects/stats";
 export const getProjectByOwner = "/projects/owner/";////{owneremail}
 export const getProjectByName = "/projects/details/name/";//{projectId}
 export const getProjectByNameAndOwner = "/projects/details/nameandowner/";//{projectId}
+
+

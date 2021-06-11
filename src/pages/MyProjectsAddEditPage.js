@@ -183,24 +183,28 @@ class MyProjectsAddEditPage extends React.Component {
   handleSubmit = async event => {
     event.preventDefault();
 
-    var tags = "";
-    for (const key in selectedListTags) {
-      if (key > 0) {
-        tags += " ";
+    try {
+      var tags = "";
+      for (const key in selectedListTags) {
+        if (key > 0) {
+          tags += " ";
+        }
+        tags += selectedListTags[key].name;
       }
-      tags += selectedListTags[key].name;
-    }
 
-    this.setState({ project: { ...this.state.project, ownerEmail: getUser() } });
-    this.state.project.ownerEmail = getUser();
-    this.setState({ project: { ...this.state.project, type: tags } });
-    this.state.project.type = tags;
+      this.setState({ project: { ...this.state.project, ownerEmail: getUser() } });
+      this.state.project.ownerEmail = getUser();
+      this.setState({ project: { ...this.state.project, type: tags } });
+      this.state.project.type = tags;
 
-    if (this.props.action == 'edit') {
-      this.updateProject();
-    }
-    else {
-      this.createProject();
+      if (this.props.action == 'edit') {
+        this.updateProject();
+      }
+      else {
+        this.createProject();
+      }
+    } catch (error) {
+
     }
   };
 
@@ -333,7 +337,7 @@ class MyProjectsAddEditPage extends React.Component {
                         <Col sm={inputfieldwidth}>
                           <Input type="url" name="name" id="name" placeholder="Add link/Url to project logo" value={this.state.project.imageUrl}
                             onChange={e => this.setState({ project: { ...this.state.project, imageUrl: e.target.value } })} />
-                            <small>Dimensions 250x250px</small></Col>
+                          <small>Dimensions 250x250px</small></Col>
                       </FormGroup>
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Youtube presentation</Label>
@@ -348,8 +352,8 @@ class MyProjectsAddEditPage extends React.Component {
                         <Col sm={inputfieldwidth}>
                           <Input type="textarea" name="description" id="description" value={this.state.project.shortDescription}
                             onChange={e => this.setState({ project: { ...this.state.project, shortDescription: e.target.value } })} />
-                            <small>Characters left {5000 - getLength(this.state.project.shortDescription)}</small></Col>
-                        
+                          <small>Characters left {5000 - getLength(this.state.project.shortDescription)}</small></Col>
+
                       </FormGroup>
 
 
@@ -358,7 +362,7 @@ class MyProjectsAddEditPage extends React.Component {
                         <Col sm={inputfieldwidth}>
                           <Input type="textarea" name="description" id="description" value={this.state.project.description}
                             onChange={e => this.setState({ project: { ...this.state.project, description: e.target.value } })} />
-                            <small>Characters left {10000 - getLength(this.state.project.description)}</small></Col>
+                          <small>Characters left {10000 - getLength(this.state.project.description)}</small></Col>
                       </FormGroup>
 
 

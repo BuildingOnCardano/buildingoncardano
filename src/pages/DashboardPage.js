@@ -1,12 +1,8 @@
 import Page from 'components/Page';
-import { IconWidget, NumberWidget } from 'components/Widget';
 import React from 'react';
 import ReactGA from 'react-ga';
-
 import {
   Card,
-  CardHeader,
-  CardBody,
   Col,
   Row,
   Table,
@@ -22,6 +18,8 @@ import "../styles/styles.css";
 import SearchInput from 'components/SearchInput';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import { removeUserSession } from 'utils/Common.js';
+import { isEmpty } from 'utils/stringutil.js';
 
 const override = css`
   display: block;
@@ -45,6 +43,12 @@ class DashboardPage extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    //handle signout
+    if (!isEmpty(this.props.signout=='true')) {
+      removeUserSession();
+    }
+
     if (width < 600) {
       this.setState({ smallScreen: true });
     }
