@@ -450,6 +450,12 @@ class MyProjectsAddEditPage extends React.Component {
                             onChange={e => this.setState({ project: { ...this.state.project, youtubeHandle: e.target.value } })} /></Col>
                       </FormGroup>
                       <FormGroup row>
+                        <Label for="name" sm={inputnamewidth}>Reddit</Label>
+                        <Col sm={inputfieldwidth}>
+                          <Input type="text" name="name" id="name" placeholder="https://www.reddit.com/r/cardano/" value={this.state.project.redditHandle}
+                            onChange={e => this.setState({ project: { ...this.state.project, redditHandle: e.target.value } })} /></Col>
+                      </FormGroup>
+                      <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Facebook Url</Label>
                         <Col sm={inputfieldwidth}>
                           <Input type="text" name="name" id="name" placeholder="https://www.facebook.com/BuildingOnCardano" value={this.state.project.facebookHandle}

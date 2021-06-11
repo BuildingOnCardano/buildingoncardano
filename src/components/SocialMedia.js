@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTwitter, faTelegram, faYoutube, faFacebook, faDiscord, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faTwitter, faTelegram, faYoutube, faFacebook, faDiscord, faGithub, faReddit } from "@fortawesome/free-brands-svg-icons";
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { isEmpty } from 'utils/stringutil.js';
 import Tooltip from "@material-ui/core/Tooltip";
@@ -21,7 +21,8 @@ export default class SocialMedia extends React.Component {
             youtubeHandle: "",
             facebookHandle: "",
             discordHandle: "",
-            githubLink: ""
+            redditHandle: "",
+            githubLink: "",
         }
     }
     async componentDidMount() {
@@ -48,6 +49,12 @@ export default class SocialMedia extends React.Component {
         if (!isEmpty(this.props.extendedmeta.youtube_handle)) {
             this.state.youtubeHandle = this.props.extendedmeta.youtube_handle;
             this.setState({ youtubeHandle: this.props.extendedmeta.youtube_handle });
+        }
+
+        //reddit
+        if (!isEmpty(this.props.extendedmeta.reddit_handle)) {
+            this.state.redditHandle = this.props.extendedmeta.reddit_handle;
+            this.setState({ redditHandle: this.props.extendedmeta.reddit_handle });
         }
 
         //facebook
@@ -113,6 +120,14 @@ export default class SocialMedia extends React.Component {
                     >
                      <a href={this.state.youtubeHandle} target="_blank" rel="noreferrer">
                             <FontAwesomeIcon size="2x" icon={faYoutube} /> </a></Tooltip>}
+
+                {this.state.redditHandle != "" &&
+                    <Tooltip
+                        title="Reddit"
+                        placement="left"
+                    >
+                     <a href={this.state.redditHandle} target="_blank" rel="noreferrer">
+                            <FontAwesomeIcon size="2x" icon={faReddit} /> </a></Tooltip>}
 
                 {this.state.facebookHandle != "" &&
                     <Tooltip
