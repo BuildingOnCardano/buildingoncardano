@@ -6,8 +6,8 @@ import {
   Row,
   Button
 } from 'reactstrap';
-import BeatLoader
-  from "react-spinners/BeatLoader";
+import CircleLoader
+  from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
 import { baseUrl, getProjectByOwner } from '../assets/services';
 import { getUser, getPassword } from 'utils/Common.js';
@@ -69,7 +69,7 @@ class MyProjectsPage extends React.Component {
         breadcrumbs={[{ name: 'My Projects /', active: true }]}
       >
 
-        <BeatLoader loading={this.state.loading} css={override} size={100} />
+        <CircleLoader loading={this.state.loading} css={override} size={100} />
         {this.state.projects != null ?
           <Row>
             {

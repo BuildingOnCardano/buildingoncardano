@@ -18,8 +18,8 @@ import { Multiselect } from 'multiselect-react-dropdown';
 import { getUser, getPassword } from 'utils/Common.js';
 import { isEmpty } from 'lodash';
 import { getLength } from 'utils/stringutil.js';
-import BeatLoader
-  from "react-spinners/BeatLoader";
+import CircleLoader
+  from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
 import "react-datepicker/dist/react-datepicker.css";
 import TextField from '@material-ui/core/TextField';
@@ -245,7 +245,7 @@ class MyProjectsAddEditPage extends React.Component {
     return (
       <div>
         {
-          this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={100} /></div>
+          this.state.loading ? <div><CircleLoader loading={this.state.loading} css={override} size={100} /></div>
             :
             <Page
               className="MyProjectsAddEditPage"

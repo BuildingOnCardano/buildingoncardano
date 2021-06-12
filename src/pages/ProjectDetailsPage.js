@@ -19,8 +19,8 @@ import {
 
 } from 'reactstrap';
 import { faTwitter, faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
-import BeatLoader
-  from "react-spinners/BeatLoader";
+import CircleLoader
+  from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
 import ReactImageFallback from "react-image-fallback";
 import SocialMedia from '../components/SocialMedia';
@@ -99,7 +99,7 @@ class ProjectDetailsPage extends React.Component {
     return (
       < div >
         {
-          this.state.loading ? <div>Loading projects...<BeatLoader loading={this.state.loading} css={override} size={180} /></div>
+          this.state.loading ? <div><CircleLoader loading={this.state.loading} css={override} size={180} /></div>
             :
             <Page
               className="ProjectDetailsPage"

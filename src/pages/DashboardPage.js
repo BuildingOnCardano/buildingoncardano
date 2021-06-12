@@ -94,7 +94,7 @@ class DashboardPage extends React.Component {
         {/* <div><p><b>Total Projects: </b>{this.state.totalProjects}</p></div>*/}
         <div>
 
-          {this.state.loading ? <div>Loading projects...<CircleLoader loading={this.state.loading} css={override} size={100} /></div>
+          {this.state.loading ? <div><CircleLoader loading={this.state.loading} css={override} size={100} /></div>
             :
 
 
@@ -110,7 +110,7 @@ class DashboardPage extends React.Component {
 
           <Col>
             <Row className="justify-content-md-center">
-              {this.state.loading ? <div>Loading projects...<CircleLoader loading={this.state.loading} css={override} size={100} /></div>
+              {this.state.loading ? <div><CircleLoader loading={this.state.loading} css={override} size={100} /></div>
                 :
                 <div>
                   {this.state.projectTypesAndCount.map(function (item, index) {
@@ -130,7 +130,7 @@ class DashboardPage extends React.Component {
           <hr />
         </div>
 
-        {this.state.loading ? <div>Loading projects...<CircleLoader loading={this.state.loading} css={override} size={100} /></div>
+        {this.state.loading ? <div><CircleLoader loading={this.state.loading} css={override} size={100} /></div>
           :
           <Col>
             <br />
