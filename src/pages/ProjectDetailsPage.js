@@ -34,6 +34,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPage4 } from "@fortawesome/free-brands-svg-icons";
 import { faNewspaper } from "@fortawesome/free-solid-svg-icons";
 import ProjectCard from 'components/ProjectCard';
+import ReactMarkdown from "react-markdown";
 import {
   TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton,
   TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton
@@ -92,6 +93,9 @@ class ProjectDetailsPage extends React.Component {
 
   render() {
 
+    const markdown = "## Some markdown text in multiple paragraphs\n\nAnd this is a paragraph 1\n\nAnd this is a paragraph 2\n\nAnd this is a paragraph 3";
+
+
     return (
       < div >
         {
@@ -139,7 +143,7 @@ class ProjectDetailsPage extends React.Component {
                       <Row>
                         <Col>
                           <h2>Project Description:</h2>
-                          <p>{this.state.project.description}</p>
+                          <ReactMarkdown>{this.state.project.description}</ReactMarkdown>
                           <br></br>
                           {!isEmpty(this.state.project.youTubeEmbedId) && (
                             <YoutubeEmbed embedId={this.state.project.youTubeEmbedId} />)}

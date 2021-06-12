@@ -25,6 +25,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
+import ReactMarkdown from "react-markdown";
+import ReactMde, { ReactMdeTypes } from "react-mde";
+import "react-mde/lib/styles/css/react-mde-all.css";
+
+
 const override = css`
   display: block;
   margin: 0 auto;
@@ -83,7 +88,10 @@ class MyProjectsAddEditPage extends React.Component {
       modal: false,
       modal_backdrop: false,
       modal_nested_parent: false,
-      modal_nested: false
+      modal_nested: false,
+
+      longDesc: "",
+      selectedTab: "write"
     };
   }
 
@@ -224,6 +232,13 @@ class MyProjectsAddEditPage extends React.Component {
     this.setState({ project: { ...this.state.project, salesDetails: data } });
   }
 
+  handleValueChange = (value) => {
+    this.setState({ project: { ...this.state.project, description: value } })
+  };
+
+  handleTabChange = tab => {
+    this.setState({ selectedTab: tab });
+  };
 
   render() {
 
@@ -361,8 +376,16 @@ class MyProjectsAddEditPage extends React.Component {
                       <FormGroup row>
                         <Label for="description" sm={inputnamewidth}>Long Description</Label>
                         <Col sm={inputfieldwidth}>
-                          <Input type="textarea" name="description" id="description" value={this.state.project.description}
-                            onChange={e => this.setState({ project: { ...this.state.project, description: e.target.value } })} />
+                          <ReactMde
+                            onChange={this.handleValueChange}
+                            value={this.state.project.description}
+                            generateMarkdownPreview={(markdown) =>
+                              Promise.resolve(<ReactMarkdown>{markdown}</ReactMarkdown>)
+                            }
+                            selectedTab={this.state.selectedTab}
+                            onTabChange={this.handleTabChange}
+                          />
+
                           <small>Characters left {10000 - getLength(this.state.project.description)}</small></Col>
                       </FormGroup>
 
@@ -505,16 +528,16 @@ class MyProjectsAddEditPage extends React.Component {
                     </Card>
 
                     <Card body>
-                        <h3>Team Details</h3>
-                        <FormGroup row>
-                                            <Label for="teamDescription" sm={inputnamewidth}>Team Description</Label>
-                            <Col sm={inputfieldwidth}>
-                                <Input type="textarea" name="teamDescription" id="teamDescription" value={this.state.project.teamDescription}
-                                                    onChange={e => this.setState({ project: { ...this.state.project, teamDescription: e.target.value } })} />
-                                                <small>Characters left {5000 - getLength(this.state.project.teamDescription)}</small></Col>
+                      <h3>Team Details</h3>
+                      <FormGroup row>
+                        <Label for="teamDescription" sm={inputnamewidth}>Team Description</Label>
+                        <Col sm={inputfieldwidth}>
+                          <Input type="textarea" name="teamDescription" id="teamDescription" value={this.state.project.teamDescription}
+                            onChange={e => this.setState({ project: { ...this.state.project, teamDescription: e.target.value } })} />
+                          <small>Characters left {5000 - getLength(this.state.project.teamDescription)}</small></Col>
 
-                        </FormGroup>
-                        <h3>Team Details</h3>
+                      </FormGroup>
+                      <h3>Team Details</h3>
                       <MultiAddTeamMembers sendData={this.handler} existingTeam={this.state.project.projectTeam} />
                     </Card>
 

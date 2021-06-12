@@ -118,7 +118,7 @@ class AuthForm extends React.Component {
           }
           else {
             this.setState({
-              modal_text: "Registration submitted please check your email inbox for verification.", modal: true
+              modal_text: "Registration submitted please check your email inbox/junk folder for a verification mail.", modal: true
             });
             //  this.setRedirect();
 
