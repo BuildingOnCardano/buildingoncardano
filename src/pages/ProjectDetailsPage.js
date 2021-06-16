@@ -148,6 +148,10 @@ class ProjectDetailsPage extends React.Component {
                           {!isEmpty(this.state.project.youTubeEmbedId) && (
                             <YoutubeEmbed embedId={this.state.project.youTubeEmbedId} />)}
                           <br></br>
+                          {!isEmpty(this.state.project.teamDescription) &&
+                          <div>
+                          <h2>Team Description:</h2>
+                          <ReactMarkdown>{this.state.project.teamDescription}</ReactMarkdown></div>}
 
                         </Col>
 
