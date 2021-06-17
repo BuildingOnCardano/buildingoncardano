@@ -172,7 +172,8 @@ class ProjectDetailsPage extends React.Component {
                           alignItems: 'center',
                           width: '100%',
                           borderRadius: '1.9em'
-                        }}>Team Details</CardHeader>
+                        }}
+                        >Team Details</CardHeader>
                         <CardBody style={{
                           justifyContent: 'center',
                           alignItems: 'center',

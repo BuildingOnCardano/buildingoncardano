@@ -24,17 +24,17 @@ class MainLayout extends React.Component {
   componentDidMount() {
     this.checkBreakpoint(this.props.breakpoint);
 
-    setTimeout(() => {
-      if (!this.notificationSystem) {
-        return;
-      }
+    // setTimeout(() => {
+    //   if (!this.notificationSystem) {
+    //     return;
+    //   }
 
-      this.notificationSystem.addNotification({
-        title: <MdImportantDevices />,
-        message: 'Welcome to Building On Cardano! Brought to you by PAUL and SHAMROCK.',
-        level: 'info',
-      });
-    }, 1500);
+    //   this.notificationSystem.addNotification({
+    //     title: <MdImportantDevices />,
+    //     message: 'Welcome to Building On Cardano! Brought to you by PAUL and SHAMROCK.',
+    //     level: 'info',
+    //   });
+    // }, 1500);
   }
 
   // close sidebar when

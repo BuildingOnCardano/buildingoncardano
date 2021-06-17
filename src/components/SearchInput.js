@@ -6,6 +6,8 @@ import { Link, Redirect } from "react-router-dom";
 import ReactImageFallback from "react-image-fallback";
 import CardanoImage from 'assets/img/cardanoIcon.png';
 
+const width = window.innerWidth;
+
 class SearchInput extends React.Component {
   constructor(props) {
     super(props)
@@ -52,18 +54,14 @@ class SearchInput extends React.Component {
       
       <div className="serach-tab">
         {this.renderRedirectToLogin()}
-        {/* <CardHeader><h2>Search Projects</h2></CardHeader> */}
         <Select
           value={selectedOption}
           options={this.state.options}
           onChange={this.handleChange}
-
-          styles={customStyles}
-          placeholder="Search by Project Name..."
+          styles={width <= 700 ? mobileStyle : standardStyle}
+          placeholder="Search Project..."
           openMenuOnClick={true}
           classNamePrefix="select"
-          styles={customStyles}
-          // width='200px'
           menuColor='blue'
         // components={{ DropdownIndicator }}
         />
@@ -75,16 +73,16 @@ class SearchInput extends React.Component {
 export default SearchInput;
 
 
-const customStyles = {
+const mobileStyle = {
   control: (base, state) => ({
     ...base,
-    fontFamily: 'Times New Roman',
-    fontSize: 22,
     border: state.isFocused ? 0 : 0,
     boxShadow: state.isFocused ? 0 : 0,
     cursor: 'text',
     borderRadius: 0,
     borderBottom: '1px',
+    width: '70vw',
+    padding: '0.3em'
   }),
 
   option: (styles, { isFocused }) => {
@@ -101,6 +99,46 @@ const customStyles = {
     ...styles,
     color: 'black',
     fontFamily: 'Times New Roman, Times, Serif',
+  }),
+
+  menu: styles => ({
+    ...styles,
+    marginTop: 0,
+    boxShadow: 'none',
+    borderRadius: 0,
+  }),
+
+  singleValue: styles => ({
+    ...styles,
+    color: 'rgba(0, 0, 0)',
+  }),
+};
+
+const standardStyle = {
+  control: (base, state) => ({
+    ...base,
+    border: state.isFocused ? 0 : 0,
+    boxShadow: state.isFocused ? 0 : 0,
+    cursor: 'text',
+    borderRadius: 0,
+    borderBottom: '1px',
+    width: '36vw',
+    padding: '0.3em'
+  }),
+
+  option: (styles, { isFocused }) => {
+    return {
+      ...styles,
+      cursor: 'pointer',
+      backgroundColor: isFocused ? 'white' : 'white',
+      color: isFocused ? 'rgba(0, 0, 0)' : 'black',
+      lineHeight: 2,
+    }
+  },
+
+  input: styles => ({
+    ...styles,
+    color: 'black',
   }),
 
   menu: styles => ({

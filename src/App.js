@@ -13,6 +13,7 @@ import ProjectDetailsPage from 'pages/ProjectDetailsPage';
 import MyProjectsPage from 'pages/MyProjectsPage';
 import MyProjectsAddEditPage from 'pages/MyProjectsAddEditPage';
 import VerifyEmail from 'pages/VerifyEmail';
+import AllProjects from 'pages/AllProjects';
 import { createBrowserHistory } from "history";
 
 const getBasename = () => {
@@ -86,6 +87,9 @@ class App extends React.Component {
           <MainLayout breakpoint={this.props.breakpoint}>
             <React.Suspense fallback={<PageSpinner />}>
               <Route exact path="/" render={(props) => <DashboardPage {...props} />} />
+
+              <Route exact path="/allprojects" render={(props) => <AllProjects {...props} />} />
+              
 
               <Route path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
               <Route path="/application" component={() => <ProjectsPage projectType="application" />}></Route>
