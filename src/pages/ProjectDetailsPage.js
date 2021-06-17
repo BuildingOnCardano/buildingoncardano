@@ -33,7 +33,7 @@ import { baseUrl, getProjectByName } from '../assets/services';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPage4 } from "@fortawesome/free-brands-svg-icons";
 import { faNewspaper } from "@fortawesome/free-solid-svg-icons";
-import ProjectCard from 'components/ProjectCard';
+import SimilarProjectCard from 'components/SimilarProjectCard';
 import ReactMarkdown from "react-markdown";
 import {
   TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton,
@@ -149,9 +149,9 @@ class ProjectDetailsPage extends React.Component {
                             <YoutubeEmbed embedId={this.state.project.youTubeEmbedId} />)}
                           <br></br>
                           {!isEmpty(this.state.project.teamDescription) &&
-                          <div>
-                          <h2>Team Description:</h2>
-                          <ReactMarkdown>{this.state.project.teamDescription}</ReactMarkdown></div>}
+                            <div>
+                              <h2>Team Description:</h2>
+                              <ReactMarkdown>{this.state.project.teamDescription}</ReactMarkdown></div>}
 
                         </Col>
 
@@ -279,39 +279,6 @@ class ProjectDetailsPage extends React.Component {
                       </CardBody>
                     </Card>}
 
-                  {this.state.project.relatedProjects != null && this.state.project.relatedProjects.length > 0 &&
-                    <Card>
-                      <CardHeader style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: '100%',
-                        borderRadius: '1.9em'
-                      }}>Similar Projects</CardHeader>
-                      <Row>
-
-                        {
-                          this.state.project.relatedProjects.map(function (relatedProject, index) {
-                            return (
-                              <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
-                                <ProjectCard
-                                  img={relatedProject.imageUrl}
-                                  projectDetails={relatedProject}
-                                  myprojectspage={false} />
-                              </Col>
-                            )
-                          })
-
-                        }</Row>
-                    </Card>}
-
-
-                  <Card body style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    border: 'none',
-                  }}>
-                    <p><b>Project Added on </b>{this.state.project.createdDate.split('T')[0]}  |  <b>Last Updated on </b>{this.state.project.updatedDate.split('T')[0]}</p>
-                  </Card>
                 </Col>
 
                 <Col md={2} sm={6} lg={3} xs={12} className="mb-3">
@@ -441,6 +408,42 @@ class ProjectDetailsPage extends React.Component {
 
               </Row>
 
+              <Row>
+                <Col>
+                  {this.state.project.relatedProjects != null && this.state.project.relatedProjects.length > 0 &&
+                    <Card>
+                      <CardHeader style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '100%',
+                        borderRadius: '1.9em'
+                      }}>Similar Projects</CardHeader>
+                      <Row>
+
+                        {
+                          this.state.project.relatedProjects.map(function (relatedProject, index) {
+                            return (
+                              <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
+                                <SimilarProjectCard
+                                  img={relatedProject.imageUrl}
+                                  projectDetails={relatedProject}
+                                  myprojectspage={false} />
+                              </Col>
+                            )
+                          })
+
+                        }</Row>
+                    </Card>}
+
+                  <Card body style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    border: 'none',
+                  }}>
+                    <p><b>Project Added on </b>{this.state.project.createdDate.split('T')[0]}  |  <b>Last Updated on </b>{this.state.project.updatedDate.split('T')[0]}</p>
+                  </Card>
+                </Col>
+              </Row>
 
             </Page>
         }
