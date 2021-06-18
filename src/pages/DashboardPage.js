@@ -10,7 +10,9 @@ import {
   Table,
   Button,
   Nav,
-  Navbar
+  Navbar,
+  CardText,
+  CardTitle
 } from 'reactstrap';
 import CircleLoader
   from "react-spinners/CircleLoader";
@@ -275,14 +277,41 @@ class DashboardPage extends React.Component {
                     </CardHeader>
                     <CardBody>
 
-                            {this.state.salesData.map(function (item, index) {
-                              if (index < 10) {
-                                return (
-                                  <div>
-                                    {item.projectName}
-                                    {item.saleStartDate}
+                      {this.state.salesData.map(function (item, index) {
+                        if (index < 1) {
+                          return (
+                            <div>
+                              {/* {item.projectName}
+                              {item.saleStartDate}
 
-                                {/*    "id": 36,
+
+                              <CardHeader style={{
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                width: '100%',
+                                borderRadius: '0em',
+
+                              }}>{item.saleStatus}</CardHeader> */}
+
+                              <CardTitle><b>{item.projectName}</b></CardTitle>
+                              <CardText>
+                                <p><b>Sale Type: </b>{item.upcomingSale}</p>
+                                <p><b>Start Date: </b>{item.saleStartDate}</p>
+                                <p><b>End Date: </b>{item.saleEndDate}</p>
+                                <p><b>Token Price: </b>{item.saleTokenPrice}</p>
+                                <p><b>Accepted Funding: </b>{item.acceptedFunding}</p>
+                              </CardText>
+                              <hr />
+                              {!isEmpty(item.tokenDistributionDetail) && (
+                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                  <Button variant="outline-light"><a href={item.tokenDistributionDetail} target="_blank" rel="noreferrer">Sale Details</a></Button>
+                                </div>
+                              )}
+
+
+
+
+                              {/*    "id": 36,
          "projectName": "FANANCE CLUB",
         "upcomingSale": "Private Sale",
         "saleStartDate": "2021-06-15",
@@ -292,10 +321,10 @@ class DashboardPage extends React.Component {
         "tokenDistributionDetail": "https://fanance.club/",
         "acceptedFunding": "ADA",
         "saleStatus": "Live" */}
-                                  </div>
-                                )
-                              }
-                            })}
+                            </div>
+                          )
+                        }
+                      })}
 
                     </CardBody>
                   </Card>
