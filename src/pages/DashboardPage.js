@@ -4,6 +4,7 @@ import ReactGA from 'react-ga';
 import {
   Card,
   CardHeader,
+  CardBody,
   Col,
   Row,
   Table,
@@ -23,6 +24,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { removeUserSession } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
+import { Line, Bar, Pie } from "react-chartjs-2";
 
 const override = css`
   display: block;
@@ -42,6 +44,7 @@ class DashboardPage extends React.Component {
     loading: true,
     totalProjects: '',
     projectTypesAndCount: [],
+    barChartData: null,
     smallScreen: false
   };
 
@@ -86,8 +89,59 @@ class DashboardPage extends React.Component {
     try {
       var response = await fetch(baseUrl + getProjectsStats);
       const data = await response.json();
-      this.setState({ totalProjects: data.totalProjects, projectTypesAndCount: data.projectTypesAndCount });
+
+
+      var labels = [];
+      var counts = [];
+      data.projectTypesAndCount.forEach(element => {
+        labels.push(element.projectType);
+        counts.push(element.projectCount)
+      });
+
+      var chartData = {
+        labels: labels,
+        datasets: [
+          {
+            label: '# of Types',
+            data: counts,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.4)',
+              'rgba(31,179,124, 0.6)',
+              'rgba(75, 192, 192, 0.8)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.4)',
+              'rgba(144,14,249, 0.6)',
+              'rgba(54, 162, 0, 0.8)',
+              'rgba(255, 100, 86, 0.2)',
+              'rgba(165,239,83, 0.4)',
+              'rgba(120, 102, 255, 0.6)',
+              'rgba(164,113,111, 0.8)',
+              'rgba(178,135,21, 0.2)',
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(31,179,124, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+              'rgba(144,14,249, 1 )',
+              'rgba(54, 162, 0, 1)',
+              'rgba(255, 100, 86, 1)',
+              'rgba(165,239,83, 1)',
+              'rgba(120, 102, 255, 1)',
+              'rgba(164,113,111, 1)',
+              'rgba(178,135,21, 1)',
+            ],
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      this.setState({ totalProjects: data.totalProjects, projectTypesAndCount: data.projectTypesAndCount, barChartData: chartData });
       this.state.projectTypesAndCount = data.projectTypesAndCount;
+
     } catch (error) {
       console.log(error)
     }
@@ -103,14 +157,14 @@ class DashboardPage extends React.Component {
         {this.state.loading ? <div><CircleLoader loading={this.state.statsloading} css={override} size={100} /></div>
           :
           <div>
-            {/* <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center">
               <Col lg={5} >
                 <SearchInput projects={this.state.projects} />
               </Col>
-            </Row> */}
+            </Row>
 
 
-            <div className="my-auto"><hr />
+            {/* <div className="my-auto"><hr />
               <Col>
                 <Row className="justify-content-md-center">
                   <div>
@@ -127,7 +181,7 @@ class DashboardPage extends React.Component {
                 </Row>
               </Col>
               <hr />
-            </div>
+            </div> */}
 
 
             <div>
@@ -139,12 +193,11 @@ class DashboardPage extends React.Component {
                         <h3 className="mb-0">Latest Projects</h3>
                         <div className="col text-right">
                           <Button
-                            color="primary"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
                             size="sm"
                           >
-                            See all
+                            <Link to={{ pathname: '/allprojects' }}>
+                              See all
+                            </Link>
                           </Button>
                         </div>
                       </Row>
@@ -220,40 +273,57 @@ class DashboardPage extends React.Component {
                         <h3 className="mb-0">Live Sales</h3>
                       </Row>
                     </CardHeader>
+                    <CardBody>
+                      <TableContainer component={Paper}>
+                        <Table >
+                          <TableHead>
+                            {this.state.smallScreen ?
+                              <TableRow>
+                                <TableCell ><h2>Project</h2></TableCell>
+                                <TableCell ><h2>Type</h2></TableCell>
+                              </TableRow >
+                              :
+                              <TableRow >
+                                {/* <TableCell></TableCell> */}
+                                <TableCell><h2>Project</h2></TableCell>
+                                <TableCell><h2>Type</h2></TableCell>
+                                <TableCell><h2>Token Type</h2></TableCell>
+                                <TableCell><h2>Ticker</h2></TableCell>
+                                <TableCell><h2>Stage</h2></TableCell>
+                              </TableRow >}
 
-                    <TableContainer component={Paper}>
-                      <Table >
-                        <TableHead>
-                          {this.state.smallScreen ?
-                            <TableRow>
-                              <TableCell ><h2>Project</h2></TableCell>
-                              <TableCell ><h2>Type</h2></TableCell>
-                            </TableRow >
-                            :
-                            <TableRow >
-                              {/* <TableCell></TableCell> */}
-                              <TableCell><h2>Project</h2></TableCell>
-                              <TableCell><h2>Type</h2></TableCell>
-                              <TableCell><h2>Token Type</h2></TableCell>
-                              <TableCell><h2>Ticker</h2></TableCell>
-                              <TableCell><h2>Stage</h2></TableCell>
-                            </TableRow >}
+                          </TableHead>
+                          <TableBody>
+                            {this.state.salesData.map(function (item, index) {
+                              if (index < 10) {
+                                return (
+                                  <div>
+                                    {item.projectName}
+                                  </div>
+                                )
+                              }
+                            })}
+                          </TableBody >
+                        </Table>
+                      </TableContainer>
+                    </CardBody>
+                  </Card>
 
-                        </TableHead>
-                        <TableBody>
-                          {this.state.salesData.map(function (item, index) {
-                            if (index < 10) {
-                              return (
-                                <div>
-                                  {item.projectName}
-                                </div>
-                              )
-                            }
-                          })}
-                        </TableBody >
-                      </Table>
-                    </TableContainer>
 
+                  <Card>
+                    <CardHeader className="border-0">
+                      <Row className="align-items-center">
+                        <h3 className="mb-0">Project Types</h3>
+                      </Row>
+                    </CardHeader>
+                    <CardBody>
+                      <div className="chart">
+                        <Bar
+                          data={this.state.barChartData}
+                        // options={this.state.barChartData.options}
+                        />
+                      </div>
+                    </CardBody>
                   </Card>
                 </Col>
               </Row>
