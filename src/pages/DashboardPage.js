@@ -157,14 +157,14 @@ class DashboardPage extends React.Component {
         {this.state.loading ? <div><CircleLoader loading={this.state.statsloading} css={override} size={100} /></div>
           :
           <div>
-            <Row className="justify-content-md-center">
+            {/* <Row className="justify-content-md-center">
               <Col lg={5} >
                 <SearchInput projects={this.state.projects} />
               </Col>
-            </Row>
+            </Row> */}
 
 
-            {/* <div className="my-auto"><hr />
+            <div className="my-auto"><hr />
               <Col>
                 <Row className="justify-content-md-center">
                   <div>
@@ -181,7 +181,7 @@ class DashboardPage extends React.Component {
                 </Row>
               </Col>
               <hr />
-            </div> */}
+            </div>
 
 
             <div>
@@ -216,8 +216,8 @@ class DashboardPage extends React.Component {
                               {/* <TableCell></TableCell> */}
                               <TableCell><h2>Project</h2></TableCell>
                               <TableCell><h2>Type</h2></TableCell>
-                              <TableCell><h2>Token Type</h2></TableCell>
-                              <TableCell><h2>Ticker</h2></TableCell>
+                              {/* <TableCell><h2>Token Type</h2></TableCell>
+                              <TableCell><h2>Ticker</h2></TableCell> */}
                               <TableCell><h2>Stage</h2></TableCell>
                             </TableRow >}
 
@@ -250,8 +250,8 @@ class DashboardPage extends React.Component {
                                       style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
                                     />)}{item.name}</p></TableCell>
                                     <TableCell><p>{item.type}</p></TableCell>
-                                    <TableCell><p>{item.tokenType}</p></TableCell>
-                                    <TableCell><p>{item.ticker}</p></TableCell>
+                                    {/* <TableCell><p>{item.tokenType}</p></TableCell>
+                                    <TableCell><p>{item.ticker}</p></TableCell> */}
                                     <TableCell><p>{item.stage}</p></TableCell>
                                   </TableRow >
                                 )
@@ -274,38 +274,29 @@ class DashboardPage extends React.Component {
                       </Row>
                     </CardHeader>
                     <CardBody>
-                      <TableContainer component={Paper}>
-                        <Table >
-                          <TableHead>
-                            {this.state.smallScreen ?
-                              <TableRow>
-                                <TableCell ><h2>Project</h2></TableCell>
-                                <TableCell ><h2>Type</h2></TableCell>
-                              </TableRow >
-                              :
-                              <TableRow >
-                                {/* <TableCell></TableCell> */}
-                                <TableCell><h2>Project</h2></TableCell>
-                                <TableCell><h2>Type</h2></TableCell>
-                                <TableCell><h2>Token Type</h2></TableCell>
-                                <TableCell><h2>Ticker</h2></TableCell>
-                                <TableCell><h2>Stage</h2></TableCell>
-                              </TableRow >}
 
-                          </TableHead>
-                          <TableBody>
                             {this.state.salesData.map(function (item, index) {
                               if (index < 10) {
                                 return (
                                   <div>
                                     {item.projectName}
+                                    {item.saleStartDate}
+
+                                {/*    "id": 36,
+         "projectName": "FANANCE CLUB",
+        "upcomingSale": "Private Sale",
+        "saleStartDate": "2021-06-15",
+        "saleEndDate": "2021-06-30",
+        "saleDetailLink": "",
+        "saleTokenPrice": "$0.04",
+        "tokenDistributionDetail": "https://fanance.club/",
+        "acceptedFunding": "ADA",
+        "saleStatus": "Live" */}
                                   </div>
                                 )
                               }
                             })}
-                          </TableBody >
-                        </Table>
-                      </TableContainer>
+
                     </CardBody>
                   </Card>
 

@@ -401,12 +401,9 @@ class ProjectDetailsPage extends React.Component {
                             />
                           </CardBody>
                         </Card>}
-
-
                     </Col>
                   </Row>
                 </Col>
-
               </Row>
 
               <Row>
@@ -420,7 +417,6 @@ class ProjectDetailsPage extends React.Component {
                         borderRadius: '1.9em'
                       }}>Similar Projects</CardHeader>
                       <Row>
-
                         {
                           this.state.project.relatedProjects.map(function (relatedProject, index) {
                             return (
@@ -435,7 +431,6 @@ class ProjectDetailsPage extends React.Component {
 
                         }</Row>
                     </Card>}
-
                   <Card body style={{
                     justifyContent: 'center',
                     alignItems: 'center',

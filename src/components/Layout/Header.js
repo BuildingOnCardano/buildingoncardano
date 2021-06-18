@@ -86,7 +86,7 @@ class Header extends React.Component {
   componentDidMount() {
     var user = getUser();
     this.setState({ user: user });
-    //this.getAllProjects();
+    this.getAllProjects();
   }
 
   async getAllProjects() {
@@ -118,9 +118,9 @@ class Header extends React.Component {
 
 
         <Nav navbar className={bem.e('nav-right')}>
-        {/* {this.state.projects != null &&
+        {this.state.projects != null &&
             <SearchInput projects={this.state.projects} />
-          } */}
+          }
           {/* {(this.state.user != null) && (<p>Logged in as: {this.state.user}</p>)} */}
           {/* <NavItem className="d-inline-flex">
             <NavLink id="Popover1" className="position-relative">
