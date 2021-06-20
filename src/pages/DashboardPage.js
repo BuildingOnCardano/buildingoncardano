@@ -167,7 +167,7 @@ class DashboardPage extends React.Component {
                   <div>
                     {this.state.projectTypesAndCount.map(function (item, index) {
                       return (
-                        <Button className="btn-tag">
+                        <Button  size="sm" className="btn-tag">
                           <Link to={{ pathname: '/' + item.projectType }}>
                             {item.projectType} ({item.projectCount})
                           </Link>
