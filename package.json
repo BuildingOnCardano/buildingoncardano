@@ -49,6 +49,7 @@
     "react-mde": "^11.5.0",
     "react-notification-system": "^0.4.0",
     "react-paginate": "^7.1.2",
+    "react-responsive-carousel": "^3.2.18",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-select": "^4.3.1",

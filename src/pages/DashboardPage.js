@@ -27,6 +27,8 @@ import Paper from '@material-ui/core/Paper';
 import { removeUserSession } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
 import { Line, Bar, Pie } from "react-chartjs-2";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 const override = css`
   display: block;
@@ -159,13 +161,6 @@ class DashboardPage extends React.Component {
         {this.state.loading ? <div><CircleLoader loading={this.state.statsloading} css={override} size={100} /></div>
           :
           <div>
-            {/* <Row className="justify-content-md-center">
-              <Col lg={5} >
-                <SearchInput projects={this.state.projects} />
-              </Col>
-            </Row> */}
-
-
             <div className="my-auto"><hr />
               <Col>
                 <Row className="justify-content-md-center">
@@ -188,7 +183,7 @@ class DashboardPage extends React.Component {
 
             <div>
               <Row>
-                <Col>
+              <Col lg={7} md={12} sm={12} xs={12} className="mb-3">
                   <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
@@ -268,65 +263,36 @@ class DashboardPage extends React.Component {
 
 
                 </Col>
-                <Col>
+                <Col lg={5} md={12} sm={12} xs={12} className="mb-3">
                   <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
                         <h3 className="mb-0">Live Sales</h3>
                       </Row>
                     </CardHeader>
-                    <CardBody>
 
+                    <Carousel autoPlay interval="7000" showArrows={true} showThumbs={false} infiniteLoop={true} showIndicators={false}>
                       {this.state.salesData.map(function (item, index) {
-                        if (index < 1) {
-                          return (
-                            <div>
-                              {/* {item.projectName}
-                              {item.saleStartDate}
-
-
-                              <CardHeader style={{
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                width: '100%',
-                                borderRadius: '0em',
-
-                              }}>{item.saleStatus}</CardHeader> */}
-
+                        return (
+                          <div>
+                            <CardBody>
                               <CardTitle><b>{item.projectName}</b></CardTitle>
                               <CardText>
                                 <p><b>Sale Type: </b>{item.upcomingSale}</p>
-                                <p><b>Start Date: </b>{item.saleStartDate}</p>
-                                <p><b>End Date: </b>{item.saleEndDate}</p>
-                                <p><b>Token Price: </b>{item.saleTokenPrice}</p>
-                                <p><b>Accepted Funding: </b>{item.acceptedFunding}</p>
+                                <p><b>Start Date: </b>{item.saleStartDate} <b>End Date: </b>{item.saleEndDate}</p>
                               </CardText>
                               <hr />
                               {!isEmpty(item.tokenDistributionDetail) && (
                                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                  <Button variant="outline-light"><a href={item.tokenDistributionDetail} target="_blank" rel="noreferrer">Sale Details</a></Button>
+                                  <Button
+                                    size="sm" variant="outline-light"><a href={item.tokenDistributionDetail} target="_blank" rel="noreferrer">Sale Details</a></Button>
                                 </div>
                               )}
-
-
-
-
-                              {/*    "id": 36,
-         "projectName": "FANANCE CLUB",
-        "upcomingSale": "Private Sale",
-        "saleStartDate": "2021-06-15",
-        "saleEndDate": "2021-06-30",
-        "saleDetailLink": "",
-        "saleTokenPrice": "$0.04",
-        "tokenDistributionDetail": "https://fanance.club/",
-        "acceptedFunding": "ADA",
-        "saleStatus": "Live" */}
-                            </div>
-                          )
-                        }
+                            </CardBody>
+                          </div>
+                        )
                       })}
-
-                    </CardBody>
+                    </Carousel>
                   </Card>
 
 
