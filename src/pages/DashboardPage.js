@@ -167,12 +167,12 @@ class DashboardPage extends React.Component {
                   <div>
                     {this.state.projectTypesAndCount.map(function (item, index) {
                       return (
-                        <Button  size="sm" className="btn-tag">
-                          <Link to={{ pathname: '/' + item.projectType }}>
-                            {item.projectType} ({item.projectCount})
-                          </Link>
-                        </Button>
-                      )
+                        <Button size="sm" className="btn-tag2">
+                        <Link to={{ pathname: '/' + item.projectType }}>
+                          {item.projectType} ({item.projectCount})
+                        </Link>
+                      </Button>
+                                            )
                     })}
                   </div>
                 </Row>
@@ -183,7 +183,7 @@ class DashboardPage extends React.Component {
 
             <div>
               <Row>
-              <Col lg={7} md={12} sm={12} xs={12} className="mb-3">
+                <Col lg={7} md={12} sm={12} xs={12} className="mb-3">
                   <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
