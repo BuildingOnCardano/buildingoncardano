@@ -168,11 +168,11 @@ class DashboardPage extends React.Component {
                     {this.state.projectTypesAndCount.map(function (item, index) {
                       return (
                         <Button size="sm" className="btn-tag2">
-                        <Link to={{ pathname: '/' + item.projectType }}>
-                          {item.projectType} ({item.projectCount})
-                        </Link>
-                      </Button>
-                                            )
+                          <Link to={{ pathname: '/' + item.projectType }}>
+                            {item.projectType} ({item.projectCount})
+                          </Link>
+                        </Button>
+                      )
                     })}
                   </div>
                 </Row>

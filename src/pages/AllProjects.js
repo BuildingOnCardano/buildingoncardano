@@ -15,12 +15,15 @@ import CircleLoader
 import { css } from "@emotion/core";
 import { baseUrl, getAllProjects, getProjectsStats } from '../assets/services';
 import { Link } from 'react-router-dom';
-import { TableRow, TableCell, TableHead, TableBody, TableContainer } from '@material-ui/core';
+import { TableRow, TableCell, TableHead, TableBody, TableContainer, TableSortLabel } from '@material-ui/core';
 import "../styles/styles.css";
 import Paper from '@material-ui/core/Paper';
 import { removeUserSession } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
 import SearchBar from "material-ui-search-bar";
+import { DataGrid } from '@material-ui/data-grid';
+import { Redirect } from "react-router-dom";
+
 
 const override = css`
   display: block;
@@ -31,6 +34,15 @@ const override = css`
 const width = window.innerWidth;
 
 
+
+const columns = [
+  { field: 'project', headerName: 'Project', width: 150 },
+  { field: 'type', headerName: 'Type', width: 150 },
+  { field: 'tokentype', headerName: 'Token Type', width: 150 },
+  { field: 'ticker', headerName: 'Ticker', width: 150 },
+  { field: 'stage', headerName: 'Stage', width: 150 },
+];
+
 class AllProjects extends React.Component {
   state = {
     projects: null,
@@ -38,7 +50,7 @@ class AllProjects extends React.Component {
     totalProjects: '',
     projectTypesAndCount: [],
     smallScreen: false,
-    searched:  "",
+    searched: "",
     filterAbleProjects: null
   };
 
@@ -62,7 +74,7 @@ class AllProjects extends React.Component {
     try {
       var response = await fetch(baseUrl + getAllProjects);
       const data = await response.json();
-      this.setState({ projects: data, loading: false, filterAbleProjects: data })
+      this.createRows(data);
     } catch (error) {
       console.log(error)
     }
@@ -70,20 +82,51 @@ class AllProjects extends React.Component {
 
   requestSearch(searchedVal) {
     this.setState({ searched: searchedVal });
-
-    if(isEmpty(searchedVal)){
+    if (isEmpty(searchedVal)) {
       this.cancelSearch();
-    }else{
+    } else {
       const filteredRows = this.state.filterAbleProjects.filter((row) => {
-        return row.name.toLowerCase().includes(searchedVal.toLowerCase());
+        return row.project.toLowerCase().includes(searchedVal.toLowerCase());
       });
       this.setState({ filterAbleProjects: filteredRows });
     }
   };
-  
+
   cancelSearch = () => {
-    this.setState({ searched: null,  filterAbleProjects: this.state.projects});
+    this.setState({ searched: null, filterAbleProjects: this.state.projects });
   };
+
+  handleTableSort = property => event => {
+    console.log("clicked");
+    console.log(event);
+  }
+
+  createRows(data) {
+    var rows = [];
+
+    for (let index = 0; index < data.length; index++) {
+      const item = data[index];
+      var row = {
+        id: index, project: item.name, type: item.type, tokentype: item.tokenType, ticker: item.ticker, stage: item.stage
+      };
+      rows.push(row);
+    }
+    this.setState({ projects: rows, loading: false, filterAbleProjects: rows })
+  }
+
+  handleRowClick(rowData){
+    // console.log(rowData);
+    this.setState({ redirect: rowData.project})
+  }
+
+  renderRedirectToProject = () => {
+    if (!isEmpty(this.state.redirect)) {
+      var url = "/projectdetails/"+this.state.redirect;
+      this.setState({ redirect: ""});
+      return <Redirect to={{ pathname: url }} />;
+    }
+  }
+
 
   render() {
 
@@ -91,6 +134,7 @@ class AllProjects extends React.Component {
       <Page
         className="AllProjects"
       >
+        {this.renderRedirectToProject()}
         {this.state.loading ? <div><CircleLoader loading={this.state.loading} css={override} size={100} /></div>
           :
           <div>
@@ -101,63 +145,10 @@ class AllProjects extends React.Component {
                   onChange={(searchVal) => this.requestSearch(searchVal)}
                   onCancelSearch={() => this.cancelSearch()}
                 />
-                <TableContainer component={Paper}>
-                  <Table >
-                    <TableHead>
-                      {this.state.smallScreen ?
-                        <TableRow>
-                          <TableCell ><h2>Project</h2></TableCell>
-                          <TableCell ><h2>Type</h2></TableCell>
-                        </TableRow >
-                        :
-                        <TableRow >
-                          {/* <TableCell></TableCell> */}
-                          <TableCell><h2>Project</h2></TableCell>
-                          <TableCell><h2>Type</h2></TableCell>
-                          <TableCell><h2>Token Type</h2></TableCell>
-                          <TableCell><h2>Ticker</h2></TableCell>
-                          <TableCell><h2>Stage</h2></TableCell>
-                        </TableRow >}
-
-                    </TableHead>
-                    <TableBody>
-
-                      {this.state.smallScreen ?
-                        this.state.filterAbleProjects.map(function (item, index) {
-                          return (
-                            <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                              <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
-                                src={item.imageUrl}
-                                className="rounded"
-                                style={{ width: 30, height: 30 }}
-                              />)}    {item.name}</p></TableCell>
-                              <TableCell><p>{item.type}</p></TableCell>
-
-                            </TableRow >
-                          )
-                        })
-
-                        :
-                        this.state.filterAbleProjects.map(function (item, index) {
-                          if (index < 10) {
-                            return (
-                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
-                                  src={item.imageUrl}
-                                  className="rounded"
-                                  style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
-                                />)}{item.name}</p></TableCell>
-                                <TableCell><p>{item.type}</p></TableCell>
-                                <TableCell><p>{item.tokenType}</p></TableCell>
-                                <TableCell><p>{item.ticker}</p></TableCell>
-                                <TableCell><p>{item.stage}</p></TableCell>
-                              </TableRow >
-                            )
-                          }
-                        })}
-                    </TableBody >
-                  </Table>
-                </TableContainer>
+                <div style={{ height: '70vh', width: '100%' }}>
+                  <DataGrid rows={this.state.filterAbleProjects} columns={columns} 
+                  onRowClick={(rowData) => this.handleRowClick(rowData.row)} />
+                </div>
 
               </Card>
             </Col>

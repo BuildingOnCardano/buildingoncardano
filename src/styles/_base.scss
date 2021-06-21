@@ -104,6 +104,25 @@ text-decoration: none;
 .btn-tag a:hover {
 	color:#f8f9fa;
 }
+.btn-tag2 {
+  background:#f5f6f8;
+  color: #f5f6f8;
+  border-color:#f5f6f8;
+  padding:6px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  margin: 2px;
+  box-shadow: 0px 2px 2px lightgray;
+  transition: ease background-color 250ms;
+}
+.btn-tag2 a {
+	color:#225cb6;
+	padding: 5px;
+
+}
+.btn-tag2 a:hover {
+	color:#f8f9fa;
+}
 
 .col-md-4 {
 float:left;}
