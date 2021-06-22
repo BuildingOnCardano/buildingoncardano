@@ -36,6 +36,15 @@ const width = window.innerWidth;
 
 
 const columns = [
+  {
+    field: 'icon', headerName: 'Icon', width: 150, renderCell: (params) => (
+      <img
+        src={params.value}
+        className="rounded"
+        style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
+      />
+    ),
+  },
   { field: 'project', headerName: 'Project', width: 150 },
   { field: 'type', headerName: 'Type', width: 150 },
   { field: 'tokentype', headerName: 'Token Type', width: 150 },
@@ -107,26 +116,17 @@ class AllProjects extends React.Component {
     for (let index = 0; index < data.length; index++) {
       const item = data[index];
       var row = {
-        id: index, project: item.name, type: item.type, tokentype: item.tokenType, ticker: item.ticker, stage: item.stage
+        icon: item.imageUrl, id: index, project: item.name, type: item.type, tokentype: item.tokenType, ticker: item.ticker, stage: item.stage
       };
       rows.push(row);
     }
     this.setState({ projects: rows, loading: false, filterAbleProjects: rows })
   }
 
-  handleRowClick(rowData){
-    // console.log(rowData);
-    this.setState({ redirect: rowData.project})
+  handleRowClick(rowData) {
+    var url = "/projectdetails/" + rowData.project;
+    this.props.history.push(url);
   }
-
-  renderRedirectToProject = () => {
-    if (!isEmpty(this.state.redirect)) {
-      var url = "/projectdetails/"+this.state.redirect;
-      this.setState({ redirect: ""});
-      return <Redirect to={{ pathname: url }} />;
-    }
-  }
-
 
   render() {
 
@@ -134,7 +134,6 @@ class AllProjects extends React.Component {
       <Page
         className="AllProjects"
       >
-        {this.renderRedirectToProject()}
         {this.state.loading ? <div><CircleLoader loading={this.state.loading} css={override} size={100} /></div>
           :
           <div>
@@ -146,8 +145,8 @@ class AllProjects extends React.Component {
                   onCancelSearch={() => this.cancelSearch()}
                 />
                 <div style={{ height: '70vh', width: '100%' }}>
-                  <DataGrid rows={this.state.filterAbleProjects} columns={columns} 
-                  onRowClick={(rowData) => this.handleRowClick(rowData.row)} />
+                  <DataGrid rows={this.state.filterAbleProjects} columns={columns}
+                    onRowClick={(rowData) => this.handleRowClick(rowData.row)} />
                 </div>
 
               </Card>
