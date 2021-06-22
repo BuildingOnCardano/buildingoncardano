@@ -22,5 +22,6 @@ export const getProjectByNameAndOwner = "/projects/details/nameandowner/";//{pro
 
 //project sales
 export const liveProjectSales = "/projectsales/all/live";
+export const liveAndUpcomingProjectSales = "/projectsales/all/liveandupcoming";
 
 

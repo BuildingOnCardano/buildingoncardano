@@ -91,7 +91,9 @@ class MyProjectsAddEditPage extends React.Component {
       modal_nested: false,
 
       longDesc: "",
-      selectedTab: "write"
+      selectedTab: "write",
+
+      loggedIn: null
     };
   }
 
@@ -110,6 +112,12 @@ class MyProjectsAddEditPage extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    if (isEmpty(getUser())) {
+      this.setState({ loggedIn: false });
+    } else {
+      this.setState({ loggedIn: true });
+    }
     //if edit get existing project
     if (this.props.action == 'edit') {
       this.getProjectDetails();
@@ -250,8 +258,34 @@ class MyProjectsAddEditPage extends React.Component {
             <Page
               className="MyProjectsAddEditPage"
               title=""
-              breadcrumbs={[{ name: 'Project Edit', active: false }]}
+              // breadcrumbs={[{ name: 'Project Edit', active: false }]}
             >
+
+
+              {this.state.loggedIn == false &&
+                <Modal
+                  isOpen={true}
+                  toggle={this.toggle()}
+                  className={this.props.className}
+                >
+                  <ModalHeader toggle={this.toggle()}></ModalHeader>
+
+                  <ModalBody>
+                    <h3>User not logged in.</h3>
+                    <Row>
+                      <p>To add a project to Building On Cardano you must be registered and logged in.</p>
+                    </Row>
+                  </ModalBody>
+                  <ModalFooter>
+                    {' '}
+                    <Link to={{ pathname: '/' }}>
+                      <Button color="secondary" onClick={this.toggle()}>
+                        Close
+                      </Button>
+                    </Link>
+                  </ModalFooter>
+                </Modal>
+              }
 
               <Modal
                 isOpen={this.state.modal}

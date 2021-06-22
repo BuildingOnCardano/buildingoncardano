@@ -1,11 +1,10 @@
 import { STATE_LOGIN, STATE_SIGNUP } from 'components/AuthForm';
-import GAListener from 'components/GAListener';
 import { EmptyLayout, LayoutRoute, MainLayout } from 'components/Layout';
 import PageSpinner from 'components/PageSpinner';
 import AuthPage from 'pages/AuthPage';
 import React from 'react';
 import componentQueries from 'react-component-queries';
-import { Router, BrowserRouter, HashRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
 import DashboardPage from 'pages/DashboardPage';
 import ProjectsPage from 'pages/ProjectsPage';
@@ -14,6 +13,7 @@ import MyProjectsPage from 'pages/MyProjectsPage';
 import MyProjectsAddEditPage from 'pages/MyProjectsAddEditPage';
 import VerifyEmail from 'pages/VerifyEmail';
 import AllProjects from 'pages/AllProjects';
+import AllSales from 'pages/AllSales';
 import { createBrowserHistory } from "history";
 
 const getBasename = () => {
@@ -89,6 +89,7 @@ class App extends React.Component {
               <Route exact path="/" render={(props) => <DashboardPage {...props} />} />
 
               <Route exact path="/allprojects" render={(props) => <AllProjects {...props} />} />
+              <Route exact path="/allsales" render={(props) => <AllSales {...props} />} />
               
 
               <Route path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
@@ -106,6 +107,9 @@ class App extends React.Component {
               <Route path="/myprojects" render={(props) => <MyProjectsPage {...props} />} />
               <Route path="/addproject" render={(props) => <MyProjectsAddEditPage {...props} action="add" />} />
               <Route path="/editproject/:projectname" render={(props) => <MyProjectsAddEditPage {...props} action="edit" />} />
+
+
+              
 
 
               {/* <Route path="/login-modal" component={AuthModalPage} /> */}

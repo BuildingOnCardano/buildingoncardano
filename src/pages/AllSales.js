@@ -1,28 +1,18 @@
 import Page from 'components/Page';
 import React from 'react';
-import ReactGA from 'react-ga';
 import {
   Card,
   Col,
-  Row,
-  Table,
-  Button,
-  Nav,
-  Navbar
 } from 'reactstrap';
 import CircleLoader
   from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
-import { baseUrl, getAllProjects, getProjectsStats } from '../assets/services';
-import { Link } from 'react-router-dom';
-import { TableRow, TableCell, TableHead, TableBody, TableContainer, TableSortLabel } from '@material-ui/core';
+import { baseUrl, liveAndUpcomingProjectSales } from '../assets/services';
 import "../styles/styles.css";
-import Paper from '@material-ui/core/Paper';
 import { removeUserSession } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
 import SearchBar from "material-ui-search-bar";
 import { DataGrid } from '@material-ui/data-grid';
-import { Redirect } from "react-router-dom";
 
 
 const override = css`
@@ -33,26 +23,26 @@ const override = css`
 
 const width = window.innerWidth;
 
-
-
 const columns = [
-  {
-    field: 'icon', headerName: 'Icon', width: 150, renderCell: (params) => (
-      <img
-        src={params.value}
-        className="rounded"
-        style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
-      />
-    ),
-  },
+  // {
+  //   field: 'icon', headerName: 'Icon', width: 150, renderCell: (params) => (
+  //     <img
+  //       src={params.value}
+  //       className="rounded"
+  //       style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
+  //     />
+  //   ),
+  // },
   { field: 'project', headerName: 'Project', width: 150 },
   { field: 'type', headerName: 'Type', width: 150 },
-  { field: 'tokentype', headerName: 'Token Type', width: 150 },
-  { field: 'ticker', headerName: 'Ticker', width: 150 },
-  { field: 'stage', headerName: 'Stage', width: 150 },
+  { field: 'salestatus', headerName: 'Status', width: 150 },
+  { field: 'startdate', headerName: 'Start Date', width: 150 },
+  { field: 'enddate', headerName: 'End Date', width: 150 },
+  { field: 'acceptedfunding', headerName: 'Accepted Funding', width: 150 },
+  { field: 'tokenprice', headerName: 'Token Price', width: 150 },
 ];
 
-class AllProjects extends React.Component {
+class AllSales extends React.Component {
   state = {
     projects: null,
     loading: true,
@@ -76,12 +66,12 @@ class AllProjects extends React.Component {
       this.setState({ smallScreen: true });
     }
 
-    this.getAllProjects();
+    this.getAllSales();
   }
 
-  async getAllProjects() {
+  async getAllSales() {
     try {
-      var response = await fetch(baseUrl + getAllProjects);
+      var response = await fetch(baseUrl + liveAndUpcomingProjectSales);
       const data = await response.json();
       this.createRows(data);
     } catch (error) {
@@ -115,8 +105,9 @@ class AllProjects extends React.Component {
 
     for (let index = 0; index < data.length; index++) {
       const item = data[index];
-      var row = {
-        icon: item.imageUrl, id: index, project: item.name, type: item.type, tokentype: item.tokenType, ticker: item.ticker, stage: item.stage
+      var row = { //icon: item.imageUrl, 
+        id: index, project: item.projectName, type: item.upcomingSale, salestatus: item.saleStatus, startdate: item.saleStartDate,
+        enddate: item.saleEndDate, acceptedfunding: item.acceptedFunding, tokenprice: item.saleTokenPrice
       };
       rows.push(row);
     }
@@ -132,8 +123,8 @@ class AllProjects extends React.Component {
 
     return (
       <Page
-        className="AllProjects"
-        title="All Projects"
+        className="AllSales"
+        title="Live and Upcoming Sales"
       >
         {this.state.loading ? <div><CircleLoader loading={this.state.loading} css={override} size={100} /></div>
           :
@@ -157,4 +148,4 @@ class AllProjects extends React.Component {
     );
   }
 }
-export default AllProjects;
+export default AllSales;

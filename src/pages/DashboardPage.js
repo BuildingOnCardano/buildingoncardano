@@ -157,6 +157,7 @@ class DashboardPage extends React.Component {
     return (
       <Page
         className="DashboardPage"
+        // title="Dashboard"
       >
         {this.state.loading ? <div><CircleLoader loading={this.state.statsloading} css={override} size={100} /></div>
           :
@@ -268,6 +269,15 @@ class DashboardPage extends React.Component {
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
                         <h3 className="mb-0">Live Sales</h3>
+                        <div className="col text-right">
+                          <Button
+                            size="sm"
+                          >
+                            <Link to={{ pathname: '/allsales' }}>
+                              See all
+                            </Link>
+                          </Button>
+                        </div>
                       </Row>
                     </CardHeader>
 
