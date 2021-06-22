@@ -289,7 +289,8 @@ class DashboardPage extends React.Component {
                               <CardTitle><b>{item.projectName}</b></CardTitle>
                               <CardText>
                                 <p><b>Sale Type: </b>{item.upcomingSale}</p>
-                                <p><b>Start Date: </b>{item.saleStartDate} <b>End Date: </b>{item.saleEndDate}</p>
+                                <p><b>Start Date: </b>{item.saleStartDate}</p> 
+                                <p><b>End Date: </b>{item.saleEndDate}</p>
                               </CardText>
                               <hr />
                               {!isEmpty(item.tokenDistributionDetail) && (

@@ -1,29 +1,19 @@
 import Page from 'components/Page';
 import React from 'react';
-import ReactGA from 'react-ga';
 import {
   Card,
-  Col,
-  Row,
-  Table,
-  Button,
-  Nav,
-  Navbar
+  Col
 } from 'reactstrap';
 import CircleLoader
   from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
 import { baseUrl, getAllProjects, getProjectsStats } from '../assets/services';
-import { Link } from 'react-router-dom';
-import { TableRow, TableCell, TableHead, TableBody, TableContainer, TableSortLabel } from '@material-ui/core';
 import "../styles/styles.css";
-import Paper from '@material-ui/core/Paper';
 import { removeUserSession } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
 import SearchBar from "material-ui-search-bar";
 import { DataGrid } from '@material-ui/data-grid';
-import { Redirect } from "react-router-dom";
-
+import { makeStyles } from '@material-ui/styles';
 
 const override = css`
   display: block;
@@ -33,23 +23,71 @@ const override = css`
 
 const width = window.innerWidth;
 
-
+const useStyles = makeStyles({
+  root: {
+    '& .super-app-theme--header': {
+      backgroundColor: 'rgba(255, 7, 0, 0.55)',
+    },
+  },
+});
 
 const columns = [
   {
-    field: 'icon', headerName: 'Icon', width: 150, renderCell: (params) => (
+    field: 'icon',
+    renderHeader: (params) => (
+      <h2>
+        {'Icon'}
+      </h2>
+    ),
+    flexGrow: 1.0,
+    renderCell: (params) => (
       <img
         src={params.value}
         className="rounded"
         style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
       />
     ),
+    headerClassName: 'super-app-theme--header',
+    sortable: false,
   },
-  { field: 'project', headerName: 'Project', width: 150 },
-  { field: 'type', headerName: 'Type', width: 150 },
-  { field: 'tokentype', headerName: 'Token Type', width: 150 },
-  { field: 'ticker', headerName: 'Ticker', width: 150 },
-  { field: 'stage', headerName: 'Stage', width: 150 },
+  {
+    field: 'project', flex: 1,
+    renderHeader: (params) => (
+      <h2>
+        {'Project'}
+      </h2>
+    )
+  },
+  {
+    field: 'type', flex: 1,
+    renderHeader: (params) => (
+      <h2>
+        {'Type'}
+      </h2>
+    ),
+  },
+  {
+    field: 'tokentype', flex: 1,
+    renderHeader: (params) => (
+      <h2>
+        {'Token Type'}
+      </h2>
+    ),
+  },
+  {
+    field: 'ticker', flex: 1, renderHeader: (params) => (
+      <h2>
+        {'Ticker'}
+      </h2>
+    ),
+  },
+  {
+    field: 'stage', flex: 1, renderHeader: (params) => (
+      <h2>
+        {'Stage'}
+      </h2>
+    ),
+  },
 ];
 
 class AllProjects extends React.Component {
@@ -105,11 +143,6 @@ class AllProjects extends React.Component {
     this.setState({ searched: null, filterAbleProjects: this.state.projects });
   };
 
-  handleTableSort = property => event => {
-    console.log("clicked");
-    console.log(event);
-  }
-
   createRows(data) {
     var rows = [];
 
@@ -145,8 +178,11 @@ class AllProjects extends React.Component {
                   onChange={(searchVal) => this.requestSearch(searchVal)}
                   onCancelSearch={() => this.cancelSearch()}
                 />
-                <div style={{ height: '70vh', width: '100%' }}>
-                  <DataGrid rows={this.state.filterAbleProjects} columns={columns}
+                <div style={{ height: '70vh', width: '100%' }} className={useStyles.root}>
+                  <DataGrid
+                    rowHeight={70}
+                    rows={this.state.filterAbleProjects}
+                    columns={columns}
                     onRowClick={(rowData) => this.handleRowClick(rowData.row)} />
                 </div>
 

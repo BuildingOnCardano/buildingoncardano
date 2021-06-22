@@ -33,13 +33,62 @@ const columns = [
   //     />
   //   ),
   // },
-  { field: 'project', headerName: 'Project', width: 150 },
-  { field: 'type', headerName: 'Type', width: 150 },
-  { field: 'salestatus', headerName: 'Status', width: 150 },
-  { field: 'startdate', headerName: 'Start Date', width: 150 },
-  { field: 'enddate', headerName: 'End Date', width: 150 },
-  { field: 'acceptedfunding', headerName: 'Accepted Funding', width: 150 },
-  { field: 'tokenprice', headerName: 'Token Price', width: 150 },
+  {
+    field: 'project', flex: 1,
+    renderHeader: (params) => (
+      <h2>
+        {'Project'}
+      </h2>
+    ),
+  },
+  {
+    field: 'type', flex: 1,
+    renderHeader: (params) => (
+      <h2>
+        {'Type'}
+      </h2>
+    ),
+  },
+  {
+    field: 'salestatus', flex: 1,
+    renderHeader: (params) => (
+      <h2>
+        {'Status'}
+      </h2>
+    ),
+  },
+  {
+    field: 'startdate', flex: 1,
+    renderHeader: (params) => (
+      <h2>
+        {'Start Date'}
+      </h2>
+    ),
+  },
+  {
+    field: 'enddate', flex: 1,
+    renderHeader: (params) => (
+      <h2>
+        {'End Date'}
+      </h2>
+    ),
+  },
+  {
+    field: 'acceptedfunding', flex: 1,
+    renderHeader: (params) => (
+      <h2>
+        {'Accepted Funding'}
+      </h2>
+    ),
+  },
+  {
+    field: 'tokenprice', flex: 1,
+    renderHeader: (params) => (
+      <h2>
+        {'Token Price'}
+      </h2>
+    ),
+  },
 ];
 
 class AllSales extends React.Component {
@@ -137,7 +186,7 @@ class AllSales extends React.Component {
                   onCancelSearch={() => this.cancelSearch()}
                 />
                 <div style={{ height: '70vh', width: '100%' }}>
-                  <DataGrid rows={this.state.filterAbleProjects} columns={columns}
+                  <DataGrid rows={this.state.filterAbleProjects} columns={columns} rowHeight={70}
                     onRowClick={(rowData) => this.handleRowClick(rowData.row)} />
                 </div>
 
