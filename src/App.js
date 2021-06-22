@@ -99,6 +99,12 @@ class App extends React.Component {
               <Route path="/data" render={(props) => <ProjectsPage {...props} projectType="data" />} />
               <Route path="/nft" render={(props) => <ProjectsPage {...props} projectType="nft" />} />
               <Route path="/dex" render={(props) => <ProjectsPage {...props} projectType="dex" />} />
+              <Route path="/cross-chain" render={(props) => <ProjectsPage {...props} projectType="cross-chain" />} />
+              <Route path="/gaming" render={(props) => <ProjectsPage {...props} projectType="gaming" />} />
+              <Route path="/oracle" render={(props) => <ProjectsPage {...props} projectType="oracle" />} />
+              <Route path="/stablecoin" render={(props) => <ProjectsPage {...props} projectType="stablecoin" />} />
+              <Route path="/infrastructure" render={(props) => <ProjectsPage {...props} projectType="infrastructure" />} />
+              <Route path="/catalyst" render={(props) => <ProjectsPage {...props} projectType="catalyst" />} />
 
               <Route path="/projectdetails/:projectname" render={(props) => <ProjectDetailsPage {...props} />} />
 
