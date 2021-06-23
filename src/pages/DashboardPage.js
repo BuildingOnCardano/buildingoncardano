@@ -159,7 +159,7 @@ class DashboardPage extends React.Component {
         className="DashboardPage"
         // title="Dashboard"
       >
-        {this.state.loading ? <div><CircleLoader loading={this.state.statsloading} css={override} size={100} /></div>
+        {this.state.loading ? <div><CircleLoader loading={this.state.statsloading} css={override} size={80} /></div>
           :
           <div>
             <div className="my-auto"><hr />
