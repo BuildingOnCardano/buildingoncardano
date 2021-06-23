@@ -142,9 +142,10 @@ class ProjectDetailsPage extends React.Component {
                       <hr />
                       <Row>
                         <Col>
+                        {!isEmpty(this.state.project.description) && <div>
                           <h2>Project Description:</h2>
                           <ReactMarkdown>{this.state.project.description}</ReactMarkdown>
-                          <br></br>
+                          <br></br></div>}
                           {!isEmpty(this.state.project.youTubeEmbedId) && (
                             <YoutubeEmbed embedId={this.state.project.youTubeEmbedId} />)}
                           <br></br>
@@ -161,11 +162,13 @@ class ProjectDetailsPage extends React.Component {
                   </Card>
 
 
+                  {this.state.project.projectTeam != null && this.state.project.projectTeam.length != 0 &&
                   <Row style={{
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
                     <Col>
+
                       <Card>
                         <CardHeader style={{
                           justifyContent: 'center',
@@ -173,6 +176,7 @@ class ProjectDetailsPage extends React.Component {
                           width: '100%',
                           borderRadius: '1.9em'
                         }}
+
                         >Team Details</CardHeader>
                         <CardBody style={{
                           justifyContent: 'center',
@@ -220,9 +224,7 @@ class ProjectDetailsPage extends React.Component {
                         </CardBody>
                       </Card>
                     </Col>
-                  </Row>
-
-
+                  </Row>}
 
                   {this.state.project.salesDetails != null && this.state.project.salesDetails.length > 0 && this.state.project.salesDetails != undefined &&
                     <Card>
@@ -234,9 +236,7 @@ class ProjectDetailsPage extends React.Component {
                       <CardBody>
                         <Row>
                           <Col>
-
                             <div>
-
                               <CardColumns>
                                 {this.state.project.salesDetails.map(function (item, index) {
                                   return (
