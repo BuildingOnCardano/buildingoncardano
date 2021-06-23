@@ -16,7 +16,8 @@ import {
   MdViewList,
   MdKeyboardArrowRight,
   MdAddToQueue,
-  MdVerifiedUser
+  MdVerifiedUser,
+  MdAttachMoney
 
 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
@@ -79,6 +80,8 @@ class Sidebar extends React.Component {
           { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
           { to: '/myprojects', name: 'my projects', exact: true, Icon: MdVerifiedUser },
           { to: '/addproject', name: 'add project', exact: true, Icon: MdAddToQueue },
+          { to: '/allprojects', name: 'all projects', exact: true, Icon: MdGroupWork },
+          { to: '/allsales', name: 'all sales', exact: true, Icon: MdAttachMoney },
 
         ],
         loggedin: true,
@@ -88,7 +91,10 @@ class Sidebar extends React.Component {
     } else {
       this.setState({
         navItemsTop: [
-          { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard }
+          { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
+          { to: '/allprojects', name: 'all projects', exact: true, Icon: MdStar },
+          { to: '/allsales', name: 'all sales', exact: true, Icon: MdAttachMoney },
+          { to: '/addproject', name: 'add project', exact: true, Icon: MdAddToQueue },
         ],
         navItemsBottom: [{ to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle }]
       })
@@ -144,7 +150,7 @@ class Sidebar extends React.Component {
               </NavItem>
             ))}
 
-            <NavItem
+            {/* <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Pages')}
             >
@@ -182,7 +188,7 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse>
+            </Collapse> */}
 
             {this.state.navItemsBottom.map(({ to, name, exact, Icon }, index) => (
               <NavItem key={index} className={bem.e('nav-item')}>

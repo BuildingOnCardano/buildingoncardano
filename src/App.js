@@ -1,11 +1,10 @@
 import { STATE_LOGIN, STATE_SIGNUP } from 'components/AuthForm';
-import GAListener from 'components/GAListener';
 import { EmptyLayout, LayoutRoute, MainLayout } from 'components/Layout';
 import PageSpinner from 'components/PageSpinner';
 import AuthPage from 'pages/AuthPage';
 import React from 'react';
 import componentQueries from 'react-component-queries';
-import { Router, BrowserRouter, HashRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
 import DashboardPage from 'pages/DashboardPage';
 import ProjectsPage from 'pages/ProjectsPage';
@@ -13,6 +12,8 @@ import ProjectDetailsPage from 'pages/ProjectDetailsPage';
 import MyProjectsPage from 'pages/MyProjectsPage';
 import MyProjectsAddEditPage from 'pages/MyProjectsAddEditPage';
 import VerifyEmail from 'pages/VerifyEmail';
+import AllProjects from 'pages/AllProjects';
+import AllSales from 'pages/AllSales';
 import { createBrowserHistory } from "history";
 
 const getBasename = () => {
@@ -87,6 +88,10 @@ class App extends React.Component {
             <React.Suspense fallback={<PageSpinner />}>
               <Route exact path="/" render={(props) => <DashboardPage {...props} />} />
 
+              <Route exact path="/allprojects" render={(props) => <AllProjects {...props} />} />
+              <Route exact path="/allsales" render={(props) => <AllSales {...props} />} />
+              
+
               <Route path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
               <Route path="/application" component={() => <ProjectsPage projectType="application" />}></Route>
               <Route path="/tooling" render={(props) => <ProjectsPage {...props} projectType="tooling" />} />
@@ -94,6 +99,12 @@ class App extends React.Component {
               <Route path="/data" render={(props) => <ProjectsPage {...props} projectType="data" />} />
               <Route path="/nft" render={(props) => <ProjectsPage {...props} projectType="nft" />} />
               <Route path="/dex" render={(props) => <ProjectsPage {...props} projectType="dex" />} />
+              <Route path="/cross-chain" render={(props) => <ProjectsPage {...props} projectType="cross-chain" />} />
+              <Route path="/gaming" render={(props) => <ProjectsPage {...props} projectType="gaming" />} />
+              <Route path="/oracle" render={(props) => <ProjectsPage {...props} projectType="oracle" />} />
+              <Route path="/stablecoin" render={(props) => <ProjectsPage {...props} projectType="stablecoin" />} />
+              <Route path="/infrastructure" render={(props) => <ProjectsPage {...props} projectType="infrastructure" />} />
+              <Route path="/catalyst" render={(props) => <ProjectsPage {...props} projectType="catalyst" />} />
 
               <Route path="/projectdetails/:projectname" render={(props) => <ProjectDetailsPage {...props} />} />
 
@@ -102,6 +113,9 @@ class App extends React.Component {
               <Route path="/myprojects" render={(props) => <MyProjectsPage {...props} />} />
               <Route path="/addproject" render={(props) => <MyProjectsAddEditPage {...props} action="add" />} />
               <Route path="/editproject/:projectname" render={(props) => <MyProjectsAddEditPage {...props} action="edit" />} />
+
+
+              
 
 
               {/* <Route path="/login-modal" component={AuthModalPage} /> */}
