@@ -44,7 +44,7 @@ const columns = [
       <img
         src={params.value}
         className="rounded"
-        style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
+        style={{ width: "7vh", height: "7vh", marginRight: "10px" }}
       />
     ),
     headerClassName: 'super-app-theme--header',
