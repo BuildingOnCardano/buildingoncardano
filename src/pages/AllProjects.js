@@ -44,7 +44,7 @@ const columns = [
       <img
         src={params.value}
         className="rounded"
-        style={{ width: "7vh", height: "7vh", marginRight: "10px" }}
+        style={{ width: "8vh", height: "8vh", marginRight: "10px" }}
       />
     ),
     headerClassName: 'super-app-theme--header',
@@ -85,6 +85,43 @@ const columns = [
     field: 'stage', flex: 1, renderHeader: (params) => (
       <h2>
         {'Stage'}
+      </h2>
+    ),
+  },
+];
+
+const columnsMobile = [
+  {
+    field: 'icon',
+    renderHeader: (params) => (
+      <h2>
+        {'Icon'}
+      </h2>
+    ),
+    flexGrow: 1.0,
+    renderCell: (params) => (
+      <img
+        src={params.value}
+        className="rounded"
+        style={{ width: "8vh", height: "8vh", marginRight: "10px" }}
+      />
+    ),
+    headerClassName: 'super-app-theme--header',
+    sortable: false,
+  },
+  {
+    field: 'project', flex: 1,
+    renderHeader: (params) => (
+      <h2>
+        {'Project'}
+      </h2>
+    )
+  },
+  {
+    field: 'type', flex: 1,
+    renderHeader: (params) => (
+      <h2>
+        {'Type'}
       </h2>
     ),
   },
@@ -179,11 +216,17 @@ class AllProjects extends React.Component {
                   onCancelSearch={() => this.cancelSearch()}
                 />
                 <div style={{ height: '70vh', width: '100%' }} className={useStyles.root}>
-                  <DataGrid
+                  {this.state.smallScreen ? <DataGrid
                     rowHeight={70}
                     rows={this.state.filterAbleProjects}
-                    columns={columns}
+                    columns={columnsMobile}
                     onRowClick={(rowData) => this.handleRowClick(rowData.row)} />
+                    :
+                    <DataGrid
+                      rowHeight={70}
+                      rows={this.state.filterAbleProjects}
+                      columns={columns}
+                      onRowClick={(rowData) => this.handleRowClick(rowData.row)} />}
                 </div>
 
               </Card>

@@ -229,7 +229,7 @@ class DashboardPage extends React.Component {
                                   <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
                                     src={item.imageUrl}
                                     className="rounded"
-                                    style={{ width: 40, height: 40 }}
+                                    style={{ width: 140, height: 80 }}
                                   />)}    {item.name}</p></TableCell>
                                   <TableCell><p>{item.type}</p></TableCell>
 
@@ -245,7 +245,7 @@ class DashboardPage extends React.Component {
                                     <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
                                       src={item.imageUrl}
                                       className="rounded"
-                                      style={{ width: "7vh", height: "7vh", marginRight: "10px" }}
+                                      style={{ width: "12vh", height: "11vh", marginRight: "10px" }}
                                     />)}{item.name}</p></TableCell>
                                     <TableCell><p>{item.type}</p></TableCell>
                                     {/* <TableCell><p>{item.tokenType}</p></TableCell>
