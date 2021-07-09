@@ -16,6 +16,11 @@ import AllProjects from 'pages/AllProjects';
 import AllSales from 'pages/AllSales';
 import { createBrowserHistory } from "history";
 
+import GA4React from "ga-4-react";
+const ga4react = new GA4React("UA-201791504-1");
+
+ga4react.initialize();
+
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL}`;
 };

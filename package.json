@@ -21,6 +21,8 @@
     "d3-geo": "^1.11.3",
     "draft-js": "^0.11.7",
     "faker": "^4.1.0",
+    "ga-4-react": "^0.1.281",
+    "history": "^5.0.0",
     "linkifyjs": "^2.1.9",
     "lodash": "^4.17.20",
     "material-ui-search-bar": "^1.0.0",

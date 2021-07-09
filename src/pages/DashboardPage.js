@@ -29,15 +29,11 @@ import { isEmpty } from 'utils/stringutil.js';
 import { Line, Bar, Pie } from "react-chartjs-2";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
-
-ReactGA.initialize('G-GHF73S719G');
-ReactGA.pageview(window.location.pathname + window.location.search);
 
 const width = window.innerWidth;
 
@@ -53,6 +49,7 @@ class DashboardPage extends React.Component {
   };
 
   componentDidMount() {
+
     window.scrollTo(0, 0);
 
     //handle signout
@@ -229,7 +226,7 @@ class DashboardPage extends React.Component {
                                   <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
                                     src={item.imageUrl}
                                     className="rounded"
-                                    style={{ width: 140, height: 80 }}
+                                    style={{ width: 100, height: 80 }}
                                   />)}    {item.name}</p></TableCell>
                                   <TableCell><p>{item.type}</p></TableCell>
 
