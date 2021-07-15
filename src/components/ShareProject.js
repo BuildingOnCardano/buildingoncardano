@@ -57,9 +57,19 @@ export default class ShareProject extends React.Component {
         };
 
     }
+
+    getUrl() {
+        var inputUrl = this.props.name;
+        if (inputUrl.includes(" ")) {
+            inputUrl = inputUrl.replace(" ", "%20")
+        }
+
+        return inputUrl;
+    }
+
     render() {
         return (
-                <div>
+            <div>
                 <FacebookShareButton url={baseUrl + this.props.name}
                     title={"Checkout " + this.props.name + " on buildingoncardano.com!"}>
                     <FacebookIcon
@@ -73,7 +83,7 @@ export default class ShareProject extends React.Component {
                     <TwitterIcon size={"2.5rem"} round />
                 </TwitterShareButton>
 
-                <TelegramShareButton url={baseUrl + this.props.name}
+                <TelegramShareButton url={baseUrl + this.getUrl()}
                     title={"Checkout " + this.props.name + " on buildingoncardano.com!"}>
                     <TelegramIcon size={"2.5rem"} round />
                 </TelegramShareButton>
