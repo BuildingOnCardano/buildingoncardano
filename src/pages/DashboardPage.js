@@ -1,6 +1,5 @@
 import Page from 'components/Page';
 import React from 'react';
-import ReactGA from 'react-ga';
 import {
   Card,
   CardHeader,
@@ -17,18 +16,17 @@ import {
 import CircleLoader
   from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
-import { baseUrl, getLatestProjects, getProjectsStats, liveProjectSales } from '../assets/services';
+import { baseUrl, getLatestProjects, getProjectsStats, liveProjectSales, getMostViewedProjects } from '../assets/services';
 import { Link } from 'react-router-dom';
 import { TableRow, TableCell, TableHead, TableBody, TableContainer } from '@material-ui/core';
 import "../styles/styles.css";
-import SearchInput from 'components/SearchInput';
-import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { removeUserSession } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
 import { Line, Bar, Pie } from "react-chartjs-2";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import FeaturedProjectCard from 'components/FeaturedProjectCard';
 const override = css`
   display: block;
   margin: 0 auto;
@@ -40,6 +38,8 @@ const width = window.innerWidth;
 class DashboardPage extends React.Component {
   state = {
     projects: null,
+    featuredProjects: null,
+    mostViewedProjects: null,
     salesData: null,
     loading: true,
     totalProjects: '',
@@ -48,7 +48,7 @@ class DashboardPage extends React.Component {
     smallScreen: false
   };
 
-  componentDidMount() {
+  async componentDidMount() {
 
     window.scrollTo(0, 0);
 
@@ -63,7 +63,9 @@ class DashboardPage extends React.Component {
     }
     this.getProjectsStats();
     this.getLiveSales();
-    this.getAllProjects();
+    await this.getMostViewedProjects();
+    await this.getFeaturedProjects();
+    await this.getAllProjects();
   }
 
   async getAllProjects() {
@@ -71,6 +73,26 @@ class DashboardPage extends React.Component {
       var response = await fetch(baseUrl + getLatestProjects);
       const data = await response.json();
       this.setState({ projects: data, loading: false })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async getFeaturedProjects() {
+    try {
+      var response = await fetch(baseUrl + getLatestProjects);
+      const data = await response.json();
+      this.setState({ featuredProjects: this.shuffle(data) });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async getMostViewedProjects() {
+    try {
+      var response = await fetch(baseUrl + getMostViewedProjects);
+      const data = await response.json();
+      this.setState({ mostViewedProjects: data });
     } catch (error) {
       console.log(error)
     }
@@ -148,13 +170,29 @@ class DashboardPage extends React.Component {
     }
   }
 
+  shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  getMonthName() {
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    const d = new Date();
+    return monthNames[d.getMonth()];
+  }
 
   render() {
 
     return (
       <Page
         className="DashboardPage"
-        // title="Dashboard"
+      // title="Dashboard"
       >
         {this.state.loading ? <div><CircleLoader loading={this.state.statsloading} css={override} size={80} /></div>
           :
@@ -180,12 +218,38 @@ class DashboardPage extends React.Component {
 
 
             <div>
+              <div>
+                <h3 className="mb-0">Featured Apps</h3>
+                <div className="col text-right">
+                  <Link to={{ pathname: '/promote' }}>
+                    <small>Promote your app here.</small>
+                  </Link>
+                </div>
+              </div>
               <Row>
-                <Col lg={7} md={12} sm={12} xs={12} className="mb-3">
+                {this.state.featuredProjects.map(function (item, index) {
+                  if (index < 4) {
+                    return (
+                      <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
+                        <div className='ProjectCards'>
+                          <FeaturedProjectCard
+                            img={item.imageUrl}
+                            projectDetails={item} />
+                        </div>
+                      </Col>
+                    )
+                  }
+                })}
+              </Row>
+
+
+              <Row>
+                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+
                   <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
-                        <h3 className="mb-0">Latest Projects</h3>
+                        <h3 className="mb-0">Recently Updated</h3>
                         <div className="col text-right">
                           <Button
                             size="sm"
@@ -213,7 +277,7 @@ class DashboardPage extends React.Component {
                               <TableCell><h2>Type</h2></TableCell>
                               {/* <TableCell><h2>Token Type</h2></TableCell>
                               <TableCell><h2>Ticker</h2></TableCell> */}
-                              <TableCell><h2>Stage</h2></TableCell>
+                              {/* <TableCell><h2>Stage</h2></TableCell> */}
                             </TableRow >}
 
                         </TableHead>
@@ -221,33 +285,35 @@ class DashboardPage extends React.Component {
 
                           {this.state.smallScreen ?
                             this.state.projects.map(function (item, index) {
-                              return (
-                                <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                  <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
-                                    src={item.imageUrl}
-                                    className="rounded"
-                                    style={{ width: 100, height: 80 }}
-                                  />)}    {item.name}</p></TableCell>
-                                  <TableCell><p>{item.type}</p></TableCell>
+                              if (index < 5) {
+                                return (
+                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
+                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
+                                      src={item.imageUrl}
+                                      className="rounded"
+                                      style={{ width: 100, height: 80 }}
+                                    />)}    {item.name}</p></TableCell>
+                                    <TableCell><p>{item.type}</p></TableCell>
 
-                                </TableRow >
-                              )
+                                  </TableRow >
+                                )
+                              }
                             })
 
                             :
                             this.state.projects.map(function (item, index) {
-                              if (index < 10) {
+                              if (index < 7) {
                                 return (
                                   <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
                                     <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
                                       src={item.imageUrl}
                                       className="rounded"
-                                      style={{ width: "12vh", height: "11vh", marginRight: "10px" }}
+                                      style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
                                     />)}{item.name}</p></TableCell>
                                     <TableCell><p>{item.type}</p></TableCell>
                                     {/* <TableCell><p>{item.tokenType}</p></TableCell>
                                     <TableCell><p>{item.ticker}</p></TableCell> */}
-                                    <TableCell><p>{item.stage}</p></TableCell>
+                                    {/* <TableCell><p>{item.stage}</p></TableCell> */}
                                   </TableRow >
                                 )
                               }
@@ -257,11 +323,88 @@ class DashboardPage extends React.Component {
                     </TableContainer>
 
                   </Card>
-
-
-
                 </Col>
-                <Col lg={5} md={12} sm={12} xs={12} className="mb-3">
+
+                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+                  <Card>
+                    <CardHeader className="border-0">
+                      <Row className="align-items-center">
+                        <h3 className="mb-0">{this.getMonthName()} Most Popular</h3>
+                        <div className="col text-right">
+                          <Button
+                            size="sm"
+                          >
+                            <Link to={{ pathname: '/allprojects' }}>
+                              See all
+                            </Link>
+                          </Button>
+                        </div>
+                      </Row>
+                    </CardHeader>
+
+                    <TableContainer component={Paper}>
+                      <Table >
+                        <TableHead className="thead-light">
+                          {this.state.smallScreen ?
+                            <TableRow>
+                              <TableCell ><h2>Project</h2></TableCell>
+                              <TableCell ><h2>Type</h2></TableCell>
+                            </TableRow >
+                            :
+                            <TableRow >
+                              {/* <TableCell></TableCell> */}
+                              <TableCell><h2>Project</h2></TableCell>
+                              <TableCell><h2>Type</h2></TableCell>
+                              {/* <TableCell><h2>Token Type</h2></TableCell>
+            <TableCell><h2>Ticker</h2></TableCell> */}
+                              {/* <TableCell><h2>Stage</h2></TableCell> */}
+                            </TableRow >}
+
+                        </TableHead>
+                        <TableBody>
+
+                          {this.state.smallScreen ?
+                            this.state.mostViewedProjects.map(function (item, index) {
+                              if (index < 5) {
+                                return (
+                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
+                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
+                                      src={item.imageUrl}
+                                      className="rounded"
+                                      style={{ width: 100, height: 80 }}
+                                    />)}    {item.name}</p></TableCell>
+                                    <TableCell><p>{item.type}</p></TableCell>
+
+                                  </TableRow >
+                                )
+                              }
+                            })
+
+                            :
+                            this.state.mostViewedProjects.map(function (item, index) {
+                              if (index < 7) {
+                                return (
+                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
+                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
+                                      src={item.imageUrl}
+                                      className="rounded"
+                                      style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
+                                    />)}{item.name}</p></TableCell>
+                                    <TableCell><p>{item.type}</p></TableCell>
+                                    {/* <TableCell><p>{item.tokenType}</p></TableCell>
+                  <TableCell><p>{item.ticker}</p></TableCell> */}
+                                    {/* <TableCell><p>{item.stage}</p></TableCell> */}
+                                  </TableRow >
+                                )
+                              }
+                            })}
+                        </TableBody >
+                      </Table>
+                    </TableContainer>
+                  </Card>
+                </Col>
+
+                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
                   <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
@@ -286,7 +429,7 @@ class DashboardPage extends React.Component {
                               <CardTitle><b>{item.projectName}</b></CardTitle>
                               <CardText>
                                 <p><b>Sale Type: </b>{item.upcomingSale}</p>
-                                <p><b>Start Date: </b>{item.saleStartDate}</p> 
+                                <p><b>Start Date: </b>{item.saleStartDate}</p>
                                 <p><b>End Date: </b>{item.saleEndDate}</p>
                               </CardText>
                               <hr />

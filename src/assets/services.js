@@ -13,6 +13,7 @@ export const createProject = "/projects/create";
 export const updateProject = "/projects/update";
 export const getAllProjects = "/projects/all";
 export const getLatestProjects = "/projects/latest";
+export const getMostViewedProjects = "/projects/mostviewed";
 export const getProjectDetailsById = "/projects/details/";//{projectId}
 export const getProjectsByType = "/projects/type/";////{projectType}
 export const getProjectsStats = "/projects/stats";
@@ -24,4 +25,5 @@ export const getProjectByNameAndOwner = "/projects/details/nameandowner/";//{pro
 export const liveProjectSales = "/projectsales/all/live";
 export const liveAndUpcomingProjectSales = "/projectsales/all/liveandupcoming";
 
-
+//promotion 
+export const promotionRequest = "/promotion/request"

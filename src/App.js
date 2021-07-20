@@ -14,6 +14,7 @@ import MyProjectsAddEditPage from 'pages/MyProjectsAddEditPage';
 import VerifyEmail from 'pages/VerifyEmail';
 import AllProjects from 'pages/AllProjects';
 import AllSales from 'pages/AllSales';
+import PromoteAppPage from 'pages/PromoteAppPage';
 import { createBrowserHistory } from "history";
 
 import GA4React from "ga-4-react";
@@ -120,7 +121,7 @@ class App extends React.Component {
               <Route path="/editproject/:projectname" render={(props) => <MyProjectsAddEditPage {...props} action="edit" />} />
 
 
-              
+              <Route path="/promote" render={(props) => <PromoteAppPage {...props} action="add" />} />
 
 
               {/* <Route path="/login-modal" component={AuthModalPage} /> */}
