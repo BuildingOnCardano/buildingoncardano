@@ -16,7 +16,7 @@ import {
 import CircleLoader
   from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
-import { baseUrl, getLatestProjects, getProjectsStats, liveProjectSales, getMostViewedProjects } from '../assets/services';
+import { baseUrl, getLatestProjects, getProjectsStats, liveProjectSales, getMostViewedProjects, getAllProjects } from '../assets/services';
 import { Link } from 'react-router-dom';
 import { TableRow, TableCell, TableHead, TableBody, TableContainer } from '@material-ui/core';
 import "../styles/styles.css";
@@ -80,7 +80,7 @@ class DashboardPage extends React.Component {
 
   async getFeaturedProjects() {
     try {
-      var response = await fetch(baseUrl + getLatestProjects);
+      var response = await fetch(baseUrl + getAllProjects);
       const data = await response.json();
       this.setState({ featuredProjects: this.shuffle(data) });
     } catch (error) {
