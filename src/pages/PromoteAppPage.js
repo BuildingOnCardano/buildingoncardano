@@ -3,7 +3,8 @@ import React from 'react';
 import {
   Button, Form, FormGroup, Input, Label,
 } from 'reactstrap';
-import { Card, Col, Row } from 'reactstrap';
+import { Card, Col, Row, Modal, ModalBody, ModalFooter, ModalHeader, } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { baseUrl, promotionRequest, createProject } from '../assets/services';
 import { getUser, getPassword } from 'utils/Common.js';
 import CircleLoader
@@ -12,7 +13,7 @@ import { css } from "@emotion/core";
 import "react-datepicker/dist/react-datepicker.css";
 import { makeStyles } from '@material-ui/core/styles';
 import "react-mde/lib/styles/css/react-mde-all.css";
-
+import { isEmpty } from 'lodash';
 
 const override = css`
   display: block;
@@ -50,6 +51,13 @@ class PromoteAppPage extends React.Component {
       email: "",
       projectname: "",
       package: "",
+
+      showMandatory: false,
+
+      modal: false,
+      modal_backdrop: false,
+      modal_nested_parent: false,
+      modal_nested: false,
     };
   }
 
@@ -59,7 +67,7 @@ class PromoteAppPage extends React.Component {
   }
 
   async submitPromotion() {
-    var requestBody = {name: this.state.name, projectName: this.state.projectname, email: this.state.email, packageType: this.state.package};
+    var requestBody = { name: this.state.name, projectName: this.state.projectname, email: this.state.email, packageType: this.state.package };
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'password': getPassword() },
@@ -73,25 +81,27 @@ class PromoteAppPage extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    this.submitPromotion();
+
+    if (!isEmpty(this.state.name) && !isEmpty(this.state.email) && !isEmpty(this.state.projectname) && !isEmpty(this.state.package)) {
+      this.setState({ modal: true });
+      this.submitPromotion();
+    }{
+      this.setState({ showMandatory: true });
+    }
+
+
   };
 
-  onSelect(selectedList, selectedItem) {
-    selectedListTags = selectedList;
-  }
+  toggle = modalType => () => {
+    if (!modalType) {
+      return this.setState({
+        modal: !this.state.modal,
+      });
+    }
 
-  onRemove(selectedList, removedItem) {
-    selectedListTags = selectedList;
-  }
-
-  handler(data) {
-    this.setState({ project: { ...this.state.project, projectTeam: data } });
-  }
-
-
-
-  handleTabChange = tab => {
-    this.setState({ selectedTab: tab });
+    this.setState({
+      [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
+    });
   };
 
   render() {
@@ -106,6 +116,34 @@ class PromoteAppPage extends React.Component {
               title=""
             // breadcrumbs={[{ name: 'Project Edit', active: false }]}
             >
+
+              <Modal
+                isOpen={this.state.modal}
+                toggle={this.toggle()}
+                className={this.props.className}
+              >
+                <ModalHeader toggle={this.toggle()}></ModalHeader>
+
+                <ModalBody>
+                  <h3>Success.</h3>
+                  <Row>
+                    <div>
+                      <p>Thank you for submitting a promotion requestto Building On Cardano.</p>
+                      <br></br>
+                      <p>We will be intouch soon.</p>
+                    </div>
+                  </Row>
+
+                </ModalBody>
+                <ModalFooter>
+                  {' '}
+                  <Link to={{ pathname: '/' }}>
+                    <Button color="secondary" onClick={this.toggle()}>
+                      Close
+                    </Button>
+                  </Link>
+                </ModalFooter>
+              </Modal>
 
               <Row
                 style={{
@@ -150,7 +188,7 @@ class PromoteAppPage extends React.Component {
                           <Label for="name" sm={inputnamewidth}>Your Email</Label>
                           <Col sm={inputfieldwidth}>
                             <Input type="url" name="name" id="name" placeholder="" value={this.state.email}
-                              onChange={e => this.setState({ email: e.target.value  })} /></Col>
+                              onChange={e => this.setState({ email: e.target.value })} /></Col>
                         </FormGroup>
                         <FormGroup row>
                           <Label for="name" sm={inputnamewidth}>Project Name</Label>
@@ -162,7 +200,7 @@ class PromoteAppPage extends React.Component {
                         <FormGroup row>
                           <Label for="name" sm={inputnamewidth}>Promotion Package</Label>
                           <Col sm={inputfieldwidth}>
-                            <Input type="select" name="select" onChange={e => this.setState({ package: e.target.value  })}
+                            <Input type="select" name="select" onChange={e => this.setState({ package: e.target.value })}
                               value={this.state.package}>
                               <option></option>
                               <option>30 Days Shared Homepage Spot</option>
@@ -173,7 +211,7 @@ class PromoteAppPage extends React.Component {
                         </FormGroup>
 
                       </Card>
-
+                      {this.state.showMandatory && <p style={{  color: 'red' }}>All fields are mandatory.</p>}
                       <Card body style={{
                         justifyContent: 'center',
                         alignItems: 'center',
