@@ -209,7 +209,9 @@ class AllProjects extends React.Component {
           :
           <div>
             <Col>
+            <small>Use the search bar to find the project your are looking for or filter on each individual column.</small>
               <Card>
+                
                 <SearchBar
                   value={this.state.searched}
                   onChange={(searchVal) => this.requestSearch(searchVal)}

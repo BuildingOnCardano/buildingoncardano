@@ -1,12 +1,15 @@
 import React from 'react';
 import { MdSearch } from 'react-icons/md';
 import { Form, Input, Col, Card, CardHeader } from 'reactstrap';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import { Link, Redirect } from "react-router-dom";
 import ReactImageFallback from "react-image-fallback";
 import CardanoImage from 'assets/img/cardanoIcon.png';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 const width = window.innerWidth;
+
+
 
 class SearchInput extends React.Component {
   constructor(props) {
@@ -24,12 +27,14 @@ class SearchInput extends React.Component {
     var data = this.props.projects;
     var options = [];
     data.forEach(item => {
-      var option = { value: item.name, label: <div>                          
-      <ReactImageFallback
-        src={item.imageUrl}
-        width="30px"
-        height="30px"
-        fallbackImage={CardanoImage} />{item.name}</div> };
+      var option = {
+        value: item.name, label: <div>
+          <ReactImageFallback
+            src={item.imageUrl}
+            width="30px"
+            height="30px"
+            fallbackImage={CardanoImage} />{item.name}</div>
+      };
       options.push(option);
     });
     this.setState({ options: options });
@@ -41,7 +46,7 @@ class SearchInput extends React.Component {
 
   renderRedirectToLogin = () => {
     if (this.state.redirect) {
-      return <Redirect to={{ pathname: '/projectdetails/'+this.state.projectName }} />
+      return <Redirect to={{ pathname: '/projectdetails/' + this.state.projectName }} />
     }
   }
 
@@ -49,9 +54,47 @@ class SearchInput extends React.Component {
     const { selectedOption } = this.state;
     const { match, location, history } = this.props;
 
+    const ValueContainer = ({ children, ...props }) => {
+      return (
+        components.ValueContainer && (
+          <components.ValueContainer {...props}>
+            {!!children && (
+              // <i
+              //   className="fa fa-search"
+              //   aria-hidden="true"
+              //   style={{ position: "absolute", left: 6 }}
+              // />
+              <FontAwesomeIcon icon={faSearch}  style={{ position: "absolute", left: 6 }}/>
+            )}
+            {children}
+          </components.ValueContainer>
+        )
+      );
+    };
+
+    // const DropdownIndicator = props => {
+    //   return (
+    //     components.DropdownIndicator && (
+    //       <components.DropdownIndicator {...props}>
+    //         <i className="fa fa-search" aria-hidden="true" />
+    //       </components.DropdownIndicator>
+    //     )
+    //   );
+    // };
+
+
+    const DropdownIndicator = props => {
+      return (
+        components.DropdownIndicator && (
+          <components.DropdownIndicator {...props}>
+            <FontAwesomeIcon icon={faSearch} />
+          </components.DropdownIndicator>
+        )
+      );
+    };
 
     return (
-      
+
       <div className="serach-tab">
         {this.renderRedirectToLogin()}
         <Select
@@ -59,11 +102,11 @@ class SearchInput extends React.Component {
           options={this.state.options}
           onChange={this.handleChange}
           styles={width <= 700 ? mobileStyle : standardStyle}
-          placeholder="Search Project..."
+          placeholder="Discover Projects..."
           openMenuOnClick={true}
           classNamePrefix="select"
           menuColor='blue'
-        // components={{ DropdownIndicator }}
+          components={{ DropdownIndicator }}
         />
       </div>
     );
