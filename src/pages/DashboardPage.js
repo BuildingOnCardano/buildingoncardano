@@ -27,6 +27,8 @@ import { Line, Bar, Pie } from "react-chartjs-2";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import FeaturedProjectCard from 'components/FeaturedProjectCard';
+import CardanoImage from 'assets/img/cardanoIcon.png';
+import ReactImageFallback from "react-image-fallback";
 const override = css`
   display: block;
   margin: 0 auto;
@@ -288,11 +290,13 @@ class DashboardPage extends React.Component {
                               if (index < 5) {
                                 return (
                                   <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
-                                      src={item.imageUrl}
-                                      className="rounded"
-                                      style={{ width: 100, height: 80 }}
-                                    />)}    {item.name}</p></TableCell>
+                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
+                                      <ReactImageFallback
+                                        src={item.imageUrl}
+                                        width="50"
+                                        height="50"
+                                        fallbackImage={CardanoImage} />
+                                    )}    {item.name}</p></TableCell>
                                     <TableCell><p>{item.type}</p></TableCell>
 
                                   </TableRow >
@@ -305,11 +309,20 @@ class DashboardPage extends React.Component {
                               if (index < 7) {
                                 return (
                                   <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
-                                      src={item.imageUrl}
-                                      className="rounded"
-                                      style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
-                                    />)}{item.name}</p></TableCell>
+                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
+                                      // <img
+                                      //   src={item.imageUrl}
+                                      //   className="rounded"
+                                      //   style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
+                                      // />
+                                      <ReactImageFallback
+                                        src={item.imageUrl}
+                                        width="50vh"
+                                        height="50vh"
+                                        fallbackImage={CardanoImage}
+                                        />
+
+                                    )}{item.name}</p></TableCell>
                                     <TableCell><p>{item.type}</p></TableCell>
                                     {/* <TableCell><p>{item.tokenType}</p></TableCell>
                                     <TableCell><p>{item.ticker}</p></TableCell> */}
@@ -368,11 +381,20 @@ class DashboardPage extends React.Component {
                               if (index < 5) {
                                 return (
                                   <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
-                                      src={item.imageUrl}
-                                      className="rounded"
-                                      style={{ width: 100, height: 80 }}
-                                    />)}    {item.name}</p></TableCell>
+                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
+                                    // <img
+                                    //   src={item.imageUrl}
+                                    //   className="rounded"
+                                    //   style={{ width: 100, height: 80 }}
+                                    // />
+
+                                    <ReactImageFallback
+                                    src={item.imageUrl}
+                                    width="50"
+                                    height="50"
+                                    fallbackImage={CardanoImage} />
+
+                                    )}    {item.name}</p></TableCell>
                                     <TableCell><p>{item.type}</p></TableCell>
 
                                   </TableRow >
@@ -385,11 +407,14 @@ class DashboardPage extends React.Component {
                               if (index < 7) {
                                 return (
                                   <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (<img
-                                      src={item.imageUrl}
-                                      className="rounded"
-                                      style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
-                                    />)}{item.name}</p></TableCell>
+                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
+                                      <ReactImageFallback
+                                        src={item.imageUrl}
+                                        width="50vh"
+                                        height="50vh"
+                                        fallbackImage={CardanoImage}
+                                        marginRight="10px" />
+                                    )}{item.name}</p></TableCell>
                                     <TableCell><p>{item.type}</p></TableCell>
                                     {/* <TableCell><p>{item.tokenType}</p></TableCell>
                   <TableCell><p>{item.ticker}</p></TableCell> */}
