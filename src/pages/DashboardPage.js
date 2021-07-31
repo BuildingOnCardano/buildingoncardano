@@ -92,7 +92,7 @@ class DashboardPage extends React.Component {
 
   async getMostViewedProjects() {
     try {
-      var response = await fetch(baseUrl + getMostViewedProjects);
+      var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getMonthName());
       const data = await response.json();
       this.setState({ mostViewedProjects: data });
     } catch (error) {
@@ -186,7 +186,11 @@ class DashboardPage extends React.Component {
     ];
 
     const d = new Date();
-    return monthNames[d.getMonth()];
+    var currentMonth = d.getMonth();
+    var lastMonth = currentMonth - 1;
+    if (lastMonth < 0) lastMonth = 11;
+
+    return monthNames[lastMonth];
   }
 
   render() {
@@ -320,7 +324,7 @@ class DashboardPage extends React.Component {
                                         width="50vh"
                                         height="50vh"
                                         fallbackImage={CardanoImage}
-                                        />
+                                      />
 
                                     )}{item.name}</p></TableCell>
                                     <TableCell><p>{item.type}</p></TableCell>
@@ -382,17 +386,17 @@ class DashboardPage extends React.Component {
                                 return (
                                   <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
                                     <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
-                                    // <img
-                                    //   src={item.imageUrl}
-                                    //   className="rounded"
-                                    //   style={{ width: 100, height: 80 }}
-                                    // />
+                                      // <img
+                                      //   src={item.imageUrl}
+                                      //   className="rounded"
+                                      //   style={{ width: 100, height: 80 }}
+                                      // />
 
-                                    <ReactImageFallback
-                                    src={item.imageUrl}
-                                    width="50"
-                                    height="50"
-                                    fallbackImage={CardanoImage} />
+                                      <ReactImageFallback
+                                        src={item.imageUrl}
+                                        width="50"
+                                        height="50"
+                                        fallbackImage={CardanoImage} />
 
                                     )}    {item.name}</p></TableCell>
                                     <TableCell><p>{item.type}</p></TableCell>
