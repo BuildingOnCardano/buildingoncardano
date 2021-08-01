@@ -18,7 +18,7 @@
   color: #222;
   margin-top: -0.2em;
   line-height: 1.4;
-  font-size: 1.2em;
+  font-size: 1.0em;
   font-weight: 900;
   font-family: 'Montserrat', sans-serif;
   transition: all ease-in 100ms;
@@ -155,7 +155,7 @@ strong {
 .ProjectCard {
   background: #ffffff;
   border-radius: 0.6em;
-  margin: 0.5em;
+  // margin: 0.5em;
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 13px 27px -5px rgba(26, 26, 27, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03);
@@ -179,7 +179,7 @@ strong {
 .ProjectCard h2 {
   color: #222;
   line-height: 1.4;
-  font-size: 1.2em;
+  font-size: 1.0em;
   font-weight: 900;
   font-family: 'Montserrat', sans-serif;
   transition: all ease-in 100ms;

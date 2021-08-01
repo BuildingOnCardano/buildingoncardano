@@ -42,6 +42,7 @@ class DashboardPage extends React.Component {
     projects: null,
     featuredProjects: null,
     mostViewedProjects: null,
+    mostViewedPreviousMonthProjects: null,
     salesData: null,
     loading: true,
     totalProjects: '',
@@ -65,9 +66,14 @@ class DashboardPage extends React.Component {
     }
     this.getProjectsStats();
     this.getLiveSales();
+
+    await this.getMostPreviousMonthViewedProjects();
     await this.getMostViewedProjects();
     await this.getFeaturedProjects();
     await this.getAllProjects();
+
+
+
   }
 
   async getAllProjects() {
@@ -89,6 +95,17 @@ class DashboardPage extends React.Component {
       console.log(error)
     }
   }
+
+  async getMostPreviousMonthViewedProjects() {
+    try {
+      var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getPreviousMonthName());
+      const data = await response.json();
+      this.setState({ mostViewedPreviousMonthProjects: data });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   async getMostViewedProjects() {
     try {
@@ -180,7 +197,7 @@ class DashboardPage extends React.Component {
     return a;
   }
 
-  getMonthName() {
+  getPreviousMonthName() {
     const monthNames = ["January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
     ];
@@ -191,6 +208,16 @@ class DashboardPage extends React.Component {
     if (lastMonth < 0) lastMonth = 11;
 
     return monthNames[lastMonth];
+  }
+
+  getMonthName() {
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    const d = new Date();
+    var currentMonth = d.getMonth();
+    return monthNames[currentMonth];
   }
 
   render() {
@@ -224,14 +251,19 @@ class DashboardPage extends React.Component {
 
 
             <div>
-              <div>
-                <h3 className="mb-0">Featured Apps</h3>
-                <div className="col text-right">
+
+              <Row style={{ padding: 0, marginBottom: 0, }}>
+                <Col>
+                  <h3 className="mb-0">Featured Apps</h3>                  
+                </Col>
+                <Col className="col text-right">
                   <Link to={{ pathname: '/promote' }}>
                     <small>Promote your app here.</small>
                   </Link>
-                </div>
-              </div>
+                </Col>
+              </Row>
+
+
               <Row>
                 {this.state.featuredProjects.map(function (item, index) {
                   if (index < 4) {
@@ -250,7 +282,7 @@ class DashboardPage extends React.Component {
 
 
               <Row>
-                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+                <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
 
                   <Card>
                     <CardHeader className="border-0">
@@ -310,7 +342,7 @@ class DashboardPage extends React.Component {
 
                             :
                             this.state.projects.map(function (item, index) {
-                              if (index < 7) {
+                              if (index < 5) {
                                 return (
                                   <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
                                     <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
@@ -342,7 +374,98 @@ class DashboardPage extends React.Component {
                   </Card>
                 </Col>
 
-                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+                <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
+                  <Card>
+                    <CardHeader className="border-0">
+                      <Row className="align-items-center">
+                        <h3 className="mb-0">{this.getPreviousMonthName()} Most Popular</h3>
+                        <div className="col text-right">
+                          <Button
+                            size="sm"
+                          >
+                            <Link to={{ pathname: '/allprojects' }}>
+                              See all
+                            </Link>
+                          </Button>
+                        </div>
+                      </Row>
+                    </CardHeader>
+
+                    <TableContainer component={Paper}>
+                      <Table >
+                        <TableHead className="thead-light">
+                          {this.state.smallScreen ?
+                            <TableRow>
+                              <TableCell ><h2>Project</h2></TableCell>
+                              <TableCell ><h2>Type</h2></TableCell>
+                            </TableRow >
+                            :
+                            <TableRow >
+                              {/* <TableCell></TableCell> */}
+                              <TableCell><h2>Project</h2></TableCell>
+                              <TableCell><h2>Type</h2></TableCell>
+                              {/* <TableCell><h2>Token Type</h2></TableCell>
+            <TableCell><h2>Ticker</h2></TableCell> */}
+                              {/* <TableCell><h2>Stage</h2></TableCell> */}
+                            </TableRow >}
+
+                        </TableHead>
+                        <TableBody>
+
+                          {this.state.smallScreen ?
+                            this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
+                              if (index < 5) {
+                                return (
+                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
+                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
+                                      // <img
+                                      //   src={item.imageUrl}
+                                      //   className="rounded"
+                                      //   style={{ width: 100, height: 80 }}
+                                      // />
+
+                                      <ReactImageFallback
+                                        src={item.imageUrl}
+                                        width="50"
+                                        height="50"
+                                        fallbackImage={CardanoImage} />
+
+                                    )}    {item.name}</p></TableCell>
+                                    <TableCell><p>{item.type}</p></TableCell>
+
+                                  </TableRow >
+                                )
+                              }
+                            })
+
+                            :
+                            this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
+                              if (index < 5) {
+                                return (
+                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
+                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
+                                      <ReactImageFallback
+                                        src={item.imageUrl}
+                                        width="50vh"
+                                        height="50vh"
+                                        fallbackImage={CardanoImage}
+                                        marginRight="10px" />
+                                    )}{item.name}</p></TableCell>
+                                    <TableCell><p>{item.type}</p></TableCell>
+                                    {/* <TableCell><p>{item.tokenType}</p></TableCell>
+                  <TableCell><p>{item.ticker}</p></TableCell> */}
+                                    {/* <TableCell><p>{item.stage}</p></TableCell> */}
+                                  </TableRow >
+                                )
+                              }
+                            })}
+                        </TableBody >
+                      </Table>
+                    </TableContainer>
+                  </Card>
+                </Col>
+
+                <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
                   <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
@@ -408,7 +531,7 @@ class DashboardPage extends React.Component {
 
                             :
                             this.state.mostViewedProjects.map(function (item, index) {
-                              if (index < 7) {
+                              if (index < 5) {
                                 return (
                                   <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
                                     <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
@@ -433,7 +556,7 @@ class DashboardPage extends React.Component {
                   </Card>
                 </Col>
 
-                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+                <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
                   <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">

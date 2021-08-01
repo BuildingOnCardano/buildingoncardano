@@ -22,15 +22,15 @@ export default class FeaturedProjectCard extends React.Component {
     render() {
         return (
             <div className="ProjectCard" style={{
-                minHeight: '10rem'
+                minHeight: '8rem'
             }}>
                 <br></br>
                 <Link to={{ pathname: '/projectdetails/' + this.props.projectDetails.name, state: { projectDetails: this.props.projectDetails } }}>
-                    <div style={{ paddingTop: 10, alignSelf: 'flex-start' }}>
+                    <div style={{ alignSelf: 'flex-start' }}>
                         <ReactImageFallback
                             src={this.props.img}
                             width="50"
-                            height="70"
+                            height="60"
                             fallbackImage={CardanoImage} />
                         <div className="ProjectCard-body">
                             <h2>{this.props.projectDetails.name}</h2>
