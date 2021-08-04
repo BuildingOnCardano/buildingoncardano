@@ -1,5 +1,5 @@
 import React from 'react';
-import shamrock from 'assets/img/shamrock.png';
+import shamrock from 'assets/img/paddy.jpg';
 import paul from 'assets/img/paul.jpg';
 
 import { Navbar, Nav, NavItem, Row } from 'reactstrap';
@@ -12,7 +12,7 @@ const Footer = () => {
             Building On Cardano - a place to view whats happening within the cardano ecosystem. 
           </Row>
           <Row>
-            Brought to you by SPO's Shamrock Pool and Cardano With Paul
+            Brought to you by Stake Pool Operators Shamrock Pool and Cardano With Paul
           </Row>
           <Row>
             <a href="https://shamrock-pool.com/" target="_blank">

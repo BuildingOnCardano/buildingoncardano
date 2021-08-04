@@ -414,7 +414,8 @@ class ProjectDetailsPage extends React.Component {
                         justifyContent: 'center',
                         alignItems: 'center',
                         width: '100%',
-                        borderRadius: '1.9em'
+                        borderRadius: '1.9em',
+                        marginBottom: 10
                       }}>Similar Projects</CardHeader>
                       <Row>
                         {
