@@ -4,7 +4,7 @@ import Notifications from 'components/Notifications';
 import SearchInput from 'components/SearchInput';
 import withBadge from 'hocs/withBadge';
 import React from 'react';
-import { baseUrl, getLatestProjects, getProjectsStats, liveProjectSales } from '../../assets/services';
+import { baseUrl, getAllProjects, getProjectsStats, liveProjectSales } from '../../assets/services';
 import {
   MdClearAll,
   MdExitToApp,
@@ -91,7 +91,7 @@ class Header extends React.Component {
 
   async getAllProjects() {
     try {
-      var response = await fetch(baseUrl + getLatestProjects);
+      var response = await fetch(baseUrl + getAllProjects);
       const data = await response.json();
       this.setState({ projects: data })
     } catch (error) {
