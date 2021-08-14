@@ -33,6 +33,9 @@ import {
 import bn from 'utils/bemnames';
 import { getUser } from 'utils/Common.js';
 import logo200Image from 'assets/img/logo/Light-icon200.png';
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import Tooltip from "@material-ui/core/Tooltip";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const sidebarBackground = {
   backgroundImage: `url("${sidebarBgImage}")`,
@@ -205,12 +208,27 @@ class Sidebar extends React.Component {
                 </BSNavLink>
               </NavItem>
             ))}
-
-
-
           </Nav>
-        </div>
-      </aside>
+
+          <Row className="justify-content-md-center">
+            <Col xs={12} sm={4} md={4}>
+              <a href="https://twitter.com/BuildingCardano" target="_blank" rel="noreferrer">
+                <img
+                  className="pr-2"
+                  alt=""
+                />
+                <FontAwesomeIcon size="2x" icon={faTwitter} style={{
+                  color: "white", justifyContent: 'center',
+                  alignItems: 'center',
+                  textAlign: 'center'
+                }} /></a>
+            </Col>
+          </Row>
+
+
+
+        </div >
+      </aside >
     );
   }
 }
