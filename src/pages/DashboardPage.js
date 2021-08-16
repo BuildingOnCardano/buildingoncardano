@@ -31,8 +31,7 @@ import RecentlyAddedProjectCard from 'components/RecentlyAddedProjectCard';//Rec
 import CardanoImage from 'assets/img/cardanoIcon.png';
 import ReactImageFallback from "react-image-fallback";
 
-import Particle from "react-particles-js";
-import particlesConfig from "../assets/particlesConfig.json";
+
 
 import shamrock from 'assets/img/paddy.jpg';
 import paul from 'assets/img/paul.jpg';
@@ -85,50 +84,97 @@ class DashboardPage extends React.Component {
   }
 
   async getDashBoardData() {
-    await Promise.all([this.getFeaturedProjects(), this.getMostPreviousMonthViewedProjects()], this.getMostViewedProjects(), this.getLatestProjects());
+
+    var response = await fetch(baseUrl + getLatestProjects);
+    const getLatestProjectsVar = await response.json();
+    this.setState({ recentlyAddedProjects: getLatestProjectsVar });
+
+    var response = await fetch(baseUrl + getAllProjects);
+    const getFeaturedProjects = await response.json();
+    this.setState({ featuredProjects: this.shuffle(getFeaturedProjects) });
+
+
+    var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getPreviousMonthName());
+    const getMostPreviousMonthViewedProjects = await response.json();
+    this.setState({ mostViewedPreviousMonthProjects: getMostPreviousMonthViewedProjects });
+
+    var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getMonthName());
+    const getMostViewedProjectsVar = await response.json();
+    this.setState({ mostViewedProjects: getMostViewedProjectsVar });
+
+
+    await this.getProjectsStats();
+    //await Promise.all([this.getFeaturedProjects(), this.getMostPreviousMonthViewedProjects()], this.getMostViewedProjects(), this.getLatestProjects());
     return true;
   }
 
-  async getLatestProjects() {
+  async getProjectsStats() {
     try {
-      var response = await fetch(baseUrl + getLatestProjects);
+      var response = await fetch(baseUrl + getProjectsStats);
       const data = await response.json();
-      this.setState({ recentlyAddedProjects: data });
+
+
+      var labels = [];
+      var counts = [];
+      data.projectTypesAndCount.forEach(element => {
+        labels.push(element.projectType);
+        counts.push(element.projectCount)
+      });
+
+
+
+      this.setState({ projectTypesAndCount: data.projectTypesAndCount });
+      this.state.projectTypesAndCount = data.projectTypesAndCount;
+
     } catch (error) {
       console.log(error)
     }
   }
 
-  async getFeaturedProjects() {
-    try {
-      var response = await fetch(baseUrl + getLatestProjects);
-      const data = await response.json();
-      this.setState({ featuredProjects: this.shuffle(data) });
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // async getLatestProjects() {
+  //   try {
+  //     var response = await fetch(baseUrl + getLatestProjects);
+  //     const data = await response.json();
+  //     this.setState({ recentlyAddedProjects: data });
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  //   return true;
+  // }
 
-  async getMostPreviousMonthViewedProjects() {
-    try {
-      var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getPreviousMonthName());
-      const data = await response.json();
-      this.setState({ mostViewedPreviousMonthProjects: data });
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // async getFeaturedProjects() {
+  //   try {
+  //     var response = await fetch(baseUrl + getAllProjects);
+  //     const data = await response.json();
+  //     this.setState({ featuredProjects: this.shuffle(data) });
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  //   return true;
+  // }
+
+  // async getMostPreviousMonthViewedProjects() {
+  //   try {
+  //     var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getPreviousMonthName());
+  //     const data = await response.json();
+  //     this.setState({ mostViewedPreviousMonthProjects: data });
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  //   return true;
+  // }
 
 
-  async getMostViewedProjects() {
-    try {
-      var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getMonthName());
-      const data = await response.json();
-      this.setState({ mostViewedProjects: data });
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // async getMostViewedProjects() {
+  //   try {
+  //     var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getMonthName());
+  //     const data = await response.json();
+  //     this.setState({ mostViewedProjects: data });
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  //   return true;
+  // }
 
   async getLiveSales() {
     try {
@@ -138,6 +184,7 @@ class DashboardPage extends React.Component {
     } catch (error) {
       console.log(error)
     }
+    return true;
   }
 
   shuffle(a) {
@@ -179,7 +226,7 @@ class DashboardPage extends React.Component {
       // title="Dashboard"
       >
 
-        <Particle params={particlesConfig} className="App-particles__container" />
+  
 
         {this.state.loading ? <div><CircleLoader loading={this.state.statsloading} css={override} size={80} /></div>
           :
@@ -191,44 +238,44 @@ class DashboardPage extends React.Component {
             <div>
 
 
-
+<br></br>
 
               {/* <Row>
                 <Col>
                   <h3 className="mb-0">App Types</h3>
                 </Col>
               </Row> */}
-              <Card>
-                <CardBody>
+              <Card style={{backgroundColor:"#225cb6", opacity:0.80}}>
+                <CardBody >
 
 
 
                   <div className="App">
                     <Row>
-                      <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
+                      {/* <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
                         <div class="wrapper">
                           <img class="img_0_left" src={this.state.featuredProjects[0].imageUrl} />
                           <img class="img_1_left" src={this.state.featuredProjects[1].imageUrl} />
                           <img class="img_2_left" src={this.state.featuredProjects[2].imageUrl} />
-                          <img class="img_3_left" src={this.state.featuredProjects[4].imageUrl} />
+                          <img class="img_3_left" src={this.state.featuredProjects[3].imageUrl} />
                         </div>
-                      </Col>
-                      <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
-                        <div className="App-text">
-                          <h1 className="App-text__title">&#123;Building On Cardano&#125;</h1>
-                          <h2 className="App-text__body">
+                      </Col> */}
+                      <Col lg={12} md={12} sm={12} xs={12} className="mb-3">
+                      <div className="App-text">
+                          <h1 className="App-text__title text-white">&#123;Building On Cardano&#125;</h1>
+                          <h2 className="text-white">
                             The Home of All things being built on Cardano
                           </h2>
                         </div>
                       </Col>
-                      <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
+                      {/* <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
                         <div class="wrapper">
-                          <img class="img_0_right" src={this.state.featuredProjects[0].imageUrl} />
-                          <img class="img_1_right" src={this.state.featuredProjects[1].imageUrl} />
-                          <img class="img_2_right" src={this.state.featuredProjects[2].imageUrl} />
-                          <img class="img_3_right" src={this.state.featuredProjects[4].imageUrl} />
+                          <img class="img_0_right" src={this.state.featuredProjects[4].imageUrl} />
+                          <img class="img_1_right" src={this.state.featuredProjects[5].imageUrl} />
+                          <img class="img_2_right" src={this.state.featuredProjects[6].imageUrl} />
+                          <img class="img_3_right" src={this.state.featuredProjects[8].imageUrl} />                      
                         </div>
-                      </Col>
+                      </Col> */}
                     </Row>
                   </div>
                   <Row className="justify-content-md-center">
@@ -279,7 +326,7 @@ class DashboardPage extends React.Component {
                 {this.state.recentlyAddedProjects.map(function (item, index) {
                   if (index < 6) {
                     return (
-                      <Col lg={2} md={10} sm={10} xs={12} className="mb-3">
+                      <Col lg={2} md={6} sm={6} xs={6} className="mb-3">
                         <div className='ProjectCards'>
                           <RecentlyAddedProjectCard
                             img={item.imageUrl}

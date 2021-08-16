@@ -29,7 +29,8 @@ import {
   Popover,
   PopoverBody,
   Row,
-  Col
+  Col,
+  Container
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import bn from 'utils/bemnames';
@@ -104,25 +105,22 @@ class Header extends React.Component {
     const { isNotificationConfirmed } = this.state;
 
     return (
-      // <Navbar light expand className={bem.b('bg-white')}>
-      <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
-        <Nav navbar className="mr-2">
-          <Button outline onClick={this.handleSidebarControlButton}>
-            <MdClearAll size={20} />
-          </Button>
-        </Nav>
+      <div style={{backgroundColor:"#225cb6", opacity:0.80}}>
+      {/* <div> */}
+        <Container fluid>
+          <Navbar className="navbar-top navbar-light" expand="md" id="navbar-main">
+            <Nav navbar className="mr-2">
+              <Button outline onClick={this.handleSidebarControlButton}>
+                <MdClearAll size={20} />
+              </Button>
+            </Nav>
 
-        <Nav navbar className="mr-2">
-
-        </Nav>
-
-
-        <Nav navbar className={bem.e('nav-right')}>
-        {this.state.projects != null &&
-            <SearchInput projects={this.state.projects} />
-          }
-          {/* {(this.state.user != null) && (<p>Logged in as: {this.state.user}</p>)} */}
-          {/* <NavItem className="d-inline-flex">
+            <Nav navbar className={bem.e('nav-right')}>
+              {this.state.projects != null &&
+                <SearchInput projects={this.state.projects} />
+              }
+              {/* {(this.state.user != null) && (<p>Logged in as: {this.state.user}</p>)} */}
+              {/* <NavItem className="d-inline-flex">
             <NavLink id="Popover1" className="position-relative">
               {isNotificationConfirmed ? (
                 <MdNotificationsNone
@@ -150,30 +148,30 @@ class Header extends React.Component {
             </Popover>
           </NavItem> */}
 
-          {this.state.user != null && <NavItem>
-            <NavLink id="Popover2">
-              <Avatar
-                onClick={this.toggleUserCardPopover}
-                className="can-click"
-              />
-            </NavLink>
-            <Popover
-              placement="bottom-end"
-              isOpen={this.state.isOpenUserCardPopover}
-              toggle={this.toggleUserCardPopover}
-              target="Popover2"
-              className="p-0 border-0"
-              style={{ minWidth: 250 }}
-            >
-              <PopoverBody className="p-0 border-light">
-                <UserCard
-                  // title="Jane"
-                  subtitle={this.state.user}
-                  // text="Last updated 3 mins ago"
-                  className="border-light"
+              {this.state.user != null && <NavItem>
+                <NavLink id="Popover2">
+                  <Avatar
+                    onClick={this.toggleUserCardPopover}
+                    className="can-click"
+                  />
+                </NavLink>
+                <Popover
+                  placement="bottom-end"
+                  isOpen={this.state.isOpenUserCardPopover}
+                  toggle={this.toggleUserCardPopover}
+                  target="Popover2"
+                  className="p-0 border-0"
+                  style={{ minWidth: 250 }}
                 >
-                  <ListGroup flush>
-                    {/* <ListGroupItem tag="button" action className="border-light">
+                  <PopoverBody className="p-0 border-light">
+                    <UserCard
+                      // title="Jane"
+                      subtitle={this.state.user}
+                      // text="Last updated 3 mins ago"
+                      className="border-light"
+                    >
+                      <ListGroup flush>
+                        {/* <ListGroupItem tag="button" action className="border-light">
                       <MdPersonPin /> Profile
                     </ListGroupItem>
                     <ListGroupItem tag="button" action className="border-light">
@@ -188,19 +186,22 @@ class Header extends React.Component {
                     <ListGroupItem tag="button" action className="border-light">
                       <MdHelp /> Help
                     </ListGroupItem> */}
-                    <ListGroupItem tag="button" action className="border-light">
-                      <Link to={{ pathname: '/signout' }}>
-                        <MdExitToApp />
-                        Signout
-                      </Link>
-                    </ListGroupItem>
-                  </ListGroup>
-                </UserCard>
-              </PopoverBody>
-            </Popover>
-          </NavItem>}
-        </Nav>
-      </Navbar>
+                        <ListGroupItem tag="button" action className="border-light">
+                          <Link to={{ pathname: '/signout' }}>
+                            <MdExitToApp />
+                            Signout
+                          </Link>
+                        </ListGroupItem>
+                      </ListGroup>
+                    </UserCard>
+                  </PopoverBody>
+                </Popover>
+              </NavItem>}
+            </Nav>
+          </Navbar>
+        </Container>
+      </div>
+
     );
   }
 }

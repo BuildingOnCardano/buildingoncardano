@@ -69,7 +69,7 @@ class ProjectsPage extends React.Component {
       <Page
         className="ProjectsPage"
         title=""
-        breadcrumbs={[{ name: 'Projects /' + this.props.projectType, active: true }]}
+        breadcrumbs={[{ name:  this.props.projectType, active: true }]}
       >
 
 

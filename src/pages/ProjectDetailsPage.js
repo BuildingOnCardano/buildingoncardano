@@ -104,7 +104,7 @@ class ProjectDetailsPage extends React.Component {
             <Page
               className="ProjectDetailsPage"
               title=""
-              breadcrumbs={[{ name: 'Project Details' + ' / ' + this.props.match.params.projectname, active: true }]}
+              // breadcrumbs={[{ name: 'Project Details' + ' / ' + this.props.match.params.projectname, active: true }]}
             >
 
               <Row

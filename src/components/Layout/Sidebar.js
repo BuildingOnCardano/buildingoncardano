@@ -119,7 +119,7 @@ class Sidebar extends React.Component {
   render() {
     return (
       <aside className={bem.b()} data-image={sidebarBgImage}>
-        <div className={bem.e('background')} style={sidebarBackground} />
+        {/* <div className={bem.e('background')} style={sidebarBackground} /> */}
         <div className={bem.e('content')}>
 
           <Navbar>

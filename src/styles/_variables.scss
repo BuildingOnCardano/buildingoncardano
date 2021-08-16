@@ -36,7 +36,8 @@ $grays: map-merge(
   $grays
 );
 
-$blue: #225cb6 !default;
+$blueNoOpacity: #225cb6 !default;
+$blue: rgba($blueNoOpacity, .8);
 $lightblue: #3183e6 !default;
 $indigo: #6610f2 !default;
 $purple: #6f42c1 !default;
@@ -887,9 +888,9 @@ $breadcrumb-item-padding: 0.5rem !default;
 
 $breadcrumb-margin-bottom: 1rem !default;
 
-$breadcrumb-bg: $gray-200 !default;
-$breadcrumb-divider-color: $gray-600 !default;
-$breadcrumb-active-color: $gray-600 !default;
+$breadcrumb-bg: $blue !default;
+$breadcrumb-divider-color: $blue !default;
+$breadcrumb-active-color: $white !default;
 $breadcrumb-divider: "/" !default;
 
 // Carousel
