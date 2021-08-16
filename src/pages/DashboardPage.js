@@ -26,9 +26,19 @@ import { isEmpty } from 'utils/stringutil.js';
 import { Line, Bar, Pie } from "react-chartjs-2";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import FeaturedProjectCard from 'components/FeaturedProjectCard';
+import FeaturedProjectCard from 'components/FeaturedProjectCard';//RecentlyAddedProjectCard
+import RecentlyAddedProjectCard from 'components/RecentlyAddedProjectCard';//RecentlyAddedProjectCard
 import CardanoImage from 'assets/img/cardanoIcon.png';
 import ReactImageFallback from "react-image-fallback";
+
+import Particle from "react-particles-js";
+import particlesConfig from "../assets/particlesConfig.json";
+
+import shamrock from 'assets/img/paddy.jpg';
+import paul from 'assets/img/paul.jpg';
+import "../styles/imageoverlay.css";
+
+
 const override = css`
   display: block;
   margin: 0 auto;
@@ -39,7 +49,7 @@ const width = window.innerWidth;
 
 class DashboardPage extends React.Component {
   state = {
-    projects: null,
+    recentlyAddedProjects: null,
     featuredProjects: null,
     mostViewedProjects: null,
     mostViewedPreviousMonthProjects: null,
@@ -64,23 +74,26 @@ class DashboardPage extends React.Component {
     if (width < 600) {
       this.setState({ smallScreen: true });
     }
-    this.getProjectsStats();
+    // this.getProjectsStats();
     this.getLiveSales();
 
-    await this.getMostPreviousMonthViewedProjects();
-    await this.getMostViewedProjects();
-    await this.getFeaturedProjects();
-    await this.getAllProjects();
-
-
+    var dataLoaded = await this.getDashBoardData();
+    if (dataLoaded) {
+      this.setState({ loading: false });
+    }
 
   }
 
-  async getAllProjects() {
+  async getDashBoardData() {
+    await Promise.all([this.getFeaturedProjects(), this.getMostPreviousMonthViewedProjects()], this.getMostViewedProjects(), this.getLatestProjects());
+    return true;
+  }
+
+  async getLatestProjects() {
     try {
       var response = await fetch(baseUrl + getLatestProjects);
       const data = await response.json();
-      this.setState({ projects: data, loading: false })
+      this.setState({ recentlyAddedProjects: data });
     } catch (error) {
       console.log(error)
     }
@@ -88,7 +101,7 @@ class DashboardPage extends React.Component {
 
   async getFeaturedProjects() {
     try {
-      var response = await fetch(baseUrl + getAllProjects);
+      var response = await fetch(baseUrl + getLatestProjects);
       const data = await response.json();
       this.setState({ featuredProjects: this.shuffle(data) });
     } catch (error) {
@@ -122,68 +135,6 @@ class DashboardPage extends React.Component {
       var response = await fetch(baseUrl + liveProjectSales);
       const data = await response.json();
       this.setState({ salesData: data })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  async getProjectsStats() {
-    try {
-      var response = await fetch(baseUrl + getProjectsStats);
-      const data = await response.json();
-
-
-      var labels = [];
-      var counts = [];
-      data.projectTypesAndCount.forEach(element => {
-        labels.push(element.projectType);
-        counts.push(element.projectCount)
-      });
-
-      var chartData = {
-        labels: labels,
-        datasets: [
-          {
-            label: '# of Types',
-            data: counts,
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.4)',
-              'rgba(31,179,124, 0.6)',
-              'rgba(75, 192, 192, 0.8)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.4)',
-              'rgba(144,14,249, 0.6)',
-              'rgba(54, 162, 0, 0.8)',
-              'rgba(255, 100, 86, 0.2)',
-              'rgba(165,239,83, 0.4)',
-              'rgba(120, 102, 255, 0.6)',
-              'rgba(164,113,111, 0.8)',
-              'rgba(178,135,21, 0.2)',
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(31,179,124, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(144,14,249, 1 )',
-              'rgba(54, 162, 0, 1)',
-              'rgba(255, 100, 86, 1)',
-              'rgba(165,239,83, 1)',
-              'rgba(120, 102, 255, 1)',
-              'rgba(164,113,111, 1)',
-              'rgba(178,135,21, 1)',
-            ],
-            borderWidth: 1,
-          },
-        ],
-      };
-
-      this.setState({ totalProjects: data.totalProjects, projectTypesAndCount: data.projectTypesAndCount, barChartData: chartData });
-      this.state.projectTypesAndCount = data.projectTypesAndCount;
-
     } catch (error) {
       console.log(error)
     }
@@ -227,13 +178,60 @@ class DashboardPage extends React.Component {
         className="DashboardPage"
       // title="Dashboard"
       >
+
+        <Particle params={particlesConfig} className="App-particles__container" />
+
         {this.state.loading ? <div><CircleLoader loading={this.state.statsloading} css={override} size={80} /></div>
           :
           <div>
-            <div className="my-auto"><hr />
-              <Col>
-                <Row className="justify-content-md-center">
-                  <div>
+            {/* <Particle params={particlesConfig} className="App-particles__container" /> */}
+
+
+
+            <div>
+
+
+
+
+              {/* <Row>
+                <Col>
+                  <h3 className="mb-0">App Types</h3>
+                </Col>
+              </Row> */}
+              <Card>
+                <CardBody>
+
+
+
+                  <div className="App">
+                    <Row>
+                      <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
+                        <div class="wrapper">
+                          <img class="img_0_left" src={this.state.featuredProjects[0].imageUrl} />
+                          <img class="img_1_left" src={this.state.featuredProjects[1].imageUrl} />
+                          <img class="img_2_left" src={this.state.featuredProjects[2].imageUrl} />
+                          <img class="img_3_left" src={this.state.featuredProjects[4].imageUrl} />
+                        </div>
+                      </Col>
+                      <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+                        <div className="App-text">
+                          <h1 className="App-text__title">&#123;Building On Cardano&#125;</h1>
+                          <h2 className="App-text__body">
+                            The Home of All things being built on Cardano
+                          </h2>
+                        </div>
+                      </Col>
+                      <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
+                        <div class="wrapper">
+                          <img class="img_0_right" src={this.state.featuredProjects[0].imageUrl} />
+                          <img class="img_1_right" src={this.state.featuredProjects[1].imageUrl} />
+                          <img class="img_2_right" src={this.state.featuredProjects[2].imageUrl} />
+                          <img class="img_3_right" src={this.state.featuredProjects[4].imageUrl} />
+                        </div>
+                      </Col>
+                    </Row>
+                  </div>
+                  <Row className="justify-content-md-center">
                     {this.state.projectTypesAndCount.map(function (item, index) {
                       return (
                         <Button size="sm" className="btn-tag2">
@@ -243,18 +241,13 @@ class DashboardPage extends React.Component {
                         </Button>
                       )
                     })}
-                  </div>
-                </Row>
-              </Col>
-              <hr />
-            </div>
-
-
-            <div>
+                  </Row>
+                </CardBody>
+              </Card>
 
               <Row style={{ padding: 0, marginBottom: 0, }}>
                 <Col>
-                  <h3 className="mb-0">Featured Apps</h3>                  
+                  <h3 className="mb-0">Featured Apps</h3>
                 </Col>
                 <Col className="col text-right">
                   <Link to={{ pathname: '/promote' }}>
@@ -262,8 +255,6 @@ class DashboardPage extends React.Component {
                   </Link>
                 </Col>
               </Row>
-
-
               <Row>
                 {this.state.featuredProjects.map(function (item, index) {
                   if (index < 4) {
@@ -279,102 +270,33 @@ class DashboardPage extends React.Component {
                   }
                 })}
               </Row>
+              <Row>
+                <Col>
+                  <h3 className="mb-0">Recently Added</h3>
+                </Col>
+              </Row>
+              <Row>
+                {this.state.recentlyAddedProjects.map(function (item, index) {
+                  if (index < 6) {
+                    return (
+                      <Col lg={2} md={10} sm={10} xs={12} className="mb-3">
+                        <div className='ProjectCards'>
+                          <RecentlyAddedProjectCard
+                            img={item.imageUrl}
+                            projectDetails={item} />
+                        </div>
+                      </Col>
+                    )
+                  }
+                })}
+              </Row>
 
 
               <Row>
-                <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
 
-                  <Card>
-                    <CardHeader className="border-0">
-                      <Row className="align-items-center">
-                        <h3 className="mb-0">Recently Updated</h3>
-                        <div className="col text-right">
-                          <Button
-                            size="sm"
-                          >
-                            <Link to={{ pathname: '/allprojects' }}>
-                              See all
-                            </Link>
-                          </Button>
-                        </div>
-                      </Row>
-                    </CardHeader>
 
-                    <TableContainer component={Paper}>
-                      <Table >
-                        <TableHead className="thead-light">
-                          {this.state.smallScreen ?
-                            <TableRow>
-                              <TableCell ><h2>Project</h2></TableCell>
-                              <TableCell ><h2>Type</h2></TableCell>
-                            </TableRow >
-                            :
-                            <TableRow >
-                              {/* <TableCell></TableCell> */}
-                              <TableCell><h2>Project</h2></TableCell>
-                              <TableCell><h2>Type</h2></TableCell>
-                              {/* <TableCell><h2>Token Type</h2></TableCell>
-                              <TableCell><h2>Ticker</h2></TableCell> */}
-                              {/* <TableCell><h2>Stage</h2></TableCell> */}
-                            </TableRow >}
 
-                        </TableHead>
-                        <TableBody>
-
-                          {this.state.smallScreen ?
-                            this.state.projects.map(function (item, index) {
-                              if (index < 5) {
-                                return (
-                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
-                                      <ReactImageFallback
-                                        src={item.imageUrl}
-                                        width="50"
-                                        height="50"
-                                        fallbackImage={CardanoImage} />
-                                    )}    {item.name}</p></TableCell>
-                                    <TableCell><p>{item.type}</p></TableCell>
-
-                                  </TableRow >
-                                )
-                              }
-                            })
-
-                            :
-                            this.state.projects.map(function (item, index) {
-                              if (index < 5) {
-                                return (
-                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
-                                      // <img
-                                      //   src={item.imageUrl}
-                                      //   className="rounded"
-                                      //   style={{ width: "5vh", height: "5vh", marginRight: "10px" }}
-                                      // />
-                                      <ReactImageFallback
-                                        src={item.imageUrl}
-                                        width="50vh"
-                                        height="50vh"
-                                        fallbackImage={CardanoImage}
-                                      />
-
-                                    )}{item.name}</p></TableCell>
-                                    <TableCell><p>{item.type}</p></TableCell>
-                                    {/* <TableCell><p>{item.tokenType}</p></TableCell>
-                                    <TableCell><p>{item.ticker}</p></TableCell> */}
-                                    {/* <TableCell><p>{item.stage}</p></TableCell> */}
-                                  </TableRow >
-                                )
-                              }
-                            })}
-                        </TableBody >
-                      </Table>
-                    </TableContainer>
-
-                  </Card>
-                </Col>
-
-                <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
+                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
                   <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
@@ -390,82 +312,66 @@ class DashboardPage extends React.Component {
                         </div>
                       </Row>
                     </CardHeader>
+                    <CardBody>
+                      <TableContainer component={Paper}>
+                        <Table >
+                          <TableBody>
 
-                    <TableContainer component={Paper}>
-                      <Table >
-                        <TableHead className="thead-light">
-                          {this.state.smallScreen ?
-                            <TableRow>
-                              <TableCell ><h2>Project</h2></TableCell>
-                              <TableCell ><h2>Type</h2></TableCell>
-                            </TableRow >
-                            :
-                            <TableRow >
-                              {/* <TableCell></TableCell> */}
-                              <TableCell><h2>Project</h2></TableCell>
-                              <TableCell><h2>Type</h2></TableCell>
-                              {/* <TableCell><h2>Token Type</h2></TableCell>
-            <TableCell><h2>Ticker</h2></TableCell> */}
-                              {/* <TableCell><h2>Stage</h2></TableCell> */}
-                            </TableRow >}
+                            {this.state.smallScreen ?
+                              this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
+                                if (index < 5) {
+                                  return (
+                                    <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
+                                      <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
+                                        // <img
+                                        //   src={item.imageUrl}
+                                        //   className="rounded"
+                                        //   style={{ width: 100, height: 80 }}
+                                        // />
 
-                        </TableHead>
-                        <TableBody>
+                                        <ReactImageFallback
+                                          src={item.imageUrl}
+                                          width="32"
+                                          height="32"
+                                          fallbackImage={CardanoImage} />
 
-                          {this.state.smallScreen ?
-                            this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
-                              if (index < 5) {
-                                return (
-                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
-                                      // <img
-                                      //   src={item.imageUrl}
-                                      //   className="rounded"
-                                      //   style={{ width: 100, height: 80 }}
-                                      // />
+                                      )}    {item.name}</p></TableCell>
+                                      {/* <TableCell><p>{item.type}</p></TableCell> */}
 
-                                      <ReactImageFallback
-                                        src={item.imageUrl}
-                                        width="50"
-                                        height="50"
-                                        fallbackImage={CardanoImage} />
+                                    </TableRow >
+                                  )
+                                }
+                              })
 
-                                    )}    {item.name}</p></TableCell>
-                                    <TableCell><p>{item.type}</p></TableCell>
-
-                                  </TableRow >
-                                )
-                              }
-                            })
-
-                            :
-                            this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
-                              if (index < 5) {
-                                return (
-                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
-                                      <ReactImageFallback
-                                        src={item.imageUrl}
-                                        width="50vh"
-                                        height="50vh"
-                                        fallbackImage={CardanoImage}
-                                        marginRight="10px" />
-                                    )}{item.name}</p></TableCell>
-                                    <TableCell><p>{item.type}</p></TableCell>
-                                    {/* <TableCell><p>{item.tokenType}</p></TableCell>
+                              :
+                              this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
+                                if (index < 5) {
+                                  return (
+                                    <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
+                                      <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
+                                        <ReactImageFallback
+                                          src={item.imageUrl}
+                                          width="32"
+                                          height="32"
+                                          fallbackImage={CardanoImage}
+                                          marginRight="10px" />
+                                      )}{item.name}</p></TableCell>
+                                      {/* <TableCell><p>{item.type}</p></TableCell> */}
+                                      {/* <TableCell><p>{item.tokenType}</p></TableCell>
                   <TableCell><p>{item.ticker}</p></TableCell> */}
-                                    {/* <TableCell><p>{item.stage}</p></TableCell> */}
-                                  </TableRow >
-                                )
-                              }
-                            })}
-                        </TableBody >
-                      </Table>
-                    </TableContainer>
+                                      {/* <TableCell><p>{item.stage}</p></TableCell> */}
+                                    </TableRow >
+                                  )
+                                }
+                              })}
+                          </TableBody >
+                        </Table>
+                      </TableContainer>
+                    </CardBody>
                   </Card>
                 </Col>
 
-                <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
+                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
                   <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
@@ -481,82 +387,65 @@ class DashboardPage extends React.Component {
                         </div>
                       </Row>
                     </CardHeader>
+                    <CardBody>
+                      <TableContainer component={Paper}>
+                        <Table >
+                          <TableBody>
+                            {this.state.smallScreen ?
+                              this.state.mostViewedProjects.map(function (item, index) {
+                                if (index < 5) {
+                                  return (
+                                    <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
+                                      <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
+                                        // <img
+                                        //   src={item.imageUrl}
+                                        //   className="rounded"
+                                        //   style={{ width: 100, height: 80 }}
+                                        // />
 
-                    <TableContainer component={Paper}>
-                      <Table >
-                        <TableHead className="thead-light">
-                          {this.state.smallScreen ?
-                            <TableRow>
-                              <TableCell ><h2>Project</h2></TableCell>
-                              <TableCell ><h2>Type</h2></TableCell>
-                            </TableRow >
-                            :
-                            <TableRow >
-                              {/* <TableCell></TableCell> */}
-                              <TableCell><h2>Project</h2></TableCell>
-                              <TableCell><h2>Type</h2></TableCell>
-                              {/* <TableCell><h2>Token Type</h2></TableCell>
-            <TableCell><h2>Ticker</h2></TableCell> */}
-                              {/* <TableCell><h2>Stage</h2></TableCell> */}
-                            </TableRow >}
+                                        <ReactImageFallback
+                                          src={item.imageUrl}
+                                          width="32"
+                                          height="32"
+                                          fallbackImage={CardanoImage} />
 
-                        </TableHead>
-                        <TableBody>
+                                      )}    {item.name}</p></TableCell>
+                                      {/* <TableCell><p>{item.type}</p></TableCell> */}
 
-                          {this.state.smallScreen ?
-                            this.state.mostViewedProjects.map(function (item, index) {
-                              if (index < 5) {
-                                return (
-                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
-                                      // <img
-                                      //   src={item.imageUrl}
-                                      //   className="rounded"
-                                      //   style={{ width: 100, height: 80 }}
-                                      // />
+                                    </TableRow >
+                                  )
+                                }
+                              })
 
-                                      <ReactImageFallback
-                                        src={item.imageUrl}
-                                        width="50"
-                                        height="50"
-                                        fallbackImage={CardanoImage} />
-
-                                    )}    {item.name}</p></TableCell>
-                                    <TableCell><p>{item.type}</p></TableCell>
-
-                                  </TableRow >
-                                )
-                              }
-                            })
-
-                            :
-                            this.state.mostViewedProjects.map(function (item, index) {
-                              if (index < 5) {
-                                return (
-                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                    <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
-                                      <ReactImageFallback
-                                        src={item.imageUrl}
-                                        width="50vh"
-                                        height="50vh"
-                                        fallbackImage={CardanoImage}
-                                        marginRight="10px" />
-                                    )}{item.name}</p></TableCell>
-                                    <TableCell><p>{item.type}</p></TableCell>
-                                    {/* <TableCell><p>{item.tokenType}</p></TableCell>
+                              :
+                              this.state.mostViewedProjects.map(function (item, index) {
+                                if (index < 5) {
+                                  return (
+                                    <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
+                                      <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
+                                        <ReactImageFallback
+                                          src={item.imageUrl}
+                                          width="32"
+                                          height="32"
+                                          fallbackImage={CardanoImage}
+                                          marginRight="10px" />
+                                      )}{item.name}</p></TableCell>
+                                      {/* <TableCell><p>{item.type}</p></TableCell> */}
+                                      {/* <TableCell><p>{item.tokenType}</p></TableCell>
                   <TableCell><p>{item.ticker}</p></TableCell> */}
-                                    {/* <TableCell><p>{item.stage}</p></TableCell> */}
-                                  </TableRow >
-                                )
-                              }
-                            })}
-                        </TableBody >
-                      </Table>
-                    </TableContainer>
+                                      {/* <TableCell><p>{item.stage}</p></TableCell> */}
+                                    </TableRow >
+                                  )
+                                }
+                              })}
+                          </TableBody >
+                        </Table>
+                      </TableContainer>
+                    </CardBody>
                   </Card>
                 </Col>
 
-                <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
+                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
                   <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
@@ -572,12 +461,12 @@ class DashboardPage extends React.Component {
                         </div>
                       </Row>
                     </CardHeader>
+                    <CardBody>
+                      <Carousel autoPlay interval="7000" showArrows={true} showThumbs={false} infiniteLoop={true} showIndicators={false}>
+                        {this.state.salesData.map(function (item, index) {
+                          return (
+                            <div>
 
-                    <Carousel autoPlay interval="7000" showArrows={true} showThumbs={false} infiniteLoop={true} showIndicators={false}>
-                      {this.state.salesData.map(function (item, index) {
-                        return (
-                          <div>
-                            <CardBody>
                               <CardTitle><b>{item.projectName}</b></CardTitle>
                               <CardText>
                                 <p><b>Sale Type: </b>{item.upcomingSale}</p>
@@ -591,15 +480,17 @@ class DashboardPage extends React.Component {
                                     size="sm" variant="outline-light"><a href={item.tokenDistributionDetail} target="_blank" rel="noreferrer">Sale Details</a></Button>
                                 </div>
                               )}
-                            </CardBody>
-                          </div>
-                        )
-                      })}
-                    </Carousel>
+
+                            </div>
+                          )
+                        })}
+
+                      </Carousel>
+                    </CardBody>
                   </Card>
 
 
-                  <Card>
+                  {/* <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
                         <h3 className="mb-0">Project Types</h3>
@@ -613,11 +504,11 @@ class DashboardPage extends React.Component {
                         />
                       </div>
                     </CardBody>
-                  </Card>
+                  </Card> */}
                 </Col>
               </Row>
             </div>
-          </div>}
+          </div >}
 
       </Page>
     );

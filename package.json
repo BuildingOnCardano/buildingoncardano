@@ -52,6 +52,7 @@
     "react-mde": "^11.5.0",
     "react-notification-system": "^0.4.0",
     "react-paginate": "^7.1.2",
+    "react-particles-js": "^3.5.3",
     "react-responsive-carousel": "^3.2.18",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
@@ -71,6 +72,7 @@
     "semantic-ui-react": "^2.0.3",
     "style-loader": "^2.0.0",
     "styled-components": "^5.2.1",
+    "tsparticles": "^1.33.3",
     "victory": "^32.0.0"
   },
   "devDependencies": {

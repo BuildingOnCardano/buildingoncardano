@@ -150,6 +150,8 @@ strong {
   // display: flex;
   // align-items: flex-start;
     justify-content: center;
+    padding: 0.2em;
+
 }
 
 .ProjectCard {
@@ -160,6 +162,7 @@ strong {
   cursor: pointer;
   box-shadow: 0 13px 27px -5px rgba(26, 26, 27, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03);
   transition: all ease 200ms;
+  padding: 0;
 }
 
 .ProjectCard:hover {
@@ -206,7 +209,7 @@ strong {
 }
 
 .ProjectCard-body {
-  padding: 1.5em;
+  padding: 0.2em;
 }
 
 #name::placeholder {

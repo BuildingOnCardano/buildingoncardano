@@ -2,7 +2,7 @@ import React from 'react';
 import ReactImageFallback from "react-image-fallback";
 import CardanoImage from 'assets/img/cardanoIcon.png';
 import { Link } from 'react-router-dom';
-export default class FeaturedProjectCard extends React.Component {
+export default class RecentlyAddedProjectCard extends React.Component {
 
     constructor(props) {
         super(props);
@@ -22,19 +22,19 @@ export default class FeaturedProjectCard extends React.Component {
     render() {
         return (
             <div className="ProjectCard" style={{
-                minHeight: '8rem'
+                minHeight: '6rem'
             }}>
                 <br></br>
                 <Link to={{ pathname: '/projectdetails/' + this.props.projectDetails.name, state: { projectDetails: this.props.projectDetails } }}>
                     <div style={{ alignSelf: 'flex-start' }}>
                         <ReactImageFallback
                             src={this.props.img}
-                            width="70"
-                            height="70"
+                            width="30"
+                            height="30"
                             fallbackImage={CardanoImage} />
                         <div className="ProjectCard-body">
-                            <h2>{this.props.projectDetails.name}</h2>
-                            <h5>{this.props.projectDetails.type}</h5>
+                            <h3>{this.props.projectDetails.name}</h3>
+                            {/* <h5>{this.props.projectDetails.type}</h5> */}
                         </div>
                     </div>
                 </Link>

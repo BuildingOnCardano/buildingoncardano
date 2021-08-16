@@ -134,7 +134,7 @@ class Sidebar extends React.Component {
               </Col>
             </Row>
 
-            <h5 className="text-white">Building On Cardano</h5>
+            {/* <h5 className="text-white">Building On Cardano</h5> */}
           </Navbar>
           <Nav vertical>
             {this.state.navItemsTop.map(({ to, name, exact, Icon }, index) => (
