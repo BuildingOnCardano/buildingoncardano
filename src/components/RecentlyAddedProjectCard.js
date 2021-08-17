@@ -2,6 +2,10 @@ import React from 'react';
 import ReactImageFallback from "react-image-fallback";
 import CardanoImage from 'assets/img/cardanoIcon.png';
 import { Link } from 'react-router-dom';
+import CircularImage from 'utils/CircularImage';
+import {
+    Media,
+} from 'reactstrap';
 export default class RecentlyAddedProjectCard extends React.Component {
 
     constructor(props) {
@@ -33,7 +37,7 @@ export default class RecentlyAddedProjectCard extends React.Component {
                             height="30"
                             fallbackImage={CardanoImage} />
                         <div className="ProjectCard-body">
-                            <h3>{this.props.projectDetails.name}</h3>
+                            <h5>{this.props.projectDetails.name}</h5>
                             {/* <h5>{this.props.projectDetails.type}</h5> */}
                         </div>
                     </div>

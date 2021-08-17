@@ -10,6 +10,7 @@ import {
   Button,
   Nav,
   Navbar,
+  Media,
   CardText,
   CardTitle
 } from 'reactstrap';
@@ -30,7 +31,7 @@ import FeaturedProjectCard from 'components/FeaturedProjectCard';//RecentlyAdded
 import RecentlyAddedProjectCard from 'components/RecentlyAddedProjectCard';//RecentlyAddedProjectCard
 import CardanoImage from 'assets/img/cardanoIcon.png';
 import ReactImageFallback from "react-image-fallback";
-
+import CircularImage from 'utils/CircularImage';
 
 
 import shamrock from 'assets/img/paddy.jpg';
@@ -226,7 +227,7 @@ class DashboardPage extends React.Component {
       // title="Dashboard"
       >
 
-  
+
 
         {this.state.loading ? <div><CircleLoader loading={this.state.statsloading} css={override} size={80} /></div>
           :
@@ -238,14 +239,14 @@ class DashboardPage extends React.Component {
             <div>
 
 
-<br></br>
+              <br></br>
 
               {/* <Row>
                 <Col>
                   <h3 className="mb-0">App Types</h3>
                 </Col>
               </Row> */}
-              <Card style={{backgroundColor:"#225cb6", opacity:0.80}}>
+              <Card style={{ backgroundColor: "#225cb6", opacity: 0.80 }}>
                 <CardBody >
 
 
@@ -261,7 +262,7 @@ class DashboardPage extends React.Component {
                         </div>
                       </Col> */}
                       <Col lg={12} md={12} sm={12} xs={12} className="mb-3">
-                      <div className="App-text">
+                        <div className="App-text">
                           <h1 className="App-text__title text-white">&#123;Building On Cardano&#125;</h1>
                           <h2 className="text-white">
                             The Home of All things being built on Cardano
@@ -369,20 +370,18 @@ class DashboardPage extends React.Component {
                                 if (index < 5) {
                                   return (
                                     <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                      <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
-                                        // <img
-                                        //   src={item.imageUrl}
-                                        //   className="rounded"
-                                        //   style={{ width: 100, height: 80 }}
-                                        // />
-
-                                        <ReactImageFallback
-                                          src={item.imageUrl}
-                                          width="32"
-                                          height="32"
-                                          fallbackImage={CardanoImage} />
-
-                                      )}    {item.name}</p></TableCell>
+                                      <TableCell>
+                                      <Media className="align-items-center">
+                                          <a className="avatar rounded-circle mr-3">
+                                            <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                          </a>
+                                          <Media>
+                                            <span className="mb-0 text-sm">
+                                              {item.name}
+                                            </span>
+                                          </Media>
+                                        </Media>
+                                      </TableCell>
                                       {/* <TableCell><p>{item.type}</p></TableCell> */}
 
                                     </TableRow >
@@ -395,14 +394,18 @@ class DashboardPage extends React.Component {
                                 if (index < 5) {
                                   return (
                                     <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                      <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
-                                        <ReactImageFallback
-                                          src={item.imageUrl}
-                                          width="32"
-                                          height="32"
-                                          fallbackImage={CardanoImage}
-                                          marginRight="10px" />
-                                      )}{item.name}</p></TableCell>
+                                      <TableCell>
+                                      <Media className="align-items-center">
+                                          <a className="avatar rounded-circle mr-3">
+                                            <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                          </a>
+                                          <Media>
+                                            <span className="mb-0 text-sm">
+                                              {item.name}
+                                            </span>
+                                          </Media>
+                                        </Media>
+                                      </TableCell>
                                       {/* <TableCell><p>{item.type}</p></TableCell> */}
                                       {/* <TableCell><p>{item.tokenType}</p></TableCell>
                   <TableCell><p>{item.ticker}</p></TableCell> */}
@@ -443,20 +446,19 @@ class DashboardPage extends React.Component {
                                 if (index < 5) {
                                   return (
                                     <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                      <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
-                                        // <img
-                                        //   src={item.imageUrl}
-                                        //   className="rounded"
-                                        //   style={{ width: 100, height: 80 }}
-                                        // />
+                                      <TableCell>
+                                        <Media className="align-items-center">
+                                          <a className="avatar rounded-circle mr-3">
+                                            <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                          </a>
+                                          <Media>
+                                            <span className="mb-0 text-sm">
+                                              {item.name}
+                                            </span>
+                                          </Media>
+                                        </Media>
+                                      </TableCell>
 
-                                        <ReactImageFallback
-                                          src={item.imageUrl}
-                                          width="32"
-                                          height="32"
-                                          fallbackImage={CardanoImage} />
-
-                                      )}    {item.name}</p></TableCell>
                                       {/* <TableCell><p>{item.type}</p></TableCell> */}
 
                                     </TableRow >
@@ -469,14 +471,19 @@ class DashboardPage extends React.Component {
                                 if (index < 5) {
                                   return (
                                     <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                      <TableCell><p>{item.imageUrl != null && item.imageUrl.includes('http') && (
-                                        <ReactImageFallback
-                                          src={item.imageUrl}
-                                          width="32"
-                                          height="32"
-                                          fallbackImage={CardanoImage}
-                                          marginRight="10px" />
-                                      )}{item.name}</p></TableCell>
+                                      <TableCell>
+                                        <Media className="align-items-center">
+                                          <a className="avatar rounded-circle mr-3">
+                                            <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                          </a>
+                                          <Media>
+                                            <span className="mb-0 text-sm">
+                                              {item.name}
+                                            </span>
+                                          </Media>
+                                        </Media>
+
+                                      </TableCell>
                                       {/* <TableCell><p>{item.type}</p></TableCell> */}
                                       {/* <TableCell><p>{item.tokenType}</p></TableCell>
                   <TableCell><p>{item.ticker}</p></TableCell> */}

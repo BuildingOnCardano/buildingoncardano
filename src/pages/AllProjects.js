@@ -18,6 +18,7 @@ import SearchBar from "material-ui-search-bar";
 import { DataGrid } from '@material-ui/data-grid';
 import { makeStyles } from '@material-ui/styles';
 import { Line, Bar, Pie } from "react-chartjs-2";
+import CircularImage from 'utils/CircularImage';
 
 const override = css`
   display: block;
@@ -45,11 +46,12 @@ const columns = [
     ),
     flexGrow: 1.0,
     renderCell: (params) => (
-      <img
-        src={params.value}
-        className="rounded"
-        style={{ width: "8vh", height: "8vh", marginRight: "10px" }}
-      />
+      // <img
+      //   src={params.value}
+      //   className="rounded"
+      //   style={{ width: "8vh", height: "8vh", marginRight: "10px" }}
+      // />
+      <CircularImage imageUrl={params.value} height={"6vh"} width={"6vh"} />
     ),
     headerClassName: 'super-app-theme--header',
     sortable: false,
@@ -104,11 +106,12 @@ const columnsMobile = [
     ),
     flexGrow: 1.0,
     renderCell: (params) => (
-      <img
-        src={params.value}
-        className="rounded"
-        style={{ width: "8vh", height: "8vh", marginRight: "10px" }}
-      />
+      // <img
+      //   src={params.value}
+      //   className="rounded"
+      //   style={{ width: "8vh", height: "8vh", marginRight: "10px" }}
+      // />
+      <CircularImage imageUrl={params.value} height={"4vh"} width={"4vh"} />
     ),
     headerClassName: 'super-app-theme--header',
     sortable: false,
@@ -287,7 +290,7 @@ class AllProjects extends React.Component {
               </div>
 
 
-              <small>Use the search bar to find the project your are looking for or filter on each individual column.</small>
+              <small><b>Use the search bar to find the project your are looking for or filter on each individual column.</b></small>
               <Card>
 
                 <SearchBar
