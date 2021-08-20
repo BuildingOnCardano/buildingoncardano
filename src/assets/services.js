@@ -20,6 +20,7 @@ export const getProjectsStats = "/projects/stats";
 export const getProjectByOwner = "/projects/owner/";////{owneremail}
 export const getProjectByName = "/projects/details/name/";//{projectId}
 export const getProjectByNameAndOwner = "/projects/details/nameandowner/";//{projectId}
+export const getRecentlyUpdatedProjects = "/projects/recentlyupdated";
 
 //project sales
 export const liveProjectSales = "/projectsales/all/live";
@@ -27,3 +28,6 @@ export const liveAndUpcomingProjectSales = "/projectsales/all/liveandupcoming";
 
 //promotion 
 export const promotionRequest = "/promotion/request"
+
+//featured
+export const getFeaturedProjectsList = "/featuredprojects/getcurrent";

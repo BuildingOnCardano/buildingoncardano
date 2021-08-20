@@ -26,7 +26,7 @@ export default class RecentlyAddedProjectCard extends React.Component {
     render() {
         return (
             <div className="ProjectCard" style={{
-                minHeight: '6rem'
+                minHeight: '4rem'
             }}>
                 <br></br>
                 <Link to={{ pathname: '/projectdetails/' + this.props.projectDetails.name, state: { projectDetails: this.props.projectDetails } }}>

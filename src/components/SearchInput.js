@@ -64,7 +64,7 @@ class SearchInput extends React.Component {
               //   aria-hidden="true"
               //   style={{ position: "absolute", left: 6 }}
               // />
-              <FontAwesomeIcon icon={faSearch}  style={{ position: "absolute", left: 6 }}/>
+              <FontAwesomeIcon icon={faSearch} style={{ position: "absolute", left: 6 }} />
             )}
             {children}
           </components.ValueContainer>
@@ -97,7 +97,8 @@ class SearchInput extends React.Component {
 
       <div className="serach-tab">
         {this.renderRedirectToLogin()}
-        <Select
+        {this.state.options != null && <Select
+          classNamePrefix="my-select"
           value={selectedOption}
           options={this.state.options}
           onChange={this.handleChange}
@@ -105,9 +106,12 @@ class SearchInput extends React.Component {
           placeholder="Discover Projects..."
           openMenuOnClick={true}
           classNamePrefix="select"
+          openMenuOnFocus={true}
+          menuPortalTarget={document.body}
+          menuPosition={'fixed'} 
           menuColor='blue'
           components={{ DropdownIndicator }}
-        />
+        />}
       </div>
     );
   }
@@ -149,7 +153,10 @@ const mobileStyle = {
     marginTop: 0,
     boxShadow: 'none',
     borderRadius: 0,
+    zIndex: 9999
   }),
+
+  menu: provided => ({ ...provided, zIndex: 9999 }),
 
   singleValue: styles => ({
     ...styles,
@@ -190,6 +197,8 @@ const standardStyle = {
     boxShadow: 'none',
     borderRadius: 0,
   }),
+
+  menu: provided => ({ ...provided, zIndex: 9999 }),
 
   singleValue: styles => ({
     ...styles,

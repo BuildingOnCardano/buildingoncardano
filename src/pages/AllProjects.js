@@ -281,16 +281,15 @@ class AllProjects extends React.Component {
           <div>
             <Col>
 
-              <div className="chart">
+              {this.state.smallScreen != true && <div className="chart">
                 <Bar
-                  data={this.state.barChartData} height={40}
-
+                  data={this.state.barChartData} height={50}
                 // options={this.state.barChartData.options}
                 />
-              </div>
+              </div>}
 
 
-              <small><b>Use the search bar to find the project your are looking for or filter on each individual column.</b></small>
+              <small><b>Use the search bar to find the project your are looking for, or filter on each individual column.</b></small>
               <Card>
 
                 <SearchBar
@@ -298,7 +297,7 @@ class AllProjects extends React.Component {
                   onChange={(searchVal) => this.requestSearch(searchVal)}
                   onCancelSearch={() => this.cancelSearch()}
                 />
-                <div style={{ height: '70vh', width: '100%' }} className={useStyles.root}>
+                <div style={{ height: '140vh', width: '100%' }} className={useStyles.root}>
                   {this.state.smallScreen ? <DataGrid
                     rowHeight={70}
                     rows={this.state.filterAbleProjects}

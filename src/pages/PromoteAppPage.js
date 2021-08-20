@@ -159,15 +159,15 @@ class PromoteAppPage extends React.Component {
                   alignItems: 'center',
                 }}>
                   <Col md={5} lg={5} sm={11} xs={11} className="mb-3">
-                    <h3>To promote your DApp you can choose between these three packages:</h3>
+                    <h3>To promote your DApp you can choose between these packages:</h3>
                     <br></br>
-                    <h4><b>Option 1:</b> Homepage, 30 days shared spot (rotating between 10 apps max).</h4>
+                    {/* <h4><b>Option 1:</b> Homepage, 30 days shared spot (rotating between 10 apps max).</h4>
                     <br></br>
                     <h4><b>Option 2:</b> Homepage, 7 days exclusive spot.</h4>
+                    <br></br> */}
+                    <h4><b>Option 1:</b> Homepage, 30 days exclusive spot.</h4>
                     <br></br>
-                    <h4><b>Option 3:</b> Homepage, 14 days exclusive spot.</h4>
-                    <br></br>
-                    <h4><b>Option 4:</b> Homepage, 30 days exclusive spot.</h4>
+                    <h4><b>Option 2:</b> Homepage, 60 days exclusive spot.</h4>
 
                     {/* By promoting your DApp you will benefit from an estimated traffic of 110K visits per month (source: SimilarWeb, May 2019). Featured DApps on State of the DApps typically see a CTR (Click Through Rate) between 4 and 11% to your DApp details page. The details page of featured DApps has a CTR of over 55% to your DApp website (and/or social media accounts). Our CTR is very high, compared to the industry average CTR of 1.91% for a search ad, and 0.35% for a display ad.</p> */}
                   </Col>

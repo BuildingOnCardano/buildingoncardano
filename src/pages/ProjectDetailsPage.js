@@ -115,11 +115,11 @@ class ProjectDetailsPage extends React.Component {
                   <Card>
                     <CardBody>
                       <Row>
-                        <Col sm={3}>
+                        <Col sm={4}>
                           <ReactImageFallback
                             src={this.state.project.imageUrl}
-                            width="140"
-                            height="140"
+                            width="100%"
+                            height="100%"
                             fallbackImage={CardanoImage} />
                         </Col>
 

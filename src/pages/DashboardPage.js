@@ -17,7 +17,7 @@ import {
 import CircleLoader
   from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
-import { baseUrl, getLatestProjects, getProjectsStats, liveProjectSales, getMostViewedProjects, getAllProjects } from '../assets/services';
+import { baseUrl, getLatestProjects, getProjectsStats, getRecentlyUpdatedProjects, liveProjectSales, getMostViewedProjects, getFeaturedProjectsList } from '../assets/services';
 import { Link } from 'react-router-dom';
 import { TableRow, TableCell, TableHead, TableBody, TableContainer } from '@material-ui/core';
 import "../styles/styles.css";
@@ -53,6 +53,7 @@ class DashboardPage extends React.Component {
     featuredProjects: null,
     mostViewedProjects: null,
     mostViewedPreviousMonthProjects: null,
+    recentlyUpdateProjects: null,
     salesData: null,
     loading: true,
     totalProjects: '',
@@ -75,7 +76,7 @@ class DashboardPage extends React.Component {
       this.setState({ smallScreen: true });
     }
     // this.getProjectsStats();
-    this.getLiveSales();
+    //this.getLiveSales();
 
     var dataLoaded = await this.getDashBoardData();
     if (dataLoaded) {
@@ -90,7 +91,7 @@ class DashboardPage extends React.Component {
     const getLatestProjectsVar = await response.json();
     this.setState({ recentlyAddedProjects: getLatestProjectsVar });
 
-    var response = await fetch(baseUrl + getAllProjects);
+    var response = await fetch(baseUrl + getFeaturedProjectsList);
     const getFeaturedProjects = await response.json();
     this.setState({ featuredProjects: this.shuffle(getFeaturedProjects) });
 
@@ -103,6 +104,9 @@ class DashboardPage extends React.Component {
     const getMostViewedProjectsVar = await response.json();
     this.setState({ mostViewedProjects: getMostViewedProjectsVar });
 
+    var response = await fetch(baseUrl + getRecentlyUpdatedProjects);
+    const getRecentlyUpdatedProjectsVar = await response.json();
+    this.setState({ recentlyUpdateProjects: getRecentlyUpdatedProjectsVar });
 
     await this.getProjectsStats();
     //await Promise.all([this.getFeaturedProjects(), this.getMostPreviousMonthViewedProjects()], this.getMostViewedProjects(), this.getLatestProjects());
@@ -122,8 +126,6 @@ class DashboardPage extends React.Component {
         counts.push(element.projectCount)
       });
 
-
-
       this.setState({ projectTypesAndCount: data.projectTypesAndCount });
       this.state.projectTypesAndCount = data.projectTypesAndCount;
 
@@ -131,51 +133,6 @@ class DashboardPage extends React.Component {
       console.log(error)
     }
   }
-
-  // async getLatestProjects() {
-  //   try {
-  //     var response = await fetch(baseUrl + getLatestProjects);
-  //     const data = await response.json();
-  //     this.setState({ recentlyAddedProjects: data });
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  //   return true;
-  // }
-
-  // async getFeaturedProjects() {
-  //   try {
-  //     var response = await fetch(baseUrl + getAllProjects);
-  //     const data = await response.json();
-  //     this.setState({ featuredProjects: this.shuffle(data) });
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  //   return true;
-  // }
-
-  // async getMostPreviousMonthViewedProjects() {
-  //   try {
-  //     var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getPreviousMonthName());
-  //     const data = await response.json();
-  //     this.setState({ mostViewedPreviousMonthProjects: data });
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  //   return true;
-  // }
-
-
-  // async getMostViewedProjects() {
-  //   try {
-  //     var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getMonthName());
-  //     const data = await response.json();
-  //     this.setState({ mostViewedProjects: data });
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  //   return true;
-  // }
 
   async getLiveSales() {
     try {
@@ -232,25 +189,9 @@ class DashboardPage extends React.Component {
         {this.state.loading ? <div><CircleLoader loading={this.state.statsloading} css={override} size={80} /></div>
           :
           <div>
-            {/* <Particle params={particlesConfig} className="App-particles__container" /> */}
-
-
-
-            <div>
-
-
               <br></br>
-
-              {/* <Row>
-                <Col>
-                  <h3 className="mb-0">App Types</h3>
-                </Col>
-              </Row> */}
-              <Card style={{ backgroundColor: "#225cb6", opacity: 0.80 }}>
-                <CardBody >
-
-
-
+              <Card style={{ backgroundColor: "#225cb6", opacity: 0.80, zIndex: 1 }}>
+                <CardBody>
                   <div className="App">
                     <Row>
                       {/* <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
@@ -265,7 +206,7 @@ class DashboardPage extends React.Component {
                         <div className="App-text">
                           <h1 className="App-text__title text-white">&#123;Building On Cardano&#125;</h1>
                           <h2 className="text-white">
-                            The Home of All things being built on Cardano
+                            The Home of All things being building on Cardano
                           </h2>
                         </div>
                       </Col>
@@ -293,16 +234,17 @@ class DashboardPage extends React.Component {
                 </CardBody>
               </Card>
 
-              <Row style={{ padding: 0, marginBottom: 0, }}>
-                <Col>
-                  <h3 className="mb-0">Featured Apps</h3>
-                </Col>
-                <Col className="col text-right">
-                  <Link to={{ pathname: '/promote' }}>
-                    <small>Promote your app here.</small>
-                  </Link>
-                </Col>
-              </Row>
+              {this.state.featuredProjects != null && this.state.featuredProjects.length != 0 &&
+                <Row style={{ padding: 0, marginBottom: 0, }}>
+                  <Col>
+                    <h4 className="mb-0">Featured</h4>
+                  </Col>
+                  <Col className="col text-right">
+                    <Link to={{ pathname: '/promote' }}>
+                      <small>Promote your app here.</small>
+                    </Link>
+                  </Col>
+                </Row>}
               <Row>
                 {this.state.featuredProjects.map(function (item, index) {
                   if (index < 4) {
@@ -318,35 +260,73 @@ class DashboardPage extends React.Component {
                   }
                 })}
               </Row>
+
               <Row>
-                <Col>
-                  <h3 className="mb-0">Recently Added</h3>
+                <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+                  <Row>
+                    <Col>
+                      <h4 className="mb-0">new</h4>
+                    </Col>
+                  </Row>
+                  <Row>
+                    {this.state.recentlyAddedProjects.map(function (item, index) {
+                      if (index < 3) {
+                        return (
+                          <Col lg={4} md={6} sm={6} xs={6} className="mb-3">
+                            <div className='ProjectCards'>
+                              <RecentlyAddedProjectCard
+                                img={item.imageUrl}
+                                projectDetails={item} />
+                            </div>
+                          </Col>
+                        )
+                      }
+                    })}
+                  </Row>
+                </Col>
+                <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+                  <Row>
+                    <Col>
+                      <h4 className="mb-0">Updated</h4>
+                    </Col>
+                  </Row>
+                  <Row>
+                    {this.state.recentlyUpdateProjects.map(function (item, index) {
+                      if (index < 3) {
+                        return (
+                          <Col lg={4} md={6} sm={6} xs={6} className="mb-3">
+                            <div className='ProjectCards'>
+                              <RecentlyAddedProjectCard
+                                img={item.imageUrl}
+                                projectDetails={item} />
+                            </div>
+                          </Col>
+                        )
+                      }
+                    })}
+                  </Row>
                 </Col>
               </Row>
-              <Row>
-                {this.state.recentlyAddedProjects.map(function (item, index) {
-                  if (index < 6) {
-                    return (
-                      <Col lg={2} md={6} sm={6} xs={6} className="mb-3">
-                        <div className='ProjectCards'>
-                          <RecentlyAddedProjectCard
-                            img={item.imageUrl}
-                            projectDetails={item} />
-                        </div>
-                      </Col>
-                    )
-                  }
-                })}
-              </Row>
+
 
 
               <Row>
 
 
 
-                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
-                  <Card>
-                    <CardHeader className="border-0">
+                <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+                  <Row>
+                    <Col>
+                      <h4 className="mb-0">{this.getPreviousMonthName()} Most Popular</h4>
+                    </Col>
+                    <Col className="col text-right">
+                      <Link to={{ pathname: '/promote' }}>
+                        <small>See All</small>
+                      </Link>
+                    </Col>
+                  </Row>
+
+                  {/* <CardHeader className="border-0">
                       <Row className="align-items-center">
                         <h3 className="mb-0">{this.getPreviousMonthName()} Most Popular</h3>
                         <div className="col text-right">
@@ -359,70 +339,72 @@ class DashboardPage extends React.Component {
                           </Button>
                         </div>
                       </Row>
-                    </CardHeader>
-                    <CardBody>
-                      <TableContainer component={Paper}>
-                        <Table >
-                          <TableBody>
+                    </CardHeader> */}
+                  {/* <Card>
+                    <CardBody> */}
 
-                            {this.state.smallScreen ?
-                              this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
-                                if (index < 5) {
-                                  return (
-                                    <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                      <TableCell>
-                                      <Media className="align-items-center">
-                                          <a className="avatar rounded-circle mr-3">
-                                            <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
-                                          </a>
-                                          <Media>
-                                            <span className="mb-0 text-sm">
-                                              {item.name}
-                                            </span>
-                                          </Media>
-                                        </Media>
-                                      </TableCell>
-                                      {/* <TableCell><p>{item.type}</p></TableCell> */}
+                  <TableContainer component={Paper}>
+                    <Table >
+                      <TableBody>
 
-                                    </TableRow >
-                                  )
-                                }
-                              })
+                        {this.state.smallScreen ?
+                          this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
+                            if (index < 4) {
+                              return (
+                                <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
+                                  <TableCell>
+                                    <Media className="align-items-center">
+                                      <a className="avatar rounded-circle mr-3">
+                                        <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                      </a>
+                                      <Media>
+                                        <span className="mb-0 text-sm">
+                                          {item.name}
+                                        </span>
+                                      </Media>
+                                    </Media>
+                                  </TableCell>
+                                  {/* <TableCell><p>{item.type}</p></TableCell> */}
 
-                              :
-                              this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
-                                if (index < 5) {
-                                  return (
-                                    <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                      <TableCell>
-                                      <Media className="align-items-center">
-                                          <a className="avatar rounded-circle mr-3">
-                                            <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
-                                          </a>
-                                          <Media>
-                                            <span className="mb-0 text-sm">
-                                              {item.name}
-                                            </span>
-                                          </Media>
-                                        </Media>
-                                      </TableCell>
-                                      {/* <TableCell><p>{item.type}</p></TableCell> */}
-                                      {/* <TableCell><p>{item.tokenType}</p></TableCell>
+                                </TableRow >
+                              )
+                            }
+                          })
+
+                          :
+                          this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
+                            if (index < 4) {
+                              return (
+                                <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
+                                  <TableCell>
+                                    <Media className="align-items-center">
+                                      <a className="avatar rounded-circle mr-3">
+                                        <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                      </a>
+                                      <Media>
+                                        <span className="mb-0 text-sm">
+                                          {item.name}
+                                        </span>
+                                      </Media>
+                                    </Media>
+                                  </TableCell>
+                                  <TableCell><p>{item.type}</p></TableCell>
+                                  {/* <TableCell><p>{item.tokenType}</p></TableCell>
                   <TableCell><p>{item.ticker}</p></TableCell> */}
-                                      {/* <TableCell><p>{item.stage}</p></TableCell> */}
-                                    </TableRow >
-                                  )
-                                }
-                              })}
-                          </TableBody >
-                        </Table>
-                      </TableContainer>
-                    </CardBody>
-                  </Card>
+                                  {/* <TableCell><p>{item.stage}</p></TableCell> */}
+                                </TableRow >
+                              )
+                            }
+                          })}
+                      </TableBody >
+                    </Table>
+                  </TableContainer>
+                  {/* </CardBody>
+                  </Card> */}
                 </Col>
 
-                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
-                  <Card>
+                <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+                  {/* <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
                         <h3 className="mb-0">{this.getMonthName()} Most Popular</h3>
@@ -437,70 +419,90 @@ class DashboardPage extends React.Component {
                         </div>
                       </Row>
                     </CardHeader>
-                    <CardBody>
-                      <TableContainer component={Paper}>
-                        <Table >
-                          <TableBody>
-                            {this.state.smallScreen ?
-                              this.state.mostViewedProjects.map(function (item, index) {
-                                if (index < 5) {
-                                  return (
-                                    <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                      <TableCell>
-                                        <Media className="align-items-center">
-                                          <a className="avatar rounded-circle mr-3">
-                                            <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
-                                          </a>
-                                          <Media>
-                                            <span className="mb-0 text-sm">
-                                              {item.name}
-                                            </span>
-                                          </Media>
-                                        </Media>
-                                      </TableCell>
+                    <CardBody> */}
+                  <Row>
+                    <Col>
+                      <h4 className="mb-0">{this.getMonthName()} Most Popular</h4>
+                    </Col>
+                    <Col className="col text-right">
+                      <Link to={{ pathname: '/allprojects' }}>
+                        <small>See All</small>
+                      </Link>
+                    </Col>
+                  </Row>
+                  <TableContainer component={Paper}>
+                    <Table >
+                      <TableBody>
+                        {this.state.smallScreen ?
+                          this.state.mostViewedProjects.map(function (item, index) {
+                            if (index < 4) {
+                              return (
+                                <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
+                                  <TableCell>
+                                    <Media className="align-items-center">
+                                      <a className="avatar rounded-circle mr-3">
+                                        <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                      </a>
+                                      <Media>
+                                        <span className="mb-0 text-sm">
+                                          {item.name}
+                                        </span>
+                                      </Media>
+                                    </Media>
+                                  </TableCell>
 
-                                      {/* <TableCell><p>{item.type}</p></TableCell> */}
+                                  {/* <TableCell><p>{item.type}</p></TableCell> */}
 
-                                    </TableRow >
-                                  )
-                                }
-                              })
+                                </TableRow >
+                              )
+                            }
+                          })
 
-                              :
-                              this.state.mostViewedProjects.map(function (item, index) {
-                                if (index < 5) {
-                                  return (
-                                    <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                      <TableCell>
-                                        <Media className="align-items-center">
-                                          <a className="avatar rounded-circle mr-3">
-                                            <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
-                                          </a>
-                                          <Media>
-                                            <span className="mb-0 text-sm">
-                                              {item.name}
-                                            </span>
-                                          </Media>
-                                        </Media>
+                          :
+                          this.state.mostViewedProjects.map(function (item, index) {
+                            if (index < 4) {
+                              return (
+                                <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
+                                  <TableCell>
+                                    <Media className="align-items-center">
+                                      <a className="avatar rounded-circle mr-3">
+                                        <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                      </a>
+                                      <Media>
+                                        <span className="mb-0 text-sm">
+                                          {item.name}
+                                        </span>
+                                      </Media>
+                                    </Media>
 
-                                      </TableCell>
-                                      {/* <TableCell><p>{item.type}</p></TableCell> */}
-                                      {/* <TableCell><p>{item.tokenType}</p></TableCell>
+                                  </TableCell>
+                                  <TableCell><p>{item.type}</p></TableCell>
+                                  {/* <TableCell><p>{item.tokenType}</p></TableCell>
                   <TableCell><p>{item.ticker}</p></TableCell> */}
-                                      {/* <TableCell><p>{item.stage}</p></TableCell> */}
-                                    </TableRow >
-                                  )
-                                }
-                              })}
-                          </TableBody >
-                        </Table>
-                      </TableContainer>
-                    </CardBody>
-                  </Card>
+                                  {/* <TableCell><p>{item.stage}</p></TableCell> */}
+                                </TableRow >
+                              )
+                            }
+                          })}
+                      </TableBody >
+                    </Table>
+                  </TableContainer>
+                  {/* </CardBody>
+                  </Card> */}
                 </Col>
 
-                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
-                  <Card>
+                {/* <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+                <Row>
+                    <Col>
+                      <h4 className="mb-0">Live Sales</h4>
+                    </Col>
+                    <Col className="col text-right">
+                      <Link to={{ pathname: '/allsales' }}>
+                        <small>See All</small>
+                      </Link>
+                    </Col>
+                  </Row> */}
+                {/* <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
                         <h3 className="mb-0">Live Sales</h3>
@@ -515,23 +517,28 @@ class DashboardPage extends React.Component {
                         </div>
                       </Row>
                     </CardHeader>
-                    <CardBody>
-                      <Carousel autoPlay interval="7000" showArrows={true} showThumbs={false} infiniteLoop={true} showIndicators={false}>
+                    <CardBody> */}
+                {/* <Carousel autoPlay interval="7000" showArrows={true} showThumbs={false} infiniteLoop={true} showIndicators={false}>
                         {this.state.salesData.map(function (item, index) {
                           return (
                             <div>
-
-                              <CardTitle><b>{item.projectName}</b></CardTitle>
+                              <br></br>
+                              <CardTitle><h2 className="text-white"><b>{item.projectName}</b></h2></CardTitle>
                               <CardText>
+                                <br></br>
                                 <p><b>Sale Type: </b>{item.upcomingSale}</p>
+                                <br></br>
                                 <p><b>Start Date: </b>{item.saleStartDate}</p>
+                                <br></br>
                                 <p><b>End Date: </b>{item.saleEndDate}</p>
+                                <br></br>
                               </CardText>
                               <hr />
                               {!isEmpty(item.tokenDistributionDetail) && (
                                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                                   <Button
                                     size="sm" variant="outline-light"><a href={item.tokenDistributionDetail} target="_blank" rel="noreferrer">Sale Details</a></Button>
+                                  <br></br>
                                 </div>
                               )}
 
@@ -539,12 +546,12 @@ class DashboardPage extends React.Component {
                           )
                         })}
 
-                      </Carousel>
-                    </CardBody>
-                  </Card>
+                      </Carousel> */}
+                {/* </CardBody>
+                  </Card> */}
 
 
-                  {/* <Card>
+                {/* <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
                         <h3 className="mb-0">Project Types</h3>
@@ -559,9 +566,8 @@ class DashboardPage extends React.Component {
                       </div>
                     </CardBody>
                   </Card> */}
-                </Col>
+                {/* </Col> */}
               </Row>
-            </div>
           </div >}
 
       </Page>
