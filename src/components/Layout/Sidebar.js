@@ -83,8 +83,8 @@ class Sidebar extends React.Component {
           { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
           { to: '/myprojects', name: 'my projects', exact: true, Icon: MdVerifiedUser },
           { to: '/addproject', name: 'add project', exact: true, Icon: MdAddToQueue },
-          { to: '/allprojects', name: 'all projects', exact: true, Icon: MdGroupWork },
-          // { to: '/allsales', name: 'all sales', exact: true, Icon: MdAttachMoney },
+          { to: '/allprojects', name: 'projects', exact: true, Icon: MdGroupWork },
+          { to: '/allsales', name: 'sales', exact: true, Icon: MdAttachMoney },
 
         ],
         loggedin: true,
@@ -95,8 +95,8 @@ class Sidebar extends React.Component {
       this.setState({
         navItemsTop: [
           { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
-          { to: '/allprojects', name: 'all projects', exact: true, Icon: MdStar },
-          // { to: '/allsales', name: 'all sales', exact: true, Icon: MdAttachMoney },
+          { to: '/allprojects', name: 'projects', exact: true, Icon: MdStar },
+          { to: '/allsales', name: 'sales', exact: true, Icon: MdAttachMoney },
           { to: '/addproject', name: 'add project', exact: true, Icon: MdAddToQueue },
         ],
         navItemsBottom: [{ to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle }]

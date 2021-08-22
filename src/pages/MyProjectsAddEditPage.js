@@ -54,11 +54,10 @@ const inputfieldwidth = 8;
 
 const tagOptions = [
   { name: 'Defi', id: 1 },
-  { name: 'Application', id: 2 },
+  { name: 'Subscriptions', id: 2 },
   { name: 'Tooling', id: 3 },
   { name: 'Wallet', id: 4 },
   { name: 'Data', id: 5 },
-  { name: 'Nft', id: 6 },
   { name: 'Dex', id: 6 },
   { name: 'Cross-Chain', id: 7 },
   { name: 'Gaming', id: 8 },
@@ -66,6 +65,18 @@ const tagOptions = [
   { name: 'Stablecoin', id: 10 },
   { name: 'Infrastructure', id: 11 },
   { name: 'Catalyst', id: 12 },
+  { name: 'Telcom', id: 13 },
+  { name: 'Gambling', id: 14 },
+  { name: 'Payment', id: 15 },
+  { name: 'NFT', id: 16 },
+  { name: 'NFT Platform', id: 17 },
+  { name: 'NFT Marketplace', id: 18 },
+  { name: 'NFT Lending', id: 19 },
+  { name: 'Charity', id: 20 },
+  { name: 'Forex', id: 21 },
+  { name: 'Lending', id: 22 },
+  { name: 'Launch Pad', id: 23 },
+  { name: 'Cloud Storage', id: 24 },
 ]
 
 var selectedListTags = [];
