@@ -206,7 +206,7 @@ class DashboardPage extends React.Component {
                         <div className="App-text">
                           <h1 className="App-text__title text-white">&#123;Building On Cardano&#125;</h1>
                           <h2 className="text-white">
-                            The Home of All things being building on Cardano
+                            The Home of All things building on Cardano
                           </h2>
                         </div>
                       </Col>
