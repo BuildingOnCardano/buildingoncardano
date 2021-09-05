@@ -104,7 +104,7 @@ class ProjectDetailsPage extends React.Component {
             <Page
               className="ProjectDetailsPage"
               title=""
-              // breadcrumbs={[{ name: 'Project Details' + ' / ' + this.props.match.params.projectname, active: true }]}
+            // breadcrumbs={[{ name: 'Project Details' + ' / ' + this.props.match.params.projectname, active: true }]}
             >
 
               <Row
@@ -114,38 +114,79 @@ class ProjectDetailsPage extends React.Component {
                 <Col xl={8} lg={12} md={12} sm={6}>
                   <Card>
                     <CardBody>
-                      <Row>
-                        <Col sm={4}>
-                          <ReactImageFallback
-                            src={this.state.project.imageUrl}
-                            width="100%"
-                            height="100%"
-                            fallbackImage={CardanoImage} />
-                        </Col>
+                      {this.state.project.screenshotUrl != null ?
+                        <Row>
+                          <Col sm={6}>
+                            <ReactImageFallback
+                              src={this.state.project.screenshotUrl}
+                              width="100%"
+                              height="100%"
+                              fallbackImage={CardanoImage} />
+                              
+                          </Col>
 
-                        <Col sm={8}>
-                          <h1>{this.state.project.name}</h1>
-                          <p>{this.state.project.shortDescription}</p>
-                          <p><b>Tags: </b>{this.state.project.type}</p>
-                          {!isEmpty(this.state.project.stage) && (
-                            <div>
-                              <p><b>Development Stage: </b>{this.state.project.stage}</p>
-                            </div>
-                          )}
-                          {!isEmpty(this.state.project.releaseDate) && (
-                            <div>
-                              <p><b>Release Date: </b>{this.state.project.releaseDate}</p>
-                            </div>
-                          )}
-                        </Col>
-                      </Row>
+                          <Col sm={6}>
+                            <Col>
+                              <Row>
+                                <ReactImageFallback
+                                  src={this.state.project.imageUrl}
+                                  width="50"
+                                  height="50"
+                                  fallbackImage={CardanoImage} />
+                                <h1>{this.state.project.name}</h1>
+                              </Row>
+                            </Col>
+                            <Col>
+                              <p>{this.state.project.shortDescription}</p>
+                              <p><b>Tags: </b>{this.state.project.type}</p>
+                              {!isEmpty(this.state.project.stage) && (
+                                <div>
+                                  <p><b>Development Stage: </b>{this.state.project.stage}</p>
+                                </div>
+                              )}
+                              {!isEmpty(this.state.project.releaseDate) && (
+                                <div>
+                                  <p><b>Release Date: </b>{this.state.project.releaseDate}</p>
+                                </div>
+                              )}
+                            </Col>
+                          </Col>
+                        </Row> :
+                        <Row>
+                          <Col sm={4}>
+                            <ReactImageFallback
+                              src={this.state.project.imageUrl}
+                              width="100%"
+                              height="100%"
+                              fallbackImage={CardanoImage} />
+                          </Col>
+
+                          <Col sm={8}>
+                            <Col>
+                              <h1>{this.state.project.name}</h1>
+                              <p>{this.state.project.shortDescription}</p>
+                              <p><b>Tags: </b>{this.state.project.type}</p>
+                              {!isEmpty(this.state.project.stage) && (
+                                <div>
+                                  <p><b>Development Stage: </b>{this.state.project.stage}</p>
+                                </div>
+                              )}
+                              {!isEmpty(this.state.project.releaseDate) && (
+                                <div>
+                                  <p><b>Release Date: </b>{this.state.project.releaseDate}</p>
+                                </div>
+                              )}
+                            </Col>
+                          </Col>
+
+                        </Row>}
                       <hr />
                       <Row>
                         <Col>
-                        {!isEmpty(this.state.project.description) && <div>
-                          <h2>Project Description:</h2>
-                          <ReactMarkdown>{this.state.project.description}</ReactMarkdown>
-                          <br></br></div>}
+                          {!isEmpty(this.state.project.description) && <div>
+                            <h2>Project Description:</h2>
+                            <ReactMarkdown>{this.state.project.description}</ReactMarkdown>
+                            <br></br></div>}
                           {!isEmpty(this.state.project.youTubeEmbedId) && (
                             <YoutubeEmbed embedId={this.state.project.youTubeEmbedId} />)}
                           <br></br>
@@ -155,76 +196,77 @@ class ProjectDetailsPage extends React.Component {
                               <ReactMarkdown>{this.state.project.teamDescription}</ReactMarkdown></div>}
 
                         </Col>
-
                       </Row>
                     </CardBody>
+
+
 
                   </Card>
 
 
                   {this.state.project.projectTeam != null && this.state.project.projectTeam.length != 0 &&
-                  <Row style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                    <Col>
+                    <Row style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                      <Col>
 
-                      <Card>
-                        <CardHeader style={{
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          width: '100%',
-                          borderRadius: '1.9em'
-                        }}
+                        <Card>
+                          <CardHeader style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            width: '100%',
+                            borderRadius: '1.9em'
+                          }}
 
-                        >Team Details</CardHeader>
-                        <CardBody style={{
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                        }}>
+                          >Team Details</CardHeader>
+                          <CardBody style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}>
 
-                          <Row>
-                            {this.state.project.projectTeam.map(function (item, index) {
-                              return (
-                                <Card body style={{
-                                  justifyContent: 'center',
-                                  alignItems: 'center',
-                                  maxWidth: '12rem',
-                                  boxShadow: 'none',
-                                  margin: '14px',
-                                  backgroundColor: '#f8f9fa',
-                                }}>
-                                  <ReactImageFallback
-                                    src={item.img}
-                                    width="100"
-                                    height="100"
-                                    fallbackImage={Person} />
-                                  <b>{item.memberName}</b>
-                                  <p>{item.position}</p>
-                                  <div style={{
+                            <Row>
+                              {this.state.project.projectTeam.map(function (item, index) {
+                                return (
+                                  <Card body style={{
                                     justifyContent: 'center',
                                     alignItems: 'center',
-                                    textAlign: 'center',
+                                    maxWidth: '12rem',
+                                    boxShadow: 'none',
+                                    margin: '14px',
+                                    backgroundColor: '#f8f9fa',
                                   }}>
-                                    {item.twitter &&
-                                      <a href={item.twitter} target="_blank" rel="noreferrer">
-                                        <FontAwesomeIcon icon={faTwitter} />  </a>}
-                                    {item.linkin &&
-                                      <a href={item.linkin} target="_blank" rel="noreferrer">
-                                        <FontAwesomeIcon icon={faLinkedin} />  </a>}
-                                    {item.github &&
-                                      <a href={item.github} target="_blank" rel="noreferrer">
-                                        <FontAwesomeIcon icon={faGithub} />  </a>}
-                                  </div>
-                                </Card>
-                              )
-                            })
-                            }
-                          </Row>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                  </Row>}
+                                    <ReactImageFallback
+                                      src={item.img}
+                                      width="100"
+                                      height="100"
+                                      fallbackImage={Person} />
+                                    <b>{item.memberName}</b>
+                                    <p>{item.position}</p>
+                                    <div style={{
+                                      justifyContent: 'center',
+                                      alignItems: 'center',
+                                      textAlign: 'center',
+                                    }}>
+                                      {item.twitter &&
+                                        <a href={item.twitter} target="_blank" rel="noreferrer">
+                                          <FontAwesomeIcon icon={faTwitter} />  </a>}
+                                      {item.linkin &&
+                                        <a href={item.linkin} target="_blank" rel="noreferrer">
+                                          <FontAwesomeIcon icon={faLinkedin} />  </a>}
+                                      {item.github &&
+                                        <a href={item.github} target="_blank" rel="noreferrer">
+                                          <FontAwesomeIcon icon={faGithub} />  </a>}
+                                    </div>
+                                  </Card>
+                                )
+                              })
+                              }
+                            </Row>
+                          </CardBody>
+                        </Card>
+                      </Col>
+                    </Row>}
 
                   {this.state.project.salesDetails != null && this.state.project.salesDetails.length > 0 && this.state.project.salesDetails != undefined &&
                     <Card>

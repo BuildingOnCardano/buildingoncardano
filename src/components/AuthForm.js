@@ -37,6 +37,7 @@ class AuthForm extends React.Component {
       modal_nested: false,
       modal_text: "",
       loading: false,
+      acceptedTerms: false
     };
   }
 
@@ -208,6 +209,19 @@ class AuthForm extends React.Component {
     return buttonText;
   }
 
+  handleChange = (query) => (e) => {
+    if (this.state.acceptedTerms) {
+      this.setState({
+        acceptedTerms: false
+      });
+    } else {
+      this.setState({
+        acceptedTerms: true
+      });
+    }
+  }
+
+
   render() {
     const {
       showLogo,
@@ -274,20 +288,40 @@ class AuthForm extends React.Component {
         )}
         <FormGroup check>
           <Label check>
-            <Input type="checkbox" />{' '}
-            {this.isSignup ? 'Agree the terms and policy' : 'Remember me'}
+            <Input
+              style={{ fontSize: 14 }}
+              type="checkbox"
+              onChange={this.handleChange("&ticker=")}
+
+            />{' '}
+            {this.isSignup ? <Link to={{ pathname: '/termsandpolicy' }}>Agree the terms and policy</Link> : 'Remember me'}
           </Label>
         </FormGroup>
         <hr />
         {this.state.loading ? <CircleLoader loading={this.state.loading} css={override} size={100} />
           :
-          <Button
-            size="lg"
-            className="bg-gradient-theme-left border-0"
-            block
-            onClick={this.handleSubmit}>
-            {this.renderButtonText()}
-          </Button>}
+
+          this.isSignup ?
+            <Button
+              disabled={!this.state.acceptedTerms}
+              size="lg"
+              className="bg-gradient-theme-left border-0"
+              block
+              onClick={this.handleSubmit}>
+              {this.renderButtonText()}
+
+            </Button>
+
+            :
+            <Button
+              size="lg"
+              className="bg-gradient-theme-left border-0"
+              block
+              onClick={this.handleSubmit}>
+              {this.renderButtonText()}
+
+            </Button>
+        }
 
         <div className="text-center pt-1">
           <h6>or</h6>
@@ -305,9 +339,16 @@ class AuthForm extends React.Component {
           </h6>
 
         </div>
-        <a href="/">
-          Exit
-        </a>
+        <Row>
+          <Link to={{ pathname: '/resetpassword' }}>
+            Reset Password</Link>
+        </Row>
+        <Row>
+          <a href="/">
+            Exit
+          </a>
+        </Row>
+
 
         {children}
       </Form>

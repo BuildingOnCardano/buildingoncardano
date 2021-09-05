@@ -15,7 +15,10 @@ import VerifyEmail from 'pages/VerifyEmail';
 import AllProjects from 'pages/AllProjects';
 import AllSales from 'pages/AllSales';
 import PromoteAppPage from 'pages/PromoteAppPage';
+import TermsAndPolicy from 'pages/TermsAndPolicy';
+import ResetPasswordPage from 'pages/ResetPasswordPage'
 import { createBrowserHistory } from "history";
+
 
 import GA4React from "ga-4-react";
 const ga4react = new GA4React("UA-201791504-1");
@@ -85,8 +88,20 @@ class App extends React.Component {
             )}
           />
 
+          <LayoutRoute
+            exact
+            path="/resetpassword"
+            layout={EmptyLayout}
+            component={props => (
+              <ResetPasswordPage {...props} authState={STATE_LOGIN} />
+            )}
+          />
+
+
+
+
           <Route path="/verify/:verifycode" component={props => (
-            <VerifyEmail {...props}/>
+            <VerifyEmail {...props} />
           )} />
 
 
@@ -96,14 +111,15 @@ class App extends React.Component {
 
               <Route exact path="/allprojects" render={(props) => <AllProjects {...props} />} />
               <Route exact path="/allsales" render={(props) => <AllSales {...props} />} />
-              
+
+              <Route exact path="/termsandpolicy" render={(props) => <TermsAndPolicy {...props} />} />
+
 
               <Route path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
-              <Route path="/application" component={() => <ProjectsPage projectType="application" />}></Route>
+              <Route path="/subscriptions" component={() => <ProjectsPage projectType="subscriptions" />}></Route>
               <Route path="/tooling" render={(props) => <ProjectsPage {...props} projectType="tooling" />} />
               <Route path="/wallet" render={(props) => <ProjectsPage {...props} projectType="wallet" />} />
               <Route path="/data" render={(props) => <ProjectsPage {...props} projectType="data" />} />
-              <Route path="/nft" render={(props) => <ProjectsPage {...props} projectType="nft" />} />
               <Route path="/dex" render={(props) => <ProjectsPage {...props} projectType="dex" />} />
               <Route path="/cross-chain" render={(props) => <ProjectsPage {...props} projectType="cross-chain" />} />
               <Route path="/gaming" render={(props) => <ProjectsPage {...props} projectType="gaming" />} />
@@ -111,6 +127,23 @@ class App extends React.Component {
               <Route path="/stablecoin" render={(props) => <ProjectsPage {...props} projectType="stablecoin" />} />
               <Route path="/infrastructure" render={(props) => <ProjectsPage {...props} projectType="infrastructure" />} />
               <Route path="/catalyst" render={(props) => <ProjectsPage {...props} projectType="catalyst" />} />
+
+              <Route path="/Telcom" render={(props) => <ProjectsPage {...props} projectType="Telcom" />} />
+              <Route path="/Gambling" render={(props) => <ProjectsPage {...props} projectType="Gambling" />} />
+              <Route path="/Payment" render={(props) => <ProjectsPage {...props} projectType="Payment" />} />
+              <Route path="/nft" render={(props) => <ProjectsPage {...props} projectType="nft" />} />
+              <Route path="/NFT Platform" render={(props) => <ProjectsPage {...props} projectType="NFT Platform" />} />
+              <Route path="/NFT Marketplace" render={(props) => <ProjectsPage {...props} projectType="NFT Marketplace" />} />
+              <Route path="/NFT Lending" render={(props) => <ProjectsPage {...props} projectType="NFT Lending" />} />
+
+              <Route path="/Charity" render={(props) => <ProjectsPage {...props} projectType="Charity" />} />
+              <Route path="/Forex" render={(props) => <ProjectsPage {...props} projectType="Forex" />} />
+              <Route path="/Lending" render={(props) => <ProjectsPage {...props} projectType="Lending" />} />
+              <Route path="/Launch Pad" render={(props) => <ProjectsPage {...props} projectType="Launch Pad" />} />
+              <Route path="/Cloud Storage" render={(props) => <ProjectsPage {...props} projectType="Cloud Storage" />} />
+
+              <Route path="/application" component={() => <ProjectsPage projectType="application" />}></Route>
+
 
               <Route path="/projectdetails/:projectname" render={(props) => <ProjectDetailsPage {...props} />} />
 

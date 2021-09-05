@@ -97,6 +97,8 @@ class MyProjectsAddEditPage extends React.Component {
       project: null,
 
       modal: false,
+      errormodal: false,
+
       modal_backdrop: false,
       modal_nested_parent: false,
       modal_nested: false,
@@ -144,7 +146,7 @@ class MyProjectsAddEditPage extends React.Component {
     try {
       const requestOptions = {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json', 'ownerEmail': getUser() },
+        headers: { 'Content-Type': 'application/json', 'ownerEmail': getUser(), 'user': getUser(), 'password': getPassword() },
       };
       var response = await fetch(baseUrl + getProjectByNameAndOwner + this.props.match.params.projectname, requestOptions);
       const data = await response.json();
@@ -163,16 +165,19 @@ class MyProjectsAddEditPage extends React.Component {
       var selectedValue = [];
       pieces.forEach(typeInDb => {
         if (!isEmpty(typeInDb)) {
-          var typeFound = tagOptions.filter(item => item.name.includes(typeInDb));
+          var typeFound = tagOptions.filter(item => item.name.toLowerCase().includes(typeInDb.toLowerCase()));
           selectedValue.push(typeFound[0]);
         }
       });
       selectedListTags = selectedValue;
     }
     var tags = "";
-    selectedListTags.forEach(element => {
-      tags += element.name + " ";
-    });
+    if (selectedListTags != null && selectedListTags.length > 0) {
+      selectedListTags.forEach(element => {
+        tags += element.name + " ";
+      });
+    }
+
 
     this.setState({ project: { ...this.state.project, type: tags } });
     this.setState({ loading: false });
@@ -181,13 +186,15 @@ class MyProjectsAddEditPage extends React.Component {
   async updateProject() {
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'password': getPassword() },
+      headers: { 'Content-Type': 'application/json', 'user': getUser(),'password': getPassword() },
       body: JSON.stringify(this.state.project)
     };
     var response = await fetch(baseUrl + updateProject, requestOptions);
     var data = await response.json();
     if (data.response == "updated") {
       this.setState({ modal: true });
+    } else {
+      this.setState({ errormodal: true });
     }
   }
 
@@ -269,7 +276,7 @@ class MyProjectsAddEditPage extends React.Component {
             <Page
               className="MyProjectsAddEditPage"
               title=""
-              // breadcrumbs={[{ name: 'Project Edit', active: false }]}
+            // breadcrumbs={[{ name: 'Project Edit', active: false }]}
             >
 
 
@@ -313,6 +320,34 @@ class MyProjectsAddEditPage extends React.Component {
                         <p>Thank you for submitting a project to Building On Cardano.</p>
                         <br></br>
                         <p>We have a short process of verification before a project is displayed.</p>
+                      </div>}
+
+                  </Row>
+
+                </ModalBody>
+                <ModalFooter>
+                  {' '}
+                  <Link to={{ pathname: '/myprojects' }}>
+                    <Button color="secondary" onClick={this.toggle()}>
+                      Close
+                    </Button>
+                  </Link>
+                </ModalFooter>
+              </Modal>
+
+              <Modal
+                isOpen={this.state.errormodal}
+                toggle={this.toggle()}
+                className={this.props.className}
+              >
+                <ModalHeader toggle={this.toggle()}></ModalHeader>
+
+                <ModalBody>
+                  <h3>Failure.</h3>
+                  <Row>
+                    {this.props.action == 'edit' ? <p>Project didnt update.  <p>If the issue persists please contact: buildingoncardano@gmail.com</p></p>
+                      : <div>
+
                       </div>}
 
                   </Row>
@@ -399,6 +434,13 @@ class MyProjectsAddEditPage extends React.Component {
                           <Input type="url" name="name" id="name" placeholder="Add link/Url to project logo" value={this.state.project.imageUrl}
                             onChange={e => this.setState({ project: { ...this.state.project, imageUrl: e.target.value } })} />
                           <small>Dimensions 250x250px</small></Col>
+                      </FormGroup>
+                      <FormGroup row>
+                        <Label for="name" sm={inputnamewidth}>Project Screenshot Url</Label>
+                        <Col sm={inputfieldwidth}>
+                          <Input type="url" name="name" id="name" placeholder="Add link/Url to project screenshot" value={this.state.project.screenshotUrl}
+                            onChange={e => this.setState({ project: { ...this.state.project, screenshotUrl: e.target.value } })} />
+                          <small>Dimensions 400x400px</small></Col>
                       </FormGroup>
                       <FormGroup row>
                         <Label for="name" sm={inputnamewidth}>Youtube presentation</Label>

@@ -36,7 +36,7 @@ import logo200Image from 'assets/img/logo/Light-icon200.png';
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import Tooltip from "@material-ui/core/Tooltip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { Link } from "react-router-dom";
 const sidebarBackground = {
   backgroundImage: `url("${sidebarBgImage}")`,
   backgroundSize: 'cover',
@@ -125,12 +125,14 @@ class Sidebar extends React.Component {
           <Navbar>
             <Row className="justify-content-md-center">
               <Col xs={12} sm={4} md={4}>
+              <Link to={{ pathname: '/' }}>
                 <img
                   src={logo200Image}
                   className="rounded"
                   style={{ width: 120, height: 120, cursor: 'pointer', alignSelf: 'center' }}
                   alt="logo"
                 />
+                </Link>
               </Col>
             </Row>
 

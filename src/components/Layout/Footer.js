@@ -1,6 +1,7 @@
 import React from 'react';
 import shamrock from 'assets/img/paddy.jpg';
 import paul from 'assets/img/paul.jpg';
+import { Link, Redirect } from "react-router-dom";
 
 import { Navbar, Nav, NavItem, Row } from 'reactstrap';
 const Footer = () => {
@@ -29,7 +30,9 @@ const Footer = () => {
                 style={{ width: "7vh", height: "7vh", cursor: 'pointer' }}
               />
             </a>
+            
           </Row>
+          <Link to={{ pathname: '/termsandpolicy' }}>Terms and policy</Link>
         </NavItem>
       </Nav>
     </Navbar>
