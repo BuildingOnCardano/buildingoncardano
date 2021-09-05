@@ -78,7 +78,7 @@ class ResetPassword extends React.Component {
 
 
     this.setState({
-      modal_text: "Thankyou for your request please check your email account for further instructions.", modal: true
+      modal_text: "Thankyou for your request please check your email account for further instructions. Note: Check your spam/junk folder.", modal: true
     });
 
     this.requestResetPassword();
