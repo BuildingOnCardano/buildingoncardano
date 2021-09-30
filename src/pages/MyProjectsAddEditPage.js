@@ -173,9 +173,14 @@ class MyProjectsAddEditPage extends React.Component {
     }
     var tags = "";
     if (selectedListTags != null && selectedListTags.length > 0) {
-      selectedListTags.forEach(element => {
-        tags += element.name + " ";
-      });
+      try {
+        selectedListTags.forEach(element => {
+          tags += element.name + " ";
+        });
+      } catch (error) {
+        console.log(error);
+      }
+
     }
 
 
