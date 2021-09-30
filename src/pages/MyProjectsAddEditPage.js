@@ -77,6 +77,7 @@ const tagOptions = [
   { name: 'Lending', id: 22 },
   { name: 'Launch Pad', id: 23 },
   { name: 'Cloud Storage', id: 24 },
+  { name: 'Application', id: 25 }
 ]
 
 var selectedListTags = [];
