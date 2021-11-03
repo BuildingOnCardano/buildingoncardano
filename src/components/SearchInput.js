@@ -97,7 +97,7 @@ class SearchInput extends React.Component {
 
       <div className="serach-tab">
         {this.renderRedirectToLogin()}
-        {this.state.options != null && <Select
+        {/* {this.state.options != null && <Select
           classNamePrefix="my-select"
           value={selectedOption}
           options={this.state.options}
@@ -111,7 +111,7 @@ class SearchInput extends React.Component {
           menuPosition={'fixed'} 
           menuColor='blue'
           components={{ DropdownIndicator }}
-        />}
+        />} */}
       </div>
     );
   }

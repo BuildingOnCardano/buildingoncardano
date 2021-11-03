@@ -1,8 +1,6 @@
 import React from 'react';
 import CardanoImage from 'assets/img/cardanoIcon.png';
-import {
-    Button
-} from 'reactstrap';
+import ReactImageFallback from "react-image-fallback";
 export default class CircularImage extends React.Component {
 
     constructor(props) {
@@ -15,17 +13,32 @@ export default class CircularImage extends React.Component {
 
     render() {
         return (
-            <img
-                alt={CardanoImage}
+
+
+            <ReactImageFallback
                 src={this.props.imageUrl}
+                width="75"
+                height="70"
+                fallbackImage={CardanoImage}
                 style={{
                     borderRadius: "50%",
                     width: this.props.width,
                     height: this.props.width,
                     // background: "red",
                     display: "block"
-                }}
-            />
+                }} />
+
+            // <img
+            //     alt={CardanoImage}
+            //     src={this.props.imageUrl}
+            //     style={{
+            //         borderRadius: "50%",
+            //         width: this.props.width,
+            //         height: this.props.width,
+            //         // background: "red",
+            //         display: "block"
+            //     }}
+            // />
         )
     };
 };

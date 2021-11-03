@@ -41,7 +41,7 @@ export default class SocialMedia extends React.Component {
         }
 
         //telegram
-        if (!isEmpty(this.props.extendedmeta.twitter_handle)) {
+        if (!isEmpty(this.props.extendedmeta.telegram_handle)) {
             this.state.telegramHandle = this.props.extendedmeta.telegram_handle;
             this.setState({ telegramHandle: this.props.extendedmeta.telegram_handle });
         }

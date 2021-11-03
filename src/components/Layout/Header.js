@@ -105,8 +105,11 @@ class Header extends React.Component {
     const { isNotificationConfirmed } = this.state;
 
     return (
-      <div style={{backgroundColor:"#225cb6", opacity:0.80}}>
-      {/* <div> */}
+
+      // backgroundColor:"#225cb6",
+
+      <div style={{ opacity: 0.80 }}>
+        {/* <div> */}
         <Container fluid>
           <Navbar className="navbar-top navbar-light" expand="md" id="navbar-main">
             <Nav navbar className="mr-2">
@@ -115,7 +118,25 @@ class Header extends React.Component {
               </Button>
             </Nav>
 
+            <Nav navbar style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              textAlign: 'center'
+            }}>
+
+
+              <div className="App-text" style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                textAlign: 'center',
+              }} >
+                <h1 className="text-black" style={{ color: "#225cb6" }}>Building On Cardano</h1>
+              </div>
+
+            </Nav>
+
             <Nav navbar className={bem.e('nav-right')}>
+
               {this.state.projects != null &&
                 <SearchInput projects={this.state.projects} />
               }

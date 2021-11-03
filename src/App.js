@@ -16,9 +16,9 @@ import AllProjects from 'pages/AllProjects';
 import AllSales from 'pages/AllSales';
 import PromoteAppPage from 'pages/PromoteAppPage';
 import TermsAndPolicy from 'pages/TermsAndPolicy';
-import ResetPasswordPage from 'pages/ResetPasswordPage'
+import ResetPasswordPage from 'pages/ResetPasswordPage';
 import { createBrowserHistory } from "history";
-
+import NFTsPage from 'pages/NFTsPage';
 
 import GA4React from "ga-4-react";
 const ga4react = new GA4React("UA-201791504-1");
@@ -113,6 +113,9 @@ class App extends React.Component {
               <Route exact path="/allsales" render={(props) => <AllSales {...props} />} />
 
               <Route exact path="/termsandpolicy" render={(props) => <TermsAndPolicy {...props} />} />
+
+              {/* <Route exact path="/nfts" render={(props) => <NFTsPage {...props} />} /> */}
+              
 
 
               <Route path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />

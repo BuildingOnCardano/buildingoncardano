@@ -104,6 +104,8 @@ class MyProjectsAddEditPage extends React.Component {
       modal_nested_parent: false,
       modal_nested: false,
 
+      lockProjectName: false,
+
       longDesc: "",
       selectedTab: "write",
 
@@ -135,6 +137,9 @@ class MyProjectsAddEditPage extends React.Component {
     //if edit get existing project
     if (this.props.action == 'edit') {
       this.getProjectDetails();
+      
+      this.setState({ lockProjectName: true });
+
     }
     else {
       this.setState({ project: project });
@@ -386,7 +391,7 @@ class MyProjectsAddEditPage extends React.Component {
                         <Label for="name" sm={inputnamewidth}>Name *</Label>
                         <Col sm={inputfieldwidth}>
                           <Input type="text" name="name" id="name" placeholder="" value={this.state.project.name}
-                            onChange={e => this.setState({ project: { ...this.state.project, name: e.target.value } })} /></Col>
+                            onChange={e => this.setState({ project: { ...this.state.project, name: e.target.value } })} disabled={this.state.lockProjectName}/></Col>
                       </FormGroup>
 
                       <FormGroup row>

@@ -8,6 +8,13 @@
     margin-left: auto;
   }
 
+  &__nav-center {
+    flex-direction: row;
+    justify-content: flex-left;
+    margin-left: auto;
+  }
+
+
   // &__notification-popover {
   //   &.popover {
   //     width: 320px;

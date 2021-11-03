@@ -53,6 +53,7 @@ class DashboardPage extends React.Component {
     featuredProjects: null,
     mostViewedProjects: null,
     mostViewedPreviousMonthProjects: null,
+    mostViewedPreviousePreviousMonthProjects: null,
     recentlyUpdateProjects: null,
     salesData: null,
     loading: true,
@@ -95,6 +96,10 @@ class DashboardPage extends React.Component {
     const getFeaturedProjects = await response.json();
     this.setState({ featuredProjects: this.shuffle(getFeaturedProjects) });
 
+
+    var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getPreviousPreviousMonthName());
+    const getMostPreviousPreviousMonthViewedProjects = await response.json();
+    this.setState({ mostViewedPreviousePreviousMonthProjects: getMostPreviousPreviousMonthViewedProjects });
 
     var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getPreviousMonthName());
     const getMostPreviousMonthViewedProjects = await response.json();
@@ -166,6 +171,19 @@ class DashboardPage extends React.Component {
     return monthNames[lastMonth];
   }
 
+  getPreviousPreviousMonthName() {
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    const d = new Date();
+    var currentMonth = d.getMonth();
+    var lastMonth = currentMonth - 2;
+    if (lastMonth < 0) lastMonth = 11;
+
+    return monthNames[lastMonth];
+  }
+
   getMonthName() {
     const monthNames = ["January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
@@ -190,59 +208,7 @@ class DashboardPage extends React.Component {
           :
           <div>
             <br></br>
-            <Card style={{ backgroundColor: "#225cb6", opacity: 0.80, zIndex: 1 }}>
-              <CardBody>
-                <div className="App">
-                  <Row>
-                    {/* <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
-                        <div class="wrapper">
-                          <img class="img_0_left" src={this.state.featuredProjects[0].imageUrl} />
-                          <img class="img_1_left" src={this.state.featuredProjects[1].imageUrl} />
-                          <img class="img_2_left" src={this.state.featuredProjects[2].imageUrl} />
-                          <img class="img_3_left" src={this.state.featuredProjects[3].imageUrl} />
-                        </div>
-                      </Col> */}
-                    {width < 600 ?
-                      <Col lg={12} md={12} sm={12} xs={12} className="mb-3">
-                        <div className="App-text">
-                          <h2 className="text-white">Building On Cardano</h2>
 
-                        </div>
-                      </Col>
-                      :
-                      <Col lg={12} md={12} sm={12} xs={12} className="mb-3">
-                        <div className="App-text">
-                          <h1 className="text-white">Building On Cardano</h1>
-                        </div>
-                      </Col>
-                    }
-                    {/* <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
-                        <div class="wrapper">
-                          <img class="img_0_right" src={this.state.featuredProjects[4].imageUrl} />
-                          <img class="img_1_right" src={this.state.featuredProjects[5].imageUrl} />
-                          <img class="img_2_right" src={this.state.featuredProjects[6].imageUrl} />
-                          <img class="img_3_right" src={this.state.featuredProjects[8].imageUrl} />                      
-                        </div>
-                      </Col> */}
-                  </Row>
-                </div>
-                <Row className="justify-content-md-center" style={{
-                 justifyContent: 'center',
-                  alignItems: 'center',
-                  textAlign: 'center'
-                }}>
-                  {this.state.projectTypesAndCount.map(function (item, index) {
-                    return (
-                      <Button size="sm" className="btn-tag2">
-                        <Link to={{ pathname: '/' + item.projectType }}>
-                          {item.projectType} ({item.projectCount})
-                        </Link>
-                      </Button>
-                    )
-                  })}
-                </Row>
-              </CardBody>
-            </Card>
 
             {this.state.featuredProjects != null && this.state.featuredProjects.length != 0 &&
               <Row style={{ padding: 0, marginBottom: 0, }}>
@@ -271,18 +237,21 @@ class DashboardPage extends React.Component {
               })}
             </Row>
 
+            <hr></hr>
+
+
             <Row>
               <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
-                    <h4 className="mb-0">new</h4>
+                    <h4 className="mb-0">Recently added</h4>
                   </Col>
                 </Row>
                 <Row>
                   {this.state.recentlyAddedProjects.map(function (item, index) {
-                    if (index < 4) {
+                    if (index < 3) {
                       return (
-                        <Col lg={3} md={6} sm={6} xs={6} className="mb-3">
+                        <Col lg={4} md={6} sm={6} xs={6} className="mb-3">
                           <div className='ProjectCards'>
                             <RecentlyAddedProjectCard
                               img={item.imageUrl}
@@ -293,18 +262,20 @@ class DashboardPage extends React.Component {
                     }
                   })}
                 </Row>
+
+
               </Col>
               <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
-                    <h4 className="mb-0">Updated</h4>
+                    <h4 className="mb-0">Recently updated</h4>
                   </Col>
                 </Row>
                 <Row>
                   {this.state.recentlyUpdateProjects.map(function (item, index) {
-                    if (index < 4) {
+                    if (index < 3) {
                       return (
-                        <Col lg={3} md={6} sm={6} xs={6} className="mb-3">
+                        <Col lg={4} md={6} sm={6} xs={6} className="mb-3">
                           <div className='ProjectCards'>
                             <RecentlyAddedProjectCard
                               img={item.imageUrl}
@@ -315,19 +286,19 @@ class DashboardPage extends React.Component {
                     }
                   })}
                 </Row>
+
               </Col>
             </Row>
 
-
-
+            <hr></hr>
+            <h4 className="mb-0">Ranking Per Month</h4>
+            <br></br>
             <Row>
 
-
-
-              <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+            <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
-                    <h4 className="mb-0">{this.getPreviousMonthName()} Most Popular</h4>
+                    <h4 className="mb-0">{this.getPreviousPreviousMonthName()}</h4>
                   </Col>
                   <Col className="col text-right">
                     <Link to={{ pathname: '/promote' }}>
@@ -335,24 +306,69 @@ class DashboardPage extends React.Component {
                     </Link>
                   </Col>
                 </Row>
+                <TableContainer component={Paper}>
+                  <Table >
+                    <TableBody>
+                      {this.state.smallScreen ?
+                        this.state.mostViewedPreviousePreviousMonthProjects.map(function (item, index) {
+                          if (index < 4) {
+                            return (
+                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
+                                <TableCell>
+                                  <Media className="align-items-center">
+                                    <a className="avatar rounded-circle mr-3">
+                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                    </a>
+                                    <Media>
+                                      <span className="mb-0 text-sm">
+                                        {item.name}
+                                      </span>
+                                    </Media>
+                                  </Media>
+                                </TableCell>
+                              </TableRow >
+                            )
+                          }
+                        })
 
-                {/* <CardHeader className="border-0">
-                      <Row className="align-items-center">
-                        <h3 className="mb-0">{this.getPreviousMonthName()} Most Popular</h3>
-                        <div className="col text-right">
-                          <Button
-                            size="sm"
-                          >
-                            <Link to={{ pathname: '/allprojects' }}>
-                              See all
-                            </Link>
-                          </Button>
-                        </div>
-                      </Row>
-                    </CardHeader> */}
-                {/* <Card>
-                    <CardBody> */}
+                        :
+                        this.state.mostViewedPreviousePreviousMonthProjects.map(function (item, index) {
+                          if (index < 4) {
+                            return (
+                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
+                                <TableCell>
+                                  <Media className="align-items-center">
+                                    <a className="avatar rounded-circle mr-3">
+                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                    </a>
+                                    <Media>
+                                      <span className="mb-0 text-sm">
+                                        {item.name}
+                                      </span>
+                                    </Media>
+                                  </Media>
+                                </TableCell>
+                                <TableCell><p>{item.type}</p></TableCell>
+                              </TableRow >
+                            )
+                          }
+                        })}
+                    </TableBody >
+                  </Table>
+                </TableContainer>
+              </Col>
 
+              <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+                <Row>
+                  <Col>
+                    <h4 className="mb-0">{this.getPreviousMonthName()}</h4>
+                  </Col>
+                  <Col className="col text-right">
+                    <Link to={{ pathname: '/promote' }}>
+                      <small>See All</small>
+                    </Link>
+                  </Col>
+                </Row>
                 <TableContainer component={Paper}>
                   <Table >
                     <TableBody>
@@ -374,8 +390,6 @@ class DashboardPage extends React.Component {
                                     </Media>
                                   </Media>
                                 </TableCell>
-                                {/* <TableCell><p>{item.type}</p></TableCell> */}
-
                               </TableRow >
                             )
                           }
@@ -399,9 +413,6 @@ class DashboardPage extends React.Component {
                                   </Media>
                                 </TableCell>
                                 <TableCell><p>{item.type}</p></TableCell>
-                                {/* <TableCell><p>{item.tokenType}</p></TableCell>
-                  <TableCell><p>{item.ticker}</p></TableCell> */}
-                                {/* <TableCell><p>{item.stage}</p></TableCell> */}
                               </TableRow >
                             )
                           }
@@ -409,11 +420,9 @@ class DashboardPage extends React.Component {
                     </TableBody >
                   </Table>
                 </TableContainer>
-                {/* </CardBody>
-                  </Card> */}
               </Col>
 
-              <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+              <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
                 {/* <Card>
                     <CardHeader className="border-0">
                       <Row className="align-items-center">
@@ -432,7 +441,7 @@ class DashboardPage extends React.Component {
                     <CardBody> */}
                 <Row>
                   <Col>
-                    <h4 className="mb-0">{this.getMonthName()} Most Popular</h4>
+                    <h4 className="mb-0">{this.getMonthName()}</h4>
                   </Col>
                   <Col className="col text-right">
                     <Link to={{ pathname: '/allprojects' }}>
@@ -470,7 +479,7 @@ class DashboardPage extends React.Component {
 
                         :
                         this.state.mostViewedProjects.map(function (item, index) {
-                          if (index < 4) {
+                          if (index < 4 && item != null) {
                             return (
                               <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
                                 <TableCell>
@@ -578,6 +587,35 @@ class DashboardPage extends React.Component {
                   </Card> */}
               {/* </Col> */}
             </Row>
+
+            {/* <Row>
+              <Col lg={12} md={12} sm={12} xs={12} className="mb-3">
+                <Row>
+                  <Col>
+                    <h4 className="mb-0">Project Types</h4>
+                  </Col>
+                </Row>
+                <Row className="justify-content-md-center" style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  textAlign: 'center'
+                }}>
+                  {this.state.projectTypesAndCount.map(function (item, index) {
+                    return (
+                      <Col lg={1} md={4} sm={4} xs={4} className="mb-3">
+                        <Button size="sm" className="btn-tag2">
+                          <Link to={{ pathname: '/' + item.projectType }}>
+                            {item.projectType} ({item.projectCount})
+                          </Link>
+                        </Button>
+                      </Col>
+                    )
+                  })}
+                </Row>
+
+              </Col>
+
+            </Row> */}
           </div >}
 
       </Page>

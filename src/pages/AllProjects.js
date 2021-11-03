@@ -167,6 +167,7 @@ class AllProjects extends React.Component {
     try {
       var response = await fetch(baseUrl + getAllProjects);
       const data = await response.json();
+      console.log(data);
       this.createRows(data);
     } catch (error) {
       console.log(error)

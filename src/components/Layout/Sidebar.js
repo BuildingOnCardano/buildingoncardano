@@ -17,7 +17,8 @@ import {
   MdKeyboardArrowRight,
   MdAddToQueue,
   MdVerifiedUser,
-  MdAttachMoney
+  MdAttachMoney,
+  MdArtTrack
 
 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
@@ -84,7 +85,8 @@ class Sidebar extends React.Component {
           { to: '/myprojects', name: 'my projects', exact: true, Icon: MdVerifiedUser },
           { to: '/addproject', name: 'add project', exact: true, Icon: MdAddToQueue },
           { to: '/allprojects', name: 'projects', exact: true, Icon: MdGroupWork },
-          { to: '/allsales', name: 'sales', exact: true, Icon: MdAttachMoney },
+          // { to: '/allsales', name: 'sales', exact: true, Icon: MdAttachMoney },
+          // { to: '/nfts', name: 'nfts', exact: true, Icon: MdArtTrack },
 
         ],
         loggedin: true,
@@ -96,8 +98,10 @@ class Sidebar extends React.Component {
         navItemsTop: [
           { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
           { to: '/allprojects', name: 'projects', exact: true, Icon: MdStar },
-          { to: '/allsales', name: 'sales', exact: true, Icon: MdAttachMoney },
+          // { to: '/allsales', name: 'sales', exact: true, Icon: MdAttachMoney },
+          // { to: '/nfts', name: 'nfts', exact: true, Icon: MdArtTrack },
           { to: '/addproject', name: 'add project', exact: true, Icon: MdAddToQueue },
+
         ],
         navItemsBottom: [{ to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle }]
       })
