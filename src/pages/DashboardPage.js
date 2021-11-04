@@ -17,7 +17,8 @@ import {
 import CircleLoader
   from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
-import { baseUrl, getLatestProjects, getProjectsStats, getRecentlyUpdatedProjects, liveProjectSales, getMostViewedProjects, getFeaturedProjectsList } from '../assets/services';
+import { baseUrl, getLatestProjects, getProjectsStats, getRecentlyUpdatedProjects, liveProjectSales, getMostViewedProjects, getFeaturedProjectsList,
+  getProjectTokensWalletRankings, getProjectTokensTransactionRankings } from '../assets/services';
 import { Link } from 'react-router-dom';
 import { TableRow, TableCell, TableHead, TableBody, TableContainer } from '@material-ui/core';
 import "../styles/styles.css";
@@ -60,7 +61,9 @@ class DashboardPage extends React.Component {
     totalProjects: '',
     projectTypesAndCount: [],
     barChartData: null,
-    smallScreen: false
+    smallScreen: false,
+    projectTokensWalletRankings: null,
+    projectTokensTransactionRankings: null,
   };
 
   async componentDidMount() {
@@ -88,27 +91,42 @@ class DashboardPage extends React.Component {
 
   async getDashBoardData() {
 
+    //TOKENS TOTAL WALLETS
+    var response = await fetch(baseUrl + getProjectTokensWalletRankings);
+    const projectTokensWalletRankings = await response.json();
+    this.setState({ projectTokensWalletRankings: projectTokensWalletRankings });
+
+    //TOKENS TOTAL TRX
+    var response = await fetch(baseUrl + getProjectTokensTransactionRankings);
+    const projectTokensTransactionRankings = await response.json();
+    this.setState({ projectTokensTransactionRankings: projectTokensTransactionRankings });
+
+    //LATEST PROJECTS
     var response = await fetch(baseUrl + getLatestProjects);
     const getLatestProjectsVar = await response.json();
     this.setState({ recentlyAddedProjects: getLatestProjectsVar });
 
+    //FEATURED PROJECTS
     var response = await fetch(baseUrl + getFeaturedProjectsList);
     const getFeaturedProjects = await response.json();
     this.setState({ featuredProjects: this.shuffle(getFeaturedProjects) });
 
-
+    //TWO MONTHS AGO VIEWS RANKING
     var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getPreviousPreviousMonthName());
     const getMostPreviousPreviousMonthViewedProjects = await response.json();
     this.setState({ mostViewedPreviousePreviousMonthProjects: getMostPreviousPreviousMonthViewedProjects });
 
+    //ONE MONTH AGO VIEWS RANKING
     var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getPreviousMonthName());
     const getMostPreviousMonthViewedProjects = await response.json();
     this.setState({ mostViewedPreviousMonthProjects: getMostPreviousMonthViewedProjects });
 
+    //CURRENT MONTH VIEWS RANKING
     var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getMonthName());
     const getMostViewedProjectsVar = await response.json();
     this.setState({ mostViewedProjects: getMostViewedProjectsVar });
 
+    //UPDATED PROJECTS
     var response = await fetch(baseUrl + getRecentlyUpdatedProjects);
     const getRecentlyUpdatedProjectsVar = await response.json();
     this.setState({ recentlyUpdateProjects: getRecentlyUpdatedProjectsVar });
@@ -291,11 +309,11 @@ class DashboardPage extends React.Component {
             </Row>
 
             <hr></hr>
-            <h4 className="mb-0">Ranking Per Month</h4>
+            <h4 className="mb-0">Project Views Rankings</h4>
             <br></br>
             <Row>
 
-            <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+              <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
                     <h4 className="mb-0">{this.getPreviousPreviousMonthName()}</h4>
@@ -423,22 +441,6 @@ class DashboardPage extends React.Component {
               </Col>
 
               <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
-                {/* <Card>
-                    <CardHeader className="border-0">
-                      <Row className="align-items-center">
-                        <h3 className="mb-0">{this.getMonthName()} Most Popular</h3>
-                        <div className="col text-right">
-                          <Button
-                            size="sm"
-                          >
-                            <Link to={{ pathname: '/allprojects' }}>
-                              See all
-                            </Link>
-                          </Button>
-                        </div>
-                      </Row>
-                    </CardHeader>
-                    <CardBody> */}
                 <Row>
                   <Col>
                     <h4 className="mb-0">{this.getMonthName()}</h4>
@@ -469,9 +471,6 @@ class DashboardPage extends React.Component {
                                     </Media>
                                   </Media>
                                 </TableCell>
-
-                                {/* <TableCell><p>{item.type}</p></TableCell> */}
-
                               </TableRow >
                             )
                           }
@@ -496,9 +495,6 @@ class DashboardPage extends React.Component {
 
                                 </TableCell>
                                 <TableCell><p>{item.type}</p></TableCell>
-                                {/* <TableCell><p>{item.tokenType}</p></TableCell>
-                  <TableCell><p>{item.ticker}</p></TableCell> */}
-                                {/* <TableCell><p>{item.stage}</p></TableCell> */}
                               </TableRow >
                             )
                           }
@@ -506,86 +502,136 @@ class DashboardPage extends React.Component {
                     </TableBody >
                   </Table>
                 </TableContainer>
-                {/* </CardBody>
-                  </Card> */}
+
+              </Col>
+            </Row>
+
+{/* TOKEN RANKINGS */}
+            <hr></hr>
+            <h4 className="mb-0">PROJECT TOKEN RANKINGS</h4>
+            <br></br>
+            <Row>
+
+              <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+                <Row>
+                  <Col>
+                    <h4 className="mb-0">Total Wallets</h4>
+                  </Col>
+                </Row>
+                <TableContainer component={Paper}>
+                  <Table >
+                    <TableBody>
+                      {this.state.smallScreen ?
+                        this.state.projectTokensWalletRankings.map(function (item, index) {
+                          if (index < 4) {
+                            return (
+                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.project_name }}>
+                                <TableCell>
+                                  <Media className="align-items-center">
+                                    {/* <a className="avatar rounded-circle mr-3">
+                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                    </a> */}
+                                    <Media>
+                                      <span className="mb-0 text-sm">
+                                        {item.project_name}
+                                      </span>
+                                    </Media>
+                                  </Media>
+                                </TableCell>
+                              </TableRow >
+                            )
+                          }
+                        })
+
+                        :
+                        this.state.projectTokensWalletRankings.map(function (item, index) {
+                          if (index < 4) {
+                            return (
+                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.project_name }} >
+                                <TableCell>
+                                  <Media className="align-items-center">
+                                    {/* <a className="avatar rounded-circle mr-3">
+                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                    </a> */}
+                                    <Media>
+                                      <span className="mb-0 text-sm">
+                                        {item.project_name}
+                                      </span>
+                                    </Media>
+                                  </Media>
+                                </TableCell>
+                                <TableCell><p>{item.asset_name}</p></TableCell>
+                                <TableCell><p>{item.total_wallets}</p></TableCell>
+                              </TableRow >
+                            )
+                          }
+                        })}
+                    </TableBody >
+                  </Table>
+                </TableContainer>
               </Col>
 
-              {/* <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+              <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
-                    <Col>
-                      <h4 className="mb-0">Live Sales</h4>
-                    </Col>
-                    <Col className="col text-right">
-                      <Link to={{ pathname: '/allsales' }}>
-                        <small>See All</small>
-                      </Link>
-                    </Col>
-                  </Row> */}
-              {/* <Card>
-                    <CardHeader className="border-0">
-                      <Row className="align-items-center">
-                        <h3 className="mb-0">Live Sales</h3>
-                        <div className="col text-right">
-                          <Button
-                            size="sm"
-                          >
-                            <Link to={{ pathname: '/allsales' }}>
-                              See all
-                            </Link>
-                          </Button>
-                        </div>
-                      </Row>
-                    </CardHeader>
-                    <CardBody> */}
-              {/* <Carousel autoPlay interval="7000" showArrows={true} showThumbs={false} infiniteLoop={true} showIndicators={false}>
-                        {this.state.salesData.map(function (item, index) {
-                          return (
-                            <div>
-                              <br></br>
-                              <CardTitle><h2 className="text-white"><b>{item.projectName}</b></h2></CardTitle>
-                              <CardText>
-                                <br></br>
-                                <p><b>Sale Type: </b>{item.upcomingSale}</p>
-                                <br></br>
-                                <p><b>Start Date: </b>{item.saleStartDate}</p>
-                                <br></br>
-                                <p><b>End Date: </b>{item.saleEndDate}</p>
-                                <br></br>
-                              </CardText>
-                              <hr />
-                              {!isEmpty(item.tokenDistributionDetail) && (
-                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                  <Button
-                                    size="sm" variant="outline-light"><a href={item.tokenDistributionDetail} target="_blank" rel="noreferrer">Sale Details</a></Button>
-                                  <br></br>
-                                </div>
-                              )}
+                  <Col>
+                    <h4 className="mb-0">Total Transactions</h4>
+                  </Col>
+                </Row>
+                <TableContainer component={Paper}>
+                  <Table >
+                    <TableBody>
 
-                            </div>
-                          )
+                      {this.state.smallScreen ?
+                        this.state.projectTokensTransactionRankings.map(function (item, index) {
+                          if (index < 4) {
+                            return (
+                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.project_name }}>
+                                <TableCell>
+                                  <Media className="align-items-center">
+                                    {/* <a className="avatar rounded-circle mr-3">
+                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                    </a> */}
+                                    <Media>
+                                      <span className="mb-0 text-sm">
+                                        {item.project_name}
+                                      </span>
+                                    </Media>
+                                  </Media>
+                                </TableCell>
+                              </TableRow >
+                            )
+                          }
+                        })
+
+                        :
+                        this.state.projectTokensTransactionRankings.map(function (item, index) {
+                          if (index < 4) {
+                            return (
+                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.project_name }} >
+                                <TableCell>
+                                  <Media className="align-items-center">
+                                    {/* <a className="avatar rounded-circle mr-3">
+                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                    </a> */}
+                                    <Media>
+                                      <span className="mb-0 text-sm">
+                                        {item.project_name}
+                                      </span>
+                                    </Media>
+                                  </Media>
+                                </TableCell>
+                                <TableCell><p>{item.asset_name}</p></TableCell>
+                                <TableCell><p>{item.total_transactions}</p></TableCell>
+                              </TableRow >
+                            )
+                          }
                         })}
+                    </TableBody >
+                  </Table>
+                </TableContainer>
+              </Col>
 
-                      </Carousel> */}
-              {/* </CardBody>
-                  </Card> */}
-
-
-              {/* <Card>
-                    <CardHeader className="border-0">
-                      <Row className="align-items-center">
-                        <h3 className="mb-0">Project Types</h3>
-                      </Row>
-                    </CardHeader>
-                    <CardBody>
-                      <div className="chart">
-                        <Bar
-                          data={this.state.barChartData}
-                        // options={this.state.barChartData.options}
-                        />
-                      </div>
-                    </CardBody>
-                  </Card> */}
-              {/* </Col> */}
+            
             </Row>
 
             {/* <Row>

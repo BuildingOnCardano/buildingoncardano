@@ -1,7 +1,7 @@
 
-export const baseUrl = "http://localhost:8080";
+//export const baseUrl = "http://localhost:8080";
 //export const baseUrl = "https://173.212.232.170:8080";
-//export const baseUrl = "https://smashpeek.com/bocservices";
+export const baseUrl = "https://smashpeek.com/bocservices";
 
 //login and reg
 export const registration = "/registration/user";
@@ -34,6 +34,8 @@ export const getFeaturedProjectsList = "/featuredprojects/getcurrent";
 
 //tokens
 export const getProjectTokens = "/tokens/get/";//{projectname}
+export const getProjectTokensWalletRankings = "/tokens/walletranking";
+export const getProjectTokensTransactionRankings = "/tokens/transactionranking";
 
 //password reset
 export const passwordReset = "/password/reset";
