@@ -117,7 +117,7 @@ class App extends React.Component {
               {/* <Route exact path="/nfts" render={(props) => <NFTsPage {...props} />} /> */}
               
 
-
+              {/* PROJECT TYPES PAGES */}
               <Route path="/defi" render={(props) => <ProjectsPage {...props} projectType="defi" />} />
               <Route path="/subscriptions" component={() => <ProjectsPage projectType="subscriptions" />}></Route>
               <Route path="/tooling" render={(props) => <ProjectsPage {...props} projectType="tooling" />} />

@@ -17,8 +17,10 @@ import {
 import CircleLoader
   from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
-import { baseUrl, getLatestProjects, getProjectsStats, getRecentlyUpdatedProjects, liveProjectSales, getMostViewedProjects, getFeaturedProjectsList,
-  getProjectTokensWalletRankings, getProjectTokensTransactionRankings } from '../assets/services';
+import {
+  baseUrl, getLatestProjects, getProjectsStats, getRecentlyUpdatedProjects, liveProjectSales, getMostViewedProjects, getFeaturedProjectsList,
+  getProjectTokensWalletRankings, getProjectTokensTransactionRankings
+} from '../assets/services';
 import { Link } from 'react-router-dom';
 import { TableRow, TableCell, TableHead, TableBody, TableContainer } from '@material-ui/core';
 import "../styles/styles.css";
@@ -506,7 +508,7 @@ class DashboardPage extends React.Component {
               </Col>
             </Row>
 
-{/* TOKEN RANKINGS */}
+            {/* TOKEN RANKINGS */}
             <hr></hr>
             <h4 className="mb-0">PROJECT TOKEN RANKINGS</h4>
             <br></br>
@@ -631,10 +633,11 @@ class DashboardPage extends React.Component {
                 </TableContainer>
               </Col>
 
-            
+
             </Row>
 
-            {/* <Row>
+            <hr></hr>
+            <Row>
               <Col lg={12} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
@@ -648,12 +651,12 @@ class DashboardPage extends React.Component {
                 }}>
                   {this.state.projectTypesAndCount.map(function (item, index) {
                     return (
-                      <Col lg={1} md={4} sm={4} xs={4} className="mb-3">
-                        <Button size="sm" className="btn-tag2">
-                          <Link to={{ pathname: '/' + item.projectType }}>
-                            {item.projectType} ({item.projectCount})
-                          </Link>
-                        </Button>
+                      <Col lg={2} md={4} sm={4} xs={4} className="mb-3">
+                        <Link to={{ pathname: '/' + item.projectType }}>
+                          <Button size="m" className="btn-tag2" style={{ minHeight: '10vh', minWidth: '10vw' }}>
+                            <h3>{item.projectType} <br></br>({item.projectCount})</h3>
+                          </Button>
+                        </Link>
                       </Col>
                     )
                   })}
@@ -661,7 +664,7 @@ class DashboardPage extends React.Component {
 
               </Col>
 
-            </Row> */}
+            </Row>
           </div >}
 
       </Page>
