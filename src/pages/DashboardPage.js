@@ -233,7 +233,7 @@ class DashboardPage extends React.Component {
             {this.state.featuredProjects != null && this.state.featuredProjects.length != 0 &&
               <Row style={{ padding: 0, marginBottom: 0, }}>
                 <Col>
-                  <h4 className="mb-0">Featured</h4>
+                  <h4 className="mb-0" style={{ color: "#225cb6" }}>Featured</h4>
                 </Col>
                 <Col className="col text-right">
                   <Link to={{ pathname: '/promote' }}>
@@ -264,23 +264,42 @@ class DashboardPage extends React.Component {
               <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
-                    <h4 className="mb-0">Recently added</h4>
+                    <h4 className="mb-0" style={{ color: "#225cb6" }}>Recently added</h4>
                   </Col>
                 </Row>
                 <Row>
-                  {this.state.recentlyAddedProjects.map(function (item, index) {
-                    if (index < 3) {
-                      return (
-                        <Col lg={4} md={6} sm={6} xs={6} className="mb-3">
-                          <div className='ProjectCards'>
-                            <RecentlyAddedProjectCard
-                              img={item.imageUrl}
-                              projectDetails={item} />
-                          </div>
-                        </Col>
-                      )
-                    }
-                  })}
+                  {this.state.smallScreen ?
+
+                    this.state.recentlyAddedProjects.map(function (item, index) {
+                      if (index < 2) {
+                        return (
+                          <Col lg={4} md={6} sm={6} xs={6} className="mb-3">
+                            <div className='ProjectCards'>
+                              <RecentlyAddedProjectCard
+                                img={item.imageUrl}
+                                projectDetails={item} />
+                            </div>
+                          </Col>
+                        )
+                      }
+                    })
+
+                    :
+
+                    this.state.recentlyAddedProjects.map(function (item, index) {
+                      if (index < 3) {
+                        return (
+                          <Col lg={4} md={6} sm={6} xs={6} className="mb-3">
+                            <div className='ProjectCards'>
+                              <RecentlyAddedProjectCard
+                                img={item.imageUrl}
+                                projectDetails={item} />
+                            </div>
+                          </Col>
+                        )
+                      }
+                    })
+                  }
                 </Row>
 
 
@@ -288,37 +307,58 @@ class DashboardPage extends React.Component {
               <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
-                    <h4 className="mb-0">Recently updated</h4>
+                    <h4 className="mb-0" style={{ color: "#225cb6" }}>Recently updated</h4>
                   </Col>
                 </Row>
                 <Row>
-                  {this.state.recentlyUpdateProjects.map(function (item, index) {
-                    if (index < 3) {
-                      return (
-                        <Col lg={4} md={6} sm={6} xs={6} className="mb-3">
-                          <div className='ProjectCards'>
-                            <RecentlyAddedProjectCard
-                              img={item.imageUrl}
-                              projectDetails={item} />
-                          </div>
-                        </Col>
-                      )
-                    }
-                  })}
+
+                  {this.state.smallScreen ?
+
+                    this.state.recentlyUpdateProjects.map(function (item, index) {
+                      if (index < 2) {
+                        return (
+                          <Col lg={4} md={6} sm={6} xs={6} className="mb-3">
+                            <div className='ProjectCards'>
+                              <RecentlyAddedProjectCard
+                                img={item.imageUrl}
+                                projectDetails={item} />
+                            </div>
+                          </Col>
+                        )
+                      }
+                    })
+
+                    :
+
+                    this.state.recentlyUpdateProjects.map(function (item, index) {
+                      if (index < 3) {
+                        return (
+                          <Col lg={4} md={6} sm={6} xs={6} className="mb-3">
+                            <div className='ProjectCards'>
+                              <RecentlyAddedProjectCard
+                                img={item.imageUrl}
+                                projectDetails={item} />
+                            </div>
+                          </Col>
+                        )
+                      }
+                    })
+
+                  }
                 </Row>
 
               </Col>
             </Row>
 
             <hr></hr>
-            <h4 className="mb-0">Project Views Rankings</h4>
+            <h4 className="mb-0" style={{ color: "#225cb6" }}>Project Views Rankings</h4>
             <br></br>
             <Row>
 
-              <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+              <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
-                    <h4 className="mb-0">{this.getPreviousPreviousMonthName()}</h4>
+                    <h4 className="mb-0" style={{ color: "#225cb6" }}>{this.getPreviousPreviousMonthName()}</h4>
                   </Col>
                   <Col className="col text-right">
                     <Link to={{ pathname: '/promote' }}>
@@ -378,10 +418,10 @@ class DashboardPage extends React.Component {
                 </TableContainer>
               </Col>
 
-              <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+              <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
-                    <h4 className="mb-0">{this.getPreviousMonthName()}</h4>
+                    <h4 className="mb-0" style={{ color: "#225cb6" }}>{this.getPreviousMonthName()}</h4>
                   </Col>
                   <Col className="col text-right">
                     <Link to={{ pathname: '/promote' }}>
@@ -442,7 +482,7 @@ class DashboardPage extends React.Component {
                 </TableContainer>
               </Col>
 
-              <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+              {/* <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
                     <h4 className="mb-0">{this.getMonthName()}</h4>
@@ -505,19 +545,19 @@ class DashboardPage extends React.Component {
                   </Table>
                 </TableContainer>
 
-              </Col>
+              </Col> */}
             </Row>
 
             {/* TOKEN RANKINGS */}
             <hr></hr>
-            <h4 className="mb-0">PROJECT TOKEN RANKINGS</h4>
+            <h4 className="mb-0" style={{ color: "#225cb6" }}>PROJECT TOKEN RANKINGS</h4>
             <br></br>
             <Row>
 
               <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
-                    <h4 className="mb-0">Total Wallets</h4>
+                    <h4 className="mb-0" style={{ color: "#225cb6" }}>Total Wallets</h4>
                   </Col>
                 </Row>
                 <TableContainer component={Paper}>
@@ -576,7 +616,7 @@ class DashboardPage extends React.Component {
               <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
-                    <h4 className="mb-0">Total Transactions</h4>
+                    <h4 className="mb-0" style={{ color: "#225cb6" }}>Total Transactions</h4>
                   </Col>
                 </Row>
                 <TableContainer component={Paper}>
@@ -641,7 +681,7 @@ class DashboardPage extends React.Component {
               <Col lg={12} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
-                    <h4 className="mb-0">Project Types</h4>
+                    <h4 className="mb-0" style={{ color: "#225cb6" }}>Project Types</h4>
                   </Col>
                 </Row>
                 <Row className="justify-content-md-center" style={{
@@ -651,10 +691,10 @@ class DashboardPage extends React.Component {
                 }}>
                   {this.state.projectTypesAndCount.map(function (item, index) {
                     return (
-                      <Col lg={2} md={4} sm={4} xs={4} className="mb-3">
+                      <Col lg={2} md={6} sm={6} xs={6} className="mb-3">
                         <Link to={{ pathname: '/' + item.projectType }}>
                           <Button size="m" className="btn-tag2" style={{ minHeight: '10vh', minWidth: '10vw' }}>
-                            <h3>{item.projectType} <br></br>({item.projectCount})</h3>
+                            <h4 style={{ color: "#225cb6" }}>{item.projectType} <br></br>({item.projectCount})</h4>
                           </Button>
                         </Link>
                       </Col>

@@ -1,7 +1,7 @@
 
-//export const baseUrl = "http://localhost:8080";
+export const baseUrl = "http://localhost:8080";
 //export const baseUrl = "https://173.212.232.170:8080";
-export const baseUrl = "https://smashpeek.com/bocservices";
+//export const baseUrl = "https://smashpeek.com/bocservices";
 
 //login and reg
 export const registration = "/registration/user";
@@ -22,6 +22,8 @@ export const getProjectByName = "/projects/details/name/";//{projectId}
 export const getProjectByNameAndOwner = "/projects/details/nameandowner/";//{projectId}
 export const getRecentlyUpdatedProjects = "/projects/recentlyupdated";
 
+export const getAllProjectsWithTypes = "/projects/withtypes";
+
 //project sales
 export const liveProjectSales = "/projectsales/all/live";
 export const liveAndUpcomingProjectSales = "/projectsales/all/liveandupcoming";
@@ -33,6 +35,7 @@ export const promotionRequest = "/promotion/request"
 export const getFeaturedProjectsList = "/featuredprojects/getcurrent";
 
 //tokens
+export const getAllProjectsTokens = "/projecttoken/tokens";
 export const getProjectTokens = "/tokens/get/";//{projectname}
 export const getProjectTokensWalletRankings = "/tokens/walletranking";
 export const getProjectTokensTransactionRankings = "/tokens/transactionranking";

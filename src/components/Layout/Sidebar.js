@@ -7,19 +7,11 @@ import {
   MdChromeReaderMode,
   MdDashboard,
   MdGroupWork,
-  MdKeyboardArrowDown,
-  MdNotificationsActive,
-  MdPages,
-  MdRadioButtonChecked,
   MdStar,
-  MdViewDay,
-  MdViewList,
   MdKeyboardArrowRight,
   MdAddToQueue,
   MdVerifiedUser,
-  MdAttachMoney,
-  MdArtTrack
-
+  MdAttachMoney
 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import {
@@ -85,6 +77,8 @@ class Sidebar extends React.Component {
           { to: '/myprojects', name: 'my projects', exact: true, Icon: MdVerifiedUser },
           { to: '/addproject', name: 'add project', exact: true, Icon: MdAddToQueue },
           { to: '/allprojects', name: 'projects', exact: true, Icon: MdGroupWork },
+          { to: '/projectsmap', name: 'projects', exact: true, Icon: MdGroupWork },
+          { to: '/alltokens', name: 'tokens', exact: true, Icon: MdAttachMoney },
           // { to: '/allsales', name: 'sales', exact: true, Icon: MdAttachMoney },
           // { to: '/nfts', name: 'nfts', exact: true, Icon: MdArtTrack },
 
@@ -98,6 +92,8 @@ class Sidebar extends React.Component {
         navItemsTop: [
           { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
           { to: '/allprojects', name: 'projects', exact: true, Icon: MdStar },
+          { to: '/ecosystem', name: 'Ecosystem', exact: true, Icon: MdGroupWork },
+          { to: '/alltokens', name: 'tokens', exact: true, Icon: MdAttachMoney },
           // { to: '/allsales', name: 'sales', exact: true, Icon: MdAttachMoney },
           // { to: '/nfts', name: 'nfts', exact: true, Icon: MdArtTrack },
           { to: '/addproject', name: 'add project', exact: true, Icon: MdAddToQueue },
@@ -127,22 +123,26 @@ class Sidebar extends React.Component {
         <div className={bem.e('content')}>
 
           <Navbar>
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center" >
               <Col xs={12} sm={4} md={4}>
-              <Link to={{ pathname: '/' }}>
-                <img
-                  src={logo200Image}
-                  className="rounded"
-                  style={{ width: 120, height: 120, cursor: 'pointer', alignSelf: 'center' }}
-                  alt="logo"
-                />
+                <Link to={{ pathname: '/' }}>
+                  <img
+                    src={logo200Image}
+                    className="rounded"
+                    style={{ width: 120, height: 120, cursor: 'pointer', alignSelf: 'center' }}
+                    alt="logo"
+                  />
                 </Link>
               </Col>
             </Row>
 
             {/* <h5 className="text-white">Building On Cardano</h5> */}
           </Navbar>
-          <Nav vertical>
+          <Nav vertical style={{
+                  color: "white", justifyContent: 'center',
+                  alignItems: 'center',
+                  textAlign: 'center'
+                }}> 
             {this.state.navItemsTop.map(({ to, name, exact, Icon }, index) => (
               <NavItem key={index} className={bem.e('nav-item')}>
                 <BSNavLink
@@ -218,16 +218,16 @@ class Sidebar extends React.Component {
 
           <Row className="justify-content-md-center">
             <Col xs={12} sm={4} md={4}>
+              <br></br>
               <a href="https://twitter.com/BuildingCardano" target="_blank" rel="noreferrer">
-                <img
-                  className="pr-2"
-                  alt=""
-                />
-                <FontAwesomeIcon size="2x" icon={faTwitter} style={{
+                <Row icon={faTwitter} style={{
                   color: "white", justifyContent: 'center',
                   alignItems: 'center',
                   textAlign: 'center'
-                }} /></a>
+                }}>
+                  <FontAwesomeIcon size="2x" icon={faTwitter} style={{color: "white"}} />
+                  <p style={{ color: '#FFFFFF' }}>Follow Us</p>
+                </Row></a>
             </Col>
           </Row>
 

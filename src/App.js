@@ -18,6 +18,8 @@ import PromoteAppPage from 'pages/PromoteAppPage';
 import TermsAndPolicy from 'pages/TermsAndPolicy';
 import ResetPasswordPage from 'pages/ResetPasswordPage';
 import { createBrowserHistory } from "history";
+import Ecosystem from 'pages/Ecosystem';
+import AllProjectTokens from 'pages/AllProjectTokens';
 import NFTsPage from 'pages/NFTsPage';
 
 import GA4React from "ga-4-react";
@@ -110,6 +112,10 @@ class App extends React.Component {
               <Route exact path="/" render={(props) => <DashboardPage {...props} />} />
 
               <Route exact path="/allprojects" render={(props) => <AllProjects {...props} />} />
+              <Route exact path="/ecosystem" render={(props) => <Ecosystem {...props} />} />
+              <Route exact path="/alltokens" render={(props) => <AllProjectTokens {...props} />} />
+
+              
               <Route exact path="/allsales" render={(props) => <AllSales {...props} />} />
 
               <Route exact path="/termsandpolicy" render={(props) => <TermsAndPolicy {...props} />} />
