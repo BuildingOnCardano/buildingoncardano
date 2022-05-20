@@ -13,7 +13,7 @@ const Footer = () => {
             Building On Cardano - a place to view whats happening within the cardano ecosystem. 
           </Row>
           <Row>
-            Brought to you by Stake Pool Operators Shamrock Pool and Cardano With Paul
+            <p>Brought to you by Stake Pool Operators <b>Paddy - Shamrock Pool</b> and <b>Cardano With Paul</b></p>
           </Row>
           <Row>
             <a href="https://shamrock-pool.com/" target="_blank">

@@ -27,19 +27,12 @@ import "../styles/styles.css";
 import Paper from '@material-ui/core/Paper';
 import { removeUserSession } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
-import { Line, Bar, Pie } from "react-chartjs-2";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
 import FeaturedProjectCard from 'components/FeaturedProjectCard';//RecentlyAddedProjectCard
 import RecentlyAddedProjectCard from 'components/RecentlyAddedProjectCard';//RecentlyAddedProjectCard
-import CardanoImage from 'assets/img/cardanoIcon.png';
-import ReactImageFallback from "react-image-fallback";
 import CircularImage from 'utils/CircularImage';
-
-
-import shamrock from 'assets/img/paddy.jpg';
-import paul from 'assets/img/paul.jpg';
 import "../styles/imageoverlay.css";
+
 
 
 const override = css`
@@ -96,7 +89,10 @@ class DashboardPage extends React.Component {
     //TOKENS TOTAL WALLETS
     var response = await fetch(baseUrl + getProjectTokensWalletRankings);
     const projectTokensWalletRankings = await response.json();
-    this.setState({ projectTokensWalletRankings: projectTokensWalletRankings });
+
+    if (projectTokensWalletRankings.status == 200) {
+      this.setState({ projectTokensWalletRankings: projectTokensWalletRankings });
+    }
 
     //TOKENS TOTAL TRX
     var response = await fetch(baseUrl + getProjectTokensTransactionRankings);
@@ -199,8 +195,13 @@ class DashboardPage extends React.Component {
     const d = new Date();
     var currentMonth = d.getMonth();
     var lastMonth = currentMonth - 2;
-    if (lastMonth < 0) lastMonth = 11;
-
+    if (currentMonth == 0) {
+      lastMonth = 10;
+    } else if (currentMonth == 1) {
+      lastMonth = 11;
+    } else {
+      lastMonth = currentMonth - 2;
+    }
     return monthNames[lastMonth];
   }
 
@@ -228,8 +229,6 @@ class DashboardPage extends React.Component {
           :
           <div>
             <br></br>
-
-
             {this.state.featuredProjects != null && this.state.featuredProjects.length != 0 &&
               <Row style={{ padding: 0, marginBottom: 0, }}>
                 <Col>
@@ -356,130 +355,164 @@ class DashboardPage extends React.Component {
             <Row>
 
               <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
-                <Row>
-                  <Col>
-                    <h4 className="mb-0" style={{ color: "#225cb6" }}>{this.getPreviousPreviousMonthName()}</h4>
-                  </Col>
-                  <Col className="col text-right">
-                    <Link to={{ pathname: '/promote' }}>
-                      <small>See All</small>
-                    </Link>
-                  </Col>
-                </Row>
-                <TableContainer component={Paper}>
-                  <Table >
-                    <TableBody>
-                      {this.state.smallScreen ?
-                        this.state.mostViewedPreviousePreviousMonthProjects.map(function (item, index) {
-                          if (index < 4) {
-                            return (
-                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                <TableCell>
-                                  <Media className="align-items-center">
-                                    <a className="avatar rounded-circle mr-3">
-                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
-                                    </a>
-                                    <Media>
-                                      <span className="mb-0 text-sm">
-                                        {item.name}
-                                      </span>
-                                    </Media>
-                                  </Media>
-                                </TableCell>
-                              </TableRow >
-                            )
-                          }
-                        })
 
-                        :
-                        this.state.mostViewedPreviousePreviousMonthProjects.map(function (item, index) {
-                          if (index < 4) {
-                            return (
-                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                <TableCell>
-                                  <Media className="align-items-center">
-                                    <a className="avatar rounded-circle mr-3">
-                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
-                                    </a>
-                                    <Media>
-                                      <span className="mb-0 text-sm">
-                                        {item.name}
-                                      </span>
+
+
+                <Row>
+                  <Row>
+                    <Col>
+                      <h4 className="mb-0" style={{ color: "#225cb6" }}>{this.getPreviousMonthName()}</h4>
+                    </Col>
+                    <Col className="col text-right">
+                      <Link to={{ pathname: '/promote' }}>
+                        <small>See All</small>
+                      </Link>
+                    </Col>
+                  </Row>
+                  <TableContainer component={Paper}>
+                    <Table >
+                      <TableBody>
+
+                        {this.state.smallScreen ?
+                          this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
+                            if (index < 4) {
+                              return (
+                                <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
+                                  <TableCell>
+                                    <Media className="align-items-center">
+                                      <a className="avatar rounded-circle mr-3">
+                                        <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                      </a>
+                                      <Media>
+                                        <span className="mb-0 text-sm" style={{ color: "#225cb6" }}>
+                                          {item.name}
+                                        </span>
+                                      </Media>
                                     </Media>
-                                  </Media>
-                                </TableCell>
-                                <TableCell><p>{item.type}</p></TableCell>
-                              </TableRow >
-                            )
-                          }
-                        })}
-                    </TableBody >
-                  </Table>
-                </TableContainer>
+                                  </TableCell>
+                                </TableRow >
+                              )
+                            }
+                          })
+
+                          :
+                          this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
+                            if (index < 4) {
+                              return (
+                                <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
+                                  <TableCell>
+                                    <Media className="align-items-center">
+                                      <a className="avatar rounded-circle mr-3">
+                                        <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                      </a>
+                                      <Media>
+                                        <span className="mb-0 text-sm" style={{ color: "#225cb6" }}>
+                                        <b>{item.name}</b>
+                                        </span>
+                                      </Media>
+                                    </Media>
+                                  </TableCell>
+                                  <TableCell><p style={{ color: "#225cb6" }}><b>{item.type}</b></p></TableCell>
+                                </TableRow >
+                              )
+                            }
+                          })}
+                      </TableBody >
+                    </Table>
+                  </TableContainer>
+                </Row>
+                <hr></hr>
+                <Row>
+                  <Row>
+                    <Col>
+                      <h4 className="mb-0" style={{ color: "#225cb6" }}>{this.getPreviousPreviousMonthName()}</h4>
+                    </Col>
+                    <Col className="col text-right">
+                      <Link to={{ pathname: '/promote' }}>
+                        <small>See All</small>
+                      </Link>
+                    </Col>
+                  </Row>
+                  <TableContainer component={Paper}>
+                    <Table >
+                      <TableBody>
+                        {this.state.smallScreen ?
+                          this.state.mostViewedPreviousePreviousMonthProjects.map(function (item, index) {
+                            if (index < 4) {
+                              return (
+                                <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
+                                  <TableCell>
+                                    <Media className="align-items-center">
+                                      <a className="avatar rounded-circle mr-3">
+                                        <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                      </a>
+                                      <Media>
+                                        <span className="mb-0 text-sm" style={{ color: "#225cb6" }}>
+                                          <b>{item.name}</b>
+                                        </span>
+                                      </Media>
+                                    </Media>
+                                  </TableCell>
+                                </TableRow >
+                              )
+                            }
+                          })
+
+                          :
+                          this.state.mostViewedPreviousePreviousMonthProjects.map(function (item, index) {
+                            if (index < 4) {
+                              return (
+                                <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
+                                  <TableCell>
+                                    <Media className="align-items-center">
+                                      <a className="avatar rounded-circle mr-3">
+                                        <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                      </a>
+                                      <Media>
+                                        <span className="mb-0 text-sm" style={{ color: "#225cb6" }}>
+                                          <b>{item.name}</b>
+                                        </span>
+                                      </Media>
+                                    </Media>
+                                  </TableCell>
+                                  <TableCell><p style={{ color: "#225cb6" }}><b>{item.type}</b></p></TableCell>
+                                </TableRow >
+                              )
+                            }
+                          })}
+                      </TableBody >
+                    </Table>
+                  </TableContainer>
+                </Row>
               </Col>
 
               <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
-                  <Col>
-                    <h4 className="mb-0" style={{ color: "#225cb6" }}>{this.getPreviousMonthName()}</h4>
-                  </Col>
-                  <Col className="col text-right">
-                    <Link to={{ pathname: '/promote' }}>
-                      <small>See All</small>
-                    </Link>
-                  </Col>
+                    <Row>
+                      <Col>
+                        <h4 className="mb-0" style={{ color: "#225cb6" }}>Project Types</h4>
+                      </Col>
+                    </Row>
+                    <Row className="justify-content-md-center" style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      textAlign: 'center'
+                    }}>
+                      {this.state.projectTypesAndCount.map(function (item, index) {
+                        return (
+                            <Link to={{ pathname: '/' + item.projectType }}>
+                              <Button size="m" className="btn-tag2" style={{ minHeight: '10vh', minWidth: '10vw' }}>
+                                <h4 style={{ color: "#225cb6" }}>{item.projectType} <br></br>({item.projectCount})</h4>
+                              </Button>
+                            </Link>
+                        )
+                      })}
+                    </Row>
+
+
                 </Row>
-                <TableContainer component={Paper}>
-                  <Table >
-                    <TableBody>
 
-                      {this.state.smallScreen ?
-                        this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
-                          if (index < 4) {
-                            return (
-                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }}>
-                                <TableCell>
-                                  <Media className="align-items-center">
-                                    <a className="avatar rounded-circle mr-3">
-                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
-                                    </a>
-                                    <Media>
-                                      <span className="mb-0 text-sm">
-                                        {item.name}
-                                      </span>
-                                    </Media>
-                                  </Media>
-                                </TableCell>
-                              </TableRow >
-                            )
-                          }
-                        })
 
-                        :
-                        this.state.mostViewedPreviousMonthProjects.map(function (item, index) {
-                          if (index < 4) {
-                            return (
-                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.name, state: { projectDetails: item } }} >
-                                <TableCell>
-                                  <Media className="align-items-center">
-                                    <a className="avatar rounded-circle mr-3">
-                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
-                                    </a>
-                                    <Media>
-                                      <span className="mb-0 text-sm">
-                                        {item.name}
-                                      </span>
-                                    </Media>
-                                  </Media>
-                                </TableCell>
-                                <TableCell><p>{item.type}</p></TableCell>
-                              </TableRow >
-                            )
-                          }
-                        })}
-                    </TableBody >
-                  </Table>
-                </TableContainer>
               </Col>
 
               {/* <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
@@ -548,136 +581,139 @@ class DashboardPage extends React.Component {
               </Col> */}
             </Row>
 
-            {/* TOKEN RANKINGS */}
-            <hr></hr>
-            <h4 className="mb-0" style={{ color: "#225cb6" }}>PROJECT TOKEN RANKINGS</h4>
-            <br></br>
-            <Row>
-
-              <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+            {this.state.projectTokensWalletRankings != null &&
+              <div>
+                {/* TOKEN RANKINGS */}
+                <hr></hr>
+                <h4 className="mb-0" style={{ color: "#225cb6" }}>PROJECT TOKEN RANKINGS</h4>
+                <br></br>
                 <Row>
-                  <Col>
-                    <h4 className="mb-0" style={{ color: "#225cb6" }}>Total Wallets</h4>
+
+                  <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+                    <Row>
+                      <Col>
+                        <h4 className="mb-0" style={{ color: "#225cb6" }}>Total Wallets</h4>
+                      </Col>
+                    </Row>
+                    <TableContainer component={Paper}>
+                      <Table >
+                        <TableBody>
+                          {this.state.smallScreen ?
+                            this.state.projectTokensWalletRankings.map(function (item, index) {
+                              if (index < 4) {
+                                return (
+                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.project_name }}>
+                                    <TableCell>
+                                      <Media className="align-items-center">
+                                        {/* <a className="avatar rounded-circle mr-3">
+                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                    </a> */}
+                                        <Media>
+                                          <span className="mb-0 text-sm">
+                                            {item.project_name}
+                                          </span>
+                                        </Media>
+                                      </Media>
+                                    </TableCell>
+                                  </TableRow >
+                                )
+                              }
+                            })
+
+                            :
+                            this.state.projectTokensWalletRankings.map(function (item, index) {
+                              if (index < 4) {
+                                return (
+                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.project_name }} >
+                                    <TableCell>
+                                      <Media className="align-items-center">
+                                        {/* <a className="avatar rounded-circle mr-3">
+                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
+                                    </a> */}
+                                        <Media>
+                                          <span className="mb-0 text-sm">
+                                            {item.project_name}
+                                          </span>
+                                        </Media>
+                                      </Media>
+                                    </TableCell>
+                                    <TableCell><p>{item.asset_name}</p></TableCell>
+                                    <TableCell><p>{item.total_wallets}</p></TableCell>
+                                  </TableRow >
+                                )
+                              }
+                            })}
+                        </TableBody >
+                      </Table>
+                    </TableContainer>
                   </Col>
-                </Row>
-                <TableContainer component={Paper}>
-                  <Table >
-                    <TableBody>
-                      {this.state.smallScreen ?
-                        this.state.projectTokensWalletRankings.map(function (item, index) {
-                          if (index < 4) {
-                            return (
-                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.project_name }}>
-                                <TableCell>
-                                  <Media className="align-items-center">
-                                    {/* <a className="avatar rounded-circle mr-3">
+
+                  <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+                    <Row>
+                      <Col>
+                        <h4 className="mb-0" style={{ color: "#225cb6" }}>Total Transactions</h4>
+                      </Col>
+                    </Row>
+                    <TableContainer component={Paper}>
+                      <Table >
+                        <TableBody>
+
+                          {this.state.smallScreen ?
+                            this.state.projectTokensTransactionRankings.map(function (item, index) {
+                              if (index < 4) {
+                                return (
+                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.project_name }}>
+                                    <TableCell>
+                                      <Media className="align-items-center">
+                                        {/* <a className="avatar rounded-circle mr-3">
                                       <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
                                     </a> */}
-                                    <Media>
-                                      <span className="mb-0 text-sm">
-                                        {item.project_name}
-                                      </span>
-                                    </Media>
-                                  </Media>
-                                </TableCell>
-                              </TableRow >
-                            )
-                          }
-                        })
+                                        <Media>
+                                          <span className="mb-0 text-sm">
+                                            {item.project_name}
+                                          </span>
+                                        </Media>
+                                      </Media>
+                                    </TableCell>
+                                  </TableRow >
+                                )
+                              }
+                            })
 
-                        :
-                        this.state.projectTokensWalletRankings.map(function (item, index) {
-                          if (index < 4) {
-                            return (
-                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.project_name }} >
-                                <TableCell>
-                                  <Media className="align-items-center">
-                                    {/* <a className="avatar rounded-circle mr-3">
+                            :
+                            this.state.projectTokensTransactionRankings.map(function (item, index) {
+                              if (index < 4) {
+                                return (
+                                  <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.project_name }} >
+                                    <TableCell>
+                                      <Media className="align-items-center">
+                                        {/* <a className="avatar rounded-circle mr-3">
                                       <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
                                     </a> */}
-                                    <Media>
-                                      <span className="mb-0 text-sm">
-                                        {item.project_name}
-                                      </span>
-                                    </Media>
-                                  </Media>
-                                </TableCell>
-                                <TableCell><p>{item.asset_name}</p></TableCell>
-                                <TableCell><p>{item.total_wallets}</p></TableCell>
-                              </TableRow >
-                            )
-                          }
-                        })}
-                    </TableBody >
-                  </Table>
-                </TableContainer>
-              </Col>
-
-              <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
-                <Row>
-                  <Col>
-                    <h4 className="mb-0" style={{ color: "#225cb6" }}>Total Transactions</h4>
+                                        <Media>
+                                          <span className="mb-0 text-sm">
+                                            {item.project_name}
+                                          </span>
+                                        </Media>
+                                      </Media>
+                                    </TableCell>
+                                    <TableCell><p>{item.asset_name}</p></TableCell>
+                                    <TableCell><p>{item.total_transactions}</p></TableCell>
+                                  </TableRow >
+                                )
+                              }
+                            })}
+                        </TableBody >
+                      </Table>
+                    </TableContainer>
                   </Col>
+
                 </Row>
-                <TableContainer component={Paper}>
-                  <Table >
-                    <TableBody>
-
-                      {this.state.smallScreen ?
-                        this.state.projectTokensTransactionRankings.map(function (item, index) {
-                          if (index < 4) {
-                            return (
-                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.project_name }}>
-                                <TableCell>
-                                  <Media className="align-items-center">
-                                    {/* <a className="avatar rounded-circle mr-3">
-                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
-                                    </a> */}
-                                    <Media>
-                                      <span className="mb-0 text-sm">
-                                        {item.project_name}
-                                      </span>
-                                    </Media>
-                                  </Media>
-                                </TableCell>
-                              </TableRow >
-                            )
-                          }
-                        })
-
-                        :
-                        this.state.projectTokensTransactionRankings.map(function (item, index) {
-                          if (index < 4) {
-                            return (
-                              <TableRow component={Link} to={{ pathname: '/projectdetails/' + item.project_name }} >
-                                <TableCell>
-                                  <Media className="align-items-center">
-                                    {/* <a className="avatar rounded-circle mr-3">
-                                      <CircularImage imageUrl={item.imageUrl} height={40} width={40} />
-                                    </a> */}
-                                    <Media>
-                                      <span className="mb-0 text-sm">
-                                        {item.project_name}
-                                      </span>
-                                    </Media>
-                                  </Media>
-                                </TableCell>
-                                <TableCell><p>{item.asset_name}</p></TableCell>
-                                <TableCell><p>{item.total_transactions}</p></TableCell>
-                              </TableRow >
-                            )
-                          }
-                        })}
-                    </TableBody >
-                  </Table>
-                </TableContainer>
-              </Col>
-
-
-            </Row>
+              </div>
+            }
 
             <hr></hr>
-            <Row>
+            {/* <Row>
               <Col lg={12} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
                   <Col>
@@ -704,7 +740,7 @@ class DashboardPage extends React.Component {
 
               </Col>
 
-            </Row>
+            </Row> */}
           </div >}
 
       </Page>

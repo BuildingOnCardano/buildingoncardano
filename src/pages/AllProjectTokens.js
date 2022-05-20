@@ -57,28 +57,28 @@ const columns = [
     field: 'token', flex: 1,
     renderHeader: (params) => (
       <h2>
-        {'Token Name'}
+        {'Name'}
       </h2>
     ),
   },
   {
     field: 'supply', flex: 1, renderHeader: (params) => (
       <h2>
-        {'Total Supply'}
+        {'Supply'}
       </h2>
     ),
   },
   {
     field: 'transactions', flex: 1, renderHeader: (params) => (
       <h2>
-        {'Total Transactions'}
+        {'Transactions'}
       </h2>
     ),
   },
   {
     field: 'wallets', flex: 1, renderHeader: (params) => (
       <h2>
-        {'Total Wallets'}
+        {'Wallets'}
       </h2>
     ),
   },
@@ -178,8 +178,8 @@ class AllProjectTokens extends React.Component {
     for (let index = 0; index < data.length; index++) {
       const item = data[index];
       var row = {
-        id: index, project: item.project_name, token: item.asset_name, policy_id: item.policy_id,  supply: item.total_supply, 
-        transactions: item.total_transactions, wallets: item.total_wallets, date: item.creation_time
+        id: index, project: item.project_name, token: item.asset_name, policy_id: item.policy_id,  supply: Number(item.total_supply), 
+        transactions: Number(item.total_transactions), wallets: Number(item.total_wallets), date: item.creation_time
       };
       rows.push(row);
     }

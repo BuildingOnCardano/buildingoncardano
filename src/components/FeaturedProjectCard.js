@@ -33,8 +33,8 @@ export default class FeaturedProjectCard extends React.Component {
                             height="70"
                             fallbackImage={CardanoImage} />
                         <div className="ProjectCard-body">
-                            <h2>{this.props.projectDetails.name}</h2>
-                            <h5>{this.props.projectDetails.type}</h5>
+                            <h2 style={{ color: "#225cb6" }}>{this.props.projectDetails.name}</h2>
+                            <h5 style={{ color: "#225cb6" }}>{this.props.projectDetails.type}</h5>
                         </div>
                     </div>
                 </Link>

@@ -77,7 +77,10 @@ const tagOptions = [
   { name: 'Lending', id: 22 },
   { name: 'Launch Pad', id: 23 },
   { name: 'Cloud Storage', id: 24 },
-  { name: 'Application', id: 25 }
+  { name: 'Application', id: 25 },
+  { name: 'Identity', id: 26 },
+  { name: 'Meme Coin', id: 27 },
+  { name: 'Metaverse', id: 28 }
 ]
 
 var selectedListTags = [];
@@ -422,6 +425,8 @@ class MyProjectsAddEditPage extends React.Component {
                             <option>IFO</option>
                             <option>IDO</option>
                             <option>ISO</option>
+                            <option>TestNet</option>
+                            <option>Live</option>
                             <option>Live on Exchange</option>
                             <option>Other</option>
                           </Input></Col>

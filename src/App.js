@@ -150,8 +150,9 @@ class App extends React.Component {
               <Route path="/Lending" render={(props) => <ProjectsPage {...props} projectType="Lending" />} />
               <Route path="/Launch Pad" render={(props) => <ProjectsPage {...props} projectType="Launch Pad" />} />
               <Route path="/Cloud Storage" render={(props) => <ProjectsPage {...props} projectType="Cloud Storage" />} />
+              <Route path="/Meme Coin" render={(props) => <ProjectsPage {...props} projectType="Meme Coin" />} />
 
-              <Route path="/application" component={() => <ProjectsPage projectType="application" />}></Route>
+              <Route path="/application" component={() => <ProjectsPage projectType="Meme Coin" />}></Route>
 
 
               <Route path="/projectdetails/:projectname" render={(props) => <ProjectDetailsPage {...props} />} />
