@@ -7,8 +7,8 @@ import {
 } from 'react-icons/md';
 import NotificationSystem from 'react-notification-system';
 import { NOTIFICATION_SYSTEM_STYLE } from 'utils/constants';
-import Particle from "react-particles-js";
-import particlesConfig from "assets/particlesConfig.json";
+import Particle from 'react-particles-js';
+import particlesConfig from 'assets/particlesConfig.json';
 
 class MainLayout extends React.Component {
   static isSidebarOpen() {
@@ -79,7 +79,10 @@ class MainLayout extends React.Component {
     const { children } = this.props;
     return (
       <main className="cr-app bg-light">
-        <Particle params={particlesConfig} className="App-particles__container" />
+        <Particle
+          params={particlesConfig}
+          className="App-particles__container"
+        />
         <Sidebar />
         <Content fluid onClick={this.handleContentClick}>
           <Header />

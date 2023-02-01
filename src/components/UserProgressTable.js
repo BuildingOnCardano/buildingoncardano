@@ -17,7 +17,9 @@ const UserProgressTable = ({ headers, usersData, ...restProps }) => {
     <Table responsive hover {...restProps}>
       <thead>
         <tr className="text-capitalize align-middle text-center">
-          {headers.map((item, index) => <th key={index}>{item}</th>)}
+          {headers.map((item, index) => (
+            <th key={index}>{item}</th>
+          ))}
         </tr>
       </thead>
       <tbody>
@@ -46,7 +48,7 @@ UserProgressTable.propTypes = {
       avatar: PropTypes.string,
       name: PropTypes.string,
       date: PropTypes.date,
-    })
+    }),
   ),
 };
 

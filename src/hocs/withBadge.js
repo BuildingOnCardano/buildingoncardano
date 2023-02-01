@@ -46,29 +46,32 @@ const sizeMap = {
   },
 };
 
-const withBadge = ({
-  position = 'bottom-right',
-  size = 'sm',
-  style = {},
-  className,
-  ...restBadgeProps
-} = {}) => WrappedComponent => ({ tag: Tag = 'div', ...restProps }) => {
-  return (
-    <Tag className="d-inline-block position-relative">
-      <WrappedComponent {...restProps} />
-      <Badge
-        className={classNames('position-absolute', className)}
-        style={{
-          ...positionMap[position],
-          ...sizeMap[size],
-          borderRadius: '50%',
-          border: '2px solid #fff',
-          ...style,
-        }}
-        {...restBadgeProps}
-      />
-    </Tag>
-  );
-};
+const withBadge =
+  ({
+    position = 'bottom-right',
+    size = 'sm',
+    style = {},
+    className,
+    ...restBadgeProps
+  } = {}) =>
+    WrappedComponent =>
+      ({ tag: Tag = 'div', ...restProps }) => {
+        return (
+          <Tag className="d-inline-block position-relative">
+            <WrappedComponent {...restProps} />
+            <Badge
+              className={classNames('position-absolute', className)}
+              style={{
+                ...positionMap[position],
+                ...sizeMap[size],
+                borderRadius: '50%',
+                border: '2px solid #fff',
+                ...style,
+              }}
+              {...restBadgeProps}
+            />
+          </Tag>
+        );
+      };
 
 export default withBadge;

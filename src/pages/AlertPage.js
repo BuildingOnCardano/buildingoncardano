@@ -12,6 +12,18 @@ import {
   Row,
   UncontrolledAlert,
 } from 'reactstrap';
+import { useParams } from 'react-router-dom';
+/* This is a higher order component that
+ *  inject a special prop   to our component.
+ */
+function withRouter(Component) {
+  function ComponentWithRouter(props) {
+    let params = useParams();
+    return <Component {...props} params={params} />;
+  }
+  return ComponentWithRouter;
+}
+
 
 const AlertPage = () => {
   return (
@@ -143,4 +155,4 @@ const AlertPage = () => {
   );
 };
 
-export default AlertPage;
+export default withRouter(AlertPage);

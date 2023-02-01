@@ -11,6 +11,17 @@ import {
   ModalBody,
   Row,
 } from 'reactstrap';
+import { useParams } from 'react-router-dom';
+/* This is a higher order component that
+ *  inject a special prop   to our component.
+ */
+function withRouter(Component) {
+  function ComponentWithRouter(props) {
+    let params = useParams();
+    return <Component {...props} params={params} />;
+  }
+  return ComponentWithRouter;
+}
 
 class AuthModalPage extends React.Component {
   state = {
@@ -18,8 +29,6 @@ class AuthModalPage extends React.Component {
     authState: STATE_LOGIN,
   };
 
-
-  
   toggle = () => {
     this.setState({
       show: !this.state.show,
@@ -42,7 +51,8 @@ class AuthModalPage extends React.Component {
           right: '20px',
           fontSize: '3rem',
         }}
-        onClick={this.toggle}>
+        onClick={this.toggle}
+      >
         &times;
       </button>
     );
@@ -50,7 +60,8 @@ class AuthModalPage extends React.Component {
     return (
       <Page
         title="Login Modal"
-        breadcrumbs={[{ name: 'login modal', active: true }]}>
+        breadcrumbs={[{ name: 'login modal', active: true }]}
+      >
         <Row>
           <Col md="12" sm="12" xs="12">
             <Card>
@@ -66,7 +77,8 @@ class AuthModalPage extends React.Component {
                   backdrop="static"
                   backdropClassName="modal-backdrop-light"
                   external={externalCloseBtn}
-                  centered>
+                  centered
+                >
                   <ModalBody>
                     <AuthForm
                       authState={this.state.authState}
@@ -83,4 +95,4 @@ class AuthModalPage extends React.Component {
   }
 }
 
-export default AuthModalPage;
+export default withRouter(AuthModalPage);

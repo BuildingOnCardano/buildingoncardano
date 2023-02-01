@@ -2,17 +2,22 @@ import logo200Image from 'assets/img/logo/logo_200.png';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  Button, Form, FormGroup, Input, Label, Row,
+  Button,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Row,
   Modal,
   ModalBody,
   ModalFooter,
   ModalHeader,
 } from 'reactstrap';
 import { baseUrl, passwordReset } from '../assets/services';
-import { Link, Redirect } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { setUserSession, removeUserSession } from 'utils/Common.js';
-import CircleLoader from "react-spinners/CircleLoader";
-import { css } from "@emotion/core";
+import CircleLoader from 'react-spinners/CircleLoader';
+import { css } from '@emotion/core';
 
 const override = css`
   display: block;
@@ -20,23 +25,22 @@ const override = css`
   border-color: red;
 `;
 
-
 class ResetPassword extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      confirmPassword: "",
+      email: '',
+      password: '',
+      confirmPassword: '',
       redirect: false,
       redirectDashoard: false,
       modal: false,
       modal_backdrop: false,
       modal_nested_parent: false,
       modal_nested: false,
-      modal_text: "",
+      modal_text: '',
       loading: false,
-      acceptedTerms: false
+      acceptedTerms: false,
     };
   }
 
@@ -58,15 +62,14 @@ class ResetPassword extends React.Component {
 
   setRedirect = () => {
     this.setState({
-      redirect: true
-    })
-  }
+      redirect: true,
+    });
+  };
   setRedirectDashboard = () => {
     this.setState({
-      redirectDashoard: true
-    })
-  }
-
+      redirectDashoard: true,
+    });
+  };
 
   changeAuthState = authState => event => {
     event.preventDefault();
@@ -75,22 +78,17 @@ class ResetPassword extends React.Component {
   };
 
   handleSubmit = async event => {
-
-
     this.setState({
-      modal_text: "Thankyou for your request please check your email account for further instructions. Note: Check your spam/junk folder.", modal: true
+      modal_text:
+        'Thankyou for your request please check your email account for further instructions. Note: Check your spam/junk folder.',
+      modal: true,
     });
 
     this.requestResetPassword();
-
   };
 
-
-
   async requestResetPassword() {
-
     var email = this.state.email;
-
 
     const requestOptions = {
       method: 'POST',
@@ -98,16 +96,12 @@ class ResetPassword extends React.Component {
       body: JSON.stringify({
         email: email,
         //password: password
-      })
+      }),
     };
     var response = await fetch(baseUrl + passwordReset, requestOptions);
     var data = await response.json();
     return data;
   }
-
-
-
-
 
   render() {
     const {
@@ -120,22 +114,16 @@ class ResetPassword extends React.Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Modal
-          isOpen={this.state.modal}
-          toggle={this.toggle()}
-        >
+        <Modal isOpen={this.state.modal} toggle={this.toggle()}>
           <ModalHeader toggle={this.toggle()}></ModalHeader>
           <ModalBody>
             <Row>
               <p>{this.state.modal_text}</p>
             </Row>
-
           </ModalBody>
           <ModalFooter>
             {' '}
-
-
-            <Link to={{ pathname: '/' }}>
+            <Link to="/">
               <Button color="secondary" onClick={this.toggle()}>
                 Close
               </Button>
@@ -158,35 +146,40 @@ class ResetPassword extends React.Component {
 
         <FormGroup>
           <Label for={usernameLabel}>{usernameLabel}</Label>
-          <Input {...usernameInputProps} onChange={e => this.setState({ email: e.target.value })} value={this.state.email} />
+          <Input
+            {...usernameInputProps}
+            onChange={e => this.setState({ email: e.target.value })}
+            value={this.state.email}
+          />
         </FormGroup>
 
         <hr />
-        {this.state.loading ? <CircleLoader loading={this.state.loading} css={override} size={100} />
-          :
+        {this.state.loading ? (
+          <CircleLoader
+            loading={this.state.loading}
+            css={override}
+            size={100}
+          />
+        ) : (
           <div>
             <Button
               size="lg"
               className="bg-gradient-theme-left border-0"
               block
-              onClick={this.handleSubmit}>
+              onClick={this.handleSubmit}
+            >
               Submit
             </Button>
             <br></br>
           </div>
-        }
-
+        )}
 
         <Row>
-          <a href="/">
-            Exit
-          </a>
+          <a href="/">Exit</a>
         </Row>
-
 
         {children}
       </Form>
-
     );
   }
 }

@@ -16,7 +16,7 @@ class GAListener extends React.Component {
 
   componentDidMount() {
     if (hasGAId) {
-    //  this.sendPageView(this.context.router.history.location);
+      //  this.sendPageView(this.context.router.history.location);
       this.context.router.history.listen(this.sendPageView);
     }
   }

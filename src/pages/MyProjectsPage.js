@@ -1,17 +1,23 @@
 import Page from 'components/Page';
 import ProjectCard from 'components/ProjectCard';
 import React from 'react';
-import {
-  Col,
-  Row,
-  Button
-} from 'reactstrap';
-import CircleLoader
-  from "react-spinners/CircleLoader";
-import { css } from "@emotion/core";
+import { Col, Row, Button } from 'reactstrap';
+import CircleLoader from 'react-spinners/CircleLoader';
+import { css } from '@emotion/core';
 import { baseUrl, getProjectByOwner } from '../assets/services';
 import { getUser, getPassword } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
+import { useParams } from 'react-router-dom';
+/* This is a higher order component that
+ *  inject a special prop   to our component.
+ */
+function withRouter(Component) {
+  function ComponentWithRouter(props) {
+    let params = useParams();
+    return <Component {...props} params={params} />;
+  }
+  return ComponentWithRouter;
+}
 
 const override = css`
   display: block;
@@ -22,13 +28,12 @@ const override = css`
 class MyProjectsPage extends React.Component {
   state = {
     projects: [],
-    loading: true
+    loading: true,
   };
 
   constructor(props) {
     super(props);
   }
-
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -46,53 +51,46 @@ class MyProjectsPage extends React.Component {
         credentials: 'same-origin', // include, *same-origin, omit
         headers: {
           'Content-Type': 'application/json',
-          'password': getPassword()
+          password: getPassword(),
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         redirect: 'follow', // manual, *follow, error
-        referrerPolicy: 'no-referrer' // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       });
       const data = await response.json();
-      this.setState({ projects: data, loading: false })
+      this.setState({ projects: data, loading: false });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
   render() {
-
-
     return (
       <Page
         className="MyProjectsPage"
         title=""
         breadcrumbs={[{ name: 'My Projects /', active: true }]}
       >
-
         <CircleLoader loading={this.state.loading} css={override} size={100} />
-        {this.state.projects != null ?
+        {this.state.projects != null ? (
           <Row>
-            {
-              this.state.projects.map(function (item, index) {
-                return (
-                  <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
-                    <ProjectCard
-                      img={item.imageUrl}
-                      projectDetails={item}
-                      myprojectspage={true} />
-                  </Col>
-                )
-              })
-            }
+            {this.state.projects.map(function (item, index) {
+              return (
+                <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
+                  <ProjectCard
+                    img={item.imageUrl}
+                    projectDetails={item}
+                    myprojectspage={true}
+                  />
+                </Col>
+              );
+            })}
           </Row>
-          :
+        ) : (
           <p>You currently have no projects added.</p>
-        }
-
-
-
-      </Page >
+        )}
+      </Page>
     );
   }
 }
-export default MyProjectsPage;
+export default withRouter(MyProjectsPage);

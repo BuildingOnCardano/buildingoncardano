@@ -2,18 +2,23 @@ import logo200Image from 'assets/img/logo/logo_200.png';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  Button, Form, FormGroup, Input, Label, Row,
+  Button,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Row,
   Modal,
   ModalBody,
   ModalFooter,
   ModalHeader,
 } from 'reactstrap';
 import { baseUrl, registration, login } from '../assets/services';
-import { Link, Redirect } from "react-router-dom";
+import { Link, Navigate } from 'react-router-dom';
 import { setUserSession, removeUserSession } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
-import CircleLoader from "react-spinners/CircleLoader";
-import { css } from "@emotion/core";
+import CircleLoader from 'react-spinners/CircleLoader';
+import { css } from '@emotion/core';
 
 const override = css`
   display: block;
@@ -21,23 +26,22 @@ const override = css`
   border-color: red;
 `;
 
-
 class AuthForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      confirmPassword: "",
+      email: '',
+      password: '',
+      confirmPassword: '',
       redirect: false,
       redirectDashoard: false,
       modal: false,
       modal_backdrop: false,
       modal_nested_parent: false,
       modal_nested: false,
-      modal_text: "",
+      modal_text: '',
       loading: false,
-      acceptedTerms: false
+      acceptedTerms: false,
     };
   }
 
@@ -59,26 +63,26 @@ class AuthForm extends React.Component {
 
   setRedirect = () => {
     this.setState({
-      redirect: true
-    })
-  }
+      redirect: true,
+    });
+  };
   setRedirectDashboard = () => {
     this.setState({
-      redirectDashoard: true
-    })
-  }
+      redirectDashoard: true,
+    });
+  };
   renderRedirectToLogin = () => {
     if (this.state.redirect) {
-      return <Redirect to={{ pathname: '/login' }} />
+      return <Navigate to="/login" />;
     }
-  }
+  };
 
   renderRedirectToDashboard = () => {
     if (this.state.redirectDashoard) {
       localStorage.setItem('user', this.state.email);
-      return <Redirect to={{ pathname: '/', state: { loggedIn: 'loggedIn' } }} />;
+      return <Navigate to="/" state={{ loggedIn: 'loggedIn' }} />;
     }
-  }
+  };
 
   get isLogin() {
     return this.props.authState === STATE_LOGIN;
@@ -95,14 +99,14 @@ class AuthForm extends React.Component {
   };
 
   handleSubmit = async event => {
-
     if (isEmpty(this.state.email)) {
       this.setState({
-        modal_text: "Enter your email address!", modal: true
+        modal_text: 'Enter your email address!',
+        modal: true,
       });
     } else {
       this.setState({
-        loading: true
+        loading: true,
       });
       event.preventDefault();
       var authState = this.props.authState;
@@ -114,20 +118,21 @@ class AuthForm extends React.Component {
 
           if (status.response == 'user_exists') {
             this.setState({
-              modal_text: "User already exists.", modal: true
+              modal_text: 'User already exists.',
+              modal: true,
             });
-          }
-          else {
+          } else {
             this.setState({
-              modal_text: "Registration submitted please check your email inbox/junk folder for a verification mail.", modal: true
+              modal_text:
+                'Registration submitted please check your email inbox/junk folder for a verification mail.',
+              modal: true,
             });
             //  this.setRedirect();
-
           }
         } else {
-
           this.setState({
-            modal_text: "Passwords dont match.", modal: true
+            modal_text: 'Passwords dont match.',
+            modal: true,
           });
         }
       } else {
@@ -137,25 +142,25 @@ class AuthForm extends React.Component {
         if (status.response == 'valid_user') {
           setUserSession(this.state.email, this.state.password);
           this.setRedirectDashboard();
-        }
-        else if (status.response == 'user doesnt exist') {
+        } else if (status.response == 'user doesnt exist') {
           this.setState({
-            modal_text: "User doesnt exist.", modal: true
+            modal_text: 'User doesnt exist.',
+            modal: true,
           });
-        }
-        else if (status.response == 'email_not_verified') {
+        } else if (status.response == 'email_not_verified') {
           this.setState({
-            modal_text: "Email address not verified check your email inbox.", modal: true
+            modal_text: 'Email address not verified check your email inbox.',
+            modal: true,
           });
-        }
-        else {
+        } else {
           this.setState({
-            modal_text: "Incorrect password.", modal: true
+            modal_text: 'Incorrect password.',
+            modal: true,
           });
         }
       }
       this.setState({
-        loading: false
+        loading: false,
       });
     }
   };
@@ -170,8 +175,8 @@ class AuthForm extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: email,
-        password: password
-      })
+        password: password,
+      }),
     };
     var response = await fetch(baseUrl + registration, requestOptions);
     var data = await response.json();
@@ -187,8 +192,8 @@ class AuthForm extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: email,
-        password: password
-      })
+        password: password,
+      }),
     };
     var response = await fetch(baseUrl + login, requestOptions);
     var data = await response.json();
@@ -209,18 +214,17 @@ class AuthForm extends React.Component {
     return buttonText;
   }
 
-  handleChange = (query) => (e) => {
+  handleChange = query => e => {
     if (this.state.acceptedTerms) {
       this.setState({
-        acceptedTerms: false
+        acceptedTerms: false,
       });
     } else {
       this.setState({
-        acceptedTerms: true
+        acceptedTerms: true,
       });
     }
-  }
-
+  };
 
   render() {
     const {
@@ -240,24 +244,18 @@ class AuthForm extends React.Component {
         {this.renderRedirectToLogin()}
         {this.renderRedirectToDashboard()}
 
-        <Modal
-          isOpen={this.state.modal}
-          toggle={this.toggle()}
-        >
+        <Modal isOpen={this.state.modal} toggle={this.toggle()}>
           <ModalHeader toggle={this.toggle()}></ModalHeader>
           <ModalBody>
             <Row>
               <p>{this.state.modal_text}</p>
             </Row>
-
           </ModalBody>
           <ModalFooter>
             {' '}
-
             <Button color="secondary" onClick={this.toggle()}>
               Close
             </Button>
-
           </ModalFooter>
         </Modal>
 
@@ -274,16 +272,28 @@ class AuthForm extends React.Component {
         )}
         <FormGroup>
           <Label for={usernameLabel}>{usernameLabel}</Label>
-          <Input {...usernameInputProps} onChange={e => this.setState({ email: e.target.value })} value={this.state.email} />
+          <Input
+            {...usernameInputProps}
+            onChange={e => this.setState({ email: e.target.value })}
+            value={this.state.email}
+          />
         </FormGroup>
         <FormGroup>
           <Label for={passwordLabel}>{passwordLabel}</Label>
-          <Input {...passwordInputProps} onChange={e => this.setState({ password: e.target.value })} value={this.state.password} />
+          <Input
+            {...passwordInputProps}
+            onChange={e => this.setState({ password: e.target.value })}
+            value={this.state.password}
+          />
         </FormGroup>
         {this.isSignup && (
           <FormGroup>
             <Label for={confirmPasswordLabel}>{confirmPasswordLabel}</Label>
-            <Input {...confirmPasswordInputProps} onChange={e => this.setState({ confirmPassword: e.target.value })} value={this.state.confirmPassword} />
+            <Input
+              {...confirmPasswordInputProps}
+              onChange={e => this.setState({ confirmPassword: e.target.value })}
+              value={this.state.confirmPassword}
+            />
           </FormGroup>
         )}
         <FormGroup check>
@@ -291,42 +301,46 @@ class AuthForm extends React.Component {
             <Input
               style={{ fontSize: 14 }}
               type="checkbox"
-              onChange={this.handleChange("&ticker=")}
-
+              onChange={this.handleChange('&ticker=')}
             />{' '}
-            {this.isSignup ? <Link to={{ pathname: '/termsandpolicy' }}>Agree the terms and policy</Link> : 'Remember me'}
+            {this.isSignup ? (
+              <Link to="/termsandpolicy">Agree the terms and policy</Link>
+            ) : (
+              'Remember me'
+            )}
           </Label>
         </FormGroup>
         <hr />
-        {this.state.loading ? <CircleLoader loading={this.state.loading} css={override} size={100} />
-          :
-
-          this.isSignup ?
-            <Button
-              disabled={!this.state.acceptedTerms}
-              size="lg"
-              className="bg-gradient-theme-left border-0"
-              block
-              onClick={this.handleSubmit}>
-              {this.renderButtonText()}
-
-            </Button>
-
-            :
-            <Button
-              size="lg"
-              className="bg-gradient-theme-left border-0"
-              block
-              onClick={this.handleSubmit}>
-              {this.renderButtonText()}
-
-            </Button>
-        }
+        {this.state.loading ? (
+          <CircleLoader
+            loading={this.state.loading}
+            css={override}
+            size={100}
+          />
+        ) : this.isSignup ? (
+          <Button
+            disabled={!this.state.acceptedTerms}
+            size="lg"
+            className="bg-gradient-theme-left border-0"
+            block
+            onClick={this.handleSubmit}
+          >
+            {this.renderButtonText()}
+          </Button>
+        ) : (
+          <Button
+            size="lg"
+            className="bg-gradient-theme-left border-0"
+            block
+            onClick={this.handleSubmit}
+          >
+            {this.renderButtonText()}
+          </Button>
+        )}
 
         <div className="text-center pt-1">
           <h6>or</h6>
           <h6>
-
             {this.isSignup ? (
               <a href="#login" onClick={this.changeAuthState(STATE_LOGIN)}>
                 Login
@@ -337,22 +351,16 @@ class AuthForm extends React.Component {
               </a>
             )}
           </h6>
-
         </div>
         <Row>
-          <Link to={{ pathname: '/resetpassword' }}>
-            Reset Password</Link>
+          <Link to="/resetpassword">Reset Password</Link>
         </Row>
         <Row>
-          <a href="/">
-            Exit
-          </a>
+          <a href="/">Exit</a>
         </Row>
-
 
         {children}
       </Form>
-
     );
   }
 }

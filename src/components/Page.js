@@ -23,12 +23,12 @@ const Page = ({
     <Tag className={classes} {...restProps}>
       <div className={bem.e('header')}>
         {title && typeof title === 'string' ? (
-          <Typography type="h1" className={bem.e('title')}>
+          <Typography type="h5" className={bem.e('title')}>
             {title}
           </Typography>
         ) : (
-            title
-          )}
+          title
+        )}
         {breadcrumbs && (
           <Breadcrumb className={bem.e('breadcrumb')}>
             {/* <BreadcrumbItem>Home</BreadcrumbItem> */}
@@ -55,7 +55,7 @@ Page.propTypes = {
     PropTypes.shape({
       name: PropTypes.string,
       active: PropTypes.bool,
-    })
+    }),
   ),
 };
 

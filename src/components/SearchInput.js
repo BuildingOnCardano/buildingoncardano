@@ -2,38 +2,41 @@ import React from 'react';
 import { MdSearch } from 'react-icons/md';
 import { Form, Input, Col, Card, CardHeader } from 'reactstrap';
 import Select, { components } from 'react-select';
-import { Link, Redirect } from "react-router-dom";
-import ReactImageFallback from "react-image-fallback";
+import { Link, Navigate } from 'react-router-dom';
+import ReactImageFallback from 'react-image-fallback';
 import CardanoImage from 'assets/img/cardanoIcon.png';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 const width = window.innerWidth;
 
-
-
 class SearchInput extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       selectedOption: null,
       options: null,
       redirect: false,
-      projectName: ""
+      projectName: '',
     };
   }
-
 
   componentDidMount() {
     var data = this.props.projects;
     var options = [];
     data.forEach(item => {
       var option = {
-        value: item.name, label: <div>
-          <ReactImageFallback
-            src={item.imageUrl}
-            width="30px"
-            height="30px"
-            fallbackImage={CardanoImage} />{item.name}</div>
+        value: item.name,
+        label: (
+          <div>
+            <ReactImageFallback
+              src={item.imageUrl}
+              width="30px"
+              height="30px"
+              fallbackImage={CardanoImage}
+            />
+            {item.name}
+          </div>
+        ),
       };
       options.push(option);
     });
@@ -46,9 +49,9 @@ class SearchInput extends React.Component {
 
   renderRedirectToLogin = () => {
     if (this.state.redirect) {
-      return <Redirect to={{ pathname: '/projectdetails/' + this.state.projectName }} />
+      return <Navigate to={'/projectdetails/' + this.state.projectName} />;
     }
-  }
+  };
 
   render() {
     const { selectedOption } = this.state;
@@ -64,7 +67,10 @@ class SearchInput extends React.Component {
               //   aria-hidden="true"
               //   style={{ position: "absolute", left: 6 }}
               // />
-              <FontAwesomeIcon icon={faSearch} style={{ position: "absolute", left: 6 }} />
+              <FontAwesomeIcon
+                icon={faSearch}
+                style={{ position: 'absolute', left: 6 }}
+              />
             )}
             {children}
           </components.ValueContainer>
@@ -82,7 +88,6 @@ class SearchInput extends React.Component {
     //   );
     // };
 
-
     const DropdownIndicator = props => {
       return (
         components.DropdownIndicator && (
@@ -94,7 +99,6 @@ class SearchInput extends React.Component {
     };
 
     return (
-
       <div className="serach-tab">
         {this.renderRedirectToLogin()}
         {/* {this.state.options != null && <Select
@@ -119,7 +123,6 @@ class SearchInput extends React.Component {
 
 export default SearchInput;
 
-
 const mobileStyle = {
   control: (base, state) => ({
     ...base,
@@ -129,7 +132,7 @@ const mobileStyle = {
     borderRadius: 0,
     borderBottom: '1px',
     width: '70vw',
-    padding: '0.3em'
+    padding: '0.3em',
   }),
 
   option: (styles, { isFocused }) => {
@@ -139,7 +142,7 @@ const mobileStyle = {
       backgroundColor: isFocused ? 'white' : 'white',
       color: isFocused ? 'rgba(0, 0, 0)' : 'black',
       lineHeight: 2,
-    }
+    };
   },
 
   input: styles => ({
@@ -153,7 +156,7 @@ const mobileStyle = {
     marginTop: 0,
     boxShadow: 'none',
     borderRadius: 0,
-    zIndex: 9999
+    zIndex: 9999,
   }),
 
   menu: provided => ({ ...provided, zIndex: 9999 }),
@@ -173,7 +176,7 @@ const standardStyle = {
     borderRadius: 0,
     borderBottom: '1px',
     width: '36vw',
-    padding: '0.3em'
+    padding: '0.3em',
   }),
 
   option: (styles, { isFocused }) => {
@@ -183,7 +186,7 @@ const standardStyle = {
       backgroundColor: isFocused ? 'white' : 'white',
       color: isFocused ? 'rgba(0, 0, 0)' : 'black',
       lineHeight: 2,
-    }
+    };
   },
 
   input: styles => ({
@@ -204,4 +207,4 @@ const standardStyle = {
     ...styles,
     color: 'rgba(0, 0, 0)',
   }),
-}
+};

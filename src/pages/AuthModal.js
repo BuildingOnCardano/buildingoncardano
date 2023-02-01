@@ -1,6 +1,17 @@
 import AuthForm, { STATE_LOGIN } from 'components/AuthForm';
 import React from 'react';
 import { Button, Modal, ModalBody } from 'reactstrap';
+import { useParams } from 'react-router-dom';
+/* This is a higher order component that
+ *  inject a special prop   to our component.
+ */
+function withRouter(Component) {
+  function ComponentWithRouter(props) {
+    let params = useParams();
+    return <Component {...props} params={params} />;
+  }
+  return ComponentWithRouter;
+}
 
 class AuthModal extends React.Component {
   state = {
@@ -31,7 +42,8 @@ class AuthModal extends React.Component {
           toggle={this.toggle}
           size="sm"
           fade={false}
-          centered>
+          centered
+        >
           <ModalBody>
             <AuthForm
               authState={this.state.authState}
@@ -44,4 +56,4 @@ class AuthModal extends React.Component {
   }
 }
 
-export default AuthModal;
+export default withRouter(AuthModal);

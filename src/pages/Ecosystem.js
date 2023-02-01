@@ -1,25 +1,26 @@
 import Page from 'components/Page';
 import React from 'react';
-import {
-  Col,
-  CardGroup,
-  Card,
-  CardHeader,
-  CardBody,
-  Row
-} from 'reactstrap';
-import CircleLoader
-  from "react-spinners/CircleLoader";
-import { css } from "@emotion/core";
+import { Col, Button, Card, CardHeader, CardBody, Row } from 'reactstrap';
+import CircleLoader from 'react-spinners/CircleLoader';
+import { css } from '@emotion/core';
 import { baseUrl, getAllProjectsWithTypes } from '../assets/services';
-import "../styles/styles.css";
+import '../styles/styles.css';
 import { Link } from 'react-router-dom';
 
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import sidebarBgImage from 'assets/img/sidebar/rsz_1sidebar-4.jpg';
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import CardanoImage from 'assets/img/cardanoIcon.png';
+import { useParams } from 'react-router-dom';
+/* This is a higher order component that
+ *  inject a special prop   to our component.
+ */
+function withRouter(Component) {
+  function ComponentWithRouter(props) {
+    let params = useParams();
+    return <Component {...props} params={params} />;
+  }
+  return ComponentWithRouter;
+}
 
 const override = css`
   display: block;
@@ -50,7 +51,6 @@ const Toolbox = styled.div`
   }
 `;
 
-
 class Ecosystem extends React.Component {
   state = {
     projects: null,
@@ -58,7 +58,7 @@ class Ecosystem extends React.Component {
     totalProjects: '',
     projectTypesAndCount: [],
     smallScreen: false,
-    searched: "",
+    searched: '',
     filterAbleProjects: null,
     barChartData: null,
   };
@@ -69,7 +69,6 @@ class Ecosystem extends React.Component {
       this.setState({ smallScreen: true });
     }
 
-
     this.getAllProjects();
   }
 
@@ -78,67 +77,91 @@ class Ecosystem extends React.Component {
       var response = await fetch(baseUrl + getAllProjectsWithTypes);
       const data = await response.json();
       console.log(data);
+
+      for (let typeIndex = 0; typeIndex < data.length; typeIndex++) {
+        for (let index = 0; index < data[typeIndex].projects.length; index++) {
+          data[typeIndex].projects[index].name = data[typeIndex].projects[index].name.replace(" ", "\n");
+        }
+      }
+
       this.setState({ projects: data, loading: false });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
-
-
-
-
-
-
-
   render() {
-
     return (
       <Page
         className="AllProjects"
-      // title="Projects BuildingOnCardano"
+        title="Ecosystem"
       >
-        {this.state.loading ? <div><CircleLoader loading={this.state.loading} css={override} size={100} /></div>
-          :
+        {this.state.loading ? (
+          <div>
+            <CircleLoader
+              loading={this.state.loading}
+              css={override}
+              size={100}
+            />
+          </div>
+        ) : (
           <Row>
-            {/* <Col lg={12} md={12} sm={12} xs={12} className="mb-3"> */}
+            {this.state.projects.map(function (item, index) {
+              return (
+                <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+                  <Card>
+                    <Button
+                      size="m"
+                      className="btn-tag2"
+                    >
+                      <h4 style={{ color: '#225cb6' }}>
+                        {item.project_maintype}
+                      </h4>
+                    </Button>
 
-              {this.state.projects.map(function (item, index) {
-                return (
-                  <Col lg={2} md={12} sm={12} xs={12} className="mb-3">
-                    <Card>
-                      <CardHeader style={{ color: "#225cb6" }}>{item.project_maintype}</CardHeader>
-                      <CardBody>
-                        <div >                          
-                          <Col lg={12} md={12} sm={12} xs={12} className="mb-3">
-                            <Row style={{ paddingBottom: '5px' }}>
-                              {item.projects.map((project) => {
-                                return (
-                                  <Col lg={12} md={12} sm={12} xs={12} className="mb-3">
-                                    <Link to={{ pathname: '/projectdetails/' + project.name }}>
-                                      <Row>{project.imageUrl != null && project.imageUrl != '' &&
-                                        <img style={{ height: '25px', width: '25px', marginRight: '10px' }} src={project.imageUrl} />}
-                                        <small>{project.name}</small>
-                                      </Row>
-                                    </Link>
-                                  </Col>
-                                )
-                              })}
-                            </Row>
-                          </Col>
-                        </div>
-                      </CardBody>
-                    </Card>
-                  </Col>
-                )
-              })}
+                    <CardBody>
+                      <Row>
+                        {item.projects.map(project => {
+                          return (
+                            <Link to={'/projectdetails/' + project.name}>
+                              <Row>
 
+                                {project.imageUrl != null &&
+                                  project.imageUrl != '' && (
+                                    <img
+                                      style={{
+                                        height: '40px',
+                                        width: '40px',
+                                        marginRight: '1px',
+                                        marginLeft: '20px',
+                                        marginBottom: '20px'
+                                      }}
+                                      src={project.imageUrl}
+
+                                    />
+                                  )}
+                                <h5 style={{ color: '#000', marginRight: '30px' }}>
+                                  {project.name}
+                                </h5>
+
+                                &nbsp;
+                              </Row>
+                            </Link>
+
+                          );
+                        })}
+                      </Row>
+                    </CardBody>
+                  </Card>
+                </Col>
+              );
+            })}
 
             {/* </Col> */}
           </Row>
-        }
+        )}
       </Page>
     );
   }
 }
-export default Ecosystem;
+export default withRouter(Ecosystem);

@@ -31,14 +31,15 @@ const HorizontalAvatarList = ({
                   border: '3px solid #fff',
                   marginLeft: !isFirstItem && -20,
                   marginBottom: '20px',
-                  marginTop:'20px'
+                  marginTop: '20px',
                 }}
               />
 
               {!!name && (
                 <UncontrolledTooltip
                   delay={{ show: 0, hide: 0 }}
-                  target={`HorizontalAvatarList-avatar-${index}`}>
+                  target={`HorizontalAvatarList-avatar-${index}`}
+                >
                   {name}
                 </UncontrolledTooltip>
               )}
@@ -55,7 +56,7 @@ HorizontalAvatarList.propTypes = {
     PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string,
-    })
+    }),
   ).isRequired,
   avatarProps: PropTypes.object,
   reversed: PropTypes.bool,

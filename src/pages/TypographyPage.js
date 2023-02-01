@@ -7,7 +7,8 @@ const TypographyPage = () => {
   return (
     <Page
       title="Typography"
-      breadcrumbs={[{ name: 'typography', active: true }]}>
+      breadcrumbs={[{ name: 'typography', active: true }]}
+    >
       <Row>
         <Col>
           <Card>

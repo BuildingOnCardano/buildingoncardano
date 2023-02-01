@@ -32,7 +32,7 @@ Notifications.propTypes = {
       avatar: PropTypes.string,
       message: PropTypes.node,
       date: PropTypes.date,
-    })
+    }),
   ),
 };
 
