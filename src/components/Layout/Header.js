@@ -36,10 +36,32 @@ import {
   Row,
   Col,
   Container,
+  Collapse,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import bn from 'utils/bemnames';
 import { getUser } from 'utils/Common.js';
+import { GiBurningSkull } from 'react-icons/gi';
+import { BsListOl } from 'react-icons/bs';
+
+import {
+  MdAccountCircle,
+  MdDashboard,
+  MdGroupWork,
+  MdStar,
+  MdPages,
+  MdAddToQueue,
+  MdVerifiedUser,
+  MdAttachMoney,
+  MdKeyboardArrowDown
+} from 'react-icons/md';
+import logo200Image from 'assets/img/logo/Light-icon200.png';
+
+const projectsContents = [
+  { to: '/liveprojects', name: 'alive', exact: true, Icon: MdStar },
+  { to: '/deadprojects', name: 'dead', exact: true, Icon: GiBurningSkull },
+  { to: '/allprojects', name: 'All', exact: true, Icon: BsListOl },
+];
 
 const bem = bn.create('header');
 const width = window.innerWidth;
@@ -105,14 +127,24 @@ class Header extends React.Component {
     }
   }
 
+  handleClick = name => () => {
+    this.setState(prevState => {
+      const isOpen = prevState[`isOpen${name}`];
+
+      return {
+        [`isOpen${name}`]: !isOpen,
+      };
+    });
+  };
+
   render() {
     const { isNotificationConfirmed } = this.state;
 
     return (
-      // backgroundColor:"#225cb6",
+      // 
 
-      <div style={{ opacity: 0.8 }}>
-        {/* <div> */}
+      <div style={{ backgroundColor: "#225cb6", }}>
+
         <Container fluid>
           <Navbar
             className="navbar-top navbar-light"
@@ -128,23 +160,80 @@ class Header extends React.Component {
             <Nav
               navbar
               style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                textAlign: 'center',
+                justifyContent: 'Left',
+                alignItems: 'Left',
+                textAlign: 'Left',
               }}
             >
               <div
                 className="App-text"
                 style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  textAlign: 'center',
+                  justifyContent: 'Left',
+                  alignItems: 'Left',
+                  textAlign: 'Left',
                 }}
               >
-                <h1 className="text-black" style={{ color: '#225cb6' }}>
-                  Building On Cardano
-                </h1>
+                <Link to="/">
+                  <Row>
+
+                    <img
+                      src={logo200Image}
+                      className="rounded"
+                      style={{
+                        width: 40,
+                        height: 40,
+                        cursor: 'pointer',
+                        alignSelf: 'left',
+                      }}
+                      alt="logo"
+                    />
+                    <h4 className="text-black" style={{ color: '#fff', marginTop: '8px', marginLeft: '5px', marginRight: '20px' }}>
+                      Building On Cardano
+                    </h4>
+
+                  </Row>
+                </Link>
               </div>
+
+              <NavItem
+                className={bem.e('nav-item')}
+                onClick={this.handleClick('Pages')}
+                onTouchStart={this.handleClick('Pages')}            >
+                <NavLink className={bem.e('nav-item-collapse')}>
+                  <div className="d-flex">
+                    {/* <MdPages className={bem.e('nav-item-icon')} /> */}
+                    <span style={{ color: '#fff'}}>PROJECTS</span>
+                  </div>
+                  <MdKeyboardArrowDown
+                    className={bem.e('nav-item-icon')}
+                    style={{
+                      padding: 0,
+                      transform: this.state.isOpenPages
+                        ? 'rotate(0deg)'
+                        : 'rotate(-90deg)',
+                      transitionDuration: '0.3s',
+                      transitionProperty: 'transform',
+                    }}
+                  />
+                </NavLink>
+              </NavItem>
+              <Collapse isOpen={this.state.isOpenPages}>
+                {projectsContents.map(({ to, name, exact, Icon }, index) => (
+                  <NavItem key={index} className={bem.e('nav-item')}>
+                    <NavLink
+                      id={`navItem-${name}-${index}`}
+                      className="text-uppercase"
+                      tag={NavLink}
+                      to={to}
+                      activeClassName="active"
+                      exact={exact}
+                    >
+                      <Icon className={bem.e('nav-item-icon')} style={{ color: '#fff', marginRight: '5px'}} />
+                      <span style={{ color: '#fff'}}>{name}</span>
+                    </NavLink>
+                  </NavItem>
+                ))}
+              </Collapse>
             </Nav>
 
             <Nav navbar className={bem.e('nav-right')}>
@@ -179,6 +268,9 @@ class Header extends React.Component {
               </PopoverBody>
             </Popover>
           </NavItem> */}
+
+
+
 
               {this.state.user != null && (
                 <NavItem>

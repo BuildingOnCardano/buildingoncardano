@@ -177,12 +177,9 @@ class PromoteAppPage extends React.Component {
                 alignItems: 'center',
               }}
             >
-              <h2>Promote your DApp to attract more users</h2>
-              <h3>
-                Show off your amazing decentralized application to thousands of
-                crypto investors, thought leaders, blockchain innovators, and
-                technologists.
-              </h3>
+              <h2>Promote your App here</h2>
+
+
               <br></br>
               <br></br>
               <Row
