@@ -78,11 +78,11 @@ class Ecosystem extends React.Component {
       const data = await response.json();
       console.log(data);
 
-      for (let typeIndex = 0; typeIndex < data.length; typeIndex++) {
-        for (let index = 0; index < data[typeIndex].projects.length; index++) {
-          data[typeIndex].projects[index].name = data[typeIndex].projects[index].name.replace(" ", "\n");
-        }
-      }
+      // for (let typeIndex = 0; typeIndex < data.length; typeIndex++) {
+      //   for (let index = 0; index < data[typeIndex].projects.length; index++) {
+      //     data[typeIndex].projects[index].name = data[typeIndex].projects[index].name.replace(" ", "\n");
+      //   }
+      // }
 
       this.setState({ projects: data, loading: false });
     } catch (error) {

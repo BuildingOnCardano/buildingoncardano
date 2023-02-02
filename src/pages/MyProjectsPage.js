@@ -8,6 +8,7 @@ import { baseUrl, getProjectByOwner } from '../assets/services';
 import { getUser, getPassword } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 /* This is a higher order component that
  *  inject a special prop   to our component.
  */
@@ -71,6 +72,23 @@ class MyProjectsPage extends React.Component {
         title=""
         breadcrumbs={[{ name: 'My Projects /', active: true }]}
       >
+
+        <Col lg={12} md={12} sm={12} xs={12} className="mb-3">
+          <Row>
+            <Link to={'/addproject'}>
+              <Button
+                size="lg"
+                className="bg-gradient-theme-left border-0"
+                block
+              >
+                Add New Project
+              </Button>
+
+            </Link>
+          </Row>
+        </Col>
+
+
         <CircleLoader loading={this.state.loading} css={override} size={100} />
         {this.state.projects != null ? (
           <Row>

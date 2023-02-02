@@ -1,12 +1,11 @@
 import { STATE_LOGIN, STATE_SIGNUP } from 'components/AuthForm';
 import { EmptyLayout, LayoutRoute, MainLayout } from 'components/Layout';
-import PageSpinner from 'components/PageSpinner';
 import AuthPage from 'pages/AuthPage';
 
 import GAListener from 'components/GAListener';
 import React from 'react';
-import componentQueries from 'react-component-queries';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import { BrowserRouter as Router, Route, Routes, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
 import DashboardPage from 'pages/DashboardPage';
 
@@ -35,10 +34,26 @@ export default class App extends React.Component {
     return (
       <Router>
         <GAListener>
-          <MainLayout breakpoint={this.props.breakpoint}>
-            <Routes>
 
-              <Route path="/" element={<DashboardPage props />} />
+
+          {/* <MainLayout breakpoint={this.props.breakpoint}> */}
+          <Routes>
+
+
+
+            {/* LOGIN & REGISTER */}
+            <Route path="/login" element={<AuthPage props authState={STATE_LOGIN} />} />
+            <Route path="/signup" layout={EmptyLayout} element={<AuthPage props authState={STATE_SIGNUP} />} />
+            <Route path="/signout" layout={EmptyLayout} element={<AuthPage props authState={STATE_LOGIN} />} />
+            <Route path="/resetpassword" layout={EmptyLayout} element={<ResetPasswordPage props authState={STATE_LOGIN} />} />
+            <Route path="/verify">
+              <Route path=":verifycode" element={<VerifyEmail props />} />
+            </Route>
+
+
+            <Route element={<MainLayout breakpoint={this.props.breakpoint} />}>
+              <Route path="/" layout={MainLayout} element={<DashboardPage props />} />
+
               <Route path="/allprojects" element={<AllProjects props />} />
               <Route path="/ecosystem" element={<Ecosystem props />} />
               <Route
@@ -68,17 +83,13 @@ export default class App extends React.Component {
 
               <Route path="/promote" element={<PromoteAppPage props />} />
 
-              {/* LOGIN & REGISTER */}
-              <Route path="/login" element={<AuthPage props authState={STATE_LOGIN}/>} />
-              <Route path="/signup" layout={EmptyLayout} element={<AuthPage props authState={STATE_SIGNUP}/>} />
-              <Route path="/signout" layout={EmptyLayout} element={<AuthPage props authState={STATE_LOGIN}/>} />
-              <Route path="/resetpassword" layout={EmptyLayout} element={<ResetPasswordPage props authState={STATE_LOGIN}/>} />
-              <Route path="/verify">
-                <Route path=":verifycode" element={<VerifyEmail props/>} />
-              </Route>
-              
-            </Routes>
-          </MainLayout>
+            </Route>
+
+
+
+          </Routes>
+          {/* </MainLayout> */}
+
         </GAListener>
       </Router>
     );

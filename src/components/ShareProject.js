@@ -23,7 +23,7 @@ import {
 } from 'react-share';
 import 'react-tabs/style/react-tabs.css';
 
-const baseUrl = 'https://buildingoncardano.com/#/projectdetails/';
+const baseUrl = 'https://buildingoncardano.com/projectdetails/';
 
 const tableRowStyle = {
   // borderBottom: 'solid 3px blue',

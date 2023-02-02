@@ -10,7 +10,7 @@ import { isEmpty } from 'utils/stringutil.js';
 import SearchBar from '@mkyy/mui-search-bar';
 import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
-import { Line, Bar, Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import CircularImage from 'utils/CircularImage';
 import { useParams } from 'react-router-dom';
 /* This is a higher order component that
@@ -257,7 +257,7 @@ class AllProjects extends React.Component {
 
   render() {
     return (
-      <Page className="AllProjects" title="All Projects">
+      <Page className="AllProjects" title="Projects">
         {this.state.loading ? (
           <div>
             <CircleLoader

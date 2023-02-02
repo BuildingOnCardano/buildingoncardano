@@ -194,23 +194,42 @@ class ProjectDetailsPage extends React.Component {
                         {this.state.project.screenshotUrl != null ? (
                           <Row>
                             <Col sm={6}>
-                              <ReactImageFallback
-                                src={this.state.project.screenshotUrl}
-                                width="100%"
-                                height="100%"
-                                fallbackImage={CardanoImage}
-                              />
+                              {this.state.project.screenshotUrlBase64 != null ?
+                                <ReactImageFallback
+                                  src={this.state.project.screenshotUrlBase64}
+                                  width="100%"
+                                  height="100%"
+                                  fallbackImage={CardanoImage}
+                                />
+                                :
+                                <ReactImageFallback
+                                  src={this.state.project.screenshotUrl}
+                                  width="100%"
+                                  height="100%"
+                                  fallbackImage={CardanoImage}
+                                />
+                              }
                             </Col>
 
                             <Col sm={6}>
                               <Col>
                                 <Row>
-                                  <ReactImageFallback
-                                    src={this.state.project.imageUrl}
-                                    width="50"
-                                    height="50"
-                                    fallbackImage={CardanoImage}
-                                  />
+                                  {this.state.project.imageUrlBase64 != null ?
+                                    <ReactImageFallback
+                                      src={this.state.project.imageUrlBase64}
+                                      width="50"
+                                      height="50"
+                                      fallbackImage={CardanoImage}
+                                    />
+                                    :
+                                    <ReactImageFallback
+                                      src={this.state.project.imageUrl}
+                                      width="50"
+                                      height="50"
+                                      fallbackImage={CardanoImage}
+                                    />
+                                  }
+
                                   <h1>{this.state.project.name}</h1>
                                 </Row>
                               </Col>
@@ -223,7 +242,7 @@ class ProjectDetailsPage extends React.Component {
                                 {!isEmpty(this.state.project.stage) && (
                                   <div>
                                     <p>
-                                      <b>Development Stage: </b>
+                                      <b>Status: </b>
                                       {this.state.project.stage}
                                     </p>
                                   </div>
@@ -261,7 +280,7 @@ class ProjectDetailsPage extends React.Component {
                                 {!isEmpty(this.state.project.stage) && (
                                   <div>
                                     <p>
-                                      <b>Development Stage: </b>
+                                      <b>Status: </b>
                                       {this.state.project.stage}
                                     </p>
                                   </div>

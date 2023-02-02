@@ -19,7 +19,7 @@ export default class ProjectCard extends React.Component {
       <div
         className="ProjectCard"
         style={{
-          minHeight: '19rem',
+          minHeight: '12rem',
         }}
       >
         <br></br>
@@ -57,16 +57,28 @@ export default class ProjectCard extends React.Component {
           state={{ projectDetails: this.props.projectDetails }}
         >
           <div style={{ paddingTop: 10, alignSelf: 'flex-start' }}>
+            {this.props.projectDetails.imageUrlBase64 != null ? 
+                        <ReactImageFallback
+                        src={this.props.projectDetails.imageUrlBase64}
+                        width="50"
+                        height="70"
+                        fallbackImage={CardanoImage}
+                      />
+            :
             <ReactImageFallback
-              src={this.props.img}
-              width="50"
-              height="70"
-              fallbackImage={CardanoImage}
-            />
+            src={this.props.img}
+            width="50"
+            height="70"
+            fallbackImage={CardanoImage}
+          />
+          }
+            
+
 
             <div className="ProjectCard-body">
               <h2>{this.props.projectDetails.name}</h2>
-              <p>{this.props.projectDetails.shortDescription}</p>
+              {/* {!this.props.myprojectspage &&
+              <p>{this.props.projectDetails.shortDescription}</p>} */}
               <h5>{this.props.projectDetails.type}</h5>
             </div>
           </div>

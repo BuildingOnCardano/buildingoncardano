@@ -9,6 +9,7 @@ import NotificationSystem from 'react-notification-system';
 import { NOTIFICATION_SYSTEM_STYLE } from 'utils/constants';
 import Particle from 'react-particles-js';
 import particlesConfig from 'assets/particlesConfig.json';
+import { BrowserRouter, Routes, Route, NavLink, Outlet } from 'react-router-dom';
 
 class MainLayout extends React.Component {
   static isSidebarOpen() {
@@ -86,7 +87,7 @@ class MainLayout extends React.Component {
         <Sidebar />
         <Content fluid onClick={this.handleContentClick}>
           <Header />
-          {children}
+          <Outlet />
           <Footer />
           <br></br>
         </Content>

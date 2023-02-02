@@ -2,17 +2,18 @@ import sidebarBgImage from 'assets/img/sidebar/rsz_1sidebar-4.jpg';
 import React from 'react';
 import {
   MdAccountCircle,
-  MdArrowDropDownCircle,
-  MdBrush,
-  MdChromeReaderMode,
   MdDashboard,
   MdGroupWork,
   MdStar,
-  MdKeyboardArrowRight,
+  MdPages,
   MdAddToQueue,
   MdVerifiedUser,
   MdAttachMoney,
+  MdKeyboardArrowDown
 } from 'react-icons/md';
+import { GiBurningSkull } from 'react-icons/gi';
+import { BsListOl } from 'react-icons/bs';
+
 import { NavLink } from 'react-router-dom';
 import {
   Row,
@@ -29,33 +30,11 @@ import logo200Image from 'assets/img/logo/Light-icon200.png';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-const sidebarBackground = {
-  backgroundImage: `url("${sidebarBgImage}")`,
-  backgroundSize: 'cover',
-  backgroundRepeat: 'no-repeat',
-};
 
-const pageContents = [
-  { to: '/defi', name: 'Defi', exact: true, Icon: MdKeyboardArrowRight },
-  {
-    to: '/application',
-    name: 'Application',
-    exact: true,
-    Icon: MdKeyboardArrowRight,
-  },
-  { to: '/tooling', name: 'tooling', exact: true, Icon: MdKeyboardArrowRight },
-  { to: '/wallet', name: 'Wallet', exact: true, Icon: MdKeyboardArrowRight },
-  { to: '/data', name: 'Data', exact: true, Icon: MdKeyboardArrowRight },
-  { to: '/nft', name: 'Nft', exact: true, Icon: MdKeyboardArrowRight },
-  { to: '/dex', name: 'Dex', exact: true, Icon: MdKeyboardArrowRight },
-];
-
-const navItemsBottom = [
-  { to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle },
-];
-
-const navItemsBottom2 = [
-  { to: '/signout', name: 'signout', exact: false, Icon: MdAccountCircle },
+const projectsContents = [
+  { to: '/liveprojects', name: 'alive', exact: true, Icon: MdStar },
+  { to: '/deadprojects', name: 'dead', exact: true, Icon: GiBurningSkull },
+  { to: '/allprojects', name: 'All', exact: true, Icon: BsListOl },
 ];
 
 const bem = bn.create('sidebar');
@@ -68,6 +47,7 @@ class Sidebar extends React.Component {
     navItemsTop: [],
     loggedin: false,
     navItemsBottom: [],
+    navItemsMiddle: []
   };
 
   componentDidMount() {
@@ -75,7 +55,15 @@ class Sidebar extends React.Component {
     if (user != null) {
       this.setState({
         navItemsTop: [
-          { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
+          { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard }
+        ],
+        navItemsMiddle: [
+          {
+            to: '/ecosystem',
+            name: 'Ecosystem',
+            exact: true,
+            Icon: MdGroupWork,
+          },
           {
             to: '/myprojects',
             name: 'my projects',
@@ -88,21 +76,6 @@ class Sidebar extends React.Component {
             exact: true,
             Icon: MdAddToQueue,
           },
-          { to: '/allprojects', name: 'projects', exact: true, Icon: MdStar },
-          {
-            to: '/ecosystem',
-            name: 'Ecosystem',
-            exact: true,
-            Icon: MdGroupWork,
-          },
-          {
-            to: '/alltokens',
-            name: 'tokens',
-            exact: true,
-            Icon: MdAttachMoney,
-          },
-          // { to: '/allsales', name: 'sales', exact: true, Icon: MdAttachMoney },
-          // { to: '/nfts', name: 'nfts', exact: true, Icon: MdArtTrack },
         ],
         loggedin: true,
         navItemsBottom: [
@@ -117,17 +90,15 @@ class Sidebar extends React.Component {
     } else {
       this.setState({
         navItemsTop: [
-          { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
-          { to: '/allprojects', name: 'projects', exact: true, Icon: MdStar },
+          { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard }
+        ],
+        navItemsMiddle: [
           {
             to: '/ecosystem',
             name: 'Ecosystem',
             exact: true,
             Icon: MdGroupWork,
           },
-          // { to: '/alltokens', name: 'tokens', exact: true, Icon: MdAttachMoney },
-          // { to: '/allsales', name: 'sales', exact: true, Icon: MdAttachMoney },
-          // { to: '/nfts', name: 'nfts', exact: true, Icon: MdArtTrack },
           {
             to: '/addproject',
             name: 'add project',
@@ -180,8 +151,6 @@ class Sidebar extends React.Component {
                 </Link>
               </Col>
             </Row>
-
-            {/* <h5 className="text-white">Building On Cardano</h5> */}
           </Navbar>
           <Nav
             vertical
@@ -192,6 +161,7 @@ class Sidebar extends React.Component {
               textAlign: 'center',
             }}
           >
+
             {this.state.navItemsTop.map(({ to, name, exact, Icon }, index) => (
               <NavItem key={index} className={bem.e('nav-item')}>
                 <BSNavLink
@@ -208,7 +178,8 @@ class Sidebar extends React.Component {
               </NavItem>
             ))}
 
-            {/* <NavItem
+
+            <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Pages')}
             >
@@ -231,7 +202,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
             <Collapse isOpen={this.state.isOpenPages}>
-              {pageContents.map(({ to, name, exact, Icon }, index) => (
+              {projectsContents.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
@@ -246,7 +217,23 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse> */}
+            </Collapse>
+
+            {this.state.navItemsMiddle.map(({ to, name, exact, Icon }, index) => (
+              <NavItem key={index} className={bem.e('nav-item')}>
+                <BSNavLink
+                  id={`navItem-${name}-${index}`}
+                  className="text-uppercase"
+                  tag={NavLink}
+                  to={to}
+                  activeClassName="active"
+                  exact={exact}
+                >
+                  <Icon className={bem.e('nav-item-icon')} />
+                  <span className="">{name}</span>
+                </BSNavLink>
+              </NavItem>
+            ))}
 
             {this.state.navItemsBottom.map(
               ({ to, name, exact, Icon }, index) => (

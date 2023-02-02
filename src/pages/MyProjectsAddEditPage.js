@@ -153,7 +153,7 @@ class MyProjectsAddEditPage extends React.Component {
       this.setState({ loggedIn: true });
     }
     //if edit get existing project
-    if (this.props.params.action == 'edit') {
+    if (this.props.action === 'edit') {
       this.getProjectDetails();
 
       this.setState({ lockProjectName: true });
@@ -178,7 +178,7 @@ class MyProjectsAddEditPage extends React.Component {
       var response = await fetch(
         baseUrl +
         getProjectByNameAndOwner +
-        this.props.match.params.projectname,
+        this.props.params.projectname,
         requestOptions,
       );
       const data = await response.json();
@@ -272,7 +272,7 @@ class MyProjectsAddEditPage extends React.Component {
       this.setState({ project: { ...this.state.project, type: tags } });
       this.state.project.type = tags;
 
-      if (this.props.action == 'edit') {
+      if (this.props.action === 'edit') {
         this.updateProject();
       } else {
         this.createProject();
@@ -359,7 +359,7 @@ class MyProjectsAddEditPage extends React.Component {
               <ModalBody>
                 <h3>Success.</h3>
                 <Row>
-                  {this.props.action == 'edit' ? (
+                  {this.props.action === 'edit' ? (
                     <p>Project updated successfully.</p>
                   ) : (
                     <div>
@@ -396,7 +396,7 @@ class MyProjectsAddEditPage extends React.Component {
               <ModalBody>
                 <h3>Failure.</h3>
                 <Row>
-                  {this.props.action == 'edit' ? (
+                  {this.props.action === 'edit' ? (
                     <p>
                       Project didnt update.{' '}
                       <p>
@@ -491,18 +491,10 @@ class MyProjectsAddEditPage extends React.Component {
                           value={this.state.project.stage}
                         >
                           <option></option>
-                          <option>Pre Funding</option>
-                          <option>Catalyst</option>
-                          <option>Private Sale</option>
-                          <option>Presale</option>
-                          <option>IEO</option>
-                          <option>IFO</option>
-                          <option>IDO</option>
-                          <option>ISO</option>
-                          <option>TestNet</option>
+                          <option>In Development</option>
+                          <option>Testnet</option>
                           <option>Live</option>
-                          <option>Live on Exchange</option>
-                          <option>Other</option>
+                          <option>Rugged</option>
                         </Input>
                       </Col>
                     </FormGroup>
@@ -1024,14 +1016,15 @@ class MyProjectsAddEditPage extends React.Component {
                     </FormGroup>
                   </Card>
 
-                  <Card body>
-                    <h3>Upcoming/Past Sale Details</h3>
-                    <br />
-                    <MultiAddSales
-                      sendData={this.salesDataHandler}
-                      existingSalesDetails={this.state.project.salesDetails}
-                    />
-                  </Card>
+                  {this.state.project.salesDetails != null &&
+                    <Card body>
+                      <h3>Upcoming/Past Sale Details</h3>
+                      <br />
+                      <MultiAddSales
+                        sendData={this.salesDataHandler}
+                        existingSalesDetails={this.state.project.salesDetails}
+                      />
+                    </Card>}
 
                   <Card body>
                     <h3>Team Details</h3>
