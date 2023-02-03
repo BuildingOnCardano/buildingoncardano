@@ -2,7 +2,7 @@ import React from 'react';
 import ReactImageFallback from 'react-image-fallback';
 import CardanoImage from 'assets/img/cardanoIcon.png';
 import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 export default class ProjectCard extends React.Component {
   constructor(props) {
     super(props);
@@ -32,10 +32,21 @@ export default class ProjectCard extends React.Component {
           }}
         >
           {this.props.myprojectspage && (
-            <p>
-              <b>Approved: </b>
-              {this.props.projectDetails.verified}
-            </p>
+            <Col>
+              <p>
+                <b>Approved: </b>
+                {this.props.projectDetails.verified}
+              </p>
+              <p>
+                <b>Status: </b>
+                {this.props.projectDetails.stage}
+              </p>
+              <p>
+                <b>Type: </b>
+                {this.props.projectDetails.type}
+              </p>
+            </Col>
+
           )}
         </div>
         <div
@@ -46,33 +57,28 @@ export default class ProjectCard extends React.Component {
             paddingLeft: '10px',
           }}
         >
-          {this.props.myprojectspage && (
-            <Link to={'/editproject/' + this.props.projectDetails.name}>
-              Edit Project
-            </Link>
-          )}
         </div>
         <Link
           to={'/projectdetails/' + this.props.projectDetails.name}
           state={{ projectDetails: this.props.projectDetails }}
         >
-          <div style={{ paddingTop: 10, alignSelf: 'flex-start' }}>
-            {this.props.projectDetails.imageUrlBase64 != null ? 
-                        <ReactImageFallback
-                        src={this.props.projectDetails.imageUrlBase64}
-                        width="50"
-                        height="70"
-                        fallbackImage={CardanoImage}
-                      />
-            :
-            <ReactImageFallback
-            src={this.props.img}
-            width="50"
-            height="70"
-            fallbackImage={CardanoImage}
-          />
-          }
-            
+          <div style={{ alignSelf: 'flex-start' }}>
+            {this.props.projectDetails.imageUrlBase64 != null ?
+              <ReactImageFallback
+                src={this.props.projectDetails.imageUrlBase64}
+                width="50"
+                height="70"
+                fallbackImage={CardanoImage}
+              />
+              :
+              <ReactImageFallback
+                src={this.props.img}
+                width="50"
+                height="70"
+                fallbackImage={CardanoImage}
+              />
+            }
+
 
 
             <div className="ProjectCard-body">
@@ -83,6 +89,19 @@ export default class ProjectCard extends React.Component {
             </div>
           </div>
         </Link>
+
+        {this.props.myprojectspage && (
+          <Row style={{
+
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+
+            <Link to={'/editproject/' + this.props.projectDetails.name}>
+              Edit Project
+            </Link>
+          </Row>
+        )}
       </div>
     );
   }

@@ -69,32 +69,33 @@ const inputfieldwidth = 8;
 
 const tagOptions = [
   'Application',
-  'Catalyst', 
+  'Catalyst',
   'Charity',
   'Cloud Storage',
-  'Cross-Chain', 
-  'Data', 
+  'Cross-Chain',
+  'Data',
+  'Dao',
   'Defi',
   'Dex',
   'Forex',
   'Gambling',
-  'Gaming', 
-  'Identity', 
-  'Infrastructure', 
-  'Launch Pad', 
-  'Lending', 
-  'Meme Coin', 
-  'Metaverse', 
-  'NFT', 
-  'NFT Lending', 
-  'NFT Marketplace', 
+  'Gaming',
+  'Identity',
+  'Infrastructure',
+  'Launch Pad',
+  'Lending',
+  'Meme Coin',
+  'Metaverse',
+  'NFT',
+  'NFT Lending',
+  'NFT Marketplace',
   'NFT Platform',
-  'Oracle', 
+  'Oracle',
   'Payment',
   'Stablecoin',
-  'Subscriptions', 
-  'Telcom', 
-  'Tooling', 
+  'Subscriptions',
+  'Telcom',
+  'Tooling',
   'Wallet'
 ];
 
@@ -154,7 +155,7 @@ class MyProjectsAddEditPage extends React.Component {
     }
     //if edit get existing project
     if (this.props.action === 'edit') {
-     await this.getProjectDetails();
+      await this.getProjectDetails();
 
       this.setState({ lockProjectName: true });
     } else {
@@ -258,20 +259,13 @@ class MyProjectsAddEditPage extends React.Component {
     event.preventDefault();
 
     try {
-      var tags = '';
-      for (const key in selectedListTags) {
-        if (key > 0) {
-          tags += ' ';
-        }
-        tags += selectedListTags[key].name;
-      }
 
       this.setState({
-        project: { ...this.state.project, ownerEmail: getUser() },
+        project: { ...this.state.project },
       });
-      this.state.project.ownerEmail = getUser();
-      this.setState({ project: { ...this.state.project, type: tags } });
-      this.state.project.type = tags;
+      //this.state.project.ownerEmail = getUser();
+      // this.setState({ project: { ...this.state.project, type: tags } });
+      // // this.state.project.type = tags;
 
       if (this.props.action === 'edit') {
         this.updateProject();
@@ -431,7 +425,17 @@ class MyProjectsAddEditPage extends React.Component {
                 alignItems: 'center',
               }}
             >
+
               <Col md={6} lg={8}>
+                <Card
+                  body
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Button onClick={this.handleSubmit}>Submit</Button>
+                </Card>
                 <Form>
                   <Card body>
                     <h3>Project Info</h3>

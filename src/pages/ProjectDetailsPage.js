@@ -78,20 +78,20 @@ class ProjectDetailsPage extends React.Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     window.scrollTo(0, 0);
     console.log('props = ' + this.props.params);
     this.setState({ projectname: this.props.params.projectname });
     this.state.projectname = this.props.params.projectname;
-    this.getProjectDetails();
+    await this.getProjectDetails();
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     window.scrollTo(0, 0);
     if (this.props.params.projectname !== prevProps.params.projectname) {
       this.setState({ projectname: this.props.params.projectname });
       this.state.projectname = this.props.params.projectname;
-      this.getProjectDetails();
+      await this.getProjectDetails();
       this.getTokenDetails();
     }
   }

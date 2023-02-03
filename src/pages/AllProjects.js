@@ -121,6 +121,7 @@ const tagOptions = [
   { name: 'Cloud Storage', id: 4 },
   { name: 'Cross-Chain', id: 5 },
   { name: 'Data', id: 6 },
+  { name: 'Dao', id: 29 },
   { name: 'Defi', id: 7 },
   { name: 'Dex', id: 8 },
   { name: 'Forex', id: 9 },
