@@ -108,15 +108,15 @@ class Ecosystem extends React.Component {
           <Row>
             {this.state.projects.map(function (item, index) {
               return (
-                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
+                <Col lg={3} md={12} sm={12} xs={12} className="mb-3">
                   <Card>
                     <Button
-                      size="m"
+                      size="s"
                       color="secondary"
                     >
-                      <h4 style={{ color: '#fff' }}>
+                      <h6 style={{ color: '#fff' }}>
                         {item.project_maintype}
-                      </h4>
+                      </h6>
                     </Button>
 
                     <CardBody>
