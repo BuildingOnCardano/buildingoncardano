@@ -6,8 +6,6 @@ import { css } from '@emotion/core';
 import { baseUrl, getAllProjectsWithTypes } from '../assets/services';
 import '../styles/styles.css';
 import { Link } from 'react-router-dom';
-
-import sidebarBgImage from 'assets/img/sidebar/rsz_1sidebar-4.jpg';
 import styled from 'styled-components';
 
 import { useParams } from 'react-router-dom';

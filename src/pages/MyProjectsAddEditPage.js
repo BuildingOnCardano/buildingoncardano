@@ -23,7 +23,6 @@ import {
 } from '../assets/services';
 import { project } from '../assets/project';
 import { Link } from 'react-router-dom';
-import { Multiselect } from 'multiselect-react-dropdown';
 import { getUser, getPassword } from 'utils/Common.js';
 import { isEmpty } from 'lodash';
 import { getLength } from 'utils/stringutil.js';
@@ -69,34 +68,34 @@ const inputnamewidth = 2;
 const inputfieldwidth = 8;
 
 const tagOptions = [
-  { name: 'Application', id: 1 },
-  { name: 'Catalyst', id: 2 },
-  { name: 'Charity', id: 3 },
-  { name: 'Cloud Storage', id: 4 },
-  { name: 'Cross-Chain', id: 5 },
-  { name: 'Data', id: 6 },
-  { name: 'Defi', id: 7 },
-  { name: 'Dex', id: 8 },
-  { name: 'Forex', id: 9 },
-  { name: 'Gambling', id: 10 },
-  { name: 'Gaming', id: 11 },
-  { name: 'Identity', id: 12 },
-  { name: 'Infrastructure', id: 13 },
-  { name: 'Launch Pad', id: 14 },
-  { name: 'Lending', id: 15 },
-  { name: 'Meme Coin', id: 16 },
-  { name: 'Metaverse', id: 17 },
-  { name: 'NFT', id: 18 },
-  { name: 'NFT Lending', id: 19 },
-  { name: 'NFT Marketplace', id: 20 },
-  { name: 'NFT Platform', id: 21 },
-  { name: 'Oracle', id: 22 },
-  { name: 'Payment', id: 23 },
-  { name: 'Stablecoin', id: 24 },
-  { name: 'Subscriptions', id: 25 },
-  { name: 'Telcom', id: 26 },
-  { name: 'Tooling', id: 27 },
-  { name: 'Wallet', id: 28 },
+  'Application',
+  'Catalyst', 
+  'Charity',
+  'Cloud Storage',
+  'Cross-Chain', 
+  'Data', 
+  'Defi',
+  'Dex',
+  'Forex',
+  'Gambling',
+  'Gaming', 
+  'Identity', 
+  'Infrastructure', 
+  'Launch Pad', 
+  'Lending', 
+  'Meme Coin', 
+  'Metaverse', 
+  'NFT', 
+  'NFT Lending', 
+  'NFT Marketplace', 
+  'NFT Platform',
+  'Oracle', 
+  'Payment',
+  'Stablecoin',
+  'Subscriptions', 
+  'Telcom', 
+  'Tooling', 
+  'Wallet'
 ];
 
 
@@ -145,7 +144,7 @@ class MyProjectsAddEditPage extends React.Component {
     });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     window.scrollTo(0, 0);
 
     if (isEmpty(getUser())) {
@@ -155,7 +154,7 @@ class MyProjectsAddEditPage extends React.Component {
     }
     //if edit get existing project
     if (this.props.action === 'edit') {
-      this.getProjectDetails();
+     await this.getProjectDetails();
 
       this.setState({ lockProjectName: true });
     } else {
@@ -184,42 +183,43 @@ class MyProjectsAddEditPage extends React.Component {
       );
       const data = await response.json();
       this.setState({ project: data });
-      this.setIncomingStateValues();
+      //this.setIncomingStateValues();
+      this.setState({ loading: false });
     } catch (error) {
       console.log(error);
     }
   }
 
-  setIncomingStateValues() {
-    var types = this.state.project.type;
-    if (!isEmpty(types)) {
-      selectedListTags = null;
-      var pieces = types.split(' ');
-      var selectedValue = [];
-      pieces.forEach(typeInDb => {
-        if (!isEmpty(typeInDb)) {
-          var typeFound = tagOptions.filter(item =>
-            item.name.toLowerCase().includes(typeInDb.toLowerCase()),
-          );
-          selectedValue.push(typeFound[0]);
-        }
-      });
-      selectedListTags = selectedValue;
-    }
-    var tags = '';
-    if (selectedListTags != null && selectedListTags.length > 0) {
-      try {
-        selectedListTags.forEach(element => {
-          tags += element.name + ' ';
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  // setIncomingStateValues() {
+  //   var types = this.state.project.type;
+  //   if (!isEmpty(types)) {
+  //     selectedListTags = null;
+  //     var pieces = types.split(' ');
+  //     var selectedValue = [];
+  //     pieces.forEach(typeInDb => {
+  //       if (!isEmpty(typeInDb)) {
+  //         var typeFound = tagOptions.filter(item =>
+  //           item.name.toLowerCase().includes(typeInDb.toLowerCase()),
+  //         );
+  //         selectedValue.push(typeFound[0]);
+  //       }
+  //     });
+  //     selectedListTags = selectedValue;
+  //   }
+  //   var tags = '';
+  //   if (selectedListTags != null && selectedListTags.length > 0) {
+  //     try {
+  //       selectedListTags.forEach(element => {
+  //         tags += element.name + ' ';
+  //       });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
 
-    this.setState({ project: { ...this.state.project, type: tags } });
-    this.setState({ loading: false });
-  }
+  //   this.setState({ project: { ...this.state.project, type: tags } });
+  //   this.setState({ loading: false });
+  // }
 
   async updateProject() {
     const requestOptions = {
@@ -462,18 +462,41 @@ class MyProjectsAddEditPage extends React.Component {
 
                     <FormGroup row>
                       <Label for="exampleSelect" sm={inputnamewidth}>
-                        Tags *
+                        Type *
                       </Label>
-                      <Col sm={inputfieldwidth}>
-                        <Multiselect
+
+                      {/* <Multiselect
                           options={tagOptions} // Options to display in the dropdown
                           onSelect={this.onSelect} // Function will trigger on select event
                           onRemove={this.onRemove} // Function will trigger on remove event
                           displayValue="name" // Property name to display in the dropdown options
                           selectedValues={selectedListTags}
                           id="name"
-                        />
+                        /> */}
+                      <Col sm={inputfieldwidth}>
+                        <Input
+                          type="select"
+                          name="select"
+                          id="name"
+                          onChange={e =>
+                            this.setState({
+                              project: {
+                                ...this.state.project,
+                                type: e.target.value,
+                              },
+                            })
+                          }
+                          value={this.state.project.type}
+                        >
+                          <option></option>
+                          {tagOptions.map((item, index) => (
+                            <option>{item}</option>
+                          ))}
+
+
+                        </Input>
                       </Col>
+
                     </FormGroup>
 
                     <FormGroup row>
