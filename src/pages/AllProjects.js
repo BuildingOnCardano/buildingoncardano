@@ -257,7 +257,9 @@ class AllProjects extends React.Component {
 
   render() {
     return (
-      <Page className="AllProjects" title="Projects">
+      <Page className="AllProjects"
+        breadcrumbs={[{ name: 'All Projects', active: true }]}
+      >
         {this.state.loading ? (
           <div>
             <CircleLoader

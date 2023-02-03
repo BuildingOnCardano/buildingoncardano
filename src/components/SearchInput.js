@@ -47,7 +47,7 @@ class SearchInput extends React.Component {
     this.setState({ redirect: true, projectName: selectedOption.value });
   };
 
-  renderRedirectToLogin = () => {
+  renderRedirectToProject = () => {
     if (this.state.redirect) {
       return <Navigate to={'/projectdetails/' + this.state.projectName} />;
     }
@@ -62,11 +62,6 @@ class SearchInput extends React.Component {
         components.ValueContainer && (
           <components.ValueContainer {...props}>
             {!!children && (
-              // <i
-              //   className="fa fa-search"
-              //   aria-hidden="true"
-              //   style={{ position: "absolute", left: 6 }}
-              // />
               <FontAwesomeIcon
                 icon={faSearch}
                 style={{ position: 'absolute', left: 6 }}
@@ -77,16 +72,6 @@ class SearchInput extends React.Component {
         )
       );
     };
-
-    // const DropdownIndicator = props => {
-    //   return (
-    //     components.DropdownIndicator && (
-    //       <components.DropdownIndicator {...props}>
-    //         <i className="fa fa-search" aria-hidden="true" />
-    //       </components.DropdownIndicator>
-    //     )
-    //   );
-    // };
 
     const DropdownIndicator = props => {
       return (
@@ -99,23 +84,24 @@ class SearchInput extends React.Component {
     };
 
     return (
+
       <div className="serach-tab">
-        {this.renderRedirectToLogin()}
-        {/* {this.state.options != null && <Select
+        {this.renderRedirectToProject()}
+        {this.state.options != null && <Select
           classNamePrefix="my-select"
           value={selectedOption}
           options={this.state.options}
           onChange={this.handleChange}
           styles={width <= 700 ? mobileStyle : standardStyle}
-          placeholder="Discover Projects..."
+          placeholder="Search Projects..."
           openMenuOnClick={true}
-          classNamePrefix="select"
+          // classNamePrefix="select"
           openMenuOnFocus={true}
           menuPortalTarget={document.body}
-          menuPosition={'fixed'} 
+          menuPosition={'fixed'}
           menuColor='blue'
           components={{ DropdownIndicator }}
-        />} */}
+        />}
       </div>
     );
   }

@@ -1,26 +1,16 @@
 import Avatar from 'components/Avatar';
 import { UserCard } from 'components/Card';
-import Notifications from 'components/Notifications';
 import SearchInput from 'components/SearchInput';
 import withBadge from 'hocs/withBadge';
 import React from 'react';
 import {
   baseUrl,
   getAllProjects,
-  getProjectsStats,
-  liveProjectSales,
 } from '../../assets/services';
 import {
   MdClearAll,
   MdExitToApp,
-  MdHelp,
-  MdInsertChart,
-  MdMessage,
   MdNotificationsActive,
-  MdNotificationsNone,
-  MdPersonPin,
-  MdSettingsApplications,
-  MdPersonPinCircle,
 } from 'react-icons/md';
 import {
   Button,
@@ -86,6 +76,7 @@ class Header extends React.Component {
     isOpenUserCardPopover: false,
     user: null,
     projects: null,
+    isOpenPages: false,
   };
 
   toggleNotificationPopover = () => {
@@ -138,11 +129,8 @@ class Header extends React.Component {
   };
 
   render() {
-    const { isNotificationConfirmed } = this.state;
 
     return (
-      // 
-
       <div style={{ backgroundColor: "#225cb6", }}>
 
         <Container fluid>
@@ -171,6 +159,7 @@ class Header extends React.Component {
                   justifyContent: 'Left',
                   alignItems: 'Left',
                   textAlign: 'Left',
+                  marginLeft: '5px', marginRight: '20px'
                 }}
               >
                 <Link to="/">
@@ -187,32 +176,52 @@ class Header extends React.Component {
                       }}
                       alt="logo"
                     />
-                    <h4 className="text-black" style={{ color: '#fff', marginTop: '8px', marginLeft: '5px', marginRight: '20px' }}>
+                    {/* <h4 className="text-black" style={{ color: '#fff', marginTop: '8px', marginLeft: '5px', marginRight: '20px' }}>
                       Building On Cardano
-                    </h4>
+                    </h4> */}
 
                   </Row>
                 </Link>
               </div>
 
-              <NavItem
+              <NavItem className={bem.e('nav-item')}>
+                <NavLink className={bem.e('nav-item-collapse')}>
+                  <Link to="/">
+                    <div className="d-flex">
+                      <span style={{ color: '#fff', marginLeft: '20px' }}>Dashboard</span>
+                    </div>
+                  </Link>
+                </NavLink>
+              </NavItem>
+
+              <NavItem className={bem.e('nav-item')}>
+                <NavLink className={bem.e('nav-item-collapse')}>
+                  <Link to="/allprojects">
+                    <div className="d-flex">
+                      <span style={{ color: '#fff', marginLeft: '20px' }}>Projects</span>
+                    </div>
+                  </Link>
+                </NavLink>
+              </NavItem>
+
+              {/* <NavItem
                 className={bem.e('nav-item')}
                 onClick={this.handleClick('Pages')}
                 onTouchStart={this.handleClick('Pages')}            >
                 <NavLink className={bem.e('nav-item-collapse')}>
                   <div className="d-flex">
-                    {/* <MdPages className={bem.e('nav-item-icon')} /> */}
-                    <span style={{ color: '#fff'}}>PROJECTS</span>
+                    <span style={{ color: '#fff', marginLeft: '20px' }}>Projects</span>
                   </div>
                   <MdKeyboardArrowDown
                     className={bem.e('nav-item-icon')}
                     style={{
                       padding: 0,
                       transform: this.state.isOpenPages
-                        ? 'rotate(0deg)'
-                        : 'rotate(-90deg)',
+                        ? 'rotate(-90deg)'
+                        : 'rotate(-0deg)',
                       transitionDuration: '0.3s',
                       transitionProperty: 'transform',
+                      color: '#fff'
                     }}
                   />
                 </NavLink>
@@ -228,12 +237,45 @@ class Header extends React.Component {
                       activeClassName="active"
                       exact={exact}
                     >
-                      <Icon className={bem.e('nav-item-icon')} style={{ color: '#fff', marginRight: '5px'}} />
-                      <span style={{ color: '#fff'}}>{name}</span>
+                      <Icon className={bem.e('nav-item-icon')} style={{ color: '#fff', marginRight: '5px' }} />
+                      <span style={{ color: '#fff' }}>{name}</span>
                     </NavLink>
                   </NavItem>
                 ))}
-              </Collapse>
+              </Collapse> */}
+
+              <NavItem className={bem.e('nav-item')}>
+                <NavLink className={bem.e('nav-item-collapse')}>
+                  <Link to="/ecosystem">
+                    <div className="d-flex">
+                      <span style={{ color: '#fff', marginLeft: '20px' }}>Ecosystem</span>
+                    </div>
+                  </Link>
+                </NavLink>
+              </NavItem>
+
+              <NavItem className={bem.e('nav-item')}>
+                <NavLink className={bem.e('nav-item-collapse')}>
+                  <Link to="/addproject">
+                    <div className="d-flex">
+                      <span style={{ color: '#fff', marginLeft: '20px' }}>Add Project</span>
+                    </div>
+                  </Link>
+                </NavLink>
+              </NavItem>
+
+              {this.state.user != null &&
+                <NavItem className={bem.e('nav-item')}>
+                  <NavLink className={bem.e('nav-item-collapse')}>
+                    <Link to="/myprojects">
+                      <div className="d-flex">
+                        <span style={{ color: '#fff', marginLeft: '20px' }}>My Projects</span>
+                      </div>
+                    </Link>
+                  </NavLink>
+                </NavItem>}
+
+
             </Nav>
 
             <Nav navbar className={bem.e('nav-right')}>
@@ -272,7 +314,7 @@ class Header extends React.Component {
 
 
 
-              {this.state.user != null && (
+              {this.state.user != null ? (
                 <NavItem>
                   <NavLink id="Popover2">
                     <Avatar
@@ -326,7 +368,18 @@ class Header extends React.Component {
                     </PopoverBody>
                   </Popover>
                 </NavItem>
-              )}
+              )
+                :
+                <NavItem className={bem.e('nav-item')}>
+                  <NavLink className={bem.e('nav-item-collapse')}>
+                    <Link to="/login">
+                      <div className="d-flex">
+                        <span style={{ color: '#fff', marginLeft: '20px' }}>LOGIN / SIGNUP</span>
+                      </div>
+                    </Link>
+                  </NavLink>
+                </NavItem>
+              }
             </Nav>
           </Navbar>
         </Container>

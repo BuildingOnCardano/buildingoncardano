@@ -93,8 +93,8 @@ class Ecosystem extends React.Component {
   render() {
     return (
       <Page
-        className="AllProjects"
-        title="Ecosystem"
+        className="Ecosystem"
+        breadcrumbs={[{ name: 'Ecosystem', active: true }]}
       >
         {this.state.loading ? (
           <div>

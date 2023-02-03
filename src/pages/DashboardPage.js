@@ -280,6 +280,7 @@ class DashboardPage extends React.Component {
                         justifyContent: 'center',
                         alignItems: 'center',
                         textAlign: 'center',
+                        marginTop: '20px'
                       }}
                     >
                       Featured

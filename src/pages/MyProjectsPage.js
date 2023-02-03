@@ -27,13 +27,12 @@ const override = css`
 `;
 
 class MyProjectsPage extends React.Component {
-  state = {
-    projects: [],
-    loading: true,
-  };
-
   constructor(props) {
     super(props);
+    this.state = {
+      projects: [],
+      loading: true,
+    };
   }
 
   componentDidMount() {
@@ -69,13 +68,18 @@ class MyProjectsPage extends React.Component {
     return (
       <Page
         className="MyProjectsPage"
-        title=""
-        breadcrumbs={[{ name: 'My Projects /', active: true }]}
+        breadcrumbs={[{ name: 'My Projects', active: true }]}
       >
 
-        <Col lg={12} md={12} sm={12} xs={12} className="mb-3">
-          <Row>
-            <Link to={'/addproject'}>
+        <Col lg={12} md={12} sm={12} xs={12} className="mb-3"
+        >
+          <Row style={{
+            justifyContent: 'right',
+            alignItems: 'right',
+            textAlign: 'center',
+          }}>
+            <Link to={'/addproject'}
+            >
               <Button
                 size="lg"
                 className="bg-gradient-theme-left border-0"

@@ -22,10 +22,6 @@ import { getColor } from 'utils/colors';
 import CircleLoader from 'react-spinners/CircleLoader';
 import { css } from '@emotion/core';
 import { baseUrl, getProjectsByType } from '../assets/services';
-import SocialMedia from '../components/SocialMedia';
-import CardanoImage from 'assets/img/cardanoIcon.png';
-import { Link } from 'react-router-dom';
-import ReactImageFallback from 'react-image-fallback';
 import { useParams } from 'react-router-dom';
 /* This is a higher order component that
  *  inject a special prop   to our component.
@@ -78,8 +74,7 @@ class ProjectsPage extends React.Component {
     return (
       <Page
         className="ProjectsPage"
-        title=""
-        breadcrumbs={[{ name: this.props.projectType, active: true }]}
+        breadcrumbs={[{ name: 'Project', active: true }]}
       >
         <Row>
           {this.state.loading ? (
