@@ -264,9 +264,9 @@ class DashboardPage extends React.Component {
                       className="mb-0"
                       style={{
                         color: '#225cb6',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        textAlign: 'center',
+                        justifyContent: 'left',
+                        alignItems: 'left',
+                        textAlign: 'left',
                         marginTop: '20px'
                       }}
                     >
@@ -303,9 +303,9 @@ class DashboardPage extends React.Component {
                   className="mb-0"
                   style={{
                     color: '#225cb6',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    textAlign: 'center',
+                    justifyContent: 'left',
+                    alignItems: 'left',
+                    textAlign: 'left',
                   }}
                 >
                   Recently added
@@ -546,9 +546,9 @@ class DashboardPage extends React.Component {
                       className="mb-0"
                       style={{
                         color: '#225cb6',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        textAlign: 'center',
+                        justifyContent: 'left',
+                        alignItems: 'left',
+                        textAlign: 'left',
                       }}
                     >
                       Project Types

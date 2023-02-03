@@ -31,8 +31,8 @@ export default class RecentlyAddedProjectCard extends React.Component {
           <div style={{ alignSelf: 'flex-start' }}>
             <ReactImageFallback
               src={this.props.img}
-              width="30"
-              height="30"
+              width="50"
+              height="50"
               fallbackImage={CardanoImage}
             />
             <div className="ProjectCard-body">

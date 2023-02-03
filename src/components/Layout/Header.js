@@ -112,32 +112,9 @@ class Header extends React.Component {
             expand="md"
             id="navbar-main"
           >
-            <Nav navbar className="mr-2">
-              <Button outline onClick={this.handleSidebarControlButton}>
-                <MdClearAll size={20} />
-              </Button>
-            </Nav>
 
-            <Nav
-              navbar
-              style={{
-                justifyContent: 'left',
-                alignItems: 'left',
-                textAlign: 'left',
-              }}
-            >
-              <div
-                className="App-text"
-                style={{
-                  justifyContent: 'left',
-                  alignItems: 'left',
-                  textAlign: 'left',
-                  marginLeft: '5px', marginRight: '20px'
-                }}
-              >
-                <Link to="/">
-                  <Row>
-
+            <Nav navbar>
+                  <Link to="/">
                     <img
                       src={logo200Image}
                       className="rounded"
@@ -149,13 +126,8 @@ class Header extends React.Component {
                       }}
                       alt="logo"
                     />
-                    {/* <h4 className="text-black" style={{ color: '#fff', marginTop: '8px', marginLeft: '5px', marginRight: '20px' }}>
-                      Building On Cardano
-                    </h4> */}
-
-                  </Row>
                 </Link>
-              </div>
+
 
               <NavItem className={bem.e('nav-item')}>
                 <NavLink className={bem.e('nav-item-collapse')}>
@@ -252,40 +224,10 @@ class Header extends React.Component {
             </Nav>
 
             <Nav navbar className={bem.e('nav-right')}>
+
               {this.state.projects != null && (
                 <SearchInput projects={this.state.projects} />
               )}
-              {/* {(this.state.user != null) && (<p>Logged in as: {this.state.user}</p>)} */}
-              {/* <NavItem className="d-inline-flex">
-            <NavLink id="Popover1" className="position-relative">
-              {isNotificationConfirmed ? (
-                <MdNotificationsNone
-                  size={25}
-                  className="text-secondary can-click"
-                  onClick={this.toggleNotificationPopover}
-                />
-              ) : (
-                <MdNotificationsActiveWithBadge
-                  size={25}
-                  className="text-secondary can-click animated swing infinite"
-                  onClick={this.toggleNotificationPopover}
-                />
-              )}
-            </NavLink>
-            <Popover
-              placement="bottom"
-              isOpen={this.state.isOpenNotificationPopover}
-              toggle={this.toggleNotificationPopover}
-              target="Popover1"
-            >
-              <PopoverBody>
-                <Notifications notificationsData={notificationsData} />
-              </PopoverBody>
-            </Popover>
-          </NavItem> */}
-
-
-
 
               {this.state.user != null ? (
                 <NavItem>
@@ -293,8 +235,8 @@ class Header extends React.Component {
                     <Avatar
                       onClick={this.toggleUserCardPopover}
                       className="can-click"
-                      style={{color: '#fff'}}
-                      color= '#fff'
+                      style={{ color: '#fff' }}
+                      color='#fff'
                     />
                   </NavLink>
                   <Popover
