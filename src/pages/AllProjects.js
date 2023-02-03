@@ -115,34 +115,34 @@ const columnsMobile = [
 ];
 
 const tagOptions = [
-  { name: 'Defi', id: 1 },
-  { name: 'Subscriptions', id: 2 },
-  { name: 'Tooling', id: 3 },
-  { name: 'Wallet', id: 4 },
-  { name: 'Data', id: 5 },
-  { name: 'Dex', id: 6 },
-  { name: 'Cross-Chain', id: 7 },
-  { name: 'Gaming', id: 8 },
-  { name: 'Oracle', id: 9 },
-  { name: 'Stablecoin', id: 10 },
-  { name: 'Infrastructure', id: 11 },
-  { name: 'Catalyst', id: 12 },
-  { name: 'Telcom', id: 13 },
-  { name: 'Gambling', id: 14 },
-  { name: 'Payment', id: 15 },
-  { name: 'NFT', id: 16 },
-  { name: 'NFT Platform', id: 17 },
-  { name: 'NFT Marketplace', id: 18 },
+  { name: 'Application', id: 1 },
+  { name: 'Catalyst', id: 2 },
+  { name: 'Charity', id: 3 },
+  { name: 'Cloud Storage', id: 4 },
+  { name: 'Cross-Chain', id: 5 },
+  { name: 'Data', id: 6 },
+  { name: 'Defi', id: 7 },
+  { name: 'Dex', id: 8 },
+  { name: 'Forex', id: 9 },
+  { name: 'Gambling', id: 10 },
+  { name: 'Gaming', id: 11 },
+  { name: 'Identity', id: 12 },
+  { name: 'Infrastructure', id: 13 },
+  { name: 'Launch Pad', id: 14 },
+  { name: 'Lending', id: 15 },
+  { name: 'Meme Coin', id: 16 },
+  { name: 'Metaverse', id: 17 },
+  { name: 'NFT', id: 18 },
   { name: 'NFT Lending', id: 19 },
-  { name: 'Charity', id: 20 },
-  { name: 'Forex', id: 21 },
-  { name: 'Lending', id: 22 },
-  { name: 'Launch Pad', id: 23 },
-  { name: 'Cloud Storage', id: 24 },
-  { name: 'Application', id: 25 },
-  { name: 'Identity', id: 26 },
-  { name: 'Meme Coin', id: 27 },
-  { name: 'Metaverse', id: 28 },
+  { name: 'NFT Marketplace', id: 20 },
+  { name: 'NFT Platform', id: 21 },
+  { name: 'Oracle', id: 22 },
+  { name: 'Payment', id: 23 },
+  { name: 'Stablecoin', id: 24 },
+  { name: 'Subscriptions', id: 25 },
+  { name: 'Telcom', id: 26 },
+  { name: 'Tooling', id: 27 },
+  { name: 'Wallet', id: 28 },
 ];
 
 class AllProjects extends React.Component {
@@ -368,7 +368,7 @@ class AllProjects extends React.Component {
 
                   <Col lg={9} md={7} sm={12} xs={12} className="mb-3">
                     <div
-                      style={{ height: '140vh', width: '100%' }}
+                      style={{ height: '200vh', width: '100%' }}
                       className={useStyles.root}
                     >
                       {this.state.smallScreen ? (
