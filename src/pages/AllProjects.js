@@ -82,7 +82,7 @@ const columns = [
   {
     field: 'stage',
     flex: 1,
-    renderHeader: params => <h2>{'Stage'}</h2>,
+    renderHeader: params => <h2>{'Status'}</h2>,
   },
 ];
 
@@ -158,11 +158,15 @@ class AllProjects extends React.Component {
       filterAbleProjects: null,
       barChartData: null,
       redirect: false,
-      redirectProject: null
-
+      redirectProject: null,
+      livestatus: true,
+      testnetstatus: true,
+      indevelopmentstatus: true,
+      ruggedstatus: false
     };
   }
-  componentDidMount() {
+
+  async componentDidMount() {
     window.scrollTo(0, 0);
 
     //handle signout
@@ -175,8 +179,13 @@ class AllProjects extends React.Component {
       this.setState({ smallScreen: true });
     }
 
-    //this.getProjectsStats();
-    this.getAllProjects();
+    if (!this.state.projects) {
+      await this.getAllProjects();
+    }
+
+    if (this.state.projects) {
+      this.filterStatusChange();
+    }
   }
 
   async getAllProjects() {
@@ -201,6 +210,55 @@ class AllProjects extends React.Component {
     }
   }
 
+  filterStatusChange = (name) => {
+
+    this.cancelSearch();
+    let Rows = [];
+
+    if (name === 'Live') {
+      this.setState({ livestatus: !this.state.livestatus });
+      this.state.livestatus = !this.state.livestatus;
+    } else if (name === 'Testnet') {
+      this.setState({ testnetstatus: !this.state.testnetstatus });
+      this.state.testnetstatus = !this.state.testnetstatus;
+    } else if (name === 'In Development') {
+      this.setState({ indevelopmentstatus: !this.state.indevelopmentstatus });
+      this.state.indevelopmentstatus = !this.state.indevelopmentstatus;
+    } else if (name === 'Rugged') {
+      this.setState({ ruggedstatus: !this.state.ruggedstatus });
+      this.state.ruggedstatus = !this.state.ruggedstatus;
+    }
+    //check incoming name and change that state
+
+    Rows = this.state.projects;
+
+    if (!this.state.livestatus) {
+      Rows = Rows.filter(row => row.stage !== null && row.stage !== ''
+        && !row.stage.toLowerCase().includes('live'));
+    }
+
+    if (!this.state.indevelopmentstatus) {
+      Rows = Rows.filter(row => row.stage !== null && row.stage !== ''
+        && !row.stage.toLowerCase().includes('in development'));
+    }
+
+    if (!this.state.testnetstatus) {
+      Rows = Rows.filter(row => row.stage !== null && row.stage !== '' 
+      && !row.stage.toLowerCase().includes('testnet'));
+    }
+
+    if (!this.state.ruggedstatus) {
+      Rows = Rows.filter(row => !row.stage.toLowerCase().includes('rugged'));
+    }
+
+
+    if (Rows) {
+      this.setState({ filterAbleProjects: Rows });
+    }
+
+
+  }
+
   filterChange = (event, name) => {
     console.log("change" + name);
     if (!event.target.checked) {
@@ -212,6 +270,8 @@ class AllProjects extends React.Component {
       this.setState({ filterAbleProjects: filteredRows });
     }
   }
+
+
 
   cancelSearch = () => {
     this.setState({ searched: null, filterAbleProjects: this.state.projects });
@@ -234,6 +294,7 @@ class AllProjects extends React.Component {
       rows.push(row);
     }
     this.setState({ projects: rows, loading: false, filterAbleProjects: rows });
+    this.state.projects = rows;
   }
 
   handleRowClick(rowData) {
@@ -355,11 +416,18 @@ class AllProjects extends React.Component {
                       <FormGroup style={{
                         marginLeft: '20px'
                       }}>
+                        <span style={{ fontWeight: 'bold' }}>Status Filters</span>
+                        <FormControlLabel key={1} control={<Checkbox checked={this.state.livestatus} onChange={e => this.filterStatusChange('Live')} />} label='Live' />
+                        <FormControlLabel key={3} control={<Checkbox checked={this.state.testnetstatus} onChange={e => this.filterStatusChange('Testnet')} />} label='Testnet' />
+                        <FormControlLabel key={2} control={<Checkbox checked={this.state.indevelopmentstatus} onChange={e => this.filterStatusChange('In Development')} />} label='In Development' />
+                        <FormControlLabel key={4} control={<Checkbox checked={this.state.ruggedstatus} onChange={e => this.filterStatusChange('Rugged')} />} label='Rugged' />
+                        <br></br>
+                        <span style={{ fontWeight: 'bold' }}>Type Filters</span>
                         {tagOptions.map((item, index) => {
                           return (
-                            <Row >
-                              <FormControlLabel key={index} control={<Checkbox onChange={e => this.filterChange(e, item.name)} />} label={item.name} />
-                            </Row>
+
+                            <FormControlLabel key={index} control={<Checkbox onChange={e => this.filterChange(e, item.name)} />} label={item.name} />
+
                           );
                         })}
                       </FormGroup>
