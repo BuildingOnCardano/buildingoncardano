@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'utils/propTypes';
 import classNames from 'classnames';
-import Person from 'assets/img/person.png';
+import Person from 'assets/img/person-bgwhite.png';
 
 const Avatar = ({
   rounded,
@@ -17,7 +17,7 @@ const Avatar = ({
   return (
     <Tag
       src={src}
-      style={{ width: size, height: size, ...style }}
+      style={{ color: '#fff', width: size, height: size, ...style }}
       className={classes}
       {...restProps}
     />

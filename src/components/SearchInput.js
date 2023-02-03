@@ -85,7 +85,7 @@ class SearchInput extends React.Component {
 
     return (
 
-      <div className="serach-tab">
+      <div >
         {this.renderRedirectToProject()}
         {this.state.options != null && <Select
           classNamePrefix="my-select"
@@ -116,7 +116,6 @@ const mobileStyle = {
     boxShadow: state.isFocused ? 0 : 0,
     cursor: 'text',
     borderRadius: 0,
-    borderBottom: '1px',
     width: '70vw',
     padding: '0.3em',
   }),
@@ -160,9 +159,8 @@ const standardStyle = {
     boxShadow: state.isFocused ? 0 : 0,
     cursor: 'text',
     borderRadius: 0,
-    borderBottom: '1px',
-    width: '36vw',
-    padding: '0.3em',
+    width: '30vw',
+    padding: '0.5em',
   }),
 
   option: (styles, { isFocused }) => {

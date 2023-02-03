@@ -31,43 +31,20 @@ import {
 import { Link } from 'react-router-dom';
 import bn from 'utils/bemnames';
 import { getUser } from 'utils/Common.js';
-import { GiBurningSkull } from 'react-icons/gi';
-import { BsListOl } from 'react-icons/bs';
-
-import {
-  MdAccountCircle,
-  MdDashboard,
-  MdGroupWork,
-  MdStar,
-  MdPages,
-  MdAddToQueue,
-  MdVerifiedUser,
-  MdAttachMoney,
-  MdKeyboardArrowDown
-} from 'react-icons/md';
+import styled from 'styled-components';
 import logo200Image from 'assets/img/logo/Light-icon200.png';
-
-const projectsContents = [
-  { to: '/liveprojects', name: 'alive', exact: true, Icon: MdStar },
-  { to: '/deadprojects', name: 'dead', exact: true, Icon: GiBurningSkull },
-  { to: '/allprojects', name: 'All', exact: true, Icon: BsListOl },
-];
 
 const bem = bn.create('header');
 const width = window.innerWidth;
 
-const MdNotificationsActiveWithBadge = withBadge({
-  size: 'md',
-  color: 'primary',
-  style: {
-    top: -10,
-    right: -10,
-    display: 'inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  children: <small>5</small>,
-})(MdNotificationsActive);
+const MySpan = styled.span`
+    color: white;
+    cursor: pointer;
+    marginleft: 20px;
+    &:hover {
+        text-decoration: underline;
+    }
+`;
 
 class Header extends React.Component {
   state = {
@@ -148,17 +125,17 @@ class Header extends React.Component {
             <Nav
               navbar
               style={{
-                justifyContent: 'Left',
-                alignItems: 'Left',
-                textAlign: 'Left',
+                justifyContent: 'left',
+                alignItems: 'left',
+                textAlign: 'left',
               }}
             >
               <div
                 className="App-text"
                 style={{
-                  justifyContent: 'Left',
-                  alignItems: 'Left',
-                  textAlign: 'Left',
+                  justifyContent: 'left',
+                  alignItems: 'left',
+                  textAlign: 'left',
                   marginLeft: '5px', marginRight: '20px'
                 }}
               >
@@ -188,7 +165,7 @@ class Header extends React.Component {
                 <NavLink className={bem.e('nav-item-collapse')}>
                   <Link to="/">
                     <div className="d-flex">
-                      <span style={{ color: '#fff', marginLeft: '20px' }}>Dashboard</span>
+                      <MySpan>Dashboard</MySpan>
                     </div>
                   </Link>
                 </NavLink>
@@ -198,7 +175,7 @@ class Header extends React.Component {
                 <NavLink className={bem.e('nav-item-collapse')}>
                   <Link to="/allprojects">
                     <div className="d-flex">
-                      <span style={{ color: '#fff', marginLeft: '20px' }}>Projects</span>
+                      <MySpan>Projects</MySpan>
                     </div>
                   </Link>
                 </NavLink>
@@ -248,7 +225,7 @@ class Header extends React.Component {
                 <NavLink className={bem.e('nav-item-collapse')}>
                   <Link to="/ecosystem">
                     <div className="d-flex">
-                      <span style={{ color: '#fff', marginLeft: '20px' }}>Ecosystem</span>
+                      <MySpan>Ecosystem</MySpan>
                     </div>
                   </Link>
                 </NavLink>
@@ -258,7 +235,7 @@ class Header extends React.Component {
                 <NavLink className={bem.e('nav-item-collapse')}>
                   <Link to="/addproject">
                     <div className="d-flex">
-                      <span style={{ color: '#fff', marginLeft: '20px' }}>Add Project</span>
+                      <MySpan>Add Project</MySpan>
                     </div>
                   </Link>
                 </NavLink>
@@ -269,7 +246,7 @@ class Header extends React.Component {
                   <NavLink className={bem.e('nav-item-collapse')}>
                     <Link to="/myprojects">
                       <div className="d-flex">
-                        <span style={{ color: '#fff', marginLeft: '20px' }}>My Projects</span>
+                        <MySpan>My Projects</MySpan>
                       </div>
                     </Link>
                   </NavLink>
@@ -320,6 +297,8 @@ class Header extends React.Component {
                     <Avatar
                       onClick={this.toggleUserCardPopover}
                       className="can-click"
+                      style={{color: '#fff'}}
+                      color= '#fff'
                     />
                   </NavLink>
                   <Popover
