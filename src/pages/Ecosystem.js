@@ -112,9 +112,9 @@ class Ecosystem extends React.Component {
                   <Card>
                     <Button
                       size="m"
-                      className="btn-tag2"
+                      color="secondary"
                     >
-                      <h4 style={{ color: '#225cb6' }}>
+                      <h4 style={{ color: '#fff' }}>
                         {item.project_maintype}
                       </h4>
                     </Button>
