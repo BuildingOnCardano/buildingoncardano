@@ -1,7 +1,6 @@
 import Avatar from 'components/Avatar';
 import { UserCard } from 'components/Card';
 import SearchInput from 'components/SearchInput';
-import withBadge from 'hocs/withBadge';
 import React from 'react';
 import {
   baseUrl,
@@ -10,7 +9,6 @@ import {
 import {
   MdClearAll,
   MdExitToApp,
-  MdNotificationsActive,
 } from 'react-icons/md';
 import {
   Button,
@@ -24,9 +22,7 @@ import {
   Popover,
   PopoverBody,
   Row,
-  Col,
   Container,
-  Collapse,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import bn from 'utils/bemnames';

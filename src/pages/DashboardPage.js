@@ -1,18 +1,11 @@
 import Page from 'components/Page';
 import React from 'react';
 import {
-  Card,
-  CardHeader,
-  CardBody,
   Col,
   Row,
   Table,
   Button,
-  Nav,
-  Navbar,
   Media,
-  CardText,
-  CardTitle,
 } from 'reactstrap';
 import CircleLoader from 'react-spinners/CircleLoader';
 import { css } from '@emotion/core';
@@ -20,18 +13,13 @@ import {
   baseUrl,
   getLatestProjects,
   getProjectsStats,
-  getRecentlyUpdatedProjects,
   liveProjectSales,
-  getMostViewedProjects,
   getFeaturedProjectsList,
-  getProjectTokensWalletRankings,
-  getProjectTokensTransactionRankings,
 } from '../assets/services';
 import { Link } from 'react-router-dom';
 import {
   TableRow,
   TableCell,
-  TableHead,
   TableBody,
   TableContainer,
 } from '@mui/material';
@@ -42,7 +30,6 @@ import { isEmpty } from 'utils/stringutil.js';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import FeaturedProjectCard from 'components/FeaturedProjectCard'; //RecentlyAddedProjectCard
 import RecentlyAddedProjectCard from 'components/RecentlyAddedProjectCard'; //RecentlyAddedProjectCard
-import CircularImage from 'utils/CircularImage';
 import '../styles/imageoverlay.css';
 
 const override = css`

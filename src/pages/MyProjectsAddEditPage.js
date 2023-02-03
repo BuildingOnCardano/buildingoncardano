@@ -340,6 +340,11 @@ class MyProjectsAddEditPage extends React.Component {
                 </ModalBody>
                 <ModalFooter>
                   {' '}
+                  <Link to="/login">
+                    <Button color="secondary" onClick={this.toggle()}>
+                      Login
+                    </Button>
+                  </Link>
                   <Link to="/">
                     <Button color="secondary" onClick={this.toggle()}>
                       Close

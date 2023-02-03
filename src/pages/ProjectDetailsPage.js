@@ -43,17 +43,9 @@ import SimilarProjectCard from 'components/SimilarProjectCard';
 import ReactMarkdown from 'react-markdown';
 import {
   TwitterTimelineEmbed,
-  TwitterShareButton,
-  TwitterFollowButton,
-  TwitterHashtagButton,
-  TwitterMentionButton,
-  TwitterTweetEmbed,
-  TwitterMomentShare,
-  TwitterDMButton,
-  TwitterVideoEmbed,
-  TwitterOnAirButton,
 } from 'react-twitter-embed';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const override = css`
   display: block;
@@ -785,6 +777,41 @@ class ProjectDetailsPage extends React.Component {
                             </CardBody>
                           </Card>
                         )}
+                        <Card
+                          style={{
+                            alignItems: 'center',
+                          }}
+                        >
+                          <CardHeader
+                            style={{
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              width: '100%',
+                              borderRadius: '1.9em',
+                            }}
+                          >
+                            Promote App
+                          </CardHeader>
+
+                          <CardBody>
+                            <div
+                              style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                              }}
+                            >
+                              <Link to={'/promote'}>
+                                <Button variant="outline-light">
+                                  Promote App
+                                </Button>
+                              </Link>
+                              <br />
+                              <br />
+                            </div>
+                          </CardBody>
+                        </Card>
+
                       </Col>
                     </Row>
                   </Col>
