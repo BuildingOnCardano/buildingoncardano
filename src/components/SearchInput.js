@@ -2,12 +2,48 @@ import React from 'react';
 import { MdSearch } from 'react-icons/md';
 import { Form, Input, Col, Card, CardHeader } from 'reactstrap';
 import Select, { components } from 'react-select';
-import { Link, Navigate } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import ReactImageFallback from 'react-image-fallback';
 import CardanoImage from 'assets/img/cardanoIcon.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+/* This is a higher order component that
+ *  inject a special prop   to our component.
+ */
+function withRouter(Component) {
+  function ComponentWithRouter(props) {
+    let params = useParams();
+    return <Component {...props} params={params} />;
+  }
+  return ComponentWithRouter;
+}
 const width = window.innerWidth;
+
+const ValueContainer = ({ children, ...props }) => {
+  return (
+    components.ValueContainer && (
+      <components.ValueContainer {...props}>
+        {!!children && (
+          <FontAwesomeIcon
+            icon={faSearch}
+            style={{ position: 'absolute', left: 6 }}
+          />
+        )}
+        {children}
+      </components.ValueContainer>
+    )
+  );
+};
+
+const DropdownIndicator = props => {
+  return (
+    components.DropdownIndicator && (
+      <components.DropdownIndicator {...props}>
+        <FontAwesomeIcon icon={faSearch} />
+      </components.DropdownIndicator>
+    )
+  );
+};
 
 class SearchInput extends React.Component {
   constructor(props) {
@@ -28,12 +64,29 @@ class SearchInput extends React.Component {
         value: item.name,
         label: (
           <div>
-            <ReactImageFallback
-              src={item.imageUrl}
-              width="30px"
-              height="30px"
-              fallbackImage={CardanoImage}
-            />
+            {item.imageUrlBase64 ?
+              <ReactImageFallback
+                src={item.imageUrlBase64}
+                width="30px"
+                height="30px"
+                fallbackImage={CardanoImage}
+              />
+              :
+              item.imageUrl ?
+                <ReactImageFallback
+                  src={item.imageUrl}
+                  width="30px"
+                  height="30px"
+                  fallbackImage={CardanoImage}
+                />
+                :
+                <ReactImageFallback
+                  src={CardanoImage}
+                  width="30px"
+                  height="30px"
+                  fallbackImage={CardanoImage}
+                />
+            }
             {item.name}
           </div>
         ),
@@ -47,56 +100,27 @@ class SearchInput extends React.Component {
     this.setState({ redirect: true, projectName: selectedOption.value });
   };
 
-  renderRedirectToProject = () => {
+  renderRedirectToProject() {
     if (this.state.redirect) {
-      return <Navigate to={'/projectdetails/' + this.state.projectName} />;
+      this.setState({ redirect: false })
+      return <Navigate to={'/projectdetails/' + this.state.projectName} replace={true} />;
     }
   };
 
   render() {
     const { selectedOption } = this.state;
-    const { match, location, history } = this.props;
-
-    const ValueContainer = ({ children, ...props }) => {
-      return (
-        components.ValueContainer && (
-          <components.ValueContainer {...props}>
-            {!!children && (
-              <FontAwesomeIcon
-                icon={faSearch}
-                style={{ position: 'absolute', left: 6 }}
-              />
-            )}
-            {children}
-          </components.ValueContainer>
-        )
-      );
-    };
-
-    const DropdownIndicator = props => {
-      return (
-        components.DropdownIndicator && (
-          <components.DropdownIndicator {...props}>
-            <FontAwesomeIcon icon={faSearch} />
-          </components.DropdownIndicator>
-        )
-      );
-    };
-
     return (
-
       <div >
         {this.renderRedirectToProject()}
         {this.state.options != null && <Select
           classNamePrefix="my-select"
-          value={selectedOption}
           options={this.state.options}
-          onChange={this.handleChange}
+          onChange={selectedOption => this.handleChange(selectedOption)}
           styles={width <= 700 ? mobileStyle : standardStyle}
           placeholder="Search Projects..."
           openMenuOnClick={true}
           // classNamePrefix="select"
-          openMenuOnFocus={true}
+          openMenuOnFocus={false}
           menuPortalTarget={document.body}
           menuPosition={'fixed'}
           menuColor='blue'
@@ -107,7 +131,7 @@ class SearchInput extends React.Component {
   }
 }
 
-export default SearchInput;
+export default withRouter(SearchInput);
 
 const mobileStyle = {
   control: (base, state) => ({

@@ -301,7 +301,7 @@ class AllProjects extends React.Component {
     this.setState({ redirect: true, redirectProject: rowData.project });
   }
 
-  renderRedirectToLogin = (rowData) => {
+  renderRedirectProj = (rowData) => {
     if (this.state.redirect) {
       return <Navigate to={'/projectdetails/' + this.state.redirectProject} />;
     }
@@ -377,7 +377,7 @@ class AllProjects extends React.Component {
       <Page className="AllProjects"
         breadcrumbs={[{ name: 'All Projects', active: true }]}
       >
-        {this.renderRedirectToLogin()}
+        {this.renderRedirectProj()}
         {this.state.loading ? (
           <div>
             <CircleLoader

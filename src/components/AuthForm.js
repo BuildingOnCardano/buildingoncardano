@@ -356,7 +356,7 @@ class AuthForm extends React.Component {
           <Link to="/resetpassword">Reset Password</Link>
         </Row>
         <Row>
-          <a href="/">Exit</a>
+        <Link to="/">Exit</Link>
         </Row>
 
         {children}

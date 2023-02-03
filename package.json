@@ -60,7 +60,7 @@
     "react-responsive-carousel": "^3.2.18",
     "react-router": "^5.2.0",
     "react-router-dom": "^6.3.0",
-    "react-select": "^4.3.1",
+    "react-select": "^5.7.0",
     "react-share": "^4.4.0",
     "react-simple-maps": "2.1.2",
     "react-sizeme": "^3.0.1",

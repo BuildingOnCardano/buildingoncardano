@@ -175,7 +175,7 @@ class ResetPassword extends React.Component {
         )}
 
         <Row>
-          <a href="/">Exit</a>
+          <Link to="/">Exit</Link>
         </Row>
 
         {children}
