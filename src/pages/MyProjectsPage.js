@@ -100,7 +100,7 @@ class MyProjectsPage extends React.Component {
               return (
                 <Col lg={3} md={10} sm={10} xs={12} className="mb-3">
                   <ProjectCard
-                    img={item.imageUrl}
+                    img={item.imageUrlBase64}
                     projectDetails={item}
                     myprojectspage={true}
                   />

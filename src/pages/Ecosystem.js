@@ -7,6 +7,8 @@ import { baseUrl, getAllProjectsWithTypes } from '../assets/services';
 import '../styles/styles.css';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import ReactImageFallback from 'react-image-fallback';
+import CardanoImage from 'assets/img/cardanoIcon.png';
 
 import { useParams } from 'react-router-dom';
 /* This is a higher order component that
@@ -106,7 +108,7 @@ class Ecosystem extends React.Component {
           <Row>
             {this.state.projects.map(function (item, index) {
               return (
-                <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
+                <Col lg={4} md={12} sm={12} xs={12} className="mb-3">
                   <Card>
                     <Button
                       size="m"
@@ -124,21 +126,43 @@ class Ecosystem extends React.Component {
                             <Link to={'/projectdetails/' + project.name}>
                               <Row>
 
-                                {project.imageUrl != null &&
-                                  project.imageUrl != '' && (
-                                    <img
-                                      style={{
-                                        height: '40px',
-                                        width: '40px',
-                                        marginRight: '1px',
-                                        marginLeft: '20px',
-                                        marginBottom: '20px'
-                                      }}
-                                      src={project.imageUrl}
+                                <div
+                                 style={{
+                                      marginRight: '1px',
+                                      marginLeft: '20px',
+                                      marginBottom: '20px'
+                                    }}>
+                                  {project.imageUrlBase64 == null ?
 
+                                    // <img
+                                    //   style={{
+                                    //     height: '40px',
+                                    //     width: '40px',
+                                    //     marginRight: '1px',
+                                    //     marginLeft: '20px',
+                                    //     marginBottom: '20px'
+                                    //   }}
+                                    //   src={project.imageUrlBase64}
+
+                                    // />
+
+                                    <ReactImageFallback
+                                      src={project.imageUrl}
+                                      width="40"
+                                      height="40"
+                                      fallbackImage={CardanoImage}
                                     />
-                                  )}
-                                <h5 style={{ color: '#000', marginRight: '30px' }}>
+
+                                    :
+                                    <ReactImageFallback
+                                      src={project.imageUrlBase64}
+                                      width="40"
+                                      height="40"
+                                      fallbackImage={CardanoImage}
+                                    />
+                                  }
+                                </div>
+                                <h5 style={{ color: '#000', marginRight: '20px' }}>
                                   {project.name}
                                 </h5>
 
