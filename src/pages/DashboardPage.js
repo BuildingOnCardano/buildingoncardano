@@ -573,7 +573,7 @@ class DashboardPage extends React.Component {
                             className="btn-tag2"
                             style={{ minHeight: '10vh', minWidth: '10vw' }}
                           >
-                            <h4 style={{ color: '#225cb6' }}>
+                            <h4>
                               {item.projectType} <br></br>({item.projectCount})
                             </h4>
                           </Button>

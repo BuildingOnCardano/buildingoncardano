@@ -10,9 +10,12 @@ import { isEmpty } from 'utils/stringutil.js';
 import SearchBar from '@mkyy/mui-search-bar';
 import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
-import { Bar } from 'react-chartjs-2';
 import CircularImage from 'utils/CircularImage';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
 /* This is a higher order component that
  *  inject a special prop   to our component.
  */
@@ -66,16 +69,16 @@ const columns = [
     flex: 1,
     renderHeader: params => <h2>{'Type'}</h2>,
   },
-  {
-    field: 'tokentype',
-    flex: 1,
-    renderHeader: params => <h2>{'Token Type'}</h2>,
-  },
-  {
-    field: 'ticker',
-    flex: 1,
-    renderHeader: params => <h2>{'Ticker'}</h2>,
-  },
+  // {
+  //   field: 'tokentype',
+  //   flex: 1,
+  //   renderHeader: params => <h2>{'Token Type'}</h2>,
+  // },
+  // {
+  //   field: 'ticker',
+  //   flex: 1,
+  //   renderHeader: params => <h2>{'Ticker'}</h2>,
+  // },
   {
     field: 'stage',
     flex: 1,
@@ -111,18 +114,54 @@ const columnsMobile = [
   },
 ];
 
-class AllProjects extends React.Component {
-  state = {
-    projects: null,
-    loading: true,
-    totalProjects: '',
-    projectTypesAndCount: [],
-    smallScreen: false,
-    searched: '',
-    filterAbleProjects: null,
-    barChartData: null,
-  };
+const tagOptions = [
+  { name: 'Defi', id: 1 },
+  { name: 'Subscriptions', id: 2 },
+  { name: 'Tooling', id: 3 },
+  { name: 'Wallet', id: 4 },
+  { name: 'Data', id: 5 },
+  { name: 'Dex', id: 6 },
+  { name: 'Cross-Chain', id: 7 },
+  { name: 'Gaming', id: 8 },
+  { name: 'Oracle', id: 9 },
+  { name: 'Stablecoin', id: 10 },
+  { name: 'Infrastructure', id: 11 },
+  { name: 'Catalyst', id: 12 },
+  { name: 'Telcom', id: 13 },
+  { name: 'Gambling', id: 14 },
+  { name: 'Payment', id: 15 },
+  { name: 'NFT', id: 16 },
+  { name: 'NFT Platform', id: 17 },
+  { name: 'NFT Marketplace', id: 18 },
+  { name: 'NFT Lending', id: 19 },
+  { name: 'Charity', id: 20 },
+  { name: 'Forex', id: 21 },
+  { name: 'Lending', id: 22 },
+  { name: 'Launch Pad', id: 23 },
+  { name: 'Cloud Storage', id: 24 },
+  { name: 'Application', id: 25 },
+  { name: 'Identity', id: 26 },
+  { name: 'Meme Coin', id: 27 },
+  { name: 'Metaverse', id: 28 },
+];
 
+class AllProjects extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      projects: null,
+      loading: true,
+      totalProjects: '',
+      projectTypesAndCount: [],
+      smallScreen: false,
+      searched: '',
+      filterAbleProjects: null,
+      barChartData: null,
+      redirect: false,
+      redirectProject: null
+
+    };
+  }
   componentDidMount() {
     window.scrollTo(0, 0);
 
@@ -136,7 +175,7 @@ class AllProjects extends React.Component {
       this.setState({ smallScreen: true });
     }
 
-    this.getProjectsStats();
+    //this.getProjectsStats();
     this.getAllProjects();
   }
 
@@ -144,7 +183,6 @@ class AllProjects extends React.Component {
     try {
       var response = await fetch(baseUrl + getAllProjects);
       const data = await response.json();
-      console.log(data);
       this.createRows(data);
     } catch (error) {
       console.log(error);
@@ -158,6 +196,18 @@ class AllProjects extends React.Component {
     } else {
       const filteredRows = this.state.filterAbleProjects.filter(row => {
         return row.project.toLowerCase().includes(searchedVal.toLowerCase());
+      });
+      this.setState({ filterAbleProjects: filteredRows });
+    }
+  }
+
+  filterChange = (event, name) => {
+    console.log("change" + name);
+    if (!event.target.checked) {
+      this.cancelSearch();
+    } else {
+      const filteredRows = this.state.filterAbleProjects.filter(row => {
+        return row.type.toLowerCase().includes(name.toLowerCase());
       });
       this.setState({ filterAbleProjects: filteredRows });
     }
@@ -187,9 +237,14 @@ class AllProjects extends React.Component {
   }
 
   handleRowClick(rowData) {
-    var url = '/projectdetails/' + rowData.project;
-    this.props.history.push(url);
+    this.setState({ redirect: true, redirectProject: rowData.project });
   }
+
+  renderRedirectToLogin = (rowData) => {
+    if (this.state.redirect) {
+      return <Navigate to={'/projectdetails/' + this.state.redirectProject} />;
+    }
+  };
 
   async getProjectsStats() {
     try {
@@ -257,9 +312,11 @@ class AllProjects extends React.Component {
 
   render() {
     return (
+
       <Page className="AllProjects"
         breadcrumbs={[{ name: 'All Projects', active: true }]}
       >
+        {this.renderRedirectToLogin()}
         {this.state.loading ? (
           <div>
             <CircleLoader
@@ -269,9 +326,11 @@ class AllProjects extends React.Component {
             />
           </div>
         ) : (
-          <div>
-            <Col>
-              {this.state.smallScreen != true && (
+          <Row style={{
+            justifyContent: 'center',
+          }}>
+            <Col lg={10} md={10} sm={12} xs={12} className="mb-3">
+              {/* {this.state.smallScreen != true && (
                 <div className="chart">
                   <Bar
                     data={this.state.barChartData}
@@ -279,43 +338,60 @@ class AllProjects extends React.Component {
                   // options={this.state.barChartData.options}
                   />
                 </div>
-              )}
+              )} */}
 
-              <small>
-                <b>
-                  Use the search bar to find the project your are looking for,
-                  or filter on each individual column.
-                </b>
-              </small>
               <Card>
-                <SearchBar
-                  value={this.state.searched}
-                  onChange={searchVal => this.requestSearch(searchVal)}
-                  onCancelSearch={() => this.cancelSearch()}
-                />
-                <div
-                  style={{ height: '140vh', width: '100%' }}
-                  className={useStyles.root}
-                >
-                  {this.state.smallScreen ? (
-                    <DataGrid
-                      rowHeight={70}
-                      rows={this.state.filterAbleProjects}
-                      columns={columnsMobile}
-                      onRowClick={rowData => this.handleRowClick(rowData.row)}
+                <Row style={{
+                  justifyContent: 'left',
+                }}>
+                  <Col lg={2} md={3} sm={12} xs={12} className="mb-3">
+                    <SearchBar
+                      value={this.state.searched}
+                      onChange={searchVal => this.requestSearch(searchVal)}
+                      onCancelSearch={() => this.cancelSearch()}
                     />
-                  ) : (
-                    <DataGrid
-                      rowHeight={70}
-                      rows={this.state.filterAbleProjects}
-                      columns={columns}
-                      onRowClick={rowData => this.handleRowClick(rowData.row)}
-                    />
-                  )}
-                </div>
+                    <br></br>
+                    <Col>
+                      <FormGroup style={{
+                        marginLeft: '20px'
+                      }}>
+                        {tagOptions.map((item, index) => {
+                          return (
+                            <Row >
+                              <FormControlLabel key={index} control={<Checkbox onChange={e => this.filterChange(e, item.name)} />} label={item.name} />
+                            </Row>
+                          );
+                        })}
+                      </FormGroup>
+                    </Col>
+                  </Col>
+
+                  <Col lg={9} md={7} sm={12} xs={12} className="mb-3">
+                    <div
+                      style={{ height: '140vh', width: '100%' }}
+                      className={useStyles.root}
+                    >
+                      {this.state.smallScreen ? (
+                        <DataGrid
+                          rowHeight={70}
+                          rows={this.state.filterAbleProjects}
+                          columns={columnsMobile}
+                          onRowClick={rowData => this.handleRowClick(rowData.row)}
+                        />
+                      ) : (
+                        <DataGrid
+                          rowHeight={70}
+                          rows={this.state.filterAbleProjects}
+                          columns={columns}
+                          onRowClick={rowData => this.handleRowClick(rowData.row)}
+                        />
+                      )}
+                    </div>
+                  </Col>
+                </Row>
               </Card>
             </Col>
-          </div>
+          </Row>
         )}
       </Page>
     );
