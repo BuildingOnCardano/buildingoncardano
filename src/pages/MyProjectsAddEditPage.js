@@ -320,7 +320,7 @@ class MyProjectsAddEditPage extends React.Component {
           <Page
             className="MyProjectsAddEditPage"
             title=""
-          // breadcrumbs={[{ name: 'Project Edit', active: false }]}
+            breadcrumbs={[{ name: `${this.props.action} Project`, active: true }]}
           >
             {this.state.loggedIn == false && (
               <Modal
@@ -432,7 +432,6 @@ class MyProjectsAddEditPage extends React.Component {
               }}
             >
               <Col md={6} lg={8}>
-                <h2>Edit Project</h2>
                 <Form>
                   <Card body>
                     <h3>Project Info</h3>

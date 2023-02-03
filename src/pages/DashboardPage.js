@@ -70,8 +70,6 @@ class DashboardPage extends React.Component {
     if (width < 600) {
       this.setState({ smallScreen: true });
     }
-    // this.getProjectsStats();
-    //this.getLiveSales();
 
     var dataLoaded = await this.getDashBoardData();
     if (dataLoaded) {
@@ -348,11 +346,6 @@ class DashboardPage extends React.Component {
                       }
                     })}
                 </Row>
-                <Col className="col text-right">
-                  <Link to="/recentlyadded">
-                    <small>View All</small>
-                  </Link>
-                </Col>
               </Col>
               {/* <Col lg={6} md={12} sm={12} xs={12} className="mb-3">
                 <Row>
@@ -582,6 +575,11 @@ class DashboardPage extends React.Component {
                     })}
                   </Row>
                 </Row>
+                <Col className="col text-right">
+                  <Link to="/recentlyadded">
+                    <small>View All</small>
+                  </Link>
+                </Col>
               </Col>
 
               {/* <Col lg={4} md={12} sm={12} xs={12} className="mb-3">

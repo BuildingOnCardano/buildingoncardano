@@ -7,14 +7,14 @@ import {
   getAllProjects,
 } from '../../assets/services';
 import {
-  MdClearAll,
+  MdKeyboardArrowDown,
   MdExitToApp,
 } from 'react-icons/md';
 import {
   Button,
   ListGroup,
   ListGroupItem,
-  // NavbarToggler,
+  Collapse,
   Nav,
   Navbar,
   NavItem,
@@ -33,6 +33,7 @@ import logo200Image from 'assets/img/logo/Light-icon200.png';
 const bem = bn.create('header');
 const width = window.innerWidth;
 
+
 const MySpan = styled.span`
     color: white;
     cursor: pointer;
@@ -47,9 +48,11 @@ class Header extends React.Component {
     isOpenNotificationPopover: false,
     isNotificationConfirmed: false,
     isOpenUserCardPopover: false,
+    isOpenLinksCardPopover: false,
     user: null,
     projects: null,
     isOpenPages: false,
+    smallScreen: false
   };
 
   toggleNotificationPopover = () => {
@@ -68,6 +71,12 @@ class Header extends React.Component {
     });
   };
 
+  toggleLinksCardPopover = () => {
+    this.setState({
+      isOpenLinksCardPopover: !this.state.isOpenLinksCardPopover,
+    });
+  };
+
   handleSidebarControlButton = event => {
     event.preventDefault();
     event.stopPropagation();
@@ -76,6 +85,10 @@ class Header extends React.Component {
   };
 
   componentDidMount() {
+    if (width < 600) {
+      this.setState({ smallScreen: true });
+    }
+
     var user = getUser();
     this.setState({ user: user });
     this.getAllProjects();
@@ -112,114 +125,152 @@ class Header extends React.Component {
             expand="md"
             id="navbar-main"
           >
-
             <Nav navbar>
-                  <Link to="/">
-                    <img
-                      src={logo200Image}
-                      className="rounded"
-                      style={{
-                        width: 40,
-                        height: 40,
-                        cursor: 'pointer',
-                        alignSelf: 'left',
-                      }}
-                      alt="logo"
-                    />
-                </Link>
-
-
-              <NavItem className={bem.e('nav-item')}>
-                <NavLink className={bem.e('nav-item-collapse')}>
-                  <Link to="/">
-                    <div className="d-flex">
-                      <MySpan>Dashboard</MySpan>
+              <Link to="/">
+                <img
+                  src={logo200Image}
+                  className="rounded"
+                  style={{
+                    width: 40,
+                    height: 40,
+                    cursor: 'pointer',
+                    alignSelf: 'left',
+                  }}
+                  alt="logo"
+                />
+              </Link>
+              {this.state.smallScreen ?
+                <Nav>
+                  <NavLink id="Popover3">
+                    <div className="d-flex">                    
+                      <MySpan onClick={this.toggleLinksCardPopover}>Links<MdKeyboardArrowDown /></MySpan>
                     </div>
-                  </Link>
-                </NavLink>
-              </NavItem>
+                  </NavLink>
+                  <Popover
+                    placement="bottom-end"
+                    isOpen={this.state.isOpenLinksCardPopover}
+                    toggle={this.toggleLinksCardPopover}
+                    target="Popover3"
+                    className="p-0 border-0"
+                    style={{ minWidth: 250 }}
+                  >
+                    <PopoverBody className="p-0 border-light">
+                      <ListGroup flush>
+                        <ListGroupItem
+                          tag="button"
+                          action
+                          className="border-light"
+                        >
+                          <Link to="/">
+                            Dashboard
+                          </Link>
+                        </ListGroupItem>
+                        <ListGroupItem
+                          tag="button"
+                          action
+                          className="border-light"
+                        >
+                          <Link to="/allprojects">
+                            Projects
+                          </Link>
+                        </ListGroupItem>
+                        <ListGroupItem
+                          tag="button"
+                          action
+                          className="border-light"
+                        >
+                          <Link to="/ecosystem">
+                            Ecosystem
+                          </Link>
+                        </ListGroupItem>
+                        <ListGroupItem
+                          tag="button"
+                          action
+                          className="border-light"
+                        >
+                          <Link to="/addproject">
+                            Add Project
+                          </Link>
+                        </ListGroupItem>
+                        <ListGroupItem
+                          tag="button"
+                          action
+                          className="border-light"
+                        >
+                          <Link to="/myprojects">
+                            My Projects
+                          </Link>
+                        </ListGroupItem>
+                        <ListGroupItem
+                          tag="button"
+                          action
+                          className="border-light"
+                        >
+                          <Link to="/login">
+                            Login
+                          </Link>
+                        </ListGroupItem>
+                      </ListGroup>
 
-              <NavItem className={bem.e('nav-item')}>
-                <NavLink className={bem.e('nav-item-collapse')}>
-                  <Link to="/allprojects">
-                    <div className="d-flex">
-                      <MySpan>Projects</MySpan>
-                    </div>
-                  </Link>
-                </NavLink>
-              </NavItem>
 
-              {/* <NavItem
-                className={bem.e('nav-item')}
-                onClick={this.handleClick('Pages')}
-                onTouchStart={this.handleClick('Pages')}            >
-                <NavLink className={bem.e('nav-item-collapse')}>
-                  <div className="d-flex">
-                    <span style={{ color: '#fff', marginLeft: '20px' }}>Projects</span>
-                  </div>
-                  <MdKeyboardArrowDown
-                    className={bem.e('nav-item-icon')}
-                    style={{
-                      padding: 0,
-                      transform: this.state.isOpenPages
-                        ? 'rotate(-90deg)'
-                        : 'rotate(-0deg)',
-                      transitionDuration: '0.3s',
-                      transitionProperty: 'transform',
-                      color: '#fff'
-                    }}
-                  />
-                </NavLink>
-              </NavItem>
-              <Collapse isOpen={this.state.isOpenPages}>
-                {projectsContents.map(({ to, name, exact, Icon }, index) => (
-                  <NavItem key={index} className={bem.e('nav-item')}>
-                    <NavLink
-                      id={`navItem-${name}-${index}`}
-                      className="text-uppercase"
-                      tag={NavLink}
-                      to={to}
-                      activeClassName="active"
-                      exact={exact}
-                    >
-                      <Icon className={bem.e('nav-item-icon')} style={{ color: '#fff', marginRight: '5px' }} />
-                      <span style={{ color: '#fff' }}>{name}</span>
+
+                    </PopoverBody>
+                  </Popover>
+                </Nav>
+                :
+                <Nav>
+                  <NavItem className={bem.e('nav-item')}>
+                    <NavLink className={bem.e('nav-item-collapse')}>
+                      <Link to="/">
+                        <div className="d-flex">
+                          <MySpan>Dashboard</MySpan>
+                        </div>
+                      </Link>
                     </NavLink>
                   </NavItem>
-                ))}
-              </Collapse> */}
 
-              <NavItem className={bem.e('nav-item')}>
-                <NavLink className={bem.e('nav-item-collapse')}>
-                  <Link to="/ecosystem">
-                    <div className="d-flex">
-                      <MySpan>Ecosystem</MySpan>
-                    </div>
-                  </Link>
-                </NavLink>
-              </NavItem>
+                  <NavItem className={bem.e('nav-item')}>
+                    <NavLink className={bem.e('nav-item-collapse')}>
+                      <Link to="/allprojects">
+                        <div className="d-flex">
+                          <MySpan>Projects</MySpan>
+                        </div>
+                      </Link>
+                    </NavLink>
+                  </NavItem>
 
-              <NavItem className={bem.e('nav-item')}>
-                <NavLink className={bem.e('nav-item-collapse')}>
-                  <Link to="/addproject">
-                    <div className="d-flex">
-                      <MySpan>Add Project</MySpan>
-                    </div>
-                  </Link>
-                </NavLink>
-              </NavItem>
+                  <NavItem className={bem.e('nav-item')}>
+                    <NavLink className={bem.e('nav-item-collapse')}>
+                      <Link to="/ecosystem">
+                        <div className="d-flex">
+                          <MySpan>Ecosystem</MySpan>
+                        </div>
+                      </Link>
+                    </NavLink>
+                  </NavItem>
 
-              {this.state.user != null &&
-                <NavItem className={bem.e('nav-item')}>
-                  <NavLink className={bem.e('nav-item-collapse')}>
-                    <Link to="/myprojects">
-                      <div className="d-flex">
-                        <MySpan>My Projects</MySpan>
-                      </div>
-                    </Link>
-                  </NavLink>
-                </NavItem>}
+                  <NavItem className={bem.e('nav-item')}>
+                    <NavLink className={bem.e('nav-item-collapse')}>
+                      <Link to="/addproject">
+                        <div className="d-flex">
+                          <MySpan>Add Project</MySpan>
+                        </div>
+                      </Link>
+                    </NavLink>
+                  </NavItem>
 
+                  {this.state.user != null &&
+                    <NavItem className={bem.e('nav-item')}>
+                      <NavLink className={bem.e('nav-item-collapse')}>
+                        <Link to="/myprojects">
+                          <div className="d-flex">
+                            <MySpan>My Projects</MySpan>
+                          </div>
+                        </Link>
+                      </NavLink>
+                    </NavItem>}
+                </Nav>
+              }
 
             </Nav>
 
@@ -287,11 +338,12 @@ class Header extends React.Component {
                 </NavItem>
               )
                 :
+                !this.state.smallScreen &&
                 <NavItem className={bem.e('nav-item')}>
                   <NavLink className={bem.e('nav-item-collapse')}>
                     <Link to="/login">
                       <div className="d-flex">
-                        <span style={{ color: '#fff', marginLeft: '20px' }}>LOGIN / SIGNUP</span>
+                        <span style={{ color: '#fff', marginLeft: '20px' }}>Login</span>
                       </div>
                     </Link>
                   </NavLink>

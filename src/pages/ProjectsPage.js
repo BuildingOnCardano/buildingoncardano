@@ -40,21 +40,30 @@ const override = css`
   border-color: red;
 `;
 
+const width = window.innerWidth;
+
 class ProjectsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       projects: null,
       loading: true,
-      totalProjects: '',
+      totalProjects: null,
       projectTypesAndCount: [],
       smallScreen: false,
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     window.scrollTo(0, 0);
-    this.getProjectsByType();
+    if (width < 600) {
+      this.setState({ smallScreen: true });
+    }
+
+
+    if(this.state.projects == null){
+      await this.getProjectsByType();
+    }
   }
 
   async getProjectsByType() {
@@ -74,7 +83,7 @@ class ProjectsPage extends React.Component {
     return (
       <Page
         className="ProjectsPage"
-        breadcrumbs={[{ name: 'Project', active: true }]}
+        breadcrumbs={[{ name: `${this.props.params.projectType} Projects`, active: true }]}
       >
         <Row>
           {this.state.loading ? (

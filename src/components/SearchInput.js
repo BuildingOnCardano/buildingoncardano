@@ -140,7 +140,7 @@ const mobileStyle = {
     boxShadow: state.isFocused ? 0 : 0,
     cursor: 'text',
     borderRadius: 0,
-    width: '70vw',
+    width: '60vw',
     padding: '0.3em',
   }),
 

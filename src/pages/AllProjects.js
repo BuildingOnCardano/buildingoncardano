@@ -405,6 +405,7 @@ class AllProjects extends React.Component {
                 <Row style={{
                   justifyContent: 'left',
                 }}>
+                  {!this.state.smallScreen &&
                   <Col lg={2} md={3} sm={12} xs={12} className="mb-3">
                     <SearchBar
                       value={this.state.searched}
@@ -432,7 +433,7 @@ class AllProjects extends React.Component {
                         })}
                       </FormGroup>
                     </Col>
-                  </Col>
+                  </Col>}
 
                   <Col lg={9} md={7} sm={12} xs={12} className="mb-3">
                     <div
