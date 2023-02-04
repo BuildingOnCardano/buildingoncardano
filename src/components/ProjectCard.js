@@ -70,6 +70,8 @@ export default class ProjectCard extends React.Component {
                 height="70"
                 fallbackImage={CardanoImage}
               />
+
+              
               :
               <ReactImageFallback
                 src={this.props.img}

@@ -46,6 +46,8 @@ import {
 } from 'react-twitter-embed';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ModalImage from "react-modal-image";
+import ImageComponent from 'components/ImageComponent';
 
 const override = css`
   display: block;
@@ -160,6 +162,7 @@ class ProjectDetailsPage extends React.Component {
             className="ProjectDetailsPage"
             title=""
           // breadcrumbs={[{ name: 'Project Details' + ' / ' + this.props.params.projectname, active: true }]}
+
           >
             {this.state.verifiedProject == 'false' ? (
               <div>
@@ -177,28 +180,30 @@ class ProjectDetailsPage extends React.Component {
               <div>
                 <Row
                   style={{
-                    justifyContent: 'left',
+                    justifyContent: 'center',
                   }}
                 >
-                  <Col xl={8} lg={12} md={12} sm={6}>
+                  <Col xl={9} lg={12} md={9} sm={6}>
                     <Card>
                       <CardBody>
                         {this.state.project.screenshotUrl != null ? (
                           <Row>
                             <Col sm={6}>
                               {this.state.project.screenshotUrlBase64 != null ?
-                                <ReactImageFallback
-                                  src={this.state.project.screenshotUrlBase64}
-                                  width="100%"
-                                  height="100%"
-                                  fallbackImage={CardanoImage}
+
+
+                                <ModalImage
+                                  small={this.state.project.screenshotUrlBase64}
+                                  large={this.state.project.screenshotUrlBase64}
+                                  alt={CardanoImage}
+                                  name="Test"
                                 />
                                 :
-                                <ReactImageFallback
-                                  src={this.state.project.screenshotUrl}
-                                  width="100%"
-                                  height="100%"
-                                  fallbackImage={CardanoImage}
+                                <ModalImage
+                                  small={this.state.project.screenshotUrl}
+                                  large={this.state.project.screenshotUrl}
+                                  alt={CardanoImage}
+                                  name="Test"
                                 />
                               }
                             </Col>
@@ -523,7 +528,7 @@ class ProjectDetailsPage extends React.Component {
                       )}
                   </Col>
 
-                  <Col md={2} sm={6} lg={3} xs={12} className="mb-3">
+                  <Col md={3} sm={6} lg={2} xs={12} className="mb-3">
                     <Row
                       style={{
                         justifyContent: 'center',
@@ -841,9 +846,9 @@ class ProjectDetailsPage extends React.Component {
                               return (
                                 <Col
                                   lg={3}
-                                  md={10}
-                                  sm={10}
-                                  xs={12}
+                                  md={6}
+                                  sm={2}
+                                  xs={1}
                                   className="mb-3"
                                 >
                                   <SimilarProjectCard
