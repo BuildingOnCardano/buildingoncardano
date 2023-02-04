@@ -12,7 +12,7 @@ import { css } from '@emotion/core';
 import {
   baseUrl,
   getLatestProjects,
-  getProjectsStats,
+  getProjectsStatsTypes,
   liveProjectSales,
   getFeaturedProjectsList,
 } from '../assets/services';
@@ -128,7 +128,7 @@ class DashboardPage extends React.Component {
 
   async getProjectsStats() {
     try {
-      var response = await fetch(baseUrl + getProjectsStats);
+      var response = await fetch(baseUrl + getProjectsStatsTypes);
       const data = await response.json();
 
       var labels = [];

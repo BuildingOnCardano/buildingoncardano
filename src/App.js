@@ -22,7 +22,7 @@ import ResetPasswordPage from 'pages/ResetPasswordPage';
 import { createBrowserHistory } from 'history';
 import Ecosystem from 'pages/Ecosystem';
 import AllProjectTokens from 'pages/AllProjectTokens';
-import NFTsPage from 'pages/NFTsPage';
+import Stats from 'pages/Stats';
 
 import GA4React from 'ga-4-react';
 const ga4react = new GA4React('UA-201791504-1');
@@ -56,6 +56,7 @@ export default class App extends React.Component {
 
               <Route path="/allprojects" element={<AllProjects props />} />
               <Route path="/ecosystem" element={<Ecosystem props />} />
+              <Route path="/stats" element={<Stats props />} />
               <Route
                 path="/termsandpolicy"
                 element={<TermsAndPolicy props />}

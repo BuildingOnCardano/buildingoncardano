@@ -308,69 +308,7 @@ class AllProjects extends React.Component {
     }
   };
 
-  async getProjectsStats() {
-    try {
-      var response = await fetch(baseUrl + getProjectsStats);
-      const data = await response.json();
-
-      var labels = [];
-      var counts = [];
-      data.projectTypesAndCount.forEach(element => {
-        labels.push(element.projectType);
-        counts.push(element.projectCount);
-      });
-
-      var chartData = {
-        labels: labels,
-        datasets: [
-          {
-            label: '# of Types',
-            data: counts,
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.4)',
-              'rgba(31,179,124, 0.6)',
-              'rgba(75, 192, 192, 0.8)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.4)',
-              'rgba(144,14,249, 0.6)',
-              'rgba(54, 162, 0, 0.8)',
-              'rgba(255, 100, 86, 0.2)',
-              'rgba(165,239,83, 0.4)',
-              'rgba(120, 102, 255, 0.6)',
-              'rgba(164,113,111, 0.8)',
-              'rgba(178,135,21, 0.2)',
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(31,179,124, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(144,14,249, 1 )',
-              'rgba(54, 162, 0, 1)',
-              'rgba(255, 100, 86, 1)',
-              'rgba(165,239,83, 1)',
-              'rgba(120, 102, 255, 1)',
-              'rgba(164,113,111, 1)',
-              'rgba(178,135,21, 1)',
-            ],
-            borderWidth: 1,
-          },
-        ],
-      };
-
-      this.setState({
-        totalProjects: data.totalProjects,
-        projectTypesAndCount: data.projectTypesAndCount,
-        barChartData: chartData,
-      });
-      this.state.projectTypesAndCount = data.projectTypesAndCount;
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  
 
   render() {
     return (

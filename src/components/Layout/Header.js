@@ -188,6 +188,15 @@ class Header extends React.Component {
                           action
                           className="border-light"
                         >
+                          <Link to="/stats">
+                            Stats
+                          </Link>
+                        </ListGroupItem>
+                        <ListGroupItem
+                          tag="button"
+                          action
+                          className="border-light"
+                        >
                           <Link to="/addproject">
                             Add Project
                           </Link>
@@ -248,6 +257,17 @@ class Header extends React.Component {
                       </Link>
                     </NavLink>
                   </NavItem>
+
+                  <NavItem className={bem.e('nav-item')}>
+                    <NavLink className={bem.e('nav-item-collapse')}>
+                      <Link to="/stats">
+                        <div className="d-flex">
+                          <MySpan>Stats</MySpan>
+                        </div>
+                      </Link>
+                    </NavLink>
+                  </NavItem>
+
 
                   <NavItem className={bem.e('nav-item')}>
                     <NavLink className={bem.e('nav-item-collapse')}>
