@@ -5,7 +5,7 @@ import { Col, Row, Button } from 'reactstrap';
 import CircleLoader from 'react-spinners/CircleLoader';
 import { css } from '@emotion/core';
 import { baseUrl, getProjectByOwner } from '../assets/services';
-import { getUser, getPassword } from 'utils/Common.js';
+import { getUser, getPassword, getIsLoggedIn } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -37,9 +37,10 @@ class MyProjectsPage extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    if (getIsLoggedIn === 'true') {
     if (!isEmpty(getUser())) {
       this.getProjectByOwner();
-    }
+    }}
   }
 
   async getProjectByOwner() {
