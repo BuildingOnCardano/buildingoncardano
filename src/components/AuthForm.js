@@ -342,13 +342,15 @@ class AuthForm extends React.Component {
           <h6>or</h6>
           <h6>
             {this.isSignup ? (
-              <a href="#login" onClick={this.changeAuthState(STATE_LOGIN)}>
+
+              <Link to="/login">
                 Login
-              </a>
+              </Link>
             ) : (
-              <a href="#signup" onClick={this.changeAuthState(STATE_SIGNUP)}>
+
+              <Link to="/signup">
                 Signup
-              </a>
+              </Link>
             )}
           </h6>
         </div>
@@ -356,7 +358,7 @@ class AuthForm extends React.Component {
           <Link to="/resetpassword">Reset Password</Link>
         </Row>
         <Row>
-        <Link to="/">Exit</Link>
+          <Link to="/">Exit</Link>
         </Row>
 
         {children}

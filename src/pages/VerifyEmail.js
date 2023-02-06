@@ -5,6 +5,17 @@ import { isEmpty } from 'utils/stringutil.js';
 import { Row } from 'reactstrap';
 import CircleLoader from 'react-spinners/CircleLoader';
 import { css } from '@emotion/core';
+import { useParams } from 'react-router-dom';
+/* This is a higher order component that
+ *  inject a special prop   to our component.
+ */
+function withRouter(Component) {
+  function ComponentWithRouter(props) {
+    let params = useParams();
+    return <Component {...props} params={params} />;
+  }
+  return ComponentWithRouter;
+}
 
 const override = css`
   display: block;
@@ -75,4 +86,4 @@ class VerifyEmail extends React.Component {
     );
   }
 }
-export default VerifyEmail;
+export default withRouter(VerifyEmail);
