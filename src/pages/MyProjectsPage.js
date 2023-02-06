@@ -38,11 +38,11 @@ class MyProjectsPage extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     if (!isEmpty(getUser())) {
-      this.getProjectsByType();
+      this.getProjectByOwner();
     }
   }
 
-  async getProjectsByType() {
+  async getProjectByOwner() {
     try {
       var response = await fetch(baseUrl + getProjectByOwner + getUser(), {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -98,7 +98,7 @@ class MyProjectsPage extends React.Component {
           <Row>
             {this.state.projects.map(function (item, index) {
               return (
-                <Col lg={2} md={10} sm={10} xs={12} className="mb-3">
+                <Col lg={2} md={6} sm={10} xs={12} className="mb-3">
                   <ProjectCard
                     img={item.imageUrlBase64}
                     projectDetails={item}

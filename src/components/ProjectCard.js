@@ -99,7 +99,7 @@ export default class ProjectCard extends React.Component {
             alignItems: 'center',
           }}>
 
-            <Link to={'/editproject/' + this.props.projectDetails.name}>
+            <Link to={'/editproject/' + this.props.projectDetails.name} target="_blank" rel='noopener noreferrer'>
               Edit Project
             </Link>
           </Row>

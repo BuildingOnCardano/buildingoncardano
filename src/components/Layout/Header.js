@@ -91,7 +91,10 @@ class Header extends React.Component {
 
     var user = getUser();
     this.setState({ user: user });
-    this.getAllProjects();
+
+    if(this.state.projects == null){
+      this.getAllProjects();
+    }
   }
 
   async getAllProjects() {

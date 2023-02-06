@@ -91,12 +91,14 @@ class Stats extends React.Component {
               'rgba(204,102,0, 0.8)', //testnet
               'rgba(0, 204, 0, 0.8)', //live
               'rgba(255, 22, 22, 0.8)',//rugged
+              'rgba(200, 40, 22, 0.8)',//failed
             ],
             borderColor: [
               'rgba(54, 162, 235, 1)',
               'rgba(204,102,0, 1)',
               'rgba(0, 204, 0, 0.8)', //live
               'rgba(255, 22, 22, 1)',
+              'rgba(200, 40, 22, 0.8)',//rugged
             ],
             borderWidth: 1,
           },

@@ -163,7 +163,8 @@ class AllProjects extends React.Component {
       livestatus: true,
       testnetstatus: true,
       indevelopmentstatus: true,
-      ruggedstatus: false
+      ruggedstatus: false,
+      failedstatus: false
     };
   }
 
@@ -229,6 +230,10 @@ class AllProjects extends React.Component {
       this.setState({ ruggedstatus: !this.state.ruggedstatus });
       this.state.ruggedstatus = !this.state.ruggedstatus;
     }
+    else if (name === 'Failed') {
+      this.setState({ failedstatus: !this.state.failedstatus });
+      this.state.failedstatus = !this.state.failedstatus;
+    }
     //check incoming name and change that state
 
     Rows = this.state.projects;
@@ -251,6 +256,11 @@ class AllProjects extends React.Component {
     if (!this.state.ruggedstatus) {
       Rows = Rows.filter(row => !row.stage.toLowerCase().includes('rugged'));
     }
+
+    if (!this.state.failedstatus) {
+      Rows = Rows.filter(row => !row.stage.toLowerCase().includes('failed'));
+    }
+
 
 
     if (Rows) {
@@ -361,6 +371,7 @@ class AllProjects extends React.Component {
                         <FormControlLabel key={3} control={<Checkbox checked={this.state.testnetstatus} onChange={e => this.filterStatusChange('Testnet')} />} label='Testnet' />
                         <FormControlLabel key={2} control={<Checkbox checked={this.state.indevelopmentstatus} onChange={e => this.filterStatusChange('In Development')} />} label='In Development' />
                         <FormControlLabel key={4} control={<Checkbox checked={this.state.ruggedstatus} onChange={e => this.filterStatusChange('Rugged')} />} label='Rugged' />
+                        <FormControlLabel key={4} control={<Checkbox checked={this.state.failedstatus} onChange={e => this.filterStatusChange('Failed')} />} label='Failed' />
                         <br></br>
                         <span style={{ fontWeight: 'bold' }}>Type Filters</span>
                         {tagOptions.map((item, index) => {

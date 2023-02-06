@@ -263,13 +263,13 @@ class MyProjectsAddEditPage extends React.Component {
       this.setState({
         project: { ...this.state.project },
       });
-      //this.state.project.ownerEmail = getUser();
-      // this.setState({ project: { ...this.state.project, type: tags } });
-      // // this.state.project.type = tags;
+
 
       if (this.props.action === 'edit') {
         this.updateProject();
       } else {
+        this.state.project.ownerEmail = getUser()
+        // this.setState({ project: { ...this.state.project, ownerEmail: getUser() } });
         this.createProject();
       }
     } catch (error) { }
@@ -426,7 +426,7 @@ class MyProjectsAddEditPage extends React.Component {
               }}
             >
 
-              <Col md={6} lg={8}>
+              <Col md={8} lg={8}>
                 <Card
                   body
                   style={{
@@ -527,6 +527,7 @@ class MyProjectsAddEditPage extends React.Component {
                           <option>Testnet</option>
                           <option>Live</option>
                           <option>Rugged</option>
+                          <option>Failed</option>
                         </Input>
                       </Col>
                     </FormGroup>
