@@ -42,11 +42,17 @@ class AuthForm extends React.Component {
       modal_text: '',
       loading: false,
       acceptedTerms: false,
+      rememberMe: false
     };
   }
 
   componentDidMount() {
-    removeUserSession();
+    //removeUserSession();
+    
+    this.setState({
+      email: localStorage.getItem('user'),
+      password: localStorage.getItem('password'),
+    })
   }
 
   toggle = modalType => () => {
@@ -159,6 +165,8 @@ class AuthForm extends React.Component {
           });
         }
       }
+
+
       this.setState({
         loading: false,
       });
@@ -224,6 +232,12 @@ class AuthForm extends React.Component {
         acceptedTerms: true,
       });
     }
+  };
+
+  handleRememberMe = query => e => {
+    this.setState({
+      rememberMe: !this.state.rememberMe,
+    });
   };
 
   render() {
@@ -297,18 +311,22 @@ class AuthForm extends React.Component {
           </FormGroup>
         )}
         <FormGroup check>
-          <Label check>
+          {this.isSignup && <Label check>
             <Input
               style={{ fontSize: 14 }}
               type="checkbox"
               onChange={this.handleChange('&ticker=')}
-            />{' '}
-            {this.isSignup ? (
-              <Link to="/termsandpolicy">Agree the terms and policy</Link>
-            ) : (
-              'Remember me'
-            )}
-          </Label>
+            />
+            <Link to="/termsandpolicy">Agree the terms and policy</Link>
+          </Label>}
+          {!this.isSignup && <Label check>
+            <Input
+              style={{ fontSize: 14 }}
+              type="checkbox"
+              onChange={this.handleRememberMe()}
+            />
+            Remember me
+          </Label>}
         </FormGroup>
         <hr />
         {this.state.loading ? (
