@@ -37,10 +37,12 @@ class MyProjectsPage extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    if (getIsLoggedIn === 'true') {
-    if (!isEmpty(getUser())) {
-      this.getProjectByOwner();
-    }}
+    var isLoggedIn = getIsLoggedIn();
+    if (isLoggedIn === 'true') {
+      if (!isEmpty(getUser())) {
+        this.getProjectByOwner();
+      }
+    }
   }
 
   async getProjectByOwner() {

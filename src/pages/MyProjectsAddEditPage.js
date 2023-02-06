@@ -1,7 +1,6 @@
 import Page from 'components/Page';
 import MultiAddTeamMembers from 'components/MultiAddTeamMembers';
 import MultiAddSales from 'components/MultiAddSales';
-
 import React from 'react';
 import {
   Button,
@@ -23,7 +22,7 @@ import {
 } from '../assets/services';
 import { project } from '../assets/project';
 import { Link } from 'react-router-dom';
-import { getUser, getPassword } from 'utils/Common.js';
+import { getUser, getPassword, getIsLoggedIn } from 'utils/Common.js';
 import { isEmpty } from 'lodash';
 import { getLength } from 'utils/stringutil.js';
 import CircleLoader from 'react-spinners/CircleLoader';
@@ -31,7 +30,6 @@ import { css } from '@emotion/core';
 import 'react-datepicker/dist/react-datepicker.css';
 import TextField from '@mui/material/TextField';
 import { makeStyles } from '@mui/styles';
-
 import ReactMarkdown from 'react-markdown';
 import ReactMde, { ReactMdeTypes } from 'react-mde';
 import 'react-mde/lib/styles/css/react-mde-all.css';
@@ -148,11 +146,12 @@ class MyProjectsAddEditPage extends React.Component {
   async componentDidMount() {
     window.scrollTo(0, 0);
 
-    if (isEmpty(getUser())) {
-      this.setState({ loggedIn: false });
-    } else {
+    if (getIsLoggedIn() === 'true') {
       this.setState({ loggedIn: true });
+    } else {
+      this.setState({ loggedIn: false });
     }
+
     //if edit get existing project
     if (this.props.action === 'edit') {
       await this.getProjectDetails();
