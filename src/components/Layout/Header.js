@@ -4,7 +4,7 @@ import SearchInput from 'components/SearchInput';
 import React from 'react';
 import {
   baseUrl,
-  getAllProjects,
+  getAllProjectsVerifiedSB,
 } from '../../assets/services';
 import {
   MdKeyboardArrowDown,
@@ -84,7 +84,7 @@ class Header extends React.Component {
     document.querySelector('.cr-sidebar').classList.toggle('cr-sidebar--open');
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     if (width < 600) {
       this.setState({ smallScreen: true });
     }
@@ -98,13 +98,13 @@ class Header extends React.Component {
 
 
     if (this.state.projects == null) {
-      this.getAllProjects();
+      await this.getAllProjects();
     }
   }
 
   async getAllProjects() {
     try {
-      var response = await fetch(baseUrl + getAllProjects);
+      var response = await fetch(baseUrl + getAllProjectsVerifiedSB);
       const data = await response.json();
       this.setState({ projects: data });
     } catch (error) {

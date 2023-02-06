@@ -51,7 +51,7 @@ class DashboardPage extends React.Component {
     salesData: null,
     loading: true,
     totalProjects: '',
-    projectTypesAndCount: [],
+    projectTypesAndCount: null,
     barChartData: null,
     smallScreen: false,
     projectTokensWalletRankings: null,
@@ -92,14 +92,19 @@ class DashboardPage extends React.Component {
     // this.setState({ projectTokensTransactionRankings: projectTokensTransactionRankings });
 
     //LATEST PROJECTS
-    var response = await fetch(baseUrl + getLatestProjects);
-    const getLatestProjectsVar = await response.json();
-    this.setState({ recentlyAddedProjects: getLatestProjectsVar });
+    if (this.state.recentlyAddedProjects === null) {
+      var response = await fetch(baseUrl + getLatestProjects);
+      const getLatestProjectsVar = await response.json();
+      this.setState({ recentlyAddedProjects: getLatestProjectsVar });
+    }
 
     //FEATURED PROJECTS
-    var response = await fetch(baseUrl + getFeaturedProjectsList);
-    const getFeaturedProjects = await response.json();
-    this.setState({ featuredProjects: this.shuffle(getFeaturedProjects) });
+    if (this.state.featuredProjects === null) {
+      var response = await fetch(baseUrl + getFeaturedProjectsList);
+      const getFeaturedProjects = await response.json();
+      this.setState({ featuredProjects: this.shuffle(getFeaturedProjects) });
+    }
+
 
     // //TWO MONTHS AGO VIEWS RANKING
     // var response = await fetch(baseUrl + getMostViewedProjects + "/" + this.getPreviousPreviousMonthName());
@@ -121,7 +126,9 @@ class DashboardPage extends React.Component {
     // const getRecentlyUpdatedProjectsVar = await response.json();
     // this.setState({ recentlyUpdateProjects: getRecentlyUpdatedProjectsVar });
 
-    await this.getProjectsStats();
+    if (this.state.projectTypesAndCount === null) {
+      await this.getProjectsStats();
+    }
     //await Promise.all([this.getFeaturedProjects(), this.getMostPreviousMonthViewedProjects()], this.getMostViewedProjects(), this.getLatestProjects());
     return true;
   }

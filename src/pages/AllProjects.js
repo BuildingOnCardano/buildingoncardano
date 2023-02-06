@@ -3,7 +3,7 @@ import React from 'react';
 import { Col, Card, CardHeader, CardBody, Row } from 'reactstrap';
 import CircleLoader from 'react-spinners/CircleLoader';
 import { css } from '@emotion/core';
-import { baseUrl, getAllProjects, getProjectsStats } from '../assets/services';
+import { baseUrl, getAllProjectsVerified, getProjectsStats } from '../assets/services';
 import '../styles/styles.css';
 import { removeUserSession } from 'utils/Common.js';
 import { isEmpty } from 'utils/stringutil.js';
@@ -192,7 +192,7 @@ class AllProjects extends React.Component {
 
   async getAllProjects() {
     try {
-      var response = await fetch(baseUrl + getAllProjects);
+      var response = await fetch(baseUrl + getAllProjectsVerified);
       const data = await response.json();
       this.createRows(data);
     } catch (error) {

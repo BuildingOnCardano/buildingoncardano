@@ -85,7 +85,12 @@ class ProjectDetailsPage extends React.Component {
     console.log('props = ' + this.props.params);
     this.setState({ projectname: this.props.params.projectname });
     this.state.projectname = this.props.params.projectname;
-    await this.getProjectDetails();
+
+
+    if (this.state.project === null) {
+      await this.getProjectDetails();
+    }
+
   }
 
   async componentDidUpdate(prevProps) {
@@ -106,7 +111,9 @@ class ProjectDetailsPage extends React.Component {
           baseUrl + getProjectByName + this.state.projectname,
         );
         const data = await response.json();
+        this.state.project = data;
         this.setState({ project: data });
+
         this.setState({ verifiedProject: data.verified });
 
         try {
