@@ -26,7 +26,7 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import bn from 'utils/bemnames';
-import { getUser } from 'utils/Common.js';
+import { getUser, getIsLoggedIn, removeUserSession } from 'utils/Common.js';
 import styled from 'styled-components';
 import logo200Image from 'assets/img/logo/Light-icon200.png';
 
@@ -89,10 +89,15 @@ class Header extends React.Component {
       this.setState({ smallScreen: true });
     }
 
-    var user = getUser();
-    this.setState({ user: user });
+    var isLoggedIn = getIsLoggedIn();
 
-    if(this.state.projects == null){
+    if (isLoggedIn === 'true') {
+      var user = getUser();
+      this.setState({ user: user });
+    }
+
+
+    if (this.state.projects == null) {
       this.getAllProjects();
     }
   }
@@ -116,6 +121,11 @@ class Header extends React.Component {
       };
     });
   };
+
+  signout = () => {
+    this.setState({ user: null });
+    removeUserSession();
+  }
 
   render() {
 
@@ -145,7 +155,7 @@ class Header extends React.Component {
               {this.state.smallScreen ?
                 <Nav>
                   <NavLink id="Popover3">
-                    <div className="d-flex">                    
+                    <div className="d-flex">
                       <MySpan onClick={this.toggleLinksCardPopover}>Links<MdKeyboardArrowDown /></MySpan>
                     </div>
                   </NavLink>
@@ -349,7 +359,7 @@ class Header extends React.Component {
                             action
                             className="border-light"
                           >
-                            <Link to="/signout">
+                            <Link to="/signout" onClick={this.signout}>
                               <MdExitToApp />
                               Signout
                             </Link>

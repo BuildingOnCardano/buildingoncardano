@@ -1,32 +1,24 @@
-// return the user data from the session storage
 export const getUser = () => {
   const userStr = localStorage.getItem('user');
   return userStr;
-  // if (userStr) return JSON.parse(userStr);
-  // else return null;
 };
 
 export const getPassword = () => {
-  const password = localStorage.getItem('password');
-  if (password) return JSON.parse(password);
-  else return null;
+  return localStorage.getItem('password');
 };
 
-//   // return the token from the session storage
-//   export const getToken = () => {
-//     return sessionStorage.getItem('token') || null;
-//   }
+export const getIsLoggedIn = () => {
+  return localStorage.getItem('loggedin');
+};
 
-// remove the token and user from the session storage
+
 export const removeUserSession = () => {
-  // sessionStorage.removeItem('token');
-  localStorage.removeItem('user');
-  localStorage.removeItem('password');
+  localStorage.setItem('loggedin', false);
 };
 
-// set the token and user from the session storage
+
 export const setUserSession = (user, password) => {
-  // sessionStorage.setItem('token', token);
-  localStorage.setItem('user', JSON.stringify(user));
-  localStorage.setItem('password', JSON.stringify(password));
+  localStorage.setItem('loggedin', true);
+  localStorage.setItem('user', user);
+  localStorage.setItem('password', password);
 };
