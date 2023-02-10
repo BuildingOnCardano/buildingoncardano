@@ -339,9 +339,9 @@ class DashboardPage extends React.Component {
                       item,
                       index,
                     ) {
-                      if (index < 3) {
+                      if (index < 4) {
                         return (
-                          <Col lg={4} md={6} sm={6} xs={6} className="mb-3">
+                          <Col lg={3} md={4} sm={6} xs={6} className="mb-3">
                             <div className="ProjectCards">
                               <RecentlyAddedProjectCard
                                 img={item.imageUrl}

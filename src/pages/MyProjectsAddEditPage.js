@@ -577,7 +577,7 @@ class MyProjectsAddEditPage extends React.Component {
                     </FormGroup>
                     <FormGroup row>
                       <Label for="name" sm={inputnamewidth}>
-                        Project Logo Url
+                        Project Logo Url *
                       </Label>
                       <Col sm={inputfieldwidth}>
                         <Input
